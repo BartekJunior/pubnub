@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PubNub</title>
+
+    <link rel="stylesheet" href="./styles.css" />
+
+    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.7.3.0.js"></script>
+    
+  </head>
+
+  <div id="firstDiv">
+    <h1>This is PubNub</h1>
+  </div>
+
+  <div>
+    <input id="message-body" type="text" />
+    <button onclick="buttonClick()">Send</button>
+    <div id="messages"></div>
+  </div>
+
+  <body>
+    <script src="./pubnub.js"></script>
+  </body>
+</html>

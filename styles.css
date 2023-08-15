@@ -1,0 +1,14 @@
+body {
+    background-color: aquamarine;
+}
+
+
+#firstDiv {
+    background-color: azure;
+    width: 300px;
+    height: 90px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
