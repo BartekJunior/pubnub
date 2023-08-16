@@ -1,13 +1,30 @@
 "use strict";
 
 const firstDiv = document.getElementById(`firstDiv`);
+const lastDiv = document.getElementById(`lastDiv`);
 
 firstDiv.style.backgroundColor = `red`;
+
+const shit = document.createElement(`div`);
+shit.style.display = `block`;
+shit.style.width = `100px`;
+shit.style.height = `100px`;
+shit.style.backgroundColor = `green`;
+
+let hehe;
+hehe = document.createElement(`div`);
+hehe.style.display = `block`;
+hehe.style.width = `100px`;
+hehe.style.height = `100px`;
+hehe.style.backgroundColor = `green`;
+
+let x = 999;
 
 ///// PUBNUB /////
 const buttonClick = () => {
   var input = document.getElementById("message-body");
   publishMessage(input.value);
+
   input.value = "";
 };
 
@@ -15,6 +32,30 @@ const showMessage = (msg) => {
   var message = document.createElement("div");
   message.innerText = msg;
   document.getElementById("messages").appendChild(message);
+};
+
+
+
+let newObj;
+const myListener2 = (msg) => {
+  if (msg === `newObj`) {
+
+    console.log(typeof(msg));
+    newObj = {
+      name: `bartek`,
+      age: 35,
+      region: `Poznan`,
+      language: `js`,
+      hot: true,
+    }
+  }
+};
+
+const myListener = (msg) => {
+  if (msg === `newObj`) {
+    x = 777;
+    lastDiv.appendChild(hehe);
+  }
 };
 
 let pubnub;
@@ -34,13 +75,20 @@ const setupPubNub = () => {
         console.log("Connected");
       }
     },
+
     message: (messageEvent) => {
       showMessage(messageEvent.message.description);
+      myListener(messageEvent.message.description);
+      myListener2(messageEvent.message.description);
+
+
     },
+
     presence: (presenceEvent) => {
       // handle presence
     },
   };
+
   pubnub.addListener(listener);
 
   // publish message
@@ -54,9 +102,7 @@ const setupPubNub = () => {
 // run after page is loaded
 window.onload = setupPubNub;
 
-
-
-// "publish message" 
+// "publish message"
 const publishMessage = async (message) => {
   // With the right payload, you can publish a message, add a reaction to a message,
   // send a push notification, or send a small payload called a signal.
@@ -67,5 +113,13 @@ const publishMessage = async (message) => {
       description: message,
     },
   };
+
+  console.log(publishPayload);
+
   await pubnub.publish(publishPayload);
 };
+
+// Prevent relaod page //
+// window.onbeforeunload = function() {
+//     return `Dude`
+// }
