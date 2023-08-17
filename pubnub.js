@@ -5,11 +5,10 @@ const lastDiv = document.getElementById(`lastDiv`);
 
 firstDiv.style.backgroundColor = `red`;
 
-const shit = document.createElement(`div`);
-shit.style.display = `block`;
-shit.style.width = `100px`;
-shit.style.height = `100px`;
-shit.style.backgroundColor = `green`;
+const alpha = document.getElementById(`alpha`);
+const betha = document.getElementById(`betha`);
+const gamma = document.getElementById(`gamma`);
+const sigma = document.getElementById(`sigma`);
 
 let hehe;
 hehe = document.createElement(`div`);
@@ -39,15 +38,14 @@ const showMessage = (msg) => {
 let newObj;
 const myListener2 = (msg) => {
   if (msg === `newObj`) {
-
-    console.log(typeof(msg));
+    console.log(typeof msg);
     newObj = {
       name: `bartek`,
       age: 35,
       region: `Poznan`,
       language: `js`,
       hot: true,
-    }
+    };
   }
 };
 
@@ -58,8 +56,26 @@ const myListener = (msg) => {
   }
 };
 
-let pubnub;
 
+let color;
+let same;
+let shits;
+
+
+
+document.addEventListener(`click`, function (e) {
+  if (e.target === alpha) {
+    color = `blue`;
+    e.target.style.backgroundColor = color;
+  }
+});
+
+const myListener3 = (msg) => {
+  color = alpha.style.backgroundColor;
+
+};
+
+let pubnub;
 const setupPubNub = () => {
   // Update this block with your publish/subscribe keys
   pubnub = new PubNub({
@@ -78,10 +94,7 @@ const setupPubNub = () => {
 
     message: (messageEvent) => {
       showMessage(messageEvent.message.description);
-      myListener(messageEvent.message.description);
-      myListener2(messageEvent.message.description);
-
-
+      myListener3(messageEvent.message.description);
     },
 
     presence: (presenceEvent) => {
@@ -109,7 +122,6 @@ const publishMessage = async (message) => {
   const publishPayload = {
     channel: "hello_world",
     message: {
-      title: "greeting",
       description: message,
     },
   };

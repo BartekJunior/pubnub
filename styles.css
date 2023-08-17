@@ -12,3 +12,23 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+.simpleDiv {
+    display: inline-block;
+    width: 120px;
+    height: 100px;
+    margin-top: 40px;
+}
+
+#alpha {
+    background-color: rgb(34, 110, 110);
+}
+#betha {
+    background-color: rgb(130, 155, 20);
+}
+#gamma {
+    background-color: rgb(173, 40, 151);
+}
+#sigma {
+    background-color: rgb(93, 79, 168);
+}
