@@ -12,17 +12,12 @@ const betha = document.getElementById(`betha`);
 const gamma = document.getElementById(`gamma`);
 const sigma = document.getElementById(`sigma`);
 
-
-
-
-
 let hehe;
 hehe = document.createElement(`div`);
 hehe.style.display = `block`;
 hehe.style.width = `100px`;
 hehe.style.height = `100px`;
 hehe.style.backgroundColor = `green`;
-
 
 let newObj;
 const myListener2 = (msg) => {
@@ -53,18 +48,17 @@ document.addEventListener(`click`, function (e) {
   }
 });
 
-
 let same = {
   player: UUID,
   wood: 12,
   stone: 40,
-}
+};
 
 gamma.addEventListener(`click`, function () {
   same = {
     player: UUID,
     wood: 77,
-    stone: 109
+    stone: 109,
   };
 });
 
@@ -75,9 +69,7 @@ sigma.addEventListener(`click`, function () {
 const myListener3 = (msg) => {
   console.log(msg);
   if (same !== msg) same = msg;
-
 };
-
 
 ///// PUBNUB /////
 const buttonClick = () => {
@@ -93,9 +85,6 @@ const showMessage = (msg) => {
   document.getElementById("messages").appendChild(message);
 };
 
-
-
-
 let pubnub;
 const setupPubNub = () => {
   // Update this block with your publish/subscribe keys
@@ -104,6 +93,8 @@ const setupPubNub = () => {
     subscribeKey: "sub-c-b19a2a4a-e6cc-4a73-84dd-364e0fa0eeb6",
     userId: UUID,
   });
+
+  
 
   // add listener
   const listener = {
@@ -116,12 +107,20 @@ const setupPubNub = () => {
     message: (messageEvent) => {
       showMessage(messageEvent.message.description);
       myListener3(messageEvent.message.description);
-
     },
 
-    presence: (presenceEvent) => {
-      // handle presence
+    presence: (event) => {
+      if (event.action === "join" && event.uuid !== pubnub.getUUID()) {
+        console.log(`User ${event.uuid} has joined.`);
+        console.log(event);
+        
+      } else if (event.action === "leave") {
+        console.log(`User ${event.uuid} has left.`);
+      }
     },
+
+
+
   };
 
   pubnub.addListener(listener);
@@ -130,6 +129,7 @@ const setupPubNub = () => {
   // subscribe to a channel
   pubnub.subscribe({
     channels: ["hello_world"],
+    withPresence: true,
   });
 };
 
@@ -148,9 +148,10 @@ const publishMessage = async (message) => {
   };
 
   console.log(publishPayload);
-
   await pubnub.publish(publishPayload);
 };
+
+
 
 // Prevent relaod page //
 // window.onbeforeunload = function() {
