@@ -1,5 +1,7 @@
 "use strict";
 
+const UUID = prompt(`Jak masz na imie?`);
+
 const firstDiv = document.getElementById(`firstDiv`);
 const lastDiv = document.getElementById(`lastDiv`);
 
@@ -10,29 +12,16 @@ const betha = document.getElementById(`betha`);
 const gamma = document.getElementById(`gamma`);
 const sigma = document.getElementById(`sigma`);
 
+
+
+
+
 let hehe;
 hehe = document.createElement(`div`);
 hehe.style.display = `block`;
 hehe.style.width = `100px`;
 hehe.style.height = `100px`;
 hehe.style.backgroundColor = `green`;
-
-let x = 999;
-
-///// PUBNUB /////
-const buttonClick = () => {
-  var input = document.getElementById("message-body");
-  publishMessage(input.value);
-
-  input.value = "";
-};
-
-const showMessage = (msg) => {
-  var message = document.createElement("div");
-  message.innerText = msg;
-  document.getElementById("messages").appendChild(message);
-};
-
 
 
 let newObj;
@@ -56,13 +45,7 @@ const myListener = (msg) => {
   }
 };
 
-
 let color;
-let same;
-let shits;
-
-
-
 document.addEventListener(`click`, function (e) {
   if (e.target === alpha) {
     color = `blue`;
@@ -70,10 +53,48 @@ document.addEventListener(`click`, function (e) {
   }
 });
 
+
+let same = {
+  player: UUID,
+  wood: 12,
+  stone: 40,
+}
+
+gamma.addEventListener(`click`, function () {
+  same = {
+    player: UUID,
+    wood: 77,
+    stone: 109
+  };
+});
+
+sigma.addEventListener(`click`, function () {
+  publishMessage(same);
+});
+
 const myListener3 = (msg) => {
-  color = alpha.style.backgroundColor;
+  console.log(msg);
+  if (same !== msg) same = msg;
 
 };
+
+
+///// PUBNUB /////
+const buttonClick = () => {
+  var input = document.getElementById("message-body");
+  publishMessage(input.value);
+
+  input.value = "";
+};
+
+const showMessage = (msg) => {
+  var message = document.createElement("div");
+  message.innerText = msg;
+  document.getElementById("messages").appendChild(message);
+};
+
+
+
 
 let pubnub;
 const setupPubNub = () => {
@@ -81,7 +102,7 @@ const setupPubNub = () => {
   pubnub = new PubNub({
     publishKey: "pub-c-39f0e485-ce55-4006-a9bd-6a780b9e77d2",
     subscribeKey: "sub-c-b19a2a4a-e6cc-4a73-84dd-364e0fa0eeb6",
-    userId: "demol",
+    userId: UUID,
   });
 
   // add listener
@@ -95,6 +116,7 @@ const setupPubNub = () => {
     message: (messageEvent) => {
       showMessage(messageEvent.message.description);
       myListener3(messageEvent.message.description);
+
     },
 
     presence: (presenceEvent) => {
@@ -103,7 +125,6 @@ const setupPubNub = () => {
   };
 
   pubnub.addListener(listener);
-
   // publish message
 
   // subscribe to a channel
