@@ -85,6 +85,8 @@ const showMessage = (msg) => {
   document.getElementById("messages").appendChild(message);
 };
 
+
+const onlineUsers = new Set();
 let pubnub;
 const setupPubNub = () => {
   // Update this block with your publish/subscribe keys
@@ -100,6 +102,7 @@ const setupPubNub = () => {
   const listener = {
     status: (statusEvent) => {
       if (statusEvent.category === "PNConnectedCategory") {
+        onlineUsers.add(pubnub.getUUID()); // Add the initial user's UUID
         console.log("Connected");
       }
     },
@@ -109,13 +112,20 @@ const setupPubNub = () => {
       myListener3(messageEvent.message.description);
     },
 
+
     presence: (event) => {
-      if (event.action === "join" && event.uuid !== pubnub.getUUID()) {
-        console.log(`User ${event.uuid} has joined.`);
+      if (event.action === "join") {
+        onlineUsers.add(event.uuid);
+        console.log(`User ${event.uuid} has joined. Online users:`);
+        console.log(`The online users are: ${Array.from(onlineUsers)}`);
         console.log(event);
         
+
       } else if (event.action === "leave") {
-        console.log(`User ${event.uuid} has left.`);
+        onlineUsers.delete(event.uuid);
+        console.log(`User ${event.uuid} has left. Online users:`);
+        console.log(`The online users are: ${Array.from(onlineUsers)}`);
+        console.log(event);
       }
     },
 
