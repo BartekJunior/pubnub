@@ -77,6 +77,30 @@ input.addEventListener("keydown", function(event) {
 });
 
 
+
+
+
+let onlineUsers = new Set();
+let turn = 3;
+
+
+const checkUser = () => {
+  turn = turn - 1;
+  if(turn === 0) turn = 3;
+  if (onlineUsers.size !== turn)
+   {
+    input.disabled = true;
+    send.disabled = true;
+  } else {
+    input.disabled = false;
+    send.disabled = false;
+  }
+  
+}
+
+
+// TURN MUSI BYC WYCIAGNIETE Z PUBNUB. Player.occupancy itd!!!!
+
 ///// PUBNUB /////
 const buttonClick = () => {
   publishMessage(input.value);
@@ -94,7 +118,6 @@ const showMessage = (msg) => {
 };
 
 
-const onlineUsers = new Set();
 let pubnub;
 
 const setupPubNub = () => {
@@ -116,14 +139,16 @@ const setupPubNub = () => {
 
     message: (messageEvent) => {
       showMessage(messageEvent.message.description);
+      checkUser(messageEvent.message.description);
       myListener3(messageEvent.message.description);
+
 
       console.log(messageEvent);
 
-      if(messageEvent.publisher !== UUID) {
-        input.disabled = false;
-        send.disabled = false;
-      }
+      // if(messageEvent.publisher !== UUID) {
+      //   input.disabled = false;
+      //   send.disabled = false;
+      // }
     },
 
 
