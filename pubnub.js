@@ -13,27 +13,16 @@ const gamma = document.getElementById(`gamma`);
 const sigma = document.getElementById(`sigma`);
 
 
-
-let newObj;
-const myListener2 = (msg) => {
-  if (msg === `newObj`) {
-    console.log(typeof msg);
-    newObj = {
-      name: `bartek`,
-      age: 35,
-      region: `Poznan`,
-      language: `js`,
-      hot: true,
-    };
+const input = document.getElementById("message-body");
+const send = document.getElementById("send");
+input.disabled = true;
+send.disabled = true;
+input.addEventListener("keydown", function(event) {
+  if (event.keyCode === 13) {
+      buttonClick();
   }
-};
+});
 
-const myListener = (msg) => {
-  if (msg === `newObj`) {
-    x = 777;
-    lastDiv.appendChild(hehe);
-  }
-};
 
 let color;
 document.addEventListener(`click`, function (e) {
@@ -68,38 +57,34 @@ const myListener3 = (msg) => {
 
 
 
-const input = document.getElementById("message-body");
-const send = document.getElementById("send");
-input.addEventListener("keydown", function(event) {
-  if (event.keyCode === 13) {
-      buttonClick();
-  }
-});
 
-
-
-
-
+// ------------ TURN CHANGE BART is the first player ------------- //
 let onlineUsers = new Set();
 let turn = 3;
 
+document.addEventListener(`click`, function(e) {
+  if (pubnub._config.UUID === `bart`) {
+    input.disabled = false;
+    send.disabled = false;
+  }
+}, {once: true})
 
 const checkUser = () => {
   turn = turn - 1;
   if(turn === 0) turn = 3;
-  if (onlineUsers.size !== turn)
+  if (onlineUsers.size === turn)
    {
-    input.disabled = true;
-    send.disabled = true;
-  } else {
     input.disabled = false;
     send.disabled = false;
+  } else {
+    input.disabled = true;
+    send.disabled = true;
   }
-  
 }
+// ------------ TURN CHANGE ------------- //
 
 
-// TURN MUSI BYC WYCIAGNIETE Z PUBNUB. Player.occupancy itd!!!!
+
 
 ///// PUBNUB /////
 const buttonClick = () => {
