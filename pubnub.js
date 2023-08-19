@@ -12,12 +12,6 @@ const betha = document.getElementById(`betha`);
 const gamma = document.getElementById(`gamma`);
 const sigma = document.getElementById(`sigma`);
 
-let hehe;
-hehe = document.createElement(`div`);
-hehe.style.display = `block`;
-hehe.style.width = `100px`;
-hehe.style.height = `100px`;
-hehe.style.backgroundColor = `green`;
 
 let newObj;
 const myListener2 = (msg) => {
@@ -71,12 +65,19 @@ const myListener3 = (msg) => {
   if (same !== msg) same = msg;
 };
 
+
+
+const input = document.getElementById("message-body");
+const send = document.getElementById("send");
+
 ///// PUBNUB /////
 const buttonClick = () => {
-  var input = document.getElementById("message-body");
   publishMessage(input.value);
 
   input.value = "";
+  input.disabled = true;
+  send.disabled = true;
+
 };
 
 const showMessage = (msg) => {
@@ -88,6 +89,7 @@ const showMessage = (msg) => {
 
 const onlineUsers = new Set();
 let pubnub;
+
 const setupPubNub = () => {
   // Update this block with your publish/subscribe keys
   pubnub = new PubNub({
@@ -95,8 +97,6 @@ const setupPubNub = () => {
     subscribeKey: "sub-c-b19a2a4a-e6cc-4a73-84dd-364e0fa0eeb6",
     userId: UUID,
   });
-
-  
 
   // add listener
   const listener = {
@@ -110,6 +110,14 @@ const setupPubNub = () => {
     message: (messageEvent) => {
       showMessage(messageEvent.message.description);
       myListener3(messageEvent.message.description);
+
+      console.log(messageEvent);
+
+      if(messageEvent.publisher !== UUID) {
+        
+        input.disabled = false;
+        send.disabled = false;
+      }
     },
 
 
