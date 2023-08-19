@@ -13,6 +13,7 @@ const gamma = document.getElementById(`gamma`);
 const sigma = document.getElementById(`sigma`);
 
 
+
 let newObj;
 const myListener2 = (msg) => {
   if (msg === `newObj`) {
@@ -69,6 +70,12 @@ const myListener3 = (msg) => {
 
 const input = document.getElementById("message-body");
 const send = document.getElementById("send");
+input.addEventListener("keydown", function(event) {
+  if (event.keyCode === 13) {
+      buttonClick();
+  }
+});
+
 
 ///// PUBNUB /////
 const buttonClick = () => {
@@ -114,7 +121,6 @@ const setupPubNub = () => {
       console.log(messageEvent);
 
       if(messageEvent.publisher !== UUID) {
-        
         input.disabled = false;
         send.disabled = false;
       }
