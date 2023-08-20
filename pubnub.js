@@ -12,6 +12,25 @@ const betha = document.getElementById(`betha`);
 const gamma = document.getElementById(`gamma`);
 const sigma = document.getElementById(`sigma`);
 
+class Player {
+  constructor(name, nr, color) {
+    this.name = name;
+    this.nr = nr;
+    this.color = color;
+  }
+}
+
+const setPlayer = document.getElementById(`setPlayer`);
+let players = [];
+
+setPlayer.addEventListener(`click`, function() {
+  const player1 = new Player(UUID, onlineUsers.size, `red`)
+  console.log(player1);
+  
+})
+
+
+
 
 const input = document.getElementById("message-body");
 const send = document.getElementById("send");
@@ -58,9 +77,11 @@ const myListener3 = (msg) => {
 
 
 
-// ------------ TURN CHANGE BART is the first player. TURN FUNCTION MADE FOR 3 PLAYERS!!! ------------- //
+// ------------ TURN CHANGE BART is the first player. TURN FUNCTION MADE FOR X PLAYERS!!! ------------- //
+// PlayersNumber tells how many players are in the game! Very important!!!!
 let onlineUsers = new Set();
-let turn = 3;
+const playersNumber = 3;
+let turn = playersNumber;
 
 document.addEventListener(`click`, function(e) {
   if (pubnub._config.UUID === `bart`) {
@@ -71,7 +92,7 @@ document.addEventListener(`click`, function(e) {
 
 const checkUser = () => {
   turn = turn - 1;
-  if(turn === 0) turn = 3;
+  if(turn === 0) turn = playersNumber;
   if (onlineUsers.size === turn)
    {
     input.disabled = false;
@@ -82,8 +103,6 @@ const checkUser = () => {
   }
 }
 // ------------ TURN CHANGE ------------- //
-
-
 
 
 ///// PUBNUB /////
@@ -125,7 +144,7 @@ const setupPubNub = () => {
     message: (messageEvent) => {
       showMessage(messageEvent.message.description);
       checkUser(messageEvent.message.description);
-      myListener3(messageEvent.message.description);
+      // myListener3(messageEvent.message.description);
 
 
       console.log(messageEvent);
@@ -193,6 +212,24 @@ const publishMessage = async (message) => {
 // }
 
 
+
+class Hexag {
+  constructor (type, town, soldier) {
+    this.type = type;
+    this.town = town;
+    this.soldier = soldier;
+  }
+}
+
+
+
+
+
+new Hexag (`forest`, true, true);
+const b = new Hexag (`desert`, false, false);
+const c = new Hexag (`water`, false, false);
+
+console.log(b instanceof Hexag);
 
 
 

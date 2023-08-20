@@ -7,9 +7,7 @@ body {
   width: 300px;
   height: 90px;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: inline-block;
 }
 
 .simpleDiv {
@@ -34,221 +32,226 @@ body {
 }
 
 body {
-    background-color: azure;
-    padding-top: 50px;
-  
-    -webkit-touch-callout: none;
-    /* iOS Safari */
-    -webkit-user-select: none;
-    /* Safari */
-    -khtml-user-select: none;
-    /* Konqueror HTML */
-    -moz-user-select: none;
-    /* Firefox */
-    -ms-user-select: none;
-    /* Internet Explorer/Edge */
-    user-select: none;
-    /* Non-prefixed version, currently
+  background-color: azure;
+  padding-top: 50px;
+
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
       supported by Chrome and Opera */
-  }
-  
-  h1,
-  h2 {
-    width: 400px;
-    text-align: center;
-    margin: 0 auto;
-  }
-  
-  .hex4 {
-    margin-left: 200px;
-    height: 210px;
-    width: 210px;
-    background-color: #66ff66;
-  
-    display: grid;
-    grid-template-columns: repeat(3, 60px);
-    grid-template-rows: repeat(3, 60px);
-    align-items: center;
-    align-content: center;
-    justify-items: center;
-    justify-content: center;
-  
-    -webkit-clip-path: polygon(
-      50% 0%,
-      95% 25%,
-      95% 75%,
-      50% 100%,
-      5% 75%,
-      5% 25%
-    );
-    clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
-  }
-  
-  
-  .hex-small {
-    width: 59px;
-    height: 59px;
-  }
-  
-  .shit {
-    background-image: url(./img/tower.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 70%;
-    /* position: relative; */
-  }
-  
-  /* ------------ HEX ----------------- */
-  .hex-container {
-    height: 500px;
-    width: max-content;
-    margin: 0 auto;
-  }
-  
-  .hex {
-    display: inline-block;
-    margin-left: -13px;
-    height: 120px;
-    width: 120px;
-    background-color: #8b93ad;
-  
-    -webkit-clip-path: polygon(
-      50% 0%,
-      95% 25%,
-      95% 75%,
-      50% 100%,
-      5% 75%,
-      5% 25%
-    );
-    clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
-  }
-  
-  .hex:hover {
-    opacity: 0.7;
-  }
-  
-  /* ------------------------- */
-  .hex-row {
-    margin-top: -35px;
-  }
-  
-  .hex-row.even {
-    margin-left: -56px;
-  }
-  
-  /* ------------ HUD ----------------- */
-  .game-container {
-    margin-top: 80px;
-    height: 800px;
-  }
-  
-  .hud-global {
-    background-color: rgb(61, 107, 92);
-  }
-  
-  .hud-merchant {
-    display: none;
-  }
-  
-  .hud-town {
-    display: none;
-  }
-  
-  .hud-town-btn {
-    width: 130px;
-    height: 50px;
-  }
-  
-  .resource-container {
-    display: flex;
-  }
-  
-  .resource-img {
-    background-color: rgb(116, 115, 84);
-    width: 100px;
-    height: 50px;
-  }
-  
-  .resource-value {
-    background-color: rgb(175, 172, 90);
-    width: 100px;
-    height: 50px;
-    font-weight: bold;
-    text-align: center;
-    font-size: 25px;
-  }
-  
-  .container-structure {
-    display: none;
-  }
-  
-  #confirmBtn {
-    display: none;
-  }
-  
-  .test {
-    background-color: bisque;
-    width: 100px;
-    height: 70px;
-    text-align: center;
-    font-size: 30px;
-    padding-top: 10px;
-  }
-  
-  /* ------------ HEX Images ----------------- */
-  .merchant {
-    background-image: url(./img/merchant.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100%;
-    /* position: relative; */
-  }
-  
-  .tower {
-    background-image: url(./img/tower.png), url(./img/town.png);
-    background-repeat: no-repeat;
-    background-position: top 5px left 15px, center;
-    background-size: 35%, 40%;
-    /* position: relative; */
-  }
-  
-  .castle {
-    background-image: url(./img/town.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 70%;
-    /* position: relative; */
-  }
-  
-  .class-brown {
-    background-color: brown;
-  }
-  
-  .class-green {
-    background-color: green;
-  }
-  
-  .class-blue {
-    background-color: blue;
-  }
-  
-  .class-orange {
-    background-color: orange;
-  }
-  
-  /* ------------ GAMEPLAY   ----------------- */
-  
-  .possible-move {
-    opacity: 0.4;
-  }
-  
-  .possible-collect {
-    opacity: 0.7;
-  }
-  .build-town {
-    width: 100px;
-    border-radius: 5px;
-  }
-  .build-town:hover {
-    background-color: #66ff66;
-  }
+}
+
+#setPlayer {
+  display: inline-block;
+  width: 150px;
+  height: 70px;
+  background-color: #66ff66;
+}
+
+h1,
+h2 {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.hex4 {
+  margin-left: 200px;
+  height: 210px;
+  width: 210px;
+  background-color: #66ff66;
+
+  display: grid;
+  grid-template-columns: repeat(3, 60px);
+  grid-template-rows: repeat(3, 60px);
+  align-items: center;
+  align-content: center;
+  justify-items: center;
+  justify-content: center;
+
+  -webkit-clip-path: polygon(
+    50% 0%,
+    95% 25%,
+    95% 75%,
+    50% 100%,
+    5% 75%,
+    5% 25%
+  );
+  clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+}
+
+.hex-small {
+  width: 59px;
+  height: 59px;
+}
+
+.shit {
+  background-image: url(./img/tower.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 70%;
+  /* position: relative; */
+}
+
+/* ------------ HEX ----------------- */
+.hex-container {
+  height: 500px;
+  width: max-content;
+  margin: 0 auto;
+}
+
+.hex {
+  display: inline-block;
+  margin-left: -13px;
+  height: 120px;
+  width: 120px;
+  background-color: #8b93ad;
+
+  -webkit-clip-path: polygon(
+    50% 0%,
+    95% 25%,
+    95% 75%,
+    50% 100%,
+    5% 75%,
+    5% 25%
+  );
+  clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+}
+
+.hex:hover {
+  opacity: 0.7;
+}
+
+/* ------------------------- */
+.hex-row {
+  margin-top: -35px;
+}
+
+.hex-row.even {
+  margin-left: -56px;
+}
+
+/* ------------ HUD ----------------- */
+.game-container {
+  margin-top: 80px;
+  height: 800px;
+}
+
+.hud-global {
+  background-color: rgb(61, 107, 92);
+}
+
+.hud-merchant {
+  display: none;
+}
+
+.hud-town {
+  display: none;
+}
+
+.hud-town-btn {
+  width: 130px;
+  height: 50px;
+}
+
+.resource-container {
+  display: flex;
+}
+
+.resource-img {
+  background-color: rgb(116, 115, 84);
+  width: 100px;
+  height: 50px;
+}
+
+.resource-value {
+  background-color: rgb(175, 172, 90);
+  width: 100px;
+  height: 50px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 25px;
+}
+
+.container-structure {
+  display: none;
+}
+
+#confirmBtn {
+  display: none;
+}
+
+.test {
+  background-color: bisque;
+  width: 100px;
+  height: 70px;
+  text-align: center;
+  font-size: 30px;
+  padding-top: 10px;
+}
+
+/* ------------ HEX Images ----------------- */
+.merchant {
+  background-image: url(./img/merchant.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  /* position: relative; */
+}
+
+.tower {
+  background-image: url(./img/tower.png), url(./img/town.png);
+  background-repeat: no-repeat;
+  background-position: top 5px left 15px, center;
+  background-size: 35%, 40%;
+  /* position: relative; */
+}
+
+.castle {
+  background-image: url(./img/town.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 70%;
+  /* position: relative; */
+}
+
+.class-brown {
+  background-color: brown;
+}
+
+.class-green {
+  background-color: green;
+}
+
+.class-blue {
+  background-color: blue;
+}
+
+.class-orange {
+  background-color: orange;
+}
+
+/* ------------ GAMEPLAY   ----------------- */
+
+.possible-move {
+  opacity: 0.4;
+}
+
+.possible-collect {
+  opacity: 0.7;
+}
+.build-town {
+  width: 100px;
+  border-radius: 5px;
+}
+.build-town:hover {
+  background-color: #66ff66;
+}
