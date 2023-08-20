@@ -58,7 +58,7 @@ const myListener3 = (msg) => {
 
 
 
-// ------------ TURN CHANGE BART is the first player ------------- //
+// ------------ TURN CHANGE BART is the first player. TURN FUNCTION MADE FOR 3 PLAYERS!!! ------------- //
 let onlineUsers = new Set();
 let turn = 3;
 
@@ -191,3 +191,143 @@ const publishMessage = async (message) => {
 // window.onbeforeunload = function() {
 //     return `Dude`
 // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ------------------------ OLD SPAGHETTI CODE -----------------------------------
+
+
+const hexAll = Array.from(document.querySelectorAll(`.hex`));
+let hexRow = Array.from(document.querySelectorAll(`.hex-row`));
+hexRow = hexRow.map((m) => Array.from(m.children));
+
+hexAll[0].classList.add(`merchant`);
+hexAll[0].classList.add(`class-brown`);
+hexAll[1].classList.add(`class-green`);
+hexAll[8].classList.add(`class-orange`);
+hexAll[9].classList.add(`class-green`);
+
+let randomArea0 = [hexAll[0], hexAll[1], hexAll[8], hexAll[9]];
+let randomArea1 = [hexAll[2], hexAll[3], hexAll[10], hexAll[11]];
+let randomArea2 = [hexAll[4], hexAll[5], hexAll[12], hexAll[13]];
+let randomArea3 = [hexAll[6], hexAll[7], hexAll[14], hexAll[15]];
+let randomArea4 = [hexAll[16], hexAll[17], hexAll[24], hexAll[25]];
+let randomArea5 = [hexAll[18], hexAll[19], hexAll[26], hexAll[27]];
+let randomArea6 = [hexAll[20], hexAll[21], hexAll[28], hexAll[29]];
+let randomArea7 = [hexAll[22], hexAll[23], hexAll[30], hexAll[31]];
+let randomArea8 = [hexAll[32], hexAll[33], hexAll[40], hexAll[41]];
+let randomArea9 = [hexAll[34], hexAll[35], hexAll[42], hexAll[43]];
+let randomArea10 = [hexAll[36], hexAll[37], hexAll[44], hexAll[45]];
+let randomArea11 = [hexAll[38], hexAll[39], hexAll[46], hexAll[47]];
+
+let allArea = [
+  randomArea0,
+  randomArea1,
+  randomArea2,
+  randomArea3,
+  randomArea4,
+  randomArea5,
+  randomArea6,
+  randomArea7,
+  randomArea8,
+  randomArea9,
+  randomArea10,
+  randomArea11,
+];
+
+// HUD Display
+const hudMerchant = document.querySelector(`.hud-merchant`);
+const hudTown = document.querySelector(`.hud-town`);
+
+const buildTown = document.getElementById(`buildTown`);
+const confirmBtn = document.getElementById(`confirmBtn`);
+
+const collectFood = document.getElementById(`collectFood`);
+const buildStructure = document.getElementById(`buildStructure`);
+const burnTown = document.getElementById(`burnTown`);
+
+const containerStructure = document.getElementById(`containerStructure`);
+const academyBtn = document.getElementById(`academyBtn`);
+
+const checkResource = function (f, w, s) {
+  if (foodValue >= f && woodValue >= w && stoneValue >= s) return true;
+  else return false;
+};
+
+
+
+
+const colorArr = [
+`red`,
+`green`,
+`yellow`,
+`brown`,
+`pink`,
+`purple`,
+`black`,
+`orange`,
+`white`
+]
+
+
+const hex4 = document.getElementById(`hex4`);
+let hexChild = [];
+
+function createSmall() {
+  for (let i = 0; i < 9; i++) {
+    const hexSmall = document.createElement("div");
+    hexSmall.style.backgroundColor = colorArr[i];
+    hexSmall.classList.add(`hex-small`);
+    hexChild.push(hexSmall);
+    hex4.appendChild(hexChild[i]);
+  }
+};
+
+
+// createSmall();
+
+
+// hexChild[0].classList.add(`shit`);
+// hexChild[1].classList.add(`shit`);
+// hexChild[2].classList.add(`shit`);
+// hexChild[3].classList.add(`shit`);
+
+
+
+// let bgImg;
+
+// academyBtn.addEventListener(`click`, function () {
+//   if (!checkResource(1, 1, 1)) {
+//     bgImg = window.getComputedStyle(townPosition);
+//     townPosition.style.backgroundImage = `url("file:///C:/Users/Bartek/Desktop/Web%20Development/Settlers/img/tower.png")`;
+//   }
+// });
+
+
+
+
+// const foodContainer = document.getElementById(`foodValue`);
+// const woodContainer = document.getElementById(`woodValue`);
+// const stoneContainer = document.getElementById(`stoneValue`);
+// const goldContainer = document.getElementById(`goldValue`);
+// const ideaContainer = document.getElementById(`ideaValue`);
+// let foodValue = Number(foodContainer.innerHTML);
+// let woodValue = Number(woodContainer.innerHTML);
+// let stoneValue = Number(stoneContainer.innerHTML);
+// let goldValue = Number(goldContainer.innerHTML);
+// let ideaValue = Number(ideaContainer.innerHTML);
+// buildStructure.addEventListener(`click`, function () {
+//   containerStructure.style.display = `block`;
+//   confirmBtn.style.display = `none`;
+// });
