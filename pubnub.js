@@ -28,6 +28,7 @@ setPlayer.addEventListener(`click`, function () {
   if (onlineUsers.size === 3) color = `red`;
   else if (onlineUsers.size === 2) color = `blue`;
   else if (onlineUsers.size === 1) color = `green`;
+  else alert(`Liczba graczy musi wynosic 1-3`);
   window["player" + num] = new Player(UUID, num, color);
   console.log();
 });
@@ -35,7 +36,7 @@ setPlayer.addEventListener(`click`, function () {
 // ------------ TURN CHANGE BART is the first player. TURN FUNCTION MADE FOR X PLAYERS!!! ------------- //
 // PlayersNumber tells how many players are in the game! Very important!!!!
 let onlineUsers = new Set();
-const playersNumber = 3;
+const playersNumber = 2;
 let turn = playersNumber;
 
 document.addEventListener(
