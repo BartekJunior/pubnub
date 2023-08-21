@@ -37,7 +37,7 @@ setPlayer.addEventListener(`click`, function () {
 // PlayersNumber tells how many players are in the game! Very important!!!!
 let onlineUsers = new Set();
 const playersNumber = 2;
-let turn = playersNumber;
+let turn = 1;
 
 document.addEventListener(
   `click`,
@@ -51,9 +51,10 @@ document.addEventListener(
 );
 
 const checkUser = () => {
-  turn = turn - 1;
-  if (turn === 0) turn = playersNumber;
-  if (onlineUsers.size === turn) {
+  const num = Math.ceil(playersNumber / onlineUsers.size);
+  turn++;
+  if (turn === 1 + playersNumber) turn = 1;
+  if (num === turn) {
     input.disabled = false;
     send.disabled = false;
   } else {
