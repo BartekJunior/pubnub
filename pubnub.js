@@ -20,28 +20,67 @@ class Player {
   }
 }
 
+
+
 const setPlayer = document.getElementById(`setPlayer`);
-let players = [];
+setPlayer.addEventListener(`click`, function () {
+  const num = Math.ceil(playersNumber / onlineUsers.size);
+  if (onlineUsers.size === 3) color = `red`;
+  else if (onlineUsers.size === 2) color = `blue`;
+  else if (onlineUsers.size === 1) color = `green`;
+  window["player" + num] = new Player(UUID, num, color);
+  console.log();
+});
 
-setPlayer.addEventListener(`click`, function() {
-  const player1 = new Player(UUID, onlineUsers.size, `red`)
-  console.log(player1);
-  
-})
+// ------------ TURN CHANGE BART is the first player. TURN FUNCTION MADE FOR X PLAYERS!!! ------------- //
+// PlayersNumber tells how many players are in the game! Very important!!!!
+let onlineUsers = new Set();
+const playersNumber = 3;
+let turn = playersNumber;
 
+document.addEventListener(
+  `click`,
+  function (e) {
+    if (pubnub._config.UUID === `bart`) {
+      input.disabled = false;
+      send.disabled = false;
+    }
+  },
+  { once: true }
+);
 
+const checkUser = () => {
+  turn = turn - 1;
+  if (turn === 0) turn = playersNumber;
+  if (onlineUsers.size === turn) {
+    input.disabled = false;
+    send.disabled = false;
+  } else {
+    input.disabled = true;
+    send.disabled = true;
+  }
+};
+// ------------ TURN CHANGE ------------- //
 
+let i;
+for (i = 1; i < 5; i++) {
+  window["value" + i] = i;
+}
+
+console.log(value1);
+console.log(value2);
+console.log(value3);
+console.log(value4);
 
 const input = document.getElementById("message-body");
 const send = document.getElementById("send");
 input.disabled = true;
 send.disabled = true;
-input.addEventListener("keydown", function(event) {
+input.addEventListener("keydown", function (event) {
   if (event.keyCode === 13) {
-      buttonClick();
+    buttonClick();
   }
 });
-
 
 let color;
 document.addEventListener(`click`, function (e) {
@@ -74,37 +113,6 @@ const myListener3 = (msg) => {
   if (same !== msg) same = msg;
 };
 
-
-
-
-// ------------ TURN CHANGE BART is the first player. TURN FUNCTION MADE FOR X PLAYERS!!! ------------- //
-// PlayersNumber tells how many players are in the game! Very important!!!!
-let onlineUsers = new Set();
-const playersNumber = 3;
-let turn = playersNumber;
-
-document.addEventListener(`click`, function(e) {
-  if (pubnub._config.UUID === `bart`) {
-    input.disabled = false;
-    send.disabled = false;
-  }
-}, {once: true})
-
-const checkUser = () => {
-  turn = turn - 1;
-  if(turn === 0) turn = playersNumber;
-  if (onlineUsers.size === turn)
-   {
-    input.disabled = false;
-    send.disabled = false;
-  } else {
-    input.disabled = true;
-    send.disabled = true;
-  }
-}
-// ------------ TURN CHANGE ------------- //
-
-
 ///// PUBNUB /////
 const buttonClick = () => {
   publishMessage(input.value);
@@ -112,7 +120,6 @@ const buttonClick = () => {
   input.value = "";
   input.disabled = true;
   send.disabled = true;
-
 };
 
 const showMessage = (msg) => {
@@ -120,7 +127,6 @@ const showMessage = (msg) => {
   message.innerText = msg;
   document.getElementById("messages").appendChild(message);
 };
-
 
 let pubnub;
 
@@ -146,7 +152,6 @@ const setupPubNub = () => {
       checkUser(messageEvent.message.description);
       // myListener3(messageEvent.message.description);
 
-
       console.log(messageEvent);
 
       // if(messageEvent.publisher !== UUID) {
@@ -155,15 +160,12 @@ const setupPubNub = () => {
       // }
     },
 
-
     presence: (event) => {
       if (event.action === "join") {
         onlineUsers.add(event.uuid);
         console.log(`User ${event.uuid} has joined. Online users:`);
         console.log(`The online users are: ${Array.from(onlineUsers)}`);
         console.log(event);
-        
-
       } else if (event.action === "leave") {
         onlineUsers.delete(event.uuid);
         console.log(`User ${event.uuid} has left. Online users:`);
@@ -171,9 +173,6 @@ const setupPubNub = () => {
         console.log(event);
       }
     },
-
-
-
   };
 
   pubnub.addListener(listener);
@@ -204,46 +203,26 @@ const publishMessage = async (message) => {
   await pubnub.publish(publishPayload);
 };
 
-
-
 // Prevent relaod page //
 // window.onbeforeunload = function() {
 //     return `Dude`
 // }
 
-
-
 class Hexag {
-  constructor (type, town, soldier) {
+  constructor(type, town, soldier) {
     this.type = type;
     this.town = town;
     this.soldier = soldier;
   }
 }
 
-
-
-
-
-new Hexag (`forest`, true, true);
-const b = new Hexag (`desert`, false, false);
-const c = new Hexag (`water`, false, false);
+new Hexag(`forest`, true, true);
+const b = new Hexag(`desert`, false, false);
+const c = new Hexag(`water`, false, false);
 
 console.log(b instanceof Hexag);
 
-
-
-
-
-
-
-
-
-
-
-
 // ------------------------ OLD SPAGHETTI CODE -----------------------------------
-
 
 const hexAll = Array.from(document.querySelectorAll(`.hex`));
 let hexRow = Array.from(document.querySelectorAll(`.hex-row`));
@@ -302,21 +281,17 @@ const checkResource = function (f, w, s) {
   else return false;
 };
 
-
-
-
 const colorArr = [
-`red`,
-`green`,
-`yellow`,
-`brown`,
-`pink`,
-`purple`,
-`black`,
-`orange`,
-`white`
-]
-
+  `red`,
+  `green`,
+  `yellow`,
+  `brown`,
+  `pink`,
+  `purple`,
+  `black`,
+  `orange`,
+  `white`,
+];
 
 const hex4 = document.getElementById(`hex4`);
 let hexChild = [];
@@ -329,18 +304,14 @@ function createSmall() {
     hexChild.push(hexSmall);
     hex4.appendChild(hexChild[i]);
   }
-};
-
+}
 
 // createSmall();
-
 
 // hexChild[0].classList.add(`shit`);
 // hexChild[1].classList.add(`shit`);
 // hexChild[2].classList.add(`shit`);
 // hexChild[3].classList.add(`shit`);
-
-
 
 // let bgImg;
 
@@ -350,9 +321,6 @@ function createSmall() {
 //     townPosition.style.backgroundImage = `url("file:///C:/Users/Bartek/Desktop/Web%20Development/Settlers/img/tower.png")`;
 //   }
 // });
-
-
-
 
 // const foodContainer = document.getElementById(`foodValue`);
 // const woodContainer = document.getElementById(`woodValue`);
