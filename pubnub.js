@@ -34,7 +34,7 @@ setPlayer.addEventListener(`click`, function () {
 });
 
 // ------------ TURN CHANGE BART is the first player. TURN FUNCTION MADE FOR X PLAYERS!!! ------------- //
-// PlayersNumber tells how many players are in the game! Very important!!!!
+// PlayersNumber tells how many players are in the game! IT MUST BE THE RIGHT VALUE!
 let onlineUsers = new Set();
 const playersNumber = 2;
 let turn = 1;
@@ -64,15 +64,13 @@ const checkUser = () => {
 };
 // ------------ TURN CHANGE ------------- //
 
+// Dynamic variables
 let i;
-for (i = 1; i < 5; i++) {
+for (i = 1; i < 4; i++) {
   window["value" + i] = i;
 }
+// Dynamic variables
 
-console.log(value1);
-console.log(value2);
-console.log(value3);
-console.log(value4);
 
 const input = document.getElementById("message-body");
 const send = document.getElementById("send");
@@ -165,12 +163,12 @@ const setupPubNub = () => {
     presence: (event) => {
       if (event.action === "join") {
         onlineUsers.add(event.uuid);
-        console.log(`User ${event.uuid} has joined. Online users:`);
+        console.log(`User ${event.uuid} has joined.`);
         console.log(`The online users are: ${Array.from(onlineUsers)}`);
         console.log(event);
       } else if (event.action === "leave") {
         onlineUsers.delete(event.uuid);
-        console.log(`User ${event.uuid} has left. Online users:`);
+        console.log(`User ${event.uuid} has left.`);
         console.log(`The online users are: ${Array.from(onlineUsers)}`);
         console.log(event);
       }
@@ -210,7 +208,27 @@ const publishMessage = async (message) => {
 //     return `Dude`
 // }
 
-class Hexag {
+
+
+
+
+// ------------------------ OLD SPAGHETTI CODE -----------------------------------
+
+const hexAll = Array.from(document.querySelectorAll(`.hex`));
+let hexRow = Array.from(document.querySelectorAll(`.hex-row`));
+hexRow = hexRow.map((m) => Array.from(m.children));
+
+
+const chooseLand = function () {
+  const x = Math.ceil(Math.random() * 4);
+  if (x === 1) return `water`;
+  else if (x === 2) return `forest`;
+  else if (x === 3) return `mountain`;
+  else if (x === 4) return `grass`;
+  
+}
+
+class Hex {
   constructor(type, town, soldier) {
     this.type = type;
     this.town = town;
@@ -218,17 +236,31 @@ class Hexag {
   }
 }
 
-new Hexag(`forest`, true, true);
-const b = new Hexag(`desert`, false, false);
-const c = new Hexag(`water`, false, false);
 
-console.log(b instanceof Hexag);
+console.log(new Hex (chooseLand(), false, true));
+console.log(new Hex (chooseLand(), false, true));
+console.log(new Hex (chooseLand(), false, true));
+console.log(new Hex (chooseLand(), false, true));
+console.log(new Hex (chooseLand(), false, true));
 
-// ------------------------ OLD SPAGHETTI CODE -----------------------------------
 
-const hexAll = Array.from(document.querySelectorAll(`.hex`));
-let hexRow = Array.from(document.querySelectorAll(`.hex-row`));
-hexRow = hexRow.map((m) => Array.from(m.children));
+
+// if(playersNumber === 2) {
+//   for (let i = 0; i < hexAll.length; i++) {
+//     hexAll[i] = new Hex (`sand`, false, false);
+//   }
+// }
+
+for (let i = 0; i < hexAll.length; i++) {
+  hexAll[i].addEventListener(`click`, function (event) {
+    console.log(event.target);
+  });
+}
+
+console.log(hexAll.length);
+
+
+
 
 hexAll[0].classList.add(`merchant`);
 hexAll[0].classList.add(`class-brown`);
