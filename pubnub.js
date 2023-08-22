@@ -165,12 +165,12 @@ const setupPubNub = () => {
         onlineUsers.add(event.uuid);
         console.log(`User ${event.uuid} has joined.`);
         console.log(`The online users are: ${Array.from(onlineUsers)}`);
-        console.log(event);
+        // console.log(event);
       } else if (event.action === "leave") {
         onlineUsers.delete(event.uuid);
         console.log(`User ${event.uuid} has left.`);
         console.log(`The online users are: ${Array.from(onlineUsers)}`);
-        console.log(event);
+        // console.log(event);
       }
     },
   };
@@ -236,7 +236,6 @@ class Hex {
   }
 }
 
-
 console.log(new Hex (chooseLand(), false, true));
 console.log(new Hex (chooseLand(), false, true));
 console.log(new Hex (chooseLand(), false, true));
@@ -244,18 +243,36 @@ console.log(new Hex (chooseLand(), false, true));
 console.log(new Hex (chooseLand(), false, true));
 
 
+// const div = document.createElement('div');
+// div.classList.add(`hex`);
+// firstDiv.appendChild(div);
+// div.myobject = { hello: 'world' };
+// div.addEventListener(`click`, function() {
+//   console.log(div.myobject);
+// })
 
-// if(playersNumber === 2) {
-//   for (let i = 0; i < hexAll.length; i++) {
-//     hexAll[i] = new Hex (`sand`, false, false);
-//   }
+
+
+hexAll.forEach((el) => {
+  const shit = new Hex (chooseLand(), false, true);
+  el.object = shit;
+  // console.log(el.object);
+  
+})
+
+hexAll.forEach((el) => {
+  el.addEventListener(`click`, function(e) {
+    console.log(e.target.object);
+  })
+  
+})
+
+
+// for (let i = 0; i < hexAll.length; i++) {
+//   hexAll[i].addEventListener(`click`, function (event) {
+//     console.log(event.target);
+//   });
 // }
-
-for (let i = 0; i < hexAll.length; i++) {
-  hexAll[i].addEventListener(`click`, function (event) {
-    console.log(event.target);
-  });
-}
 
 console.log(hexAll.length);
 
