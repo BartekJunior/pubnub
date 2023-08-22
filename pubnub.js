@@ -20,8 +20,6 @@ class Player {
   }
 }
 
-
-
 const setPlayer = document.getElementById(`setPlayer`);
 setPlayer.addEventListener(`click`, function () {
   const num = Math.ceil(playersNumber / onlineUsers.size);
@@ -70,7 +68,6 @@ for (i = 1; i < 4; i++) {
   window["value" + i] = i;
 }
 // Dynamic variables
-
 
 const input = document.getElementById("message-body");
 const send = document.getElementById("send");
@@ -208,16 +205,11 @@ const publishMessage = async (message) => {
 //     return `Dude`
 // }
 
-
-
-
-
 // ------------------------ OLD SPAGHETTI CODE -----------------------------------
 
 const hexAll = Array.from(document.querySelectorAll(`.hex`));
 let hexRow = Array.from(document.querySelectorAll(`.hex-row`));
 hexRow = hexRow.map((m) => Array.from(m.children));
-
 
 const chooseLand = function () {
   const x = Math.ceil(Math.random() * 4);
@@ -225,8 +217,7 @@ const chooseLand = function () {
   else if (x === 2) return `forest`;
   else if (x === 3) return `mountain`;
   else if (x === 4) return `grass`;
-  
-}
+};
 
 class Hex {
   constructor(type, town, soldier) {
@@ -236,12 +227,11 @@ class Hex {
   }
 }
 
-console.log(new Hex (chooseLand(), false, true));
-console.log(new Hex (chooseLand(), false, true));
-console.log(new Hex (chooseLand(), false, true));
-console.log(new Hex (chooseLand(), false, true));
-console.log(new Hex (chooseLand(), false, true));
-
+console.log(new Hex(chooseLand(), false, true));
+console.log(new Hex(chooseLand(), false, true));
+console.log(new Hex(chooseLand(), false, true));
+console.log(new Hex(chooseLand(), false, true));
+console.log(new Hex(chooseLand(), false, true));
 
 // const div = document.createElement('div');
 // div.classList.add(`hex`);
@@ -251,22 +241,17 @@ console.log(new Hex (chooseLand(), false, true));
 //   console.log(div.myobject);
 // })
 
-
-
 hexAll.forEach((el) => {
-  const shit = new Hex (chooseLand(), false, true);
-  el.object = shit;
+  const newHex = new Hex(chooseLand(), false, true);
+  el.object = newHex;
   // console.log(el.object);
-  
-})
+});
 
 hexAll.forEach((el) => {
-  el.addEventListener(`click`, function(e) {
+  el.addEventListener(`click`, function (e) {
     console.log(e.target.object);
-  })
-  
-})
-
+  });
+});
 
 // for (let i = 0; i < hexAll.length; i++) {
 //   hexAll[i].addEventListener(`click`, function (event) {
@@ -274,10 +259,40 @@ hexAll.forEach((el) => {
 //   });
 // }
 
-console.log(hexAll.length);
+
+// Array of 4 land piece. One big array of 12 cafelkas. Each one has 4 Hexes of land//
+const hexArea = [];
+const hexInRow = hexAll.length / 6;  //!!!!!!!Devine by 6 only when you have 6 Hexes in one row on the map!!!!!!!!!!!!
+
+const gather4hex = function (x) {
+  const arr4hex = [
+    hexAll[x],
+    hexAll[x + 1],
+    hexAll[x + hexInRow],
+    hexAll[x + hexInRow + 1],
+  ];
+  hexArea.push(arr4hex);
+};
+
+for (let i = 0; i < hexAll.length / 6; i = i + 2) {
+  gather4hex(i);
+}
+for (let i = hexAll.length / 6 * 2; i < hexAll.length / 6 * 3; i = i + 2) {
+  gather4hex(i);
+}
+for (let i = hexAll.length / 6 * 4; i < hexAll.length / 6 * 5; i = i + 2) {
+  gather4hex(i);
+}
+
+console.log(hexArea);
 
 
+// let i;
+// for (i = 1; i < 4; i++) {
+//   window["value" + i] = i;
+// }
 
+const usm = 30;
 
 hexAll[0].classList.add(`merchant`);
 hexAll[0].classList.add(`class-brown`);
