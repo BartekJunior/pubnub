@@ -257,8 +257,6 @@ class Hex {
     this.town = town;
     this.vis = vis;
 
-
-
     this.getType = () => {
 
       hexArea.forEach((el) => {
@@ -308,7 +306,7 @@ hexAll.forEach((el) => {
 
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
-    if (!el.object.vis) {
+    if (!el.object.vis && possibleMove.includes(el)) {
       el.object.getType();
     }
   });
@@ -328,6 +326,10 @@ const burnTown = document.getElementById(`burnTown`);
 const containerStructure = document.getElementById(`containerStructure`);
 const academyBtn = document.getElementById(`academyBtn`);
 // HUD Display
+
+
+
+
 
 let offsetAll = [];
 for (let i = 0; i < hexAll.length; i++) {
@@ -365,11 +367,11 @@ hexAll.forEach((el) => {
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function (event) {
     if (
-      possibleMove.includes(event.target)
-      // !event.target.classList.contains(`class-blue`)
+      possibleMove.includes(el)
+      // !el.classList.contains(`class-blue`)
     ) {
-      event.target.merchant = new Merchant(UUID, event.target);
-      event.target.merchant.showMerchant();
+      el.merchant = new Merchant(UUID, el);
+      el.merchant.showMerchant();
       merchantPosition.merchant.hideMerchant();
       delete merchantPosition.merchant;
 
