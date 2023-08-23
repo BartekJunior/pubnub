@@ -211,10 +211,13 @@ const hexAll = Array.from(document.querySelectorAll(`.hex`));
 let hexRow = Array.from(document.querySelectorAll(`.hex-row`));
 hexRow = hexRow.map((m) => Array.from(m.children));
 
+hexAll[0].classList.add(`merchant`);
+
+
 
 // Array of 4 land piece. One big array of 12 cafelkas. Each one has 4 Hexes of land//
 const hexArea = [];
-const hexInRow = hexAll.length / 6; //!!!!!!!Devine by 6 only when you have 6 Hexes in one row on the map!!!!!!!!!!!!
+const hexInRow = hexAll.length / 6; //!!!!!!!Devine by 6 only when you have 6 HEX ROWS on the map!!!!!!!!!!!!
 
 const gather4hex = function (x) {
   const arr4hex = [
@@ -240,32 +243,45 @@ console.log(hexArea);
 
 
 
-
-
+// The most important class of each HEX //
 class Hex {
-  constructor(type, town, soldier) {
+  constructor(id, type, town, soldier) {
+    this.id = id,
     this.type = type;
     this.town = town;
     this.soldier = soldier;
+
+    this.getType = () => id.classList.add(`class-${this.type}`); // shows type of the land
   }
 }
 
+
+// Draw the type of the land
 const chooseLand = function () {
-  const x = Math.ceil(Math.random() * 4);
+  const x = Math.ceil(Math.random() * 5);
   if (x === 1) return `water`;
-  else if (x === 2) return `forest`;
-  else if (x === 3) return `mountain`;
-  else if (x === 4) return `grass`;
+  else if (x === 2) return `grass`;
+  else if (x === 3) return `forest`;
+  else if (x === 4) return `mountain`;
+  else if (x === 5) return `plain`;
 };
 
 
+hexAll.forEach((el) => {
+  const newHex = new Hex(el, chooseLand(), false, true);
+  el.object = newHex;
+});
 
 
 hexAll.forEach((el) => {
-  const newHex = new Hex(chooseLand(), false, true);
-  el.object = newHex;
-  // console.log(el.object);
-});
+  el.addEventListener(`click`, function() {
+    el.object.getType();
+  })
+})
+
+
+
+
 
 
 hexArea[0].forEach((el) => {
@@ -282,11 +298,7 @@ hexAll.forEach((el) => {
 
 
 
-// hexAll[0].classList.add(`merchant`);
-// hexAll[0].classList.add(`class-brown`);
-// hexAll[1].classList.add(`class-green`);
-// hexAll[8].classList.add(`class-orange`);
-// hexAll[9].classList.add(`class-green`);
+
 
 
 

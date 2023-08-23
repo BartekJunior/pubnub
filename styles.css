@@ -223,19 +223,23 @@ h2 {
   /* position: relative; */
 }
 
-.class-brown {
+.class-mountain {
   background-color: brown;
 }
 
-.class-green {
+.class-forest {
+  background-color: rgb(85, 37, 37);
+}
+
+.class-grass {
   background-color: green;
 }
 
-.class-blue {
+.class-water {
   background-color: blue;
 }
 
-.class-orange {
+.class-plain {
   background-color: orange;
 }
 
