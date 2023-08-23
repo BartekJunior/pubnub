@@ -245,11 +245,12 @@ console.log(hexArea);
 
 // The most important class of each HEX //
 class Hex {
-  constructor(id, type, town, soldier) {
+  constructor(id, type, town, merchant, vis) {
     this.id = id,
     this.type = type;
     this.town = town;
-    this.soldier = soldier;
+    this.merchant = merchant;
+    this.vis = vis;
 
     this.getType = () => id.classList.add(`class-${this.type}`); // shows type of the land
   }
@@ -267,11 +268,17 @@ const chooseLand = function () {
 };
 
 
+
+
 hexAll.forEach((el) => {
-  const newHex = new Hex(el, chooseLand(), false, true);
+  const newHex = new Hex(el, chooseLand(), false, false, false);
   el.object = newHex;
 });
 
+hexAll[0].object.merchant = true;
+
+
+// -----------------------------------
 
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function() {
@@ -279,21 +286,66 @@ hexAll.forEach((el) => {
   })
 })
 
-
-
-
-
-
 hexArea[0].forEach((el) => {
   console.log(el.object.type);
 });
 
 
+
+
+
+
+// HUD Display
+const hudMerchant = document.querySelector(`.hud-merchant`);
+const hudTown = document.querySelector(`.hud-town`);
+
+const buildTown = document.getElementById(`buildTown`);
+const confirmBtn = document.getElementById(`confirmBtn`);
+
+const collectFood = document.getElementById(`collectFood`);
+const buildStructure = document.getElementById(`buildStructure`);
+const burnTown = document.getElementById(`burnTown`);
+
+const containerStructure = document.getElementById(`containerStructure`);
+const academyBtn = document.getElementById(`academyBtn`);
+// HUD Display
+
+
+
+let offsetAll = [];
+for (let i = 0; i < hexAll.length; i++) {
+  offsetAll[i] = [hexAll[i].offsetLeft, hexAll[i].offsetTop];
+}
+
+
+let merchantPosition;
+let possibleMove = [];
+
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function (e) {
-    console.log(e.target.object);
+    if (el.object.merchant) {
+      merchantPosition = el;
+      hudMerchant.style.display = `block`;
+
+      for (let i = 0; i < hexAll.length; i++) {
+        if (
+          offsetAll[i][0] > el.offsetLeft - 130 &&
+          offsetAll[i][0] < el.offsetLeft + 130 &&
+          offsetAll[i][1] < el.offsetTop + 130 &&
+          offsetAll[i][1] > el.offsetTop - 130 &&
+          !hexAll[i].object.merchant
+        ) {
+          possibleMove.push(hexAll[i]);
+          for (let i = 0; i < possibleMove.length; i++) {
+            possibleMove[i].classList.add(`possible-move`);
+          }
+        }
+      }
+      // console.log(possibleMove);
+    }
   });
 });
+
 
 
 
@@ -318,11 +370,7 @@ hexAll.forEach((el) => {
 
 
 
-// for (let i = 0; i < hexAll.length; i++) {
-//   hexAll[i].addEventListener(`click`, function (event) {
-//     console.log(event.target);
-//   });
-// }
+
 
 // let i;
 // for (i = 1; i < 4; i++) {
@@ -359,19 +407,7 @@ let allArea = [
   randomArea11,
 ];
 
-// HUD Display
-const hudMerchant = document.querySelector(`.hud-merchant`);
-const hudTown = document.querySelector(`.hud-town`);
 
-const buildTown = document.getElementById(`buildTown`);
-const confirmBtn = document.getElementById(`confirmBtn`);
-
-const collectFood = document.getElementById(`collectFood`);
-const buildStructure = document.getElementById(`buildStructure`);
-const burnTown = document.getElementById(`burnTown`);
-
-const containerStructure = document.getElementById(`containerStructure`);
-const academyBtn = document.getElementById(`academyBtn`);
 
 const checkResource = function (f, w, s) {
   if (foodValue >= f && woodValue >= w && stoneValue >= s) return true;
@@ -402,6 +438,8 @@ function createSmall() {
     hex4.appendChild(hexChild[i]);
   }
 }
+
+
 
 // createSmall();
 
