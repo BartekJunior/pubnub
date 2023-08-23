@@ -213,8 +213,6 @@ hexRow = hexRow.map((m) => Array.from(m.children));
 
 // hexAll[0].classList.add(`merchant`);
 
-
-
 // Array of 4 land piece. One big array of 12 cafelkas. Each one has 4 Hexes of land//
 const hexArea = [];
 const hexInRow = hexAll.length / 6; //!!!!!!!Devine by 6 only when you have 6 HEX ROWS on the map!!!!!!!!!!!!
@@ -241,7 +239,15 @@ for (let i = (hexAll.length / 6) * 4; i < (hexAll.length / 6) * 5; i = i + 2) {
 console.log(hexArea);
 // Array of 4 land piece. One big array of 12 cafelkas. Each one has 4 Hexes of land//
 
-
+// Draw the type of the land
+const chooseLand = function () {
+  const x = Math.ceil(Math.random() * 5);
+  if (x === 1) return `water`;
+  else if (x === 2) return `grass`;
+  else if (x === 3) return `forest`;
+  else if (x === 4) return `mountain`;
+  else if (x === 5) return `plain`;
+};
 
 // The most important class of each HEX //
 class Hex {
@@ -251,7 +257,31 @@ class Hex {
     this.town = town;
     this.vis = vis;
 
-    this.getType = () => id.classList.add(`class-${this.type}`); // shows type of the land
+
+
+    this.getType = () => {
+
+      hexArea.forEach((el) => {
+
+        if (el.includes(this.id)) {
+          el.forEach((el) => {
+            el.object.type = chooseLand();
+            el.object.vis = true;
+            el.classList.add(`class-${el.object.type}`);
+
+          });
+        }
+      });
+
+
+
+      // for (let i = 0; i < hexArea.length; i++) {
+      //   if (hexArea[i].includes(this.id)) {
+      //     hexArea[i].forEach((el) => el.classList.add(`class-${this.type}`)
+      //     )
+      //   }
+      // }
+    };
   }
 }
 
@@ -269,47 +299,20 @@ const merchant = new Merchant(UUID, hexAll[0]);
 hexAll[0].merchant = merchant;
 hexAll[0].merchant.showMerchant();
 
-
-
-
-
-// Draw the type of the land
-const chooseLand = function () {
-  const x = Math.ceil(Math.random() * 5);
-  if (x === 1) return `water`;
-  else if (x === 2) return `grass`;
-  else if (x === 3) return `forest`;
-  else if (x === 4) return `mountain`;
-  else if (x === 5) return `plain`;
-};
-
-
-
-
 hexAll.forEach((el) => {
-  const newHex = new Hex(el, chooseLand(), false, false);
+  const newHex = new Hex(el, undefined, false, false);
   el.object = newHex;
 });
-
-// hexAll[0].object.merchant = true;
-
 
 // -----------------------------------
 
 hexAll.forEach((el) => {
-  el.addEventListener(`click`, function() {
-    el.object.getType();
-  })
-})
-
-hexArea[0].forEach((el) => {
-  console.log(el.object.type);
+  el.addEventListener(`click`, function () {
+    if (!el.object.vis) {
+      el.object.getType();
+    }
+  });
 });
-
-
-
-
-
 
 // HUD Display
 const hudMerchant = document.querySelector(`.hud-merchant`);
@@ -326,13 +329,10 @@ const containerStructure = document.getElementById(`containerStructure`);
 const academyBtn = document.getElementById(`academyBtn`);
 // HUD Display
 
-
 let offsetAll = [];
 for (let i = 0; i < hexAll.length; i++) {
   offsetAll[i] = [hexAll[i].offsetLeft, hexAll[i].offsetTop];
 }
-
-
 
 let merchantPosition;
 let possibleMove = [];
@@ -362,11 +362,10 @@ hexAll.forEach((el) => {
   });
 });
 
-
 hexAll.forEach((el) => {
-  el.addEventListener(`click`, function(event) {
+  el.addEventListener(`click`, function (event) {
     if (
-      possibleMove.includes(event.target) 
+      possibleMove.includes(event.target)
       // !event.target.classList.contains(`class-blue`)
     ) {
       event.target.merchant = new Merchant(UUID, event.target);
@@ -379,20 +378,8 @@ hexAll.forEach((el) => {
       }
       possibleMove = [];
     }
-  })
-  
-})
-
-
-
-
-
-
-
-
-
-
-
+  });
+});
 
 // const div = document.createElement('div');
 // div.classList.add(`hex`);
@@ -402,16 +389,10 @@ hexAll.forEach((el) => {
 //   console.log(div.myobject);
 // })
 
-
-
-
-
 // let i;
 // for (i = 1; i < 4; i++) {
 //   window["value" + i] = i;
 // }
-
-
 
 let randomArea0 = [hexAll[0], hexAll[1], hexAll[8], hexAll[9]];
 let randomArea1 = [hexAll[2], hexAll[3], hexAll[10], hexAll[11]];
@@ -440,8 +421,6 @@ let allArea = [
   randomArea10,
   randomArea11,
 ];
-
-
 
 const checkResource = function (f, w, s) {
   if (foodValue >= f && woodValue >= w && stoneValue >= s) return true;
@@ -473,14 +452,7 @@ function createSmall() {
   }
 }
 
-
-
 // createSmall();
-
-// hexChild[0].classList.add(`shit`);
-// hexChild[1].classList.add(`shit`);
-// hexChild[2].classList.add(`shit`);
-// hexChild[3].classList.add(`shit`);
 
 // let bgImg;
 
