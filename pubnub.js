@@ -211,7 +211,7 @@ const hexAll = Array.from(document.querySelectorAll(`.hex`));
 let hexRow = Array.from(document.querySelectorAll(`.hex-row`));
 hexRow = hexRow.map((m) => Array.from(m.children));
 
-hexAll[0].classList.add(`merchant`);
+// hexAll[0].classList.add(`merchant`);
 
 
 
@@ -245,16 +245,32 @@ console.log(hexArea);
 
 // The most important class of each HEX //
 class Hex {
-  constructor(id, type, town, merchant, vis) {
-    this.id = id,
+  constructor(id, type, town, vis) {
+    this.id = id;
     this.type = type;
     this.town = town;
-    this.merchant = merchant;
     this.vis = vis;
 
     this.getType = () => id.classList.add(`class-${this.type}`); // shows type of the land
   }
 }
+
+class Merchant {
+  constructor(player, id) {
+    this.player = player;
+    this.id = id;
+
+    this.showMerchant = () => id.classList.add(`merchant`);
+    this.hideMerchant = () => id.classList.remove(`merchant`);
+  }
+}
+
+const merchant = new Merchant(UUID, hexAll[0]);
+hexAll[0].merchant = merchant;
+hexAll[0].merchant.showMerchant();
+
+
+
 
 
 // Draw the type of the land
@@ -271,11 +287,11 @@ const chooseLand = function () {
 
 
 hexAll.forEach((el) => {
-  const newHex = new Hex(el, chooseLand(), false, false, false);
+  const newHex = new Hex(el, chooseLand(), false, false);
   el.object = newHex;
 });
 
-hexAll[0].object.merchant = true;
+// hexAll[0].object.merchant = true;
 
 
 // -----------------------------------
@@ -311,11 +327,11 @@ const academyBtn = document.getElementById(`academyBtn`);
 // HUD Display
 
 
-
 let offsetAll = [];
 for (let i = 0; i < hexAll.length; i++) {
   offsetAll[i] = [hexAll[i].offsetLeft, hexAll[i].offsetTop];
 }
+
 
 
 let merchantPosition;
@@ -323,7 +339,7 @@ let possibleMove = [];
 
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function (e) {
-    if (el.object.merchant) {
+    if (el.merchant) {
       merchantPosition = el;
       hudMerchant.style.display = `block`;
 
@@ -333,7 +349,7 @@ hexAll.forEach((el) => {
           offsetAll[i][0] < el.offsetLeft + 130 &&
           offsetAll[i][1] < el.offsetTop + 130 &&
           offsetAll[i][1] > el.offsetTop - 130 &&
-          !hexAll[i].object.merchant
+          !hexAll[i].merchant
         ) {
           possibleMove.push(hexAll[i]);
           for (let i = 0; i < possibleMove.length; i++) {
@@ -347,7 +363,25 @@ hexAll.forEach((el) => {
 });
 
 
+hexAll.forEach((el) => {
+  el.addEventListener(`click`, function(event) {
+    if (
+      possibleMove.includes(event.target) 
+      // !event.target.classList.contains(`class-blue`)
+    ) {
+      event.target.merchant = new Merchant(UUID, event.target);
+      event.target.merchant.showMerchant();
+      merchantPosition.merchant.hideMerchant();
+      delete merchantPosition.merchant;
 
+      for (let i = 0; i < possibleMove.length; i++) {
+        possibleMove[i].classList.remove(`possible-move`);
+      }
+      possibleMove = [];
+    }
+  })
+  
+})
 
 
 
