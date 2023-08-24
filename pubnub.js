@@ -211,6 +211,22 @@ const hexAll = Array.from(document.querySelectorAll(`.hex`));
 let hexRow = Array.from(document.querySelectorAll(`.hex-row`));
 hexRow = hexRow.map((m) => Array.from(m.children));
 
+
+// HUD Display
+const hudMerchant = document.querySelector(`.hud-merchant`);
+const hudTown = document.querySelector(`.hud-town`);
+
+const buildTown = document.getElementById(`buildTown`);
+const confirmBtn = document.getElementById(`confirmBtn`);
+
+const collectFood = document.getElementById(`collectFood`);
+const buildStructure = document.getElementById(`buildStructure`);
+const burnTown = document.getElementById(`burnTown`);
+
+const containerStructure = document.getElementById(`containerStructure`);
+const academyBtn = document.getElementById(`academyBtn`);
+// HUD Display
+
 // hexAll[0].classList.add(`merchant`);
 
 // Array of 4 land piece. One big array of 12 cafelkas. Each one has 4 Hexes of land//
@@ -258,20 +274,15 @@ class Hex {
     this.vis = vis;
 
     this.getType = () => {
-
       hexArea.forEach((el) => {
-
         if (el.includes(this.id)) {
           el.forEach((el) => {
             el.object.type = chooseLand();
             el.object.vis = true;
             el.classList.add(`class-${el.object.type}`);
-
           });
         }
       });
-
-
 
       // for (let i = 0; i < hexArea.length; i++) {
       //   if (hexArea[i].includes(this.id)) {
@@ -290,6 +301,35 @@ class Merchant {
 
     this.showMerchant = () => id.classList.add(`merchant`);
     this.hideMerchant = () => id.classList.remove(`merchant`);
+
+    this.moveMerchant = () => {
+      let offsetAll = [];
+      for (let i = 0; i < hexAll.length; i++) {
+        offsetAll[i] = [hexAll[i].offsetLeft, hexAll[i].offsetTop];
+      }
+
+      let possibleMove = [];
+      if (true) {
+        hudMerchant.style.display = `block`;
+  
+        for (let i = 0; i < hexAll.length; i++) {
+          if (
+            offsetAll[i][0] > merchant.id.offsetLeft - 130 &&
+            offsetAll[i][0] < merchant.id.offsetLeft + 130 &&
+            offsetAll[i][1] < merchant.id.offsetTop + 130 &&
+            offsetAll[i][1] > merchant.id.offsetTop - 130 &&
+            !hexAll[i].merchant
+          ) {
+            possibleMove.push(hexAll[i]);
+            for (let i = 0; i < possibleMove.length; i++) {
+              possibleMove[i].classList.add(`possible-move`);
+            }
+          }
+        }
+        // console.log(possibleMove);
+      }
+
+    };
   }
 }
 
@@ -312,21 +352,12 @@ hexAll.forEach((el) => {
   });
 });
 
-// HUD Display
-const hudMerchant = document.querySelector(`.hud-merchant`);
-const hudTown = document.querySelector(`.hud-town`);
 
-const buildTown = document.getElementById(`buildTown`);
-const confirmBtn = document.getElementById(`confirmBtn`);
-
-const collectFood = document.getElementById(`collectFood`);
-const buildStructure = document.getElementById(`buildStructure`);
-const burnTown = document.getElementById(`burnTown`);
-
-const containerStructure = document.getElementById(`containerStructure`);
-const academyBtn = document.getElementById(`academyBtn`);
-// HUD Display
-
+hexAll.forEach((el) => {
+  if (el.merchant) {
+    el.addEventListener(`click`, () => el.merchant.moveMerchant())
+  }
+})
 
 
 
@@ -336,52 +367,61 @@ for (let i = 0; i < hexAll.length; i++) {
   offsetAll[i] = [hexAll[i].offsetLeft, hexAll[i].offsetTop];
 }
 
-let merchantPosition;
-let possibleMove = [];
 
-hexAll.forEach((el) => {
-  el.addEventListener(`click`, function (e) {
-    if (el.merchant) {
-      merchantPosition = el;
-      hudMerchant.style.display = `block`;
 
-      for (let i = 0; i < hexAll.length; i++) {
-        if (
-          offsetAll[i][0] > el.offsetLeft - 130 &&
-          offsetAll[i][0] < el.offsetLeft + 130 &&
-          offsetAll[i][1] < el.offsetTop + 130 &&
-          offsetAll[i][1] > el.offsetTop - 130 &&
-          !hexAll[i].merchant
-        ) {
-          possibleMove.push(hexAll[i]);
-          for (let i = 0; i < possibleMove.length; i++) {
-            possibleMove[i].classList.add(`possible-move`);
-          }
-        }
-      }
-      // console.log(possibleMove);
-    }
-  });
-});
 
-hexAll.forEach((el) => {
-  el.addEventListener(`click`, function (event) {
-    if (
-      possibleMove.includes(el)
-      // !el.classList.contains(`class-blue`)
-    ) {
-      el.merchant = new Merchant(UUID, el);
-      el.merchant.showMerchant();
-      merchantPosition.merchant.hideMerchant();
-      delete merchantPosition.merchant;
 
-      for (let i = 0; i < possibleMove.length; i++) {
-        possibleMove[i].classList.remove(`possible-move`);
-      }
-      possibleMove = [];
-    }
-  });
-});
+
+
+// let merchantPosition;
+// let possibleMove = [];
+
+// hexAll.forEach((el) => {
+//   el.addEventListener(`click`, function (e) {
+//     if (el.merchant) {
+//       merchantPosition = el;
+//       hudMerchant.style.display = `block`;
+
+//       for (let i = 0; i < hexAll.length; i++) {
+//         if (
+//           offsetAll[i][0] > el.offsetLeft - 130 &&
+//           offsetAll[i][0] < el.offsetLeft + 130 &&
+//           offsetAll[i][1] < el.offsetTop + 130 &&
+//           offsetAll[i][1] > el.offsetTop - 130 &&
+//           !hexAll[i].merchant
+//         ) {
+//           possibleMove.push(hexAll[i]);
+//           for (let i = 0; i < possibleMove.length; i++) {
+//             possibleMove[i].classList.add(`possible-move`);
+//           }
+//         }
+//       }
+//     }
+//   });
+// });
+
+// hexAll.forEach((el) => {
+//   el.addEventListener(`click`, function (event) {
+//     if (
+//       possibleMove.includes(el)
+//       // !el.classList.contains(`class-blue`)
+//     ) {
+//       el.merchant = new Merchant(UUID, el);
+//       el.merchant.showMerchant();
+//       merchantPosition.merchant.hideMerchant();
+//       delete merchantPosition.merchant;
+
+//       for (let i = 0; i < possibleMove.length; i++) {
+//         possibleMove[i].classList.remove(`possible-move`);
+//       }
+//       possibleMove = [];
+//     }
+//   });
+// });
+
+
+
+
 
 // const div = document.createElement('div');
 // div.classList.add(`hex`);
