@@ -227,7 +227,6 @@ const containerStructure = document.getElementById(`containerStructure`);
 const academyBtn = document.getElementById(`academyBtn`);
 // HUD Display
 
-// hexAll[0].classList.add(`merchant`);
 
 // Array of 4 land piece. One big array of 12 cafelkas. Each one has 4 Hexes of land//
 const hexArea = [];
@@ -254,6 +253,8 @@ for (let i = (hexAll.length / 6) * 4; i < (hexAll.length / 6) * 5; i = i + 2) {
 }
 console.log(hexArea);
 // Array of 4 land piece. One big array of 12 cafelkas. Each one has 4 Hexes of land//
+
+
 
 // Draw the type of the land
 const chooseLand = function () {
@@ -302,13 +303,12 @@ class Merchant {
     this.showMerchant = () => id.classList.add(`merchant`);
     this.hideMerchant = () => id.classList.remove(`merchant`);
 
-    this.moveMerchant = () => {
+    this.whereToGo = () => {
       let offsetAll = [];
       for (let i = 0; i < hexAll.length; i++) {
         offsetAll[i] = [hexAll[i].offsetLeft, hexAll[i].offsetTop];
       }
 
-      let possibleMove = [];
       if (true) {
         hudMerchant.style.display = `block`;
   
@@ -320,16 +320,37 @@ class Merchant {
             offsetAll[i][1] > merchant.id.offsetTop - 130 &&
             !hexAll[i].merchant
           ) {
-            possibleMove.push(hexAll[i]);
-            for (let i = 0; i < possibleMove.length; i++) {
-              possibleMove[i].classList.add(`possible-move`);
-            }
+
+            const possibleMove = new PossibleMove (UUID, hexAll[i]);
+            hexAll[i].possibleMove = possibleMove;
+            hexAll[i].classList.add(`possible-move`);
+
+
+
+            // possibleMove.push(hexAll[i]);
+            // for (let i = 0; i < possibleMove.length; i++) {
+            //   possibleMove[i].classList.add(`possible-move`);
+            // }
           }
         }
         // console.log(possibleMove);
       }
 
     };
+  }
+}
+
+
+class PossibleMove {
+  constructor(player, id) {
+    this.player = player;
+    this.id = id;
+
+    this.move = () => {
+
+
+    }
+
   }
 }
 
@@ -355,7 +376,7 @@ hexAll.forEach((el) => {
 
 hexAll.forEach((el) => {
   if (el.merchant) {
-    el.addEventListener(`click`, () => el.merchant.moveMerchant())
+    el.addEventListener(`click`, () => el.merchant.whereToGo())
   }
 })
 
