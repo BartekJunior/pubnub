@@ -211,7 +211,6 @@ const hexAll = Array.from(document.querySelectorAll(`.hex`));
 let hexRow = Array.from(document.querySelectorAll(`.hex-row`));
 hexRow = hexRow.map((m) => Array.from(m.children));
 
-
 // HUD Display
 const hudMerchant = document.querySelector(`.hud-merchant`);
 const hudTown = document.querySelector(`.hud-town`);
@@ -226,7 +225,6 @@ const burnTown = document.getElementById(`burnTown`);
 const containerStructure = document.getElementById(`containerStructure`);
 const academyBtn = document.getElementById(`academyBtn`);
 // HUD Display
-
 
 // Array of 4 land piece. One big array of 12 cafelkas. Each one has 4 Hexes of land//
 const hexArea = [];
@@ -253,8 +251,6 @@ for (let i = (hexAll.length / 6) * 4; i < (hexAll.length / 6) * 5; i = i + 2) {
 }
 console.log(hexArea);
 // Array of 4 land piece. One big array of 12 cafelkas. Each one has 4 Hexes of land//
-
-
 
 // Draw the type of the land
 const chooseLand = function () {
@@ -295,6 +291,7 @@ class Hex {
   }
 }
 
+let merchantPosition;
 class Merchant {
   constructor(player, id) {
     this.player = player;
@@ -304,52 +301,41 @@ class Merchant {
     this.hideMerchant = () => id.classList.remove(`merchant`);
 
     this.whereToGo = () => {
+      merchantPosition = this.id;
       let offsetAll = [];
       for (let i = 0; i < hexAll.length; i++) {
         offsetAll[i] = [hexAll[i].offsetLeft, hexAll[i].offsetTop];
       }
 
-      if (true) {
-        hudMerchant.style.display = `block`;
-  
-        for (let i = 0; i < hexAll.length; i++) {
-          if (
-            offsetAll[i][0] > merchant.id.offsetLeft - 130 &&
-            offsetAll[i][0] < merchant.id.offsetLeft + 130 &&
-            offsetAll[i][1] < merchant.id.offsetTop + 130 &&
-            offsetAll[i][1] > merchant.id.offsetTop - 130 &&
-            !hexAll[i].merchant
-          ) {
+      hudMerchant.style.display = `block`;
 
-            const possibleMove = new PossibleMove (UUID, hexAll[i]);
-            hexAll[i].possibleMove = possibleMove;
-            hexAll[i].classList.add(`possible-move`);
-
-
-
-            // possibleMove.push(hexAll[i]);
-            // for (let i = 0; i < possibleMove.length; i++) {
-            //   possibleMove[i].classList.add(`possible-move`);
-            // }
-          }
+      for (let i = 0; i < hexAll.length; i++) {
+        if (
+          offsetAll[i][0] > merchant.id.offsetLeft - 130 &&
+          offsetAll[i][0] < merchant.id.offsetLeft + 130 &&
+          offsetAll[i][1] < merchant.id.offsetTop + 130 &&
+          offsetAll[i][1] > merchant.id.offsetTop - 130 &&
+          !hexAll[i].merchant
+        ) {
+          const possibleMove = new PossibleMove(UUID, hexAll[i]);
+          hexAll[i].possibleMove = possibleMove;
+          hexAll[i].possibleMove.showPossibleMove();
         }
-        // console.log(possibleMove);
       }
-
     };
   }
 }
-
 
 class PossibleMove {
   constructor(player, id) {
     this.player = player;
     this.id = id;
 
-    this.move = () => {
+    
+    this.showPossibleMove = () => this.id.classList.add(`possible-move`);
+    this.hidePossibleMove = () => this.id.classList.remove(`possible-move`);
 
 
-    }
 
   }
 }
@@ -363,22 +349,48 @@ hexAll.forEach((el) => {
   el.object = newHex;
 });
 
-// -----------------------------------
+// --------------- CLICK LISTENERS FIRES METHODS --------------------
 
+// where to go //
+hexAll.forEach((el) => {
+  if (el.merchant) {
+    el.addEventListener(`click`, () => el.merchant.whereToGo());
+  }
+});
+
+// Przerobic ta funkcje. getType fires when new troops object is creating in Hex!!! //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
-    if (!el.object.vis && possibleMove.includes(el)) {
+    if (!el.object.vis && el.possibleMove) {
       el.object.getType();
     }
   });
 });
 
 
+
+
 hexAll.forEach((el) => {
-  if (el.merchant) {
-    el.addEventListener(`click`, () => el.merchant.whereToGo())
-  }
-})
+  el.addEventListener(`click`, function () {
+    if (el.possibleMove) {
+      const merchant = new Merchant(UUID, el);
+      el.merchant = merchant;
+      el.merchant.showMerchant();
+
+      merchantPosition.merchant.hideMerchant();
+      delete merchantPosition.merchant;
+
+      el.possibleMove.hidePossibleMove();
+      delete el.possibleMove;
+
+    }
+  });
+});
+
+
+
+
+
 
 
 
@@ -387,12 +399,6 @@ let offsetAll = [];
 for (let i = 0; i < hexAll.length; i++) {
   offsetAll[i] = [hexAll[i].offsetLeft, hexAll[i].offsetTop];
 }
-
-
-
-
-
-
 
 // let merchantPosition;
 // let possibleMove = [];
@@ -439,10 +445,6 @@ for (let i = 0; i < hexAll.length; i++) {
 //     }
 //   });
 // });
-
-
-
-
 
 // const div = document.createElement('div');
 // div.classList.add(`hex`);
