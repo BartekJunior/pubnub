@@ -252,15 +252,6 @@ for (let i = (hexAll.length / 6) * 4; i < (hexAll.length / 6) * 5; i = i + 2) {
 console.log(hexArea);
 // Array of 4 land piece. One big array of 12 cafelkas. Each one has 4 Hexes of land//
 
-// Draw the type of the land
-const chooseLand = function () {
-  const x = Math.ceil(Math.random() * 5);
-  if (x === 1) return `water`;
-  else if (x === 2) return `grass`;
-  else if (x === 3) return `forest`;
-  else if (x === 4) return `mountain`;
-  else if (x === 5) return `plain`;
-};
 
 // The most important class of each HEX //
 class Hex {
@@ -270,20 +261,30 @@ class Hex {
     this.town = town;
     this.vis = vis;
 
+    // Draw the type of the land
+    this.chooseLand = function () {
+      const x = Math.ceil(Math.random() * 5);
+      if (x === 1) return `water`;
+      else if (x === 2) return `grass`;
+      else if (x === 3) return `forest`;
+      else if (x === 4) return `mountain`;
+      else if (x === 5) return `plain`;
+    };
+
     this.getType = () => {
       hexArea.forEach((el) => {
         if (el.includes(this.id)) {
           el.forEach((el) => {
-            el.object.type = chooseLand();
+            el.object.type = this.chooseLand();
             el.object.vis = true;
             el.classList.add(`class-${el.object.type}`);
           });
         }
       });
-
     };
   }
 }
+
 
 let merchantPosition;
 class Merchant {
@@ -316,10 +317,10 @@ class Merchant {
           hexAll[i].possibleMove.showPossibleMove();
         }
       }
-
-    }
+    };
   }
 }
+
 
 class PossibleMove {
   constructor(player, id) {
@@ -330,8 +331,9 @@ class PossibleMove {
   }
 }
 
-const merchant = new Merchant(UUID, hexAll[0]);
-hexAll[0].merchant = merchant;
+
+//Put Merchant on the board
+hexAll[0].merchant = new Merchant(UUID, hexAll[0]);
 hexAll[0].merchant.showMerchant();
 
 hexAll.forEach((el) => {
@@ -339,8 +341,9 @@ hexAll.forEach((el) => {
   el.object = newHex;
 });
 
-// --------------- CLICK LISTENERS FIRES METHODS --------------------
 
+
+// --------------- CLICK LISTENERS FIRES METHODS --------------------
 // where to go //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
@@ -355,8 +358,7 @@ hexAll.forEach((el) => {
 // hexAll[16].addEventListener(`click`, (e) => e.merchant.whereToGo())
 
 
-
-// Przerobic ta funkcje. getType fires when new troops object is creating in Hex!!! //
+// Edit this function. getType fires when new troops object is creating in Hex!!! //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     if (!el.object.vis && el.possibleMove) {
@@ -383,23 +385,12 @@ hexAll.forEach((el) => {
           delete el.possibleMove;
         }
       });
-      
+        merchantPosition = undefined;
     }
   });
-
-  // merchantPosition = undefined;
-
 });
 
-
 // ---------------------------------------
-
-
-
-
-
-
-
 
 // let offsetAll = [];
 // for (let i = 0; i < hexAll.length; i++) {
@@ -415,14 +406,12 @@ hexAll.forEach((el) => {
 //       offsetAll[i][0] > clicked.offsetLeft - 130 &&
 //       offsetAll[i][0] < clicked.offsetLeft + 130 &&
 //       offsetAll[i][1] < clicked.offsetTop + 130 &&
-//       offsetAll[i][1] > clicked.offsetTop - 130 
+//       offsetAll[i][1] > clicked.offsetTop - 130
 //     ) {
 //       hexAll[i].classList.add(`possible-move`)
 //     }
 //   }
 // })
-
-
 
 // let merchantPosition;
 // let possibleMove = [];
