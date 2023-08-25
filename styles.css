@@ -129,6 +129,7 @@ h2 {
   width: 38px;
   height: 38px;
   opacity: 0.3;
+  border: black 3px solid;
 }
 
 /* ------------------------- */
