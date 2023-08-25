@@ -256,3 +256,25 @@ h2 {
 .settle-btn:hover {
   background-color: #66ff66;
 }
+
+
+
+
+
+.divGrid {
+  width: 150px;
+  display: inline-grid;
+  grid-template-columns: repeat(3, 40px);
+  grid-template-rows: repeat(3, 40px);
+  align-items: center;
+  align-content: center;
+  justify-items: center;
+  justify-content: center;
+  border: black solid;
+}
+
+.gridItem {
+  width: 30px;
+  height: 30px;
+  background-color: aqua;
+}
