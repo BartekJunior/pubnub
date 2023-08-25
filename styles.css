@@ -63,7 +63,7 @@ h2 {
   margin: 0 auto;
 }
 
-.small-hex-container {
+/* .small-hex-container {
   display: grid;
   grid-template-columns: repeat(3, 40px);
   grid-template-rows: repeat(3, 40px);
@@ -81,13 +81,9 @@ h2 {
     5% 25%
   );
   clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
-}
+} */
 
-.hex-small {
-  width: 38px;
-  height: 38px;
-  opacity: 0.1;
-}
+
 
 .shit {
   background-image: url(./img/tower.png);
@@ -105,12 +101,14 @@ h2 {
 }
 
 .hex {
-  display: inline-block;
-  vertical-align: top;
-  margin-left: -13px;
-  height: 120px;
-  width: 120px;
-  background-color: #8b93ad;
+  display: inline-grid;
+  grid-template-columns: repeat(3, 40px);
+  grid-template-rows: repeat(3, 40px);
+  align-items: center;
+  align-content: center;
+  justify-items: center;
+  justify-content: center;
+  margin-left: -14px;
 
   -webkit-clip-path: polygon(
     50% 0%,
@@ -127,13 +125,19 @@ h2 {
   opacity: 0.7;
 }
 
+.hex-small {
+  width: 38px;
+  height: 38px;
+  opacity: 0.3;
+}
+
 /* ------------------------- */
 .hex-row {
-  margin-top: -28px;
+  margin-top: -27px;
 }
 
 .hex-row.even {
-  margin-left: -56px;
+  margin-left: -54px;
 }
 
 /* ------------ HUD ----------------- */

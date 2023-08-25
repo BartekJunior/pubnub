@@ -274,23 +274,6 @@ const colorArr = [
   `white`,
 ];
 
-// let hexChild = [];
-// function createSmall() {
-//   for (let i = 0; i < 9; i++) {
-//     const hexSmall = document.createElement("div");
-//     hexSmall.style.backgroundColor = colorArr[i];
-//     hexSmall.classList.add(`hex-small`);
-//     hexChild.push(hexSmall);
-//   }
-// }
-// createSmall();
-// const hmm = document.createElement(`div`);
-// hmm.classList.add(`small-hex-container`);
-
-// for (let i = 0; i < hexChild.length; i++) {
-//   hmm.appendChild(hexChild[i])
-//   hexAll[2].appendChild(hmm);
-// }
 
 class Hex {
   constructor(id, type, town, vis) {
@@ -299,8 +282,6 @@ class Hex {
     this.town = town;
     this.vis = vis;
 
-
-    
     this.createSmall = function () {
       let hexChild = [];
       for (let i = 0; i < 9; i++) {
@@ -310,18 +291,10 @@ class Hex {
         hexChild.push(hexSmall);
       }
 
-      const smallHexContainer = document.createElement(`div`);
-      smallHexContainer.classList.add(`small-hex-container`);
-
       for (let i = 0; i < hexChild.length; i++) {
-        smallHexContainer.appendChild(hexChild[i]);
+        this.id.appendChild(hexChild[i]);
       }
-
-      this.id.appendChild(smallHexContainer);
     };
-
-
-
 
     // Draw the type of the land
     this.chooseLand = function () {
@@ -348,8 +321,6 @@ class Hex {
     this.createSmall(); //Fires after object begin. Create 9 small divs inside big Hex.
   }
 }
-
-
 
 class Town {
   constructor(player, id) {
