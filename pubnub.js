@@ -264,12 +264,68 @@ console.log(hexArea);
 
 /////////////////////////// CLASS CLASS CLASS ////////////////////////////////////
 // The most important class of each HEX //
+
+
+const colorArr = [
+  `red`,
+  `green`,
+  `yellow`,
+  `brown`,
+  `pink`,
+  `purple`,
+  `black`,
+  `orange`,
+  `white`,
+];
+
+// let hexChild = [];
+// function createSmall() {
+//   for (let i = 0; i < 9; i++) {
+//     const hexSmall = document.createElement("div");
+//     hexSmall.style.backgroundColor = colorArr[i];
+//     hexSmall.classList.add(`hex-small`);
+//     hexChild.push(hexSmall);
+//   }
+// }
+// createSmall();
+// const hmm = document.createElement(`div`);
+// hmm.classList.add(`small-hex-container`);
+
+// for (let i = 0; i < hexChild.length; i++) {
+//   hmm.appendChild(hexChild[i])
+//   hexAll[2].appendChild(hmm);
+// }
+
+
+
+
 class Hex {
   constructor(id, type, town, vis) {
     this.id = id;
     this.type = type;
     this.town = town;
     this.vis = vis;
+
+    this.createSmall = function() {
+      let hexChild = [];
+      for (let i = 0; i < 9; i++) {
+        const hexSmall = document.createElement("div");
+        hexSmall.style.backgroundColor = colorArr[i];
+        hexSmall.classList.add(`hex-small`);
+        hexChild.push(hexSmall);
+      }
+
+      this.id.appendChild(hexChild[0]);
+      this.id.appendChild(hexChild[1]);
+      this.id.appendChild(hexChild[2]);
+      this.id.appendChild(hexChild[3]);
+      this.id.appendChild(hexChild[4]);
+      this.id.appendChild(hexChild[5]);
+      this.id.appendChild(hexChild[6]);
+      this.id.appendChild(hexChild[7]);
+
+
+    }
 
     // Draw the type of the land
     this.chooseLand = function () {
@@ -292,8 +348,12 @@ class Hex {
         }
       });
     };
+
+    this.createSmall();
   }
 }
+
+
 
 class Town {
   constructor(player, id) {
@@ -474,43 +534,13 @@ const checkResource = function (f, w, s) {
 
 
 
-const colorArr = [
-  `red`,
-  `green`,
-  `yellow`,
-  `brown`,
-  `pink`,
-  `purple`,
-  `black`,
-  `orange`,
-  `white`,
-];
 
 
 
 
 
-let hexChild = [];
-
-function createSmall() {
-  for (let i = 0; i < 9; i++) {
-    const hexSmall = document.createElement("div");
-    hexSmall.style.backgroundColor = colorArr[i];
-    hexSmall.classList.add(`hex-small`);
-    hexChild.push(hexSmall);
-  }
-}
 
 
-createSmall();
-
-const hmm = document.createElement(`div`);
-hmm.classList.add(`small-hex-container`);
-
-for (let i = 0; i < hexChild.length; i++) {
-  hmm.appendChild(hexChild[i])
-  hexAll[2].appendChild(hmm);
-}
 
 
 // createSmall();
