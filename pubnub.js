@@ -331,13 +331,11 @@ class Merchant {
     this.settle = () => {
       this.id.town = new Town(UUID, this.id);
       this.id.classList.add(`town`);
-
       hexAll.forEach((el) => {
         if (el.possibleMove) {
           el.possibleMove.deletePossibleMove();
         }
       });
-
       this.hideMerchantHud();
       this.deleteMerchant();
       merchantPosition = undefined;
@@ -466,33 +464,7 @@ hexAll.forEach((el) => {
 //   window["value" + i] = i;
 // }
 
-let randomArea0 = [hexAll[0], hexAll[1], hexAll[8], hexAll[9]];
-let randomArea1 = [hexAll[2], hexAll[3], hexAll[10], hexAll[11]];
-let randomArea2 = [hexAll[4], hexAll[5], hexAll[12], hexAll[13]];
-let randomArea3 = [hexAll[6], hexAll[7], hexAll[14], hexAll[15]];
-let randomArea4 = [hexAll[16], hexAll[17], hexAll[24], hexAll[25]];
-let randomArea5 = [hexAll[18], hexAll[19], hexAll[26], hexAll[27]];
-let randomArea6 = [hexAll[20], hexAll[21], hexAll[28], hexAll[29]];
-let randomArea7 = [hexAll[22], hexAll[23], hexAll[30], hexAll[31]];
-let randomArea8 = [hexAll[32], hexAll[33], hexAll[40], hexAll[41]];
-let randomArea9 = [hexAll[34], hexAll[35], hexAll[42], hexAll[43]];
-let randomArea10 = [hexAll[36], hexAll[37], hexAll[44], hexAll[45]];
-let randomArea11 = [hexAll[38], hexAll[39], hexAll[46], hexAll[47]];
 
-let allArea = [
-  randomArea0,
-  randomArea1,
-  randomArea2,
-  randomArea3,
-  randomArea4,
-  randomArea5,
-  randomArea6,
-  randomArea7,
-  randomArea8,
-  randomArea9,
-  randomArea10,
-  randomArea11,
-];
 
 const checkResource = function (f, w, s) {
   if (foodValue >= f && woodValue >= w && stoneValue >= s) return true;
@@ -520,9 +492,26 @@ function createSmall() {
     hexSmall.style.backgroundColor = colorArr[i];
     hexSmall.classList.add(`hex-small`);
     hexChild.push(hexSmall);
-    hex4.appendChild(hexChild[i]);
+    // hex4.appendChild(hexChild[i]);
   }
 }
+
+// hexAll.forEach((el) => {
+//   createSmall();
+// })
+
+
+createSmall();
+console.log(hexChild);
+
+const hmm = document.createElement(`div`);
+hmm.classList.add(`hex4`);
+
+for (let i = 0; i < hexChild.length; i++) {
+  hmm.appendChild(hexChild[i])
+  hexAll[2].appendChild(hmm);
+}
+
 
 // createSmall();
 
