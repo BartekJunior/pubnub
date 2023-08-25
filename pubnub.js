@@ -331,10 +331,13 @@ class Merchant {
         ) {
           const possibleMove = new PossibleMove(UUID, hexAll[i]);
           hexAll[i].possibleMove = possibleMove;
-          hexAll[i].possibleMove.showPossibleMove();
+          // hexAll[i].possibleMove.showPossibleMove();
         }
       }
     };
+
+    this.showMerchant(); //fires after create object
+
   }
 }
 
@@ -350,18 +353,17 @@ class PossibleMove {
       id.classList.remove(`possible-move`);
       delete this.id.possibleMove;
     }
-    // this.hidePossibleMove = () => this.id.classList.remove(`possible-move`);
+
+    this.showPossibleMove(); //fires after create object
   }
 }
 
 
-//Put First Merchant on the board
+//Put Merchants on the board
 hexAll[0].merchant = new Merchant(UUID, hexAll[0]);
-hexAll[0].merchant.showMerchant();
-
-//Put Second Merchant on the board
 hexAll[35].merchant = new Merchant (UUID, hexAll[35]);
-hexAll[35].merchant.showMerchant();
+
+
 
 hexAll.forEach((el) => {
   const newHex = new Hex(el, undefined, false, false);
@@ -371,7 +373,7 @@ hexAll.forEach((el) => {
 
 
 // --------------- CLICK LISTENERS FIRES METHODS --------------------
-// where to go //
+// where to go, create PossibleMove //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     if (el.merchant) {
@@ -398,8 +400,6 @@ hexAll.forEach((el) => {
     if (el.possibleMove) {
 
       el.merchant = new Merchant(UUID, el);
-      el.merchant.showMerchant();
-
       merchantPosition.merchant.deleteMerchant();
 
       hexAll.forEach((el) => {
@@ -415,76 +415,12 @@ hexAll.forEach((el) => {
 
 
 
-// hexAll[0].merchant.deleteMerchant();
 
 // ---------------------------------------
 
-// let offsetAll = [];
-// for (let i = 0; i < hexAll.length; i++) {
-//   offsetAll[i] = [hexAll[i].offsetLeft, hexAll[i].offsetTop];
-// }
 
-// let clicked;
-// document.addEventListener(`click`, function(e) {
-//   clicked = e.target;
 
-//   for (let i = 0; i < hexAll.length; i++) {
-//     if (
-//       offsetAll[i][0] > clicked.offsetLeft - 130 &&
-//       offsetAll[i][0] < clicked.offsetLeft + 130 &&
-//       offsetAll[i][1] < clicked.offsetTop + 130 &&
-//       offsetAll[i][1] > clicked.offsetTop - 130
-//     ) {
-//       hexAll[i].classList.add(`possible-move`)
-//     }
-//   }
-// })
 
-// let merchantPosition;
-// let possibleMove = [];
-
-// hexAll.forEach((el) => {
-//   el.addEventListener(`click`, function (e) {
-//     if (el.merchant) {
-//       merchantPosition = el;
-//       hudMerchant.style.display = `block`;
-
-//       for (let i = 0; i < hexAll.length; i++) {
-//         if (
-//           offsetAll[i][0] > el.offsetLeft - 130 &&
-//           offsetAll[i][0] < el.offsetLeft + 130 &&
-//           offsetAll[i][1] < el.offsetTop + 130 &&
-//           offsetAll[i][1] > el.offsetTop - 130 &&
-//           !hexAll[i].merchant
-//         ) {
-//           possibleMove.push(hexAll[i]);
-//           for (let i = 0; i < possibleMove.length; i++) {
-//             possibleMove[i].classList.add(`possible-move`);
-//           }
-//         }
-//       }
-//     }
-//   });
-// });
-
-// hexAll.forEach((el) => {
-//   el.addEventListener(`click`, function (event) {
-//     if (
-//       possibleMove.includes(el)
-//       // !el.classList.contains(`class-blue`)
-//     ) {
-//       el.merchant = new Merchant(UUID, el);
-//       el.merchant.showMerchant();
-//       merchantPosition.merchant.hideMerchant();
-//       delete merchantPosition.merchant;
-
-//       for (let i = 0; i < possibleMove.length; i++) {
-//         possibleMove[i].classList.remove(`possible-move`);
-//       }
-//       possibleMove = [];
-//     }
-//   });
-// });
 
 // const div = document.createElement('div');
 // div.classList.add(`hex`);
