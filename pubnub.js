@@ -211,10 +211,11 @@ const hexAll = Array.from(document.querySelectorAll(`.hex`));
 let hexRow = Array.from(document.querySelectorAll(`.hex-row`));
 hexRow = hexRow.map((m) => Array.from(m.children));
 
-hexAll.forEach((el, index) => el.addEventListener(`click`, function(e){
-  console.log(index);
-  
-}))
+hexAll.forEach((el, index) =>
+  el.addEventListener(`click`, function (e) {
+    console.log(index);
+  })
+);
 
 // HUD Display
 const hudMerchant = document.querySelector(`.hud-merchant`);
@@ -258,13 +259,8 @@ for (let i = (hexAll.length / 6) * 4; i < (hexAll.length / 6) * 5; i = i + 2) {
 console.log(hexArea);
 // Array of 4 land piece. One big array of 12 cafelkas. Each one has 4 Hexes of land//
 
-
-
-
-
 /////////////////////////// CLASS CLASS CLASS ////////////////////////////////////
 // The most important class of each HEX //
-
 
 const colorArr = [
   `red`,
@@ -296,9 +292,6 @@ const colorArr = [
 //   hexAll[2].appendChild(hmm);
 // }
 
-
-
-
 class Hex {
   constructor(id, type, town, vis) {
     this.id = id;
@@ -306,7 +299,9 @@ class Hex {
     this.town = town;
     this.vis = vis;
 
-    this.createSmall = function() {
+
+    
+    this.createSmall = function () {
       let hexChild = [];
       for (let i = 0; i < 9; i++) {
         const hexSmall = document.createElement("div");
@@ -315,17 +310,18 @@ class Hex {
         hexChild.push(hexSmall);
       }
 
-      this.id.appendChild(hexChild[0]);
-      this.id.appendChild(hexChild[1]);
-      this.id.appendChild(hexChild[2]);
-      this.id.appendChild(hexChild[3]);
-      this.id.appendChild(hexChild[4]);
-      this.id.appendChild(hexChild[5]);
-      this.id.appendChild(hexChild[6]);
-      this.id.appendChild(hexChild[7]);
+      const smallHexContainer = document.createElement(`div`);
+      smallHexContainer.classList.add(`small-hex-container`);
+
+      for (let i = 0; i < hexChild.length; i++) {
+        smallHexContainer.appendChild(hexChild[i]);
+      }
+
+      this.id.appendChild(smallHexContainer);
+    };
 
 
-    }
+
 
     // Draw the type of the land
     this.chooseLand = function () {
@@ -349,7 +345,7 @@ class Hex {
       });
     };
 
-    this.createSmall();
+    this.createSmall(); //Fires after object begin. Create 9 small divs inside big Hex.
   }
 }
 
@@ -360,17 +356,13 @@ class Town {
     this.player = player;
     this.id = id;
 
-    this.buildStructure = () => {
-    }
-
+    this.buildStructure = () => {};
   }
 }
 
-
-
-settleBtn.addEventListener(`click`, function() {
+settleBtn.addEventListener(`click`, function () {
   merchantPosition.merchant.settle();
-})
+});
 
 let merchantPosition;
 class Merchant {
@@ -380,13 +372,13 @@ class Merchant {
 
     this.showMerchant = () => id.classList.add(`merchant`);
     this.hideMerchant = () => id.classList.remove(`merchant`);
-    this.showMerchantHud = () => hudMerchant.style.display = `block`;
-    this.hideMerchantHud = () => hudMerchant.style.display = `none`;
+    this.showMerchantHud = () => (hudMerchant.style.display = `block`);
+    this.hideMerchantHud = () => (hudMerchant.style.display = `none`);
 
     this.deleteMerchant = () => {
       id.classList.remove(`merchant`);
       delete this.id.merchant;
-    }
+    };
 
     this.settle = () => {
       this.id.town = new Town(UUID, this.id);
@@ -399,7 +391,7 @@ class Merchant {
       this.hideMerchantHud();
       this.deleteMerchant();
       merchantPosition = undefined;
-    }
+    };
 
     this.whereToGo = () => {
       merchantPosition = this.id;
@@ -426,11 +418,8 @@ class Merchant {
     };
 
     this.showMerchant(); //fires after create object
-
   }
 }
-
-
 
 class PossibleMove {
   constructor(player, id) {
@@ -441,25 +430,20 @@ class PossibleMove {
     this.deletePossibleMove = () => {
       id.classList.remove(`possible-move`);
       delete this.id.possibleMove;
-    }
+    };
 
     this.showPossibleMove(); //fires after create object
   }
 }
 
-
 //Put Merchants on the board
 hexAll[0].merchant = new Merchant(UUID, hexAll[0]);
-hexAll[35].merchant = new Merchant (UUID, hexAll[35]);
-
-
+hexAll[35].merchant = new Merchant(UUID, hexAll[35]);
 
 hexAll.forEach((el) => {
   const newHex = new Hex(el, undefined, false, false);
   el.object = newHex;
 });
-
-
 
 // --------------- CLICK LISTENERS FIRES METHODS --------------------
 // where to go, create PossibleMove //
@@ -471,8 +455,6 @@ hexAll.forEach((el) => {
   });
 });
 
-
-
 // Edit this function. getType fires when new troops object is creating in Hex!!! //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
@@ -482,12 +464,10 @@ hexAll.forEach((el) => {
   });
 });
 
-
 // ----- move merchant ----- //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     if (el.possibleMove) {
-
       el.merchant = new Merchant(UUID, el);
       merchantPosition.merchant.deleteMerchant();
 
@@ -502,14 +482,7 @@ hexAll.forEach((el) => {
   });
 });
 
-
-
-
 // ---------------------------------------
-
-
-
-
 
 // const div = document.createElement('div');
 // div.classList.add(`hex`);
@@ -524,24 +497,10 @@ hexAll.forEach((el) => {
 //   window["value" + i] = i;
 // }
 
-
-
 const checkResource = function (f, w, s) {
   if (foodValue >= f && woodValue >= w && stoneValue >= s) return true;
   else return false;
 };
-
-
-
-
-
-
-
-
-
-
-
-
 
 // createSmall();
 
