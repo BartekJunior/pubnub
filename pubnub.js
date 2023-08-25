@@ -471,6 +471,9 @@ const checkResource = function (f, w, s) {
   else return false;
 };
 
+
+
+
 const colorArr = [
   `red`,
   `green`,
@@ -483,7 +486,10 @@ const colorArr = [
   `white`,
 ];
 
-const hex4 = document.getElementById(`hex4`);
+
+
+
+
 let hexChild = [];
 
 function createSmall() {
@@ -492,20 +498,14 @@ function createSmall() {
     hexSmall.style.backgroundColor = colorArr[i];
     hexSmall.classList.add(`hex-small`);
     hexChild.push(hexSmall);
-    // hex4.appendChild(hexChild[i]);
   }
 }
 
-// hexAll.forEach((el) => {
-//   createSmall();
-// })
-
 
 createSmall();
-console.log(hexChild);
 
 const hmm = document.createElement(`div`);
-hmm.classList.add(`hex4`);
+hmm.classList.add(`small-hex-container`);
 
 for (let i = 0; i < hexChild.length; i++) {
   hmm.appendChild(hexChild[i])

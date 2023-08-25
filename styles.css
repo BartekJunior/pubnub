@@ -63,9 +63,7 @@ h2 {
   margin: 0 auto;
 }
 
-.hex4 {
-  background-color: #66ff66;
-
+.small-hex-container {
   display: grid;
   grid-template-columns: repeat(3, 40px);
   grid-template-rows: repeat(3, 40px);
@@ -130,7 +128,7 @@ h2 {
 
 /* ------------------------- */
 .hex-row {
-  margin-top: -35px;
+  margin-top: -28px;
 }
 
 .hex-row.even {
