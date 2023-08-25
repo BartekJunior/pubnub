@@ -215,7 +215,7 @@ h2 {
   /* position: relative; */
 }
 
-.castle {
+.town {
   background-image: url(./img/town.png);
   background-repeat: no-repeat;
   background-position: center;
@@ -252,10 +252,10 @@ h2 {
 .possible-collect {
   opacity: 0.7;
 }
-.build-town {
+.settle-btn {
   width: 100px;
   border-radius: 5px;
 }
-.build-town:hover {
+.settle-btn:hover {
   background-color: #66ff66;
 }

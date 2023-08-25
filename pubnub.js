@@ -220,7 +220,8 @@ hexAll.forEach((el, index) => el.addEventListener(`click`, function(e){
 const hudMerchant = document.querySelector(`.hud-merchant`);
 const hudTown = document.querySelector(`.hud-town`);
 
-const buildTown = document.getElementById(`buildTown`);
+const settleBtn = document.getElementById(`settleBtn`);
+
 const confirmBtn = document.getElementById(`confirmBtn`);
 
 const collectFood = document.getElementById(`collectFood`);
@@ -294,6 +295,22 @@ class Hex {
   }
 }
 
+class Town {
+  constructor(player, id) {
+    this.player = player;
+    this.id = id;
+
+    this.buildStructure = () => {
+    }
+
+  }
+}
+
+
+
+settleBtn.addEventListener(`click`, function() {
+  merchantPosition.merchant.settle();
+})
 
 let merchantPosition;
 class Merchant {
@@ -311,6 +328,20 @@ class Merchant {
       delete this.id.merchant;
     }
 
+    this.settle = () => {
+      this.id.town = new Town(UUID, this.id);
+      this.id.classList.add(`town`);
+
+      hexAll.forEach((el) => {
+        if (el.possibleMove) {
+          el.possibleMove.deletePossibleMove();
+        }
+      });
+
+      this.hideMerchantHud();
+      this.deleteMerchant();
+      merchantPosition = undefined;
+    }
 
     this.whereToGo = () => {
       merchantPosition = this.id;
