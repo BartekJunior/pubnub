@@ -281,12 +281,6 @@ class Hex {
         }
       });
 
-      // for (let i = 0; i < hexArea.length; i++) {
-      //   if (hexArea[i].includes(this.id)) {
-      //     hexArea[i].forEach((el) => el.classList.add(`class-${this.type}`)
-      //     )
-      //   }
-      // }
     };
   }
 }
@@ -311,10 +305,10 @@ class Merchant {
 
       for (let i = 0; i < hexAll.length; i++) {
         if (
-          offsetAll[i][0] > merchant.id.offsetLeft - 130 &&
-          offsetAll[i][0] < merchant.id.offsetLeft + 130 &&
-          offsetAll[i][1] < merchant.id.offsetTop + 130 &&
-          offsetAll[i][1] > merchant.id.offsetTop - 130 &&
+          offsetAll[i][0] > this.id.offsetLeft - 130 &&
+          offsetAll[i][0] < this.id.offsetLeft + 130 &&
+          offsetAll[i][1] < this.id.offsetTop + 130 &&
+          offsetAll[i][1] > this.id.offsetTop - 130 &&
           !hexAll[i].merchant
         ) {
           const possibleMove = new PossibleMove(UUID, hexAll[i]);
@@ -322,7 +316,8 @@ class Merchant {
           hexAll[i].possibleMove.showPossibleMove();
         }
       }
-    };
+
+    }
   }
 }
 
@@ -330,13 +325,8 @@ class PossibleMove {
   constructor(player, id) {
     this.player = player;
     this.id = id;
-
-    
     this.showPossibleMove = () => this.id.classList.add(`possible-move`);
     this.hidePossibleMove = () => this.id.classList.remove(`possible-move`);
-
-
-
   }
 }
 
@@ -353,10 +343,18 @@ hexAll.forEach((el) => {
 
 // where to go //
 hexAll.forEach((el) => {
-  if (el.merchant) {
-    el.addEventListener(`click`, () => el.merchant.whereToGo());
-  }
+  el.addEventListener(`click`, function () {
+    if (el.merchant) {
+      el.merchant.whereToGo();
+    }
+  });
 });
+
+// hexAll[16].merchant = new Merchant (UUID, hexAll[16]);
+// hexAll[16].merchant.showMerchant();
+// hexAll[16].addEventListener(`click`, (e) => e.merchant.whereToGo())
+
+
 
 // Przerobic ta funkcje. getType fires when new troops object is creating in Hex!!! //
 hexAll.forEach((el) => {
@@ -368,8 +366,7 @@ hexAll.forEach((el) => {
 });
 
 
-
-
+// ----- move merchant ----- //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     if (el.possibleMove) {
@@ -380,14 +377,22 @@ hexAll.forEach((el) => {
       merchantPosition.merchant.hideMerchant();
       delete merchantPosition.merchant;
 
-      el.possibleMove.hidePossibleMove();
-      delete el.possibleMove;
-
+      hexAll.forEach((el) => {
+        if (el.possibleMove) {
+          el.possibleMove.hidePossibleMove();
+          delete el.possibleMove;
+        }
+      });
+      
     }
   });
+
+  // merchantPosition = undefined;
+
 });
 
 
+// ---------------------------------------
 
 
 
@@ -395,10 +400,29 @@ hexAll.forEach((el) => {
 
 
 
-let offsetAll = [];
-for (let i = 0; i < hexAll.length; i++) {
-  offsetAll[i] = [hexAll[i].offsetLeft, hexAll[i].offsetTop];
-}
+
+// let offsetAll = [];
+// for (let i = 0; i < hexAll.length; i++) {
+//   offsetAll[i] = [hexAll[i].offsetLeft, hexAll[i].offsetTop];
+// }
+
+// let clicked;
+// document.addEventListener(`click`, function(e) {
+//   clicked = e.target;
+
+//   for (let i = 0; i < hexAll.length; i++) {
+//     if (
+//       offsetAll[i][0] > clicked.offsetLeft - 130 &&
+//       offsetAll[i][0] < clicked.offsetLeft + 130 &&
+//       offsetAll[i][1] < clicked.offsetTop + 130 &&
+//       offsetAll[i][1] > clicked.offsetTop - 130 
+//     ) {
+//       hexAll[i].classList.add(`possible-move`)
+//     }
+//   }
+// })
+
+
 
 // let merchantPosition;
 // let possibleMove = [];
