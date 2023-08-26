@@ -63,28 +63,6 @@ h2 {
   margin: 0 auto;
 }
 
-/* .small-hex-container {
-  display: grid;
-  grid-template-columns: repeat(3, 40px);
-  grid-template-rows: repeat(3, 40px);
-  align-items: center;
-  align-content: center;
-  justify-items: center;
-  justify-content: center;
-
-  -webkit-clip-path: polygon(
-    50% 0%,
-    95% 25%,
-    95% 75%,
-    50% 100%,
-    5% 75%,
-    5% 25%
-  );
-  clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
-} */
-
-
-
 .shit {
   background-image: url(./img/tower.png);
   background-repeat: no-repeat;
@@ -209,7 +187,7 @@ h2 {
   /* position: relative; */
 }
 
-.tower {
+.fortress {
   background-image: url(./img/tower.png), url(./img/town.png);
   background-repeat: no-repeat;
   background-position: top 5px left 15px, center;
@@ -221,7 +199,7 @@ h2 {
   background-image: url(./img/town.png);
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 70%;
+  background-size: 110%;
   /* position: relative; */
 }
 
@@ -245,7 +223,7 @@ h2 {
   background-color: orange;
 }
 
-/* ------------ GAMEPLAY   ----------------- */
+/* ------------ GAMEPLAY  ----------------- */
 
 .possible-move {
   opacity: 0.4;
@@ -265,6 +243,7 @@ h2 {
 
 
 
+/* ------------ TEST  ----------------- */
 
 .divGrid {
   width: 150px;
