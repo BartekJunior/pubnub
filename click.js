@@ -25,6 +25,8 @@ const burnTown = document.getElementById(`burnTown`);
 const containerStructure = document.getElementById(`containerStructure`);
 const academyBtn = document.getElementById(`academyBtn`);
 const fortressBtn = document.getElementById(`fortressBtn`);
+const portBtn = document.getElementById(`portBtn`);
+
 // HUD Display
 
 // --------------- CLICK LISTENERS FIRES METHODS --------------------
@@ -36,7 +38,6 @@ hexAll.forEach((el) => {
     }
   });
 });
-
 
 // Edit this function. getType fires when new troops object is creating in Hex!!! //
 hexAll.forEach((el) => {
@@ -70,16 +71,13 @@ settleBtn.addEventListener(`click`, function () {
   merchantPosition.merchant.settle();
 });
 
-
 let town;
 // ----- show hudTown  ----- //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
-
     if (el.town) {
       town = el.town;
       town.showHudTown();
-
     } else if (town) {
       town.hideHudTown();
       town.hideContainerStructure();
@@ -94,4 +92,12 @@ buildStructure.addEventListener(`click`, function () {
 
 fortressBtn.addEventListener(`click`, function () {
   town.buildStructure(`fortress`);
+});
+
+academyBtn.addEventListener(`click`, function () {
+  town.buildStructure(`academy`);
+});
+
+portBtn.addEventListener(`click`, function () {
+  town.buildStructure(`port`);
 });

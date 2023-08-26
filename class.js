@@ -62,10 +62,16 @@
 
       this.showContainerStructure = () => (containerStructure.style.display = `block`);
       this.hideContainerStructure = () => (containerStructure.style.display = `none`);
+
+      this.structurePlace = (building) => {
+        if (building === `fortress` ) return 1;
+        else if (building === `academy`) return 5;
+        else if (building === `port`) return 7;
+      }
   
 
       this.buildStructure = (building) => {
-        this.id.childNodes[1].classList.add(building);
+        this.id.childNodes[this.structurePlace(building)].classList.add(building);
         this[building] = true;
       };
   

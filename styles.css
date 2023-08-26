@@ -187,6 +187,14 @@ h2 {
   /* position: relative; */
 }
 
+.town {
+  background-image: url(./img/town.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 110%;
+  /* position: relative; */
+}
+
 .fortress {
   background-image: url(./img/fortress.png);
   background-repeat: no-repeat;
@@ -195,13 +203,22 @@ h2 {
   /* position: relative; */
 }
 
-.town {
-  background-image: url(./img/town.png);
+.academy {
+  background-image: url(./img/academy.png);
   background-repeat: no-repeat;
-  background-position: center;
-  background-size: 110%;
+  background-position:center;
+  background-size: 100%;
   /* position: relative; */
 }
+
+.port {
+  background-image: url(./img/port.png);
+  background-repeat: no-repeat;
+  background-position:center;
+  background-size: 100%;
+  /* position: relative; */
+}
+
 
 .class-mountain {
   background-color: brown;
