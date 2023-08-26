@@ -4,7 +4,6 @@
 hexAll[0].merchant = new Merchant(UUID, hexAll[0]);
 hexAll[35].merchant = new Merchant(UUID, hexAll[35]);
 
-
 //Create all HEXES on the board
 hexAll.forEach((el) => {
   const newHex = new Hex(el, undefined, false);
@@ -28,7 +27,6 @@ const academyBtn = document.getElementById(`academyBtn`);
 const fortressBtn = document.getElementById(`fortressBtn`);
 // HUD Display
 
-
 // --------------- CLICK LISTENERS FIRES METHODS --------------------
 // where to go, create PossibleMove //
 hexAll.forEach((el) => {
@@ -38,6 +36,7 @@ hexAll.forEach((el) => {
     }
   });
 });
+
 
 // Edit this function. getType fires when new troops object is creating in Hex!!! //
 hexAll.forEach((el) => {
@@ -66,32 +65,33 @@ hexAll.forEach((el) => {
   });
 });
 
-
-let town;
 // settle Town //
 settleBtn.addEventListener(`click`, function () {
-    // town = new Town(UUID, undefined);
-    merchantPosition.merchant.settle();
-  });
+  merchantPosition.merchant.settle();
+});
 
 
+let town;
 // ----- show hudTown  ----- //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
+
     if (el.town) {
-        town = el.town;
-      el.town.showHudTown();
-    } else {
-      hudTown.style.display = `none`;
+      town = el.town;
+      town.showHudTown();
+
+    } else if (town) {
+      town.hideHudTown();
+      town.hideContainerStructure();
+      town = undefined;
     } // I need to make prototype of each object and call function hideHudTown from proto //
   });
 });
 
-buildStructure.addEventListener(`click`, function() {
-    town.showContainerStructure();
-})
+buildStructure.addEventListener(`click`, function () {
+  town.showContainerStructure();
+});
 
-fortressBtn.addEventListener(`click`, function() {
-    town.buildStructure(`fortress`);
-})
-
+fortressBtn.addEventListener(`click`, function () {
+  town.buildStructure(`fortress`);
+});

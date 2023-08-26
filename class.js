@@ -65,8 +65,8 @@
   
 
       this.buildStructure = (building) => {
-        this.id.classList.add(building);
-        this.param = true;
+        this.id.childNodes[1].classList.add(building);
+        this[building] = true;
       };
   
     }

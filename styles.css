@@ -188,10 +188,10 @@ h2 {
 }
 
 .fortress {
-  background-image: url(./img/tower.png), url(./img/town.png);
+  background-image: url(./img/fortress.png);
   background-repeat: no-repeat;
-  background-position: top 5px left 15px, center;
-  background-size: 35%, 40%;
+  background-position:center;
+  background-size: 100%;
   /* position: relative; */
 }
 
