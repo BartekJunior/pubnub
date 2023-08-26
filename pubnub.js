@@ -256,7 +256,6 @@ for (let i = (hexAll.length / 6) * 2; i < (hexAll.length / 6) * 3; i = i + 2) {
 for (let i = (hexAll.length / 6) * 4; i < (hexAll.length / 6) * 5; i = i + 2) {
   gather4hex(i);
 }
-console.log(hexArea);
 // Array of 4 land piece. One big array of 12 cafelkas. Each one has 4 Hexes of land//
 
 
@@ -476,7 +475,7 @@ hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     if (el.town) {
       el.town.showHudTown();
-    }
+    } else {hudTown.style.display = `none`}; // I need to make prototype of each object and call function hideHudTown from proto //
   });
 });
 
