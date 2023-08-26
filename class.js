@@ -3,10 +3,9 @@
 // CLASS HEX //
   
   class Hex {
-    constructor(id, type, town, vis) {
+    constructor(id, type, vis) {
       this.id = id;
       this.type = type;
-      this.town = town;
       this.vis = vis;
   
       this.createSmall = function () {
@@ -50,26 +49,28 @@
   }
   
   class Town {
-    constructor(player, id, port, academy, fortress ) {
+    constructor(player, id, port, academy, fortress) {
       this.player = player;
       this.id = id;
+      this.port = port;
+      this.academy = academy;
+      this.fortress = fortress;
+
   
       this.showHudTown = () => (hudTown.style.display = `block`);
       this.hideHudTown = () => (hudTown.style.display = `none`);
+
+      this.showContainerStructure = () => (containerStructure.style.display = `block`);
+      this.hideContainerStructure = () => (containerStructure.style.display = `none`);
   
-  
-      this.buildStructure = (param) => {
-        this.id.classList.add(`param`);
+
+      this.buildStructure = (building) => {
+        this.id.classList.add(building);
         this.param = true;
       };
   
-      this.id.object.town = true;
     }
   }
-  
-  settleBtn.addEventListener(`click`, function () {
-    merchantPosition.merchant.settle();
-  });
   
   
   ///// CLASS MERCHANT /////
@@ -90,7 +91,7 @@
       };
   
       this.settle = () => {
-        this.id.town = new Town(UUID, this.id);
+        this.id.town = new Town(UUID, this.id, false, false, false);
         this.id.childNodes[4].classList.add(`town`);
         hexAll.forEach((el) => {
           if (el.possibleMove) {
@@ -147,14 +148,7 @@
     }
   }
   
-  //Put Merchants on the board
-  hexAll[0].merchant = new Merchant(UUID, hexAll[0]);
-  hexAll[35].merchant = new Merchant(UUID, hexAll[35]);
-  
-  hexAll.forEach((el) => {
-    const newHex = new Hex(el, undefined, false, false);
-    el.object = newHex;
-  });
+
   
   
   

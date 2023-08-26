@@ -217,21 +217,7 @@ hexAll.forEach((el, index) =>
   })
 );
 
-// HUD Display
-const hudMerchant = document.querySelector(`.hud-merchant`);
-const hudTown = document.querySelector(`.hud-town`);
 
-const settleBtn = document.getElementById(`settleBtn`);
-
-const confirmBtn = document.getElementById(`confirmBtn`);
-
-const collectFood = document.getElementById(`collectFood`);
-const buildStructure = document.getElementById(`buildStructure`);
-const burnTown = document.getElementById(`burnTown`);
-
-const containerStructure = document.getElementById(`containerStructure`);
-const academyBtn = document.getElementById(`academyBtn`);
-// HUD Display
 
 // Array of 4 land piece. One big array of 12 cafelkas. Each one has 4 Hexes of land//
 const hexArea = [];
