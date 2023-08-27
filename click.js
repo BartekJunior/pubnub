@@ -10,6 +10,16 @@ hexAll.forEach((el) => {
   el.object = newHex;
 });
 
+const setPlayer = document.getElementById(`setPlayer`);
+setPlayer.addEventListener(`click`, function () {
+  const num = Math.ceil(playersNumber / onlineUsers.size);
+  if (onlineUsers.size === 3) color = `red`;
+  else if (onlineUsers.size === 2) color = `blue`;
+  else if (onlineUsers.size === 1) color = `green`;
+  else alert(`Liczba graczy musi wynosic 1-3`);
+  window["player" + num] = new Player(UUID, num, color, 2, 1, 0, 0, 0, 2);
+});
+
 // HUD Display
 const hudMerchant = document.querySelector(`.hud-merchant`);
 const hudTown = document.querySelector(`.hud-town`);
@@ -22,11 +32,20 @@ const collectFood = document.getElementById(`collectFood`);
 const buildStructure = document.getElementById(`buildStructure`);
 const burnTown = document.getElementById(`burnTown`);
 
+
 const containerStructure = document.getElementById(`containerStructure`);
 const academyBtn = document.getElementById(`academyBtn`);
 const fortressBtn = document.getElementById(`fortressBtn`);
 const portBtn = document.getElementById(`portBtn`);
 const marketBtn = document.getElementById(`marketBtn`);
+
+const p1FoodValue = document.getElementById(`p1FoodValue`);
+const p1WoodValue = document.getElementById(`p1WoodValue`);
+const p1StoneValue = document.getElementById(`p1StoneValue`);
+const p1GoldValue = document.getElementById(`p1GoldValue`);
+const p1IdeaValue = document.getElementById(`p1IdeaValue`);
+const p1MoraleValue = document.getElementById(`p1MoraleValue`);
+
 
 
 
@@ -108,3 +127,10 @@ portBtn.addEventListener(`click`, function () {
 marketBtn.addEventListener(`click`, function () {
   town.buildStructure(`market`);
 });
+
+
+
+const resourceValue = document.querySelectorAll(`.resource-value`);
+resourceValue.forEach((el) => {
+  el.innerHTML = `value`;
+})

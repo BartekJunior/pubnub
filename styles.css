@@ -215,6 +215,25 @@ h2 {
 }
 
 
+.hud-technology-container {
+  margin-top: 50px;
+}
+
+.p1-resource-container {
+  display: flex;
+  width: 650px;
+  background-color: #9edb9e;
+}
+
+.resource-container {
+  width: 100px;
+}
+
+.resource-value {
+  width: 100px;
+  height: 40px;
+}
+
 
 /* ------------ GAMEPLAY  ----------------- */
 

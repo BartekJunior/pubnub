@@ -12,24 +12,7 @@ const betha = document.getElementById(`betha`);
 const gamma = document.getElementById(`gamma`);
 const sigma = document.getElementById(`sigma`);
 
-class Player {
-  constructor(name, nr, color) {
-    this.name = name;
-    this.nr = nr;
-    this.color = color;
-  }
-}
 
-const setPlayer = document.getElementById(`setPlayer`);
-setPlayer.addEventListener(`click`, function () {
-  const num = Math.ceil(playersNumber / onlineUsers.size);
-  if (onlineUsers.size === 3) color = `red`;
-  else if (onlineUsers.size === 2) color = `blue`;
-  else if (onlineUsers.size === 1) color = `green`;
-  else alert(`Liczba graczy musi wynosic 1-3`);
-  window["player" + num] = new Player(UUID, num, color);
-  console.log();
-});
 
 // ------------ TURN CHANGE BART is the first player. TURN FUNCTION MADE FOR X PLAYERS!!! ------------- //
 // PlayersNumber tells how many players are in the game! IT MUST BE THE RIGHT VALUE!
