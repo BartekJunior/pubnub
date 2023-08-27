@@ -114,10 +114,29 @@ class Town {
         }
       }
     };
-
-
   }
 }
+
+// Town.prototype.showHudTown = () => (hudTown.style.display = `block`);
+// Town.prototype.possibleResource = () => {
+//   let offsetAll = [];
+//   for (let i = 0; i < hexAll.length; i++) {
+//     offsetAll[i] = [hexAll[i].offsetLeft, hexAll[i].offsetTop];
+//   }
+
+//   for (let i = 0; i < hexAll.length; i++) {
+//     if (
+//       offsetAll[i][0] > this.id.offsetLeft - 130 &&
+//       offsetAll[i][0] < this.id.offsetLeft + 130 &&
+//       offsetAll[i][1] < this.id.offsetTop + 130 &&
+//       offsetAll[i][1] > this.id.offsetTop - 130 &&
+//       hexAll[i].object.vis
+//     ) {
+//       const possibleResource = new PossibleResource(UUID, hexAll[i]);
+//       hexAll[i].possibleResource = possibleResource;
+//     }
+//   }
+// };
 
 ///// CLASS MERCHANT /////
 let merchantPosition;

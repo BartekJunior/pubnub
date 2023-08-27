@@ -87,6 +87,18 @@ hexAll.forEach((el) => {
     }
   });
 });
+//delete possiblemove when clicked somewhere else and not move merchant
+hexAll.forEach((el) => {
+  el.addEventListener(`click`, function() {
+    if (!el.possibleMove && !el.merchant) {
+      hexAll.forEach((el) => {
+        if (el.possibleMove)
+        el.possibleMove.deletePossibleMove();
+      })
+    }
+  })
+})
+
 
 let town;
 // ----- show hudTown  ----- //
@@ -103,7 +115,7 @@ hexAll.forEach((el) => {
   });
 });
 
-// settle Town //
+// settle Town and build structures //
 settleBtn.addEventListener(`click`, function () {
   merchantPosition.merchant.settle();
 });
@@ -131,6 +143,7 @@ marketBtn.addEventListener(`click`, function () {
 collectResourceBtn.addEventListener(`click`, function (event) {
   town.possibleResource();
 });
+
 
 
 
