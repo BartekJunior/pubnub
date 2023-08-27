@@ -99,6 +99,18 @@ hexAll.forEach((el) => {
   })
 })
 
+//delete possibleResource when clicked somewhere else and not collect
+hexAll.forEach((el) => {
+  el.addEventListener(`click`, function() {
+    if (!el.possibleResource) {
+      hexAll.forEach((el) => {
+        if (el.possibleResource)
+        el.possibleResource.deletePossibleResource();
+      })
+    }
+  })
+})
+
 
 let town;
 // ----- show hudTown  ----- //
@@ -140,7 +152,7 @@ marketBtn.addEventListener(`click`, function () {
   town.buildStructure(`market`);
 });
 
-collectResourceBtn.addEventListener(`click`, function (event) {
+collectResourceBtn.addEventListener(`click`, function () {
   town.possibleResource();
 });
 

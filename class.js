@@ -212,19 +212,18 @@ class PossibleMove {
 }
 
 
-
 ///// CLASS POSSIBLERESOURCE ///// EDIT THIS!!!! it was just copied from posiblemove class
 class PossibleResource {
   constructor(player, id) {
     this.player = player;
     this.id = id;
-    this.showPossibleMove = () => this.id.classList.add(`possible-move`);
+    this.showPossibleResource = () => this.id.classList.add(`possible-collect`);
 
-    this.deletePossibleMove = () => {
-      id.classList.remove(`possible-move`);
-      delete this.id.possibleMove;
+    this.deletePossibleResource = () => {
+      id.classList.remove(`possible-collect`);
+      delete this.id.possibleResource;
     };
 
-    this.showPossibleMove(); //fires after create object
+    this.showPossibleResource(); //fires after create object
   }
 }
