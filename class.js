@@ -94,6 +94,28 @@ class Town {
       this.id.childNodes[this.structurePlace(building)].classList.add(building);
       this[building] = true;
     };
+
+    this.possibleResource = () => {
+      let offsetAll = [];
+      for (let i = 0; i < hexAll.length; i++) {
+        offsetAll[i] = [hexAll[i].offsetLeft, hexAll[i].offsetTop];
+      }
+
+      for (let i = 0; i < hexAll.length; i++) {
+        if (
+          offsetAll[i][0] > this.id.offsetLeft - 130 &&
+          offsetAll[i][0] < this.id.offsetLeft + 130 &&
+          offsetAll[i][1] < this.id.offsetTop + 130 &&
+          offsetAll[i][1] > this.id.offsetTop - 130 &&
+          hexAll[i].object.vis
+        ) {
+          const possibleResource = new PossibleResource(UUID, hexAll[i]);
+          hexAll[i].possibleResource = possibleResource;
+        }
+      }
+    };
+
+
   }
 }
 
@@ -146,7 +168,6 @@ class Merchant {
         ) {
           const possibleMove = new PossibleMove(UUID, hexAll[i]);
           hexAll[i].possibleMove = possibleMove;
-          // hexAll[i].possibleMove.showPossibleMove();
         }
       }
     };
@@ -157,6 +178,24 @@ class Merchant {
 
 ///// CLASS POSSIBLEMOVE /////
 class PossibleMove {
+  constructor(player, id) {
+    this.player = player;
+    this.id = id;
+    this.showPossibleMove = () => this.id.classList.add(`possible-move`);
+
+    this.deletePossibleMove = () => {
+      id.classList.remove(`possible-move`);
+      delete this.id.possibleMove;
+    };
+
+    this.showPossibleMove(); //fires after create object
+  }
+}
+
+
+
+///// CLASS POSSIBLERESOURCE ///// EDIT THIS!!!! it was just copied from posiblemove class
+class PossibleResource {
   constructor(player, id) {
     this.player = player;
     this.id = id;

@@ -28,7 +28,7 @@ const settleBtn = document.getElementById(`settleBtn`);
 
 const confirmBtn = document.getElementById(`confirmBtn`);
 
-const collectFood = document.getElementById(`collectFood`);
+const collectResourceBtn = document.getElementById(`collectResourceBtn`);
 const buildStructure = document.getElementById(`buildStructure`);
 const burnTown = document.getElementById(`burnTown`);
 
@@ -127,6 +127,12 @@ portBtn.addEventListener(`click`, function () {
 marketBtn.addEventListener(`click`, function () {
   town.buildStructure(`market`);
 });
+
+collectResourceBtn.addEventListener(`click`, function (event) {
+  town.possibleResource();
+});
+
+
 
 
 
