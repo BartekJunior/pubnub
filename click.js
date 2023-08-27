@@ -46,6 +46,12 @@ const p1GoldValue = document.getElementById(`p1GoldValue`);
 const p1IdeaValue = document.getElementById(`p1IdeaValue`);
 const p1MoraleValue = document.getElementById(`p1MoraleValue`);
 
+const foodCollect = document.getElementById(`foodCollect`)
+const woodCollect = document.getElementById(`woodCollect`)
+const stoneCollect = document.getElementById(`stoneCollect`)
+const goldCollect = document.getElementById(`goldCollect`)
+
+
 
 
 

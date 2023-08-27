@@ -210,9 +210,20 @@ h2 {
   display: none;
 }
 
+.container-collect {
+  display: flex;
+}
+
 #confirmBtn {
   display: none;
 }
+
+
+.collect {
+  width: 150px;
+  height: 50px;
+}
+
 
 
 .hud-technology-container {

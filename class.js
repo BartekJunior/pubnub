@@ -214,8 +214,25 @@ class PossibleResource {
       delete this.id.possibleResource;
     };
 
+    this.transformResource = (param) => {
+      if (param === `grass`) return `food`
+      else if (param) return `wood`
+      else if (param) return `stone`
+      else return
+    }
+
     this.collectResource = () => {
-      arr.push(this.id.object.type)
+      if (arr.length < town.size) {
+        arr.push(this.id.object.type);
+        window[this.transformResource(`grass`) + `Collect`].innerHTML = 666;
+
+      }
+      else return;
+
+
+
+
+
     }
 
 
