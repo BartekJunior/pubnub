@@ -65,6 +65,7 @@
 
       this.structurePlace = (building) => {
         if (building === `fortress` ) return 1;
+        else if (building === `market`) return 3;
         else if (building === `academy`) return 5;
         else if (building === `port`) return 7;
       }

@@ -26,6 +26,9 @@ const containerStructure = document.getElementById(`containerStructure`);
 const academyBtn = document.getElementById(`academyBtn`);
 const fortressBtn = document.getElementById(`fortressBtn`);
 const portBtn = document.getElementById(`portBtn`);
+const marketBtn = document.getElementById(`marketBtn`);
+
+
 
 // HUD Display
 
@@ -100,4 +103,8 @@ academyBtn.addEventListener(`click`, function () {
 
 portBtn.addEventListener(`click`, function () {
   town.buildStructure(`port`);
+});
+
+marketBtn.addEventListener(`click`, function () {
+  town.buildStructure(`market`);
 });
