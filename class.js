@@ -68,9 +68,10 @@ class Hex {
 }
 
 class Town {
-  constructor(player, id, port, academy, fortress) {
+  constructor(player, id, size, port, academy, fortress) {
     this.player = player;
     this.id = id;
+    this.size = size;
     this.port = port;
     this.academy = academy;
     this.fortress = fortress;
@@ -93,6 +94,7 @@ class Town {
     this.buildStructure = (building) => {
       this.id.childNodes[this.structurePlace(building)].classList.add(building);
       this[building] = true;
+      this.size++;
     };
 
     this.possibleResource = () => {
@@ -107,36 +109,23 @@ class Town {
           offsetAll[i][0] < this.id.offsetLeft + 130 &&
           offsetAll[i][1] < this.id.offsetTop + 130 &&
           offsetAll[i][1] > this.id.offsetTop - 130 &&
-          hexAll[i].object.vis
+          hexAll[i].object.vis && !hexAll[i].town && !(hexAll[i].object.type === `plain`)
         ) {
           const possibleResource = new PossibleResource(UUID, hexAll[i]);
           hexAll[i].possibleResource = possibleResource;
         }
       }
     };
+
+    this.collectResource = () => {
+
+    }
+
+
+
+
   }
 }
-
-// Town.prototype.showHudTown = () => (hudTown.style.display = `block`);
-// Town.prototype.possibleResource = () => {
-//   let offsetAll = [];
-//   for (let i = 0; i < hexAll.length; i++) {
-//     offsetAll[i] = [hexAll[i].offsetLeft, hexAll[i].offsetTop];
-//   }
-
-//   for (let i = 0; i < hexAll.length; i++) {
-//     if (
-//       offsetAll[i][0] > this.id.offsetLeft - 130 &&
-//       offsetAll[i][0] < this.id.offsetLeft + 130 &&
-//       offsetAll[i][1] < this.id.offsetTop + 130 &&
-//       offsetAll[i][1] > this.id.offsetTop - 130 &&
-//       hexAll[i].object.vis
-//     ) {
-//       const possibleResource = new PossibleResource(UUID, hexAll[i]);
-//       hexAll[i].possibleResource = possibleResource;
-//     }
-//   }
-// };
 
 ///// CLASS MERCHANT /////
 let merchantPosition;
@@ -156,7 +145,7 @@ class Merchant {
     };
 
     this.settle = () => {
-      this.id.town = new Town(UUID, this.id, false, false, false);
+      this.id.town = new Town(UUID, this.id, 1, false, false, false);
       this.id.childNodes[4].classList.add(`town`);
       hexAll.forEach((el) => {
         if (el.possibleMove) {
@@ -211,8 +200,9 @@ class PossibleMove {
   }
 }
 
+const arr = [];
 
-///// CLASS POSSIBLERESOURCE ///// EDIT THIS!!!! it was just copied from posiblemove class
+///// CLASS POSSIBLERESOURCE /////
 class PossibleResource {
   constructor(player, id) {
     this.player = player;
@@ -223,6 +213,11 @@ class PossibleResource {
       id.classList.remove(`possible-collect`);
       delete this.id.possibleResource;
     };
+
+    this.collectResource = () => {
+      arr.push(this.id.object.type)
+    }
+
 
     this.showPossibleResource(); //fires after create object
   }

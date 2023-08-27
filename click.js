@@ -99,6 +99,8 @@ hexAll.forEach((el) => {
   })
 })
 
+
+
 //delete possibleResource when clicked somewhere else and not collect
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function() {
@@ -113,19 +115,20 @@ hexAll.forEach((el) => {
 
 
 let town;
-// ----- show hudTown  ----- //
+// ----- show/hide hudTown  ----- //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     if (el.town) {
       town = el.town;
       town.showHudTown();
-    } else if (town) {
+    } else if (town && (!el.possibleResource)) {
       town.hideHudTown();
       town.hideContainerStructure();
       town = undefined;
     } // I need to make prototype of each object and call function hideHudTown from proto //
   });
 });
+
 
 // settle Town and build structures //
 settleBtn.addEventListener(`click`, function () {
@@ -155,6 +158,18 @@ marketBtn.addEventListener(`click`, function () {
 collectResourceBtn.addEventListener(`click`, function () {
   town.possibleResource();
 });
+
+
+
+
+
+hexAll.forEach((el) => {
+  el.addEventListener(`click`, function () {
+    if (el.possibleResource) {
+      el.possibleResource.collectResource();
+    }
+  });
+})
 
 
 
