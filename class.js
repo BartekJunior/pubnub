@@ -1,6 +1,7 @@
 `use strict`;
 
 // CLASS PLAYER //
+
 class Player {
   constructor(name, nr, color, food, wood, stone, gold, idea, morale) {
     this.name = name;
@@ -12,6 +13,10 @@ class Player {
     this.gold = gold;
     this.idea = idea;
     this.morale = morale;
+
+    this.showResourceValue = (resource) => {
+      window[`p1` + resource + `Value`].innerHTML = this[resource];
+    }
   }
 }
 
