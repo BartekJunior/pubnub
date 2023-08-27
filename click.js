@@ -69,11 +69,6 @@ hexAll.forEach((el) => {
   });
 });
 
-// settle Town //
-settleBtn.addEventListener(`click`, function () {
-  merchantPosition.merchant.settle();
-});
-
 let town;
 // ----- show hudTown  ----- //
 hexAll.forEach((el) => {
@@ -87,6 +82,11 @@ hexAll.forEach((el) => {
       town = undefined;
     } // I need to make prototype of each object and call function hideHudTown from proto //
   });
+});
+
+// settle Town //
+settleBtn.addEventListener(`click`, function () {
+  merchantPosition.merchant.settle();
 });
 
 buildStructure.addEventListener(`click`, function () {

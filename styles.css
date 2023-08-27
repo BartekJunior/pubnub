@@ -63,14 +63,6 @@ h2 {
   margin: 0 auto;
 }
 
-.shit {
-  background-image: url(./img/tower.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 70%;
-  /* position: relative; */
-}
-
 /* ------------ HEX ----------------- */
 .hex-container {
   height: 500px;
@@ -111,7 +103,6 @@ h2 {
   border: rgb(201, 196, 196) 1px dotted;
 }
 
-/* ------------------------- */
 .hex-row {
   margin-top: -27px;
 }
@@ -120,66 +111,29 @@ h2 {
   margin-left: -54px;
 }
 
-/* ------------ HUD ----------------- */
-.game-container {
-  margin-top: 80px;
-  height: 800px;
+/* ------------------------- */
+
+.class-mountain {
+  background-color: brown;
 }
 
-.hud-global {
-  background-color: rgb(61, 107, 92);
+.class-forest {
+  background-color: rgb(85, 37, 37);
 }
 
-.hud-merchant {
-  display: none;
+.class-grass {
+  background-color: green;
 }
 
-.hud-town {
-  display: none;
+.class-water {
+  background-color: blue;
 }
 
-.hud-town-btn {
-  width: 130px;
-  height: 50px;
+.class-plain {
+  background-color: orange;
 }
 
-.resource-container {
-  display: flex;
-}
-
-.resource-img {
-  background-color: rgb(116, 115, 84);
-  width: 100px;
-  height: 50px;
-}
-
-.resource-value {
-  background-color: rgb(175, 172, 90);
-  width: 100px;
-  height: 50px;
-  font-weight: bold;
-  text-align: center;
-  font-size: 25px;
-}
-
-.container-structure {
-  display: none;
-}
-
-#confirmBtn {
-  display: none;
-}
-
-.test {
-  background-color: bisque;
-  width: 100px;
-  height: 70px;
-  text-align: center;
-  font-size: 30px;
-  padding-top: 10px;
-}
-
-/* ------------ HEX Images ----------------- */
+/* ------------ TOWN Images ----------------- */
 .merchant {
   background-image: url(./img/merchant.png);
   background-repeat: no-repeat;
@@ -229,25 +183,38 @@ h2 {
 }
 
 
-.class-mountain {
-  background-color: brown;
+/* ------------ HUD ----------------- */
+.game-container {
+  margin-top: 80px;
+  height: 800px;
 }
 
-.class-forest {
-  background-color: rgb(85, 37, 37);
+.hud-global {
+  background-color: rgb(61, 107, 92);
 }
 
-.class-grass {
-  background-color: green;
+.hud-merchant {
+  display: none;
 }
 
-.class-water {
-  background-color: blue;
+.hud-town {
+  display: none;
 }
 
-.class-plain {
-  background-color: orange;
+.hud-town-btn {
+  width: 130px;
+  height: 50px;
 }
+
+.container-structure {
+  display: none;
+}
+
+#confirmBtn {
+  display: none;
+}
+
+
 
 /* ------------ GAMEPLAY  ----------------- */
 
@@ -265,6 +232,12 @@ h2 {
 .settle-btn:hover {
   background-color: #66ff66;
 }
+
+
+
+
+
+
 
 
 
