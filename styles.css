@@ -182,6 +182,30 @@ h2 {
   /* position: relative; */
 }
 
+.obelisk {
+  background-image: url(./img/obelisk.png);
+  background-repeat: no-repeat;
+  background-position:center;
+  background-size: 100%;
+  /* position: relative; */
+}
+
+.temple {
+  background-image: url(./img/temple.png);
+  background-repeat: no-repeat;
+  background-position:center;
+  background-size: 100%;
+  /* position: relative; */
+}
+
+.observatory {
+  background-image: url(./img/observatory.png);
+  background-repeat: no-repeat;
+  background-position:center;
+  background-size: 100%;
+  /* position: relative; */
+}
+
 
 /* ------------ HUD ----------------- */
 .game-container {

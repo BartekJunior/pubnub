@@ -32,11 +32,17 @@ const collectResourceBtn = document.getElementById(`collectResourceBtn`);
 const buildStructure = document.getElementById(`buildStructure`);
 const burnTown = document.getElementById(`burnTown`);
 
+
 const containerStructure = document.getElementById(`containerStructure`);
+
 const academyBtn = document.getElementById(`academyBtn`);
 const fortressBtn = document.getElementById(`fortressBtn`);
 const portBtn = document.getElementById(`portBtn`);
 const marketBtn = document.getElementById(`marketBtn`);
+const obeliskBtn = document.getElementById(`obeliskBtn`);
+const templeBtn = document.getElementById(`templeBtn`);
+const observatoryBtn = document.getElementById(`observatoryBtn`);
+
 
 const p1FoodValue = document.getElementById(`p1FoodValue`);
 const p1WoodValue = document.getElementById(`p1WoodValue`);
@@ -168,6 +174,24 @@ marketBtn.addEventListener(`click`, function () {
   town.buildStructure(`market`);
 });
 
+obeliskBtn.addEventListener(`click`, function () {
+  town.buildStructure(`obelisk`);
+});
+
+templeBtn.addEventListener(`click`, function () {
+  town.buildStructure(`temple`);
+});
+
+observatoryBtn.addEventListener(`click`, function () {
+  town.buildStructure(`observatory`);
+});
+
+
+
+
+
+
+
 collectResourceBtn.addEventListener(`click`, function () {
   town.possibleResource();
 });
@@ -183,28 +207,33 @@ let arr = [];
 
 
 //shitty
-// hexAll.forEach((el) => {
-//   el.addEventListener(`click`, function () {
-//     if (el.possibleResource && arr.length < town.size) {
-//       arr.push(el.possibleResource.resource);
-//       console.log(arr);
-//     }
-//   });
-// });
+hexAll.forEach((el) => {
+  el.addEventListener(`click`, function () {
+    if (el.possibleResource && arr.length < town.size) {
+      arr.push(el.possibleResource.resource);
+      console.log(arr);
+      el.removeEventListener('click', arguments.callee);    }
+  });
+});
+
+
+
+
 
 
 //shitty as well
-for (let i = 0; i < hexAll.length; i++) {
-    hexAll[i].addEventListener(`click`, function() {
-      if (hexAll[i].possibleResource && arr.length < town.size) {
+// for (let i = 0; i < hexAll.length; i++) {
+//     hexAll[i].addEventListener(`click`, function() {
+//       if (hexAll[i].possibleResource && arr.length < town.size) {
 
-        arr.push(hexAll[i].possibleResource.resource);
-        console.log(arr);
+//         arr.push(hexAll[i].possibleResource.resource);
+//         console.log(arr);
 
-      }
+//         hexAll[i].removeEventListener('click', arguments.callee);
+//       }
 
-    }, {once: true})
-  }
+//     })
+//   }
 
 
 

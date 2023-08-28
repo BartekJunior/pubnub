@@ -85,13 +85,16 @@ class Hex {
 }
 
 class Town {
-  constructor(player, id, size, port, academy, fortress) {
+  constructor(player, id, size, port, academy, fortress, obelisk, temple, observatory) {
     this.player = player;
     this.id = id;
     this.size = size;
     this.port = port;
     this.academy = academy;
     this.fortress = fortress;
+    this.obelisk = obelisk;
+    this.temple = temple;
+    this.observatory = observatory;
 
     this.showHudTown = () => (hudTown.style.display = `block`);
     this.hideHudTown = () => (hudTown.style.display = `none`);
@@ -103,6 +106,9 @@ class Town {
 
     this.structurePlace = (building) => {
       if (building === `fortress`) return 1;
+      else if (building === `obelisk`) return 0;
+      else if (building === `temple`) return 2;
+      else if (building === `observatory`) return 6;
       else if (building === `market`) return 3;
       else if (building === `academy`) return 5;
       else if (building === `port`) return 7;
