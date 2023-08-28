@@ -32,7 +32,6 @@ const collectResourceBtn = document.getElementById(`collectResourceBtn`);
 const buildStructure = document.getElementById(`buildStructure`);
 const burnTown = document.getElementById(`burnTown`);
 
-
 const containerStructure = document.getElementById(`containerStructure`);
 const academyBtn = document.getElementById(`academyBtn`);
 const fortressBtn = document.getElementById(`fortressBtn`);
@@ -46,14 +45,28 @@ const p1GoldValue = document.getElementById(`p1GoldValue`);
 const p1IdeaValue = document.getElementById(`p1IdeaValue`);
 const p1MoraleValue = document.getElementById(`p1MoraleValue`);
 
-const foodCollect = document.getElementById(`foodCollect`)
-const woodCollect = document.getElementById(`woodCollect`)
-const stoneCollect = document.getElementById(`stoneCollect`)
-const goldCollect = document.getElementById(`goldCollect`)
+const p1GlobalResource = {
+  food: 2,
+  wood: 1,
+  stone: 0,
+  gold: 0,
+  idea: 2,
+  morale: 2,
+};
 
+const p1TempResource = {
+  food: 0,
+  wood: 0,
+  stone: 0,
+  gold: 0,
+  idea: 0,
+  morale: 0,
+};
 
-
-
+const foodCollect = document.getElementById(`foodCollect`);
+const woodCollect = document.getElementById(`woodCollect`);
+const stoneCollect = document.getElementById(`stoneCollect`);
+const goldCollect = document.getElementById(`goldCollect`);
 
 // HUD Display
 
@@ -95,30 +108,25 @@ hexAll.forEach((el) => {
 });
 //delete possiblemove when clicked somewhere else and not move merchant
 hexAll.forEach((el) => {
-  el.addEventListener(`click`, function() {
+  el.addEventListener(`click`, function () {
     if (!el.possibleMove && !el.merchant) {
       hexAll.forEach((el) => {
-        if (el.possibleMove)
-        el.possibleMove.deletePossibleMove();
-      })
+        if (el.possibleMove) el.possibleMove.deletePossibleMove();
+      });
     }
-  })
-})
-
-
+  });
+});
 
 //delete possibleResource when clicked somewhere else and not collect
 hexAll.forEach((el) => {
-  el.addEventListener(`click`, function() {
+  el.addEventListener(`click`, function () {
     if (!el.possibleResource) {
       hexAll.forEach((el) => {
-        if (el.possibleResource)
-        el.possibleResource.deletePossibleResource();
-      })
+        if (el.possibleResource) el.possibleResource.deletePossibleResource();
+      });
     }
-  })
-})
-
+  });
+});
 
 let town;
 // ----- show/hide hudTown  ----- //
@@ -127,14 +135,13 @@ hexAll.forEach((el) => {
     if (el.town) {
       town = el.town;
       town.showHudTown();
-    } else if (town && (!el.possibleResource)) {
+    } else if (town && !el.possibleResource) {
       town.hideHudTown();
       town.hideContainerStructure();
       town = undefined;
     } // I need to make prototype of each object and call function hideHudTown from proto //
   });
 });
-
 
 // settle Town and build structures //
 settleBtn.addEventListener(`click`, function () {
@@ -165,19 +172,39 @@ collectResourceBtn.addEventListener(`click`, function () {
   town.possibleResource();
 });
 
+// p1GlobalResource
+// p1TempResource
 
 
 
 
+
+let arr = [];
+
+
+//shitty
 // hexAll.forEach((el) => {
 //   el.addEventListener(`click`, function () {
-//     if (el.possibleResource) {
-//       el.possibleResource.collectResource();
+//     if (el.possibleResource && arr.length < town.size) {
+//       arr.push(el.possibleResource.resource);
+//       console.log(arr);
 //     }
 //   });
-// })
+// });
 
 
+//shitty as well
+for (let i = 0; i < hexAll.length; i++) {
+    hexAll[i].addEventListener(`click`, function() {
+      if (hexAll[i].possibleResource && arr.length < town.size) {
+
+        arr.push(hexAll[i].possibleResource.resource);
+        console.log(arr);
+
+      }
+
+    }, {once: true})
+  }
 
 
 
@@ -185,4 +212,4 @@ collectResourceBtn.addEventListener(`click`, function () {
 const resourceValue = document.querySelectorAll(`.resource-value`);
 resourceValue.forEach((el) => {
   el.innerHTML = `value`;
-})
+});
