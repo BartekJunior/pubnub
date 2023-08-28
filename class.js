@@ -16,7 +16,7 @@ class Player {
 
     this.showResourceValue = (resource) => {
       window[`p1` + resource + `Value`].innerHTML = this[resource];
-    }
+    };
   }
 }
 
@@ -30,17 +30,23 @@ class Hex {
     this.collectible = collectible;
 
     this.checkResource = () => {
-      if (this.type === `grass`) return this.resource = `food`
-      else if (this.type === `forest`) return this.resource = `wood`
-      else if (this.type === `mountain`) return this.resource = `stone`
-      else if (this.type === `plain`) return this.resource = `food`
-      else if (this.type === `water`) return this.resource = `gold`
-    }
+      if (this.type === `grass`) return (this.resource = `food`);
+      else if (this.type === `forest`) return (this.resource = `wood`);
+      else if (this.type === `mountain`) return (this.resource = `stone`);
+      else if (this.type === `plain`) return (this.resource = `food`);
+      else if (this.type === `water`) return (this.resource = `gold`);
+    };
 
     this.checkCollectible = () => {
-      if (this.type === `water` || this.type === `plain`) return this.collectible = false
-      else if (this.type === `grass` || this.type === `forest` || this.type === `mountain`) return this.collectible = true;
-    }
+      if (this.type === `water` || this.type === `plain`)
+        return (this.collectible = false);
+      else if (
+        this.type === `grass` ||
+        this.type === `forest` ||
+        this.type === `mountain`
+      )
+        return (this.collectible = true);
+    };
 
     this.createSmall = function () {
       let hexChild = [];
@@ -85,13 +91,25 @@ class Hex {
 }
 
 class Town {
-  constructor(player, id, size, port, academy, fortress, obelisk, temple, observatory) {
+  constructor(
+    player,
+    id,
+    size,
+    port,
+    academy,
+    fortress,
+    market,
+    obelisk,
+    temple,
+    observatory
+  ) {
     this.player = player;
     this.id = id;
     this.size = size;
     this.port = port;
     this.academy = academy;
     this.fortress = fortress;
+    this.market = market;
     this.obelisk = obelisk;
     this.temple = temple;
     this.observatory = observatory;
@@ -117,7 +135,20 @@ class Town {
     this.buildStructure = (building) => {
       this.id.childNodes[this.structurePlace(building)].classList.add(building);
       this[building] = true;
-      this.size++;
+      this.calcSize();
+    };
+
+    this.calcSize = () => {
+      const buildings = [
+        Number(this.port),
+        Number(this.academy),
+        Number(this.fortress),
+        Number(this.market),
+        Number(this.obelisk),
+        Number(this.temple),
+        Number(this.observatory)
+      ]
+      this.size = buildings.reduce((partialSum, a) => partialSum + a, 0) + 1;
     };
 
     this.possibleResource = () => {
@@ -134,13 +165,15 @@ class Town {
           offsetAll[i][1] > this.id.offsetTop - 130 &&
           hexAll[i].object.collectible
         ) {
-          const possibleResource = new PossibleResource(UUID, hexAll[i], hexAll[i].object.resource);
+          const possibleResource = new PossibleResource(
+            UUID,
+            hexAll[i],
+            hexAll[i].object.resource
+          );
           hexAll[i].possibleResource = possibleResource;
         }
       }
     };
-
-
   }
 }
 
@@ -162,7 +195,18 @@ class Merchant {
     };
 
     this.settle = () => {
-      this.id.town = new Town(UUID, this.id, 1, false, false, false);
+      this.id.town = new Town(
+        UUID,
+        this.id,
+        1,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      );
       this.id.childNodes[4].classList.add(`town`);
       this.id.object.collectible = false;
       hexAll.forEach((el) => {
@@ -218,7 +262,6 @@ class PossibleMove {
   }
 }
 
-
 ///// CLASS POSSIBLERESOURCE /////
 class PossibleResource {
   constructor(player, id, resource) {
@@ -226,17 +269,12 @@ class PossibleResource {
     this.id = id;
     this.resource = resource;
 
-
     this.showPossibleResource = () => this.id.classList.add(`possible-collect`);
 
     this.deletePossibleResource = () => {
       id.classList.remove(`possible-collect`);
       delete this.id.possibleResource;
     };
-
-
-
-
 
     this.showPossibleResource(); //fires after create object
   }

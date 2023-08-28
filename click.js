@@ -168,7 +168,7 @@ academyBtn.addEventListener(`click`, function () {
 
 portBtn.addEventListener(`click`, function () {
   town.buildStructure(`port`);
-});
+}, {once: true});
 
 marketBtn.addEventListener(`click`, function () {
   town.buildStructure(`market`);
