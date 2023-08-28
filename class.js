@@ -37,7 +37,10 @@ class Hex {
       else if (this.type === `water`) return this.resource = `gold`
     }
 
-
+    this.checkCollectible = () => {
+      if (this.type === `water` || this.type === `plain`) return this.collectible = false
+      else if (this.type === `grass` || this.type === `forest` || this.type === `mountain`) return this.collectible = true;
+    }
 
     this.createSmall = function () {
       let hexChild = [];
@@ -71,6 +74,7 @@ class Hex {
             el.object.vis = true;
             el.classList.add(`class-${el.object.type}`);
             el.object.checkResource();
+            el.object.checkCollectible();
           });
         }
       });
@@ -221,8 +225,7 @@ class PossibleResource {
     };
 
 
-    this.collectResource = () => {
-    }
+
 
 
     this.showPossibleResource(); //fires after create object

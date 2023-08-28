@@ -169,13 +169,13 @@ collectResourceBtn.addEventListener(`click`, function () {
 
 
 
-hexAll.forEach((el) => {
-  el.addEventListener(`click`, function () {
-    if (el.possibleResource) {
-      el.possibleResource.collectResource();
-    }
-  });
-})
+// hexAll.forEach((el) => {
+//   el.addEventListener(`click`, function () {
+//     if (el.possibleResource) {
+//       el.possibleResource.collectResource();
+//     }
+//   });
+// })
 
 
 
