@@ -126,9 +126,9 @@ class Town {
           offsetAll[i][0] < this.id.offsetLeft + 130 &&
           offsetAll[i][1] < this.id.offsetTop + 130 &&
           offsetAll[i][1] > this.id.offsetTop - 130 &&
-          hexAll[i].object.vis && !hexAll[i].town && !(hexAll[i].object.type === `plain`)
+          hexAll[i].object.collectible
         ) {
-          const possibleResource = new PossibleResource(UUID, hexAll[i]);
+          const possibleResource = new PossibleResource(UUID, hexAll[i], hexAll[i].object.resource);
           hexAll[i].possibleResource = possibleResource;
         }
       }
@@ -158,6 +158,7 @@ class Merchant {
     this.settle = () => {
       this.id.town = new Town(UUID, this.id, 1, false, false, false);
       this.id.childNodes[4].classList.add(`town`);
+      this.id.object.collectible = false;
       hexAll.forEach((el) => {
         if (el.possibleMove) {
           el.possibleMove.deletePossibleMove();
@@ -214,9 +215,12 @@ class PossibleMove {
 
 ///// CLASS POSSIBLERESOURCE /////
 class PossibleResource {
-  constructor(player, id) {
+  constructor(player, id, resource) {
     this.player = player;
     this.id = id;
+    this.resource = resource;
+
+
     this.showPossibleResource = () => this.id.classList.add(`possible-collect`);
 
     this.deletePossibleResource = () => {
