@@ -22,10 +22,22 @@ class Player {
 
 // CLASS HEX //
 class Hex {
-  constructor(id, type, vis) {
+  constructor(id, type, vis, resource, collectible) {
     this.id = id;
     this.type = type;
     this.vis = vis;
+    this.resource = resource;
+    this.collectible = collectible;
+
+    this.checkResource = () => {
+      if (this.type === `grass`) return this.resource = `food`
+      else if (this.type === `forest`) return this.resource = `wood`
+      else if (this.type === `mountain`) return this.resource = `stone`
+      else if (this.type === `plain`) return this.resource = `food`
+      else if (this.type === `water`) return this.resource = `gold`
+    }
+
+
 
     this.createSmall = function () {
       let hexChild = [];
@@ -58,6 +70,7 @@ class Hex {
             el.object.type = this.chooseLand();
             el.object.vis = true;
             el.classList.add(`class-${el.object.type}`);
+            el.object.checkResource();
           });
         }
       });
@@ -116,12 +129,6 @@ class Town {
         }
       }
     };
-
-    this.collectResource = () => {
-
-    }
-
-
 
 
   }
@@ -200,7 +207,6 @@ class PossibleMove {
   }
 }
 
-const arr = [];
 
 ///// CLASS POSSIBLERESOURCE /////
 class PossibleResource {
@@ -214,25 +220,8 @@ class PossibleResource {
       delete this.id.possibleResource;
     };
 
-    this.transformResource = (param) => {
-      if (param === `grass`) return `food`
-      else if (param) return `wood`
-      else if (param) return `stone`
-      else return
-    }
 
     this.collectResource = () => {
-      if (arr.length < town.size) {
-        arr.push(this.id.object.type);
-        window[this.transformResource(`grass`) + `Collect`].innerHTML = 666;
-
-      }
-      else return;
-
-
-
-
-
     }
 
 

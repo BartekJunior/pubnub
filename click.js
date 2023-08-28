@@ -6,7 +6,7 @@ hexAll[35].merchant = new Merchant(UUID, hexAll[35]);
 
 //Create all HEXES on the board
 hexAll.forEach((el) => {
-  const newHex = new Hex(el, undefined, false);
+  const newHex = new Hex(el, undefined, false, undefined, false);
   el.object = newHex;
 });
 
@@ -71,7 +71,7 @@ hexAll.forEach((el) => {
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     if (!el.object.vis && el.possibleMove) {
-      el.object.getType();
+      el.object.getType(); //Get type and resource from each new discovered Hex
     }
   });
 });
