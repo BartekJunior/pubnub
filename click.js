@@ -190,9 +190,8 @@ observatoryBtn.addEventListener(`click`, function () {
 
 
 
-
-
 collectResourceBtn.addEventListener(`click`, function () {
+  town.hideContainerStructure();
   town.possibleResource();
 });
 
