@@ -114,8 +114,13 @@ class Town {
     this.temple = temple;
     this.observatory = observatory;
 
-    this.showHudTown = () => (hudTown.style.display = `block`);
-    this.hideHudTown = () => (hudTown.style.display = `none`);
+    this.showHudTown = () => hudTown.style.display = `block`;
+    this.hideHudTown = () => hudTown.style.display = `none`;
+
+    this.hideConfirmCollectBtn = () => confirmCollectBtn.style.display = `none`;
+
+
+
 
     this.showContainerStructure = () =>
       (containerStructure.style.display = `block`);
@@ -270,6 +275,10 @@ class PossibleResource {
     this.resource = resource;
 
     this.showPossibleResource = () => this.id.classList.add(`possible-collect`);
+
+    this.showConfirmCollectBtn = () => confirmCollectBtn.style.display = `block`;
+    this.hideConfirmCollectBtn = () => confirmCollectBtn.style.display = `none`;
+
 
     this.deletePossibleResource = () => {
       id.classList.remove(`possible-collect`);

@@ -26,9 +26,10 @@ const hudTown = document.querySelector(`.hud-town`);
 
 const settleBtn = document.getElementById(`settleBtn`);
 
-const confirmBtn = document.getElementById(`confirmBtn`);
 
 const collectResourceBtn = document.getElementById(`collectResourceBtn`);
+const confirmCollectBtn = document.getElementById(`confirmCollectBtn`);
+
 const buildStructure = document.getElementById(`buildStructure`);
 const burnTown = document.getElementById(`burnTown`);
 
@@ -144,6 +145,8 @@ hexAll.forEach((el) => {
     } else if (town && !el.possibleResource) {
       town.hideHudTown();
       town.hideContainerStructure();
+      town.hideConfirmCollectBtn();
+
       town = undefined;
     } // I need to make prototype of each object and call function hideHudTown from proto //
   });
@@ -188,28 +191,22 @@ observatoryBtn.addEventListener(`click`, function () {
 
 
 
-
-
+//collect resource //
 collectResourceBtn.addEventListener(`click`, function () {
   town.hideContainerStructure();
   town.possibleResource();
 });
 
-// p1GlobalResource
-// p1TempResource
-
-
-
 
 
 let arr = [];
-
 
 //shitty
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     if (el.possibleResource && arr.length < town.size) {
       arr.push(el.possibleResource.resource);
+      el.possibleResource.showConfirmCollectBtn();
       console.log(arr);
       el.removeEventListener('click', arguments.callee);    }
   });
