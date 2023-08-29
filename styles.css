@@ -133,6 +133,14 @@ h2 {
   background-color: orange;
 }
 
+.class-idea {
+  background-color: #2984b9;
+}
+
+.class-morale {
+  background-color: #04be3c;
+}
+
 /* ------------ TOWN Images ----------------- */
 .merchant {
   background-image: url(./img/merchant.png);

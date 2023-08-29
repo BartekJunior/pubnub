@@ -53,6 +53,9 @@ const foodCollect = document.getElementById(`foodCollect`);
 const woodCollect = document.getElementById(`woodCollect`);
 const stoneCollect = document.getElementById(`stoneCollect`);
 const goldCollect = document.getElementById(`goldCollect`);
+const ideaCollect = document.getElementById(`ideaCollect`);
+const moraleCollect = document.getElementById(`moraleCollect`);
+
 
 const p1GlobalResource = {
   food: 2,
@@ -71,6 +74,13 @@ const p1TempResource = {
   idea: 0,
   morale: 0,
 };
+
+p1FoodValue.innerHTML = p1GlobalResource.food;
+p1WoodValue.innerHTML = p1GlobalResource.wood;
+p1StoneValue.innerHTML = p1GlobalResource.stone;
+p1GoldValue.innerHTML = p1GlobalResource.gold;
+p1IdeaValue.innerHTML = p1GlobalResource.idea;
+p1MoraleValue.innerHTML = p1GlobalResource.morale;
 
 // HUD Display
 
@@ -210,9 +220,16 @@ hexAll.forEach((el) => {
   });
 });
 
+confirmCollectBtn.addEventListener(`click`, function() {
+  window.possibleResource.updateGlobalResource();
+  window.possibleResource.showGlobalResource();
 
 
-const resourceValue = document.querySelectorAll(`.resource-value`);
-resourceValue.forEach((el) => {
-  el.innerHTML = `value`;
-});
+})
+
+
+
+// const resourceValue = document.querySelectorAll(`.resource-value`);
+// resourceValue.forEach((el) => {
+//   el.innerHTML = `value`;
+// });

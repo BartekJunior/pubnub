@@ -289,12 +289,35 @@ class PossibleResource {
       else if (arr[arr.length - 1] === `wood`) p1TempResource.wood++;
       else if (arr[arr.length - 1] === `stone`) p1TempResource.stone++;
       else if (arr[arr.length - 1] === `gold`) p1TempResource.gold++;
-    
+
       foodCollect.innerHTML = p1TempResource.food;
       woodCollect.innerHTML = p1TempResource.wood;
       stoneCollect.innerHTML = p1TempResource.stone;
       goldCollect.innerHTML = p1TempResource.gold;
+      ideaCollect.innerHTML = p1TempResource.idea;
+      moraleCollect.innerHTML = p1TempResource.morale;
     };
+
+    this.showGlobalResource = () => {
+      p1FoodValue.innerHTML = p1GlobalResource.food;
+      p1WoodValue.innerHTML = p1GlobalResource.wood;
+      p1StoneValue.innerHTML = p1GlobalResource.stone;
+      p1GoldValue.innerHTML = p1GlobalResource.gold;
+      p1IdeaValue.innerHTML = p1GlobalResource.idea;
+      p1MoraleValue.innerHTML = p1GlobalResource.morale;
+
+    }
+
+    this.updateGlobalResource = () => {
+        p1GlobalResource.food = p1GlobalResource.food + p1TempResource.food;
+        p1GlobalResource.wood = p1GlobalResource.wood + p1TempResource.wood;
+        p1GlobalResource.stone = p1GlobalResource.stone + p1TempResource.stone;
+        p1GlobalResource.gold = p1GlobalResource.gold + p1TempResource.gold;
+        p1GlobalResource.idea = p1GlobalResource.idea + p1TempResource.idea;
+        p1GlobalResource.morale = p1GlobalResource.morale + p1TempResource.morale;
+
+
+    }
 
     this.showPossibleResource(); //fires after create object
   }
