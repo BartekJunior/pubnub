@@ -298,27 +298,42 @@ class PossibleResource {
       moraleCollect.innerHTML = p1TempResource.morale;
     };
 
-    this.showGlobalResource = () => {
-      p1FoodValue.innerHTML = p1GlobalResource.food;
-      p1WoodValue.innerHTML = p1GlobalResource.wood;
-      p1StoneValue.innerHTML = p1GlobalResource.stone;
-      p1GoldValue.innerHTML = p1GlobalResource.gold;
-      p1IdeaValue.innerHTML = p1GlobalResource.idea;
-      p1MoraleValue.innerHTML = p1GlobalResource.morale;
 
-    }
-
-    this.updateGlobalResource = () => {
-        p1GlobalResource.food = p1GlobalResource.food + p1TempResource.food;
-        p1GlobalResource.wood = p1GlobalResource.wood + p1TempResource.wood;
-        p1GlobalResource.stone = p1GlobalResource.stone + p1TempResource.stone;
-        p1GlobalResource.gold = p1GlobalResource.gold + p1TempResource.gold;
-        p1GlobalResource.idea = p1GlobalResource.idea + p1TempResource.idea;
-        p1GlobalResource.morale = p1GlobalResource.morale + p1TempResource.morale;
-
-
-    }
 
     this.showPossibleResource(); //fires after create object
   }
 }
+
+
+
+
+window.updateGlobalResource = () => {
+    p1GlobalResource.food = p1GlobalResource.food + p1TempResource.food;
+    p1GlobalResource.wood = p1GlobalResource.wood + p1TempResource.wood;
+    p1GlobalResource.stone = p1GlobalResource.stone + p1TempResource.stone;
+    p1GlobalResource.gold = p1GlobalResource.gold + p1TempResource.gold;
+    p1GlobalResource.idea = p1GlobalResource.idea + p1TempResource.idea;
+    p1GlobalResource.morale = p1GlobalResource.morale + p1TempResource.morale;
+
+    p1FoodValue.innerHTML = p1GlobalResource.food;
+    p1WoodValue.innerHTML = p1GlobalResource.wood;
+    p1StoneValue.innerHTML = p1GlobalResource.stone;
+    p1GoldValue.innerHTML = p1GlobalResource.gold;
+    p1IdeaValue.innerHTML = p1GlobalResource.idea;
+    p1MoraleValue.innerHTML = p1GlobalResource.morale;
+
+    for(let key in p1TempResource) {
+      p1TempResource[key] = 0;
+    }
+
+    foodCollect.innerHTML = p1TempResource.food;
+    woodCollect.innerHTML = p1TempResource.wood;
+    stoneCollect.innerHTML = p1TempResource.stone;
+    goldCollect.innerHTML = p1TempResource.gold;
+    ideaCollect.innerHTML = p1TempResource.idea;
+    moraleCollect.innerHTML = p1TempResource.morale;
+
+    arr = [];
+}
+
+//POSSIBLERESOURCE object musi byc wyrzucony do global scope jako array, zeby moc korzystac z niego tak samo jak z town

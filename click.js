@@ -221,15 +221,10 @@ hexAll.forEach((el) => {
 });
 
 confirmCollectBtn.addEventListener(`click`, function() {
-  window.possibleResource.updateGlobalResource();
-  window.possibleResource.showGlobalResource();
-
+  updateGlobalResource();
 
 })
 
 
 
-// const resourceValue = document.querySelectorAll(`.resource-value`);
-// resourceValue.forEach((el) => {
-//   el.innerHTML = `value`;
-// });
+
