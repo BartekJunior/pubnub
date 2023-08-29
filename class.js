@@ -279,10 +279,21 @@ class PossibleResource {
     this.showConfirmCollectBtn = () => confirmCollectBtn.style.display = `block`;
     this.hideConfirmCollectBtn = () => confirmCollectBtn.style.display = `none`;
 
-
     this.deletePossibleResource = () => {
       id.classList.remove(`possible-collect`);
       delete this.id.possibleResource;
+    };
+
+    this.showTempResource = () => {
+      if (arr[arr.length - 1] === `food`) p1TempResource.food++;
+      else if (arr[arr.length - 1] === `wood`) p1TempResource.wood++;
+      else if (arr[arr.length - 1] === `stone`) p1TempResource.stone++;
+      else if (arr[arr.length - 1] === `gold`) p1TempResource.gold++;
+    
+      foodCollect.innerHTML = p1TempResource.food;
+      woodCollect.innerHTML = p1TempResource.wood;
+      stoneCollect.innerHTML = p1TempResource.stone;
+      goldCollect.innerHTML = p1TempResource.gold;
     };
 
     this.showPossibleResource(); //fires after create object

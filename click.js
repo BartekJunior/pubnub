@@ -26,13 +26,11 @@ const hudTown = document.querySelector(`.hud-town`);
 
 const settleBtn = document.getElementById(`settleBtn`);
 
-
 const collectResourceBtn = document.getElementById(`collectResourceBtn`);
 const confirmCollectBtn = document.getElementById(`confirmCollectBtn`);
 
 const buildStructure = document.getElementById(`buildStructure`);
 const burnTown = document.getElementById(`burnTown`);
-
 
 const containerStructure = document.getElementById(`containerStructure`);
 
@@ -44,13 +42,17 @@ const obeliskBtn = document.getElementById(`obeliskBtn`);
 const templeBtn = document.getElementById(`templeBtn`);
 const observatoryBtn = document.getElementById(`observatoryBtn`);
 
-
 const p1FoodValue = document.getElementById(`p1FoodValue`);
 const p1WoodValue = document.getElementById(`p1WoodValue`);
 const p1StoneValue = document.getElementById(`p1StoneValue`);
 const p1GoldValue = document.getElementById(`p1GoldValue`);
 const p1IdeaValue = document.getElementById(`p1IdeaValue`);
 const p1MoraleValue = document.getElementById(`p1MoraleValue`);
+
+const foodCollect = document.getElementById(`foodCollect`);
+const woodCollect = document.getElementById(`woodCollect`);
+const stoneCollect = document.getElementById(`stoneCollect`);
+const goldCollect = document.getElementById(`goldCollect`);
 
 const p1GlobalResource = {
   food: 2,
@@ -69,11 +71,6 @@ const p1TempResource = {
   idea: 0,
   morale: 0,
 };
-
-const foodCollect = document.getElementById(`foodCollect`);
-const woodCollect = document.getElementById(`woodCollect`);
-const stoneCollect = document.getElementById(`stoneCollect`);
-const goldCollect = document.getElementById(`goldCollect`);
 
 // HUD Display
 
@@ -169,9 +166,13 @@ academyBtn.addEventListener(`click`, function () {
   town.buildStructure(`academy`);
 });
 
-portBtn.addEventListener(`click`, function () {
-  town.buildStructure(`port`);
-}, {once: true});
+portBtn.addEventListener(
+  `click`,
+  function () {
+    town.buildStructure(`port`);
+  },
+  { once: true }
+);
 
 marketBtn.addEventListener(`click`, function () {
   town.buildStructure(`market`);
@@ -189,48 +190,25 @@ observatoryBtn.addEventListener(`click`, function () {
   town.buildStructure(`observatory`);
 });
 
-
-
-//collect resource //
+//click Collect resource. Start collecting //
 collectResourceBtn.addEventListener(`click`, function () {
   town.hideContainerStructure();
   town.possibleResource();
 });
 
-
-
+/// Collect Temporary resource with global wariable arr. Middle collecting ///
 let arr = [];
-
-//shitty
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     if (el.possibleResource && arr.length < town.size) {
       arr.push(el.possibleResource.resource);
       el.possibleResource.showConfirmCollectBtn();
+      el.possibleResource.showTempResource();
       console.log(arr);
-      el.removeEventListener('click', arguments.callee);    }
+      el.removeEventListener("click", arguments.callee);
+    }
   });
 });
-
-
-
-
-
-
-//shitty as well
-// for (let i = 0; i < hexAll.length; i++) {
-//     hexAll[i].addEventListener(`click`, function() {
-//       if (hexAll[i].possibleResource && arr.length < town.size) {
-
-//         arr.push(hexAll[i].possibleResource.resource);
-//         console.log(arr);
-
-//         hexAll[i].removeEventListener('click', arguments.callee);
-//       }
-
-//     })
-//   }
-
 
 
 
