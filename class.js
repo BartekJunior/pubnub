@@ -290,12 +290,23 @@ class PossibleResource {
       else if (arr[arr.length - 1] === `stone`) p1TempResource.stone++;
       else if (arr[arr.length - 1] === `gold`) p1TempResource.gold++;
 
-      foodCollect.innerHTML = p1TempResource.food;
-      woodCollect.innerHTML = p1TempResource.wood;
-      stoneCollect.innerHTML = p1TempResource.stone;
-      goldCollect.innerHTML = p1TempResource.gold;
-      ideaCollect.innerHTML = p1TempResource.idea;
-      moraleCollect.innerHTML = p1TempResource.morale;
+      // foodCollect.innerHTML = p1TempResource.food;
+      // woodCollect.innerHTML = p1TempResource.wood;
+      // stoneCollect.innerHTML = p1TempResource.stone;
+      // goldCollect.innerHTML = p1TempResource.gold;
+      // ideaCollect.innerHTML = p1TempResource.idea;
+      // moraleCollect.innerHTML = p1TempResource.morale;
+
+      const transferTemp = function() {
+        const p1TempResourceArr = Object.entries(p1TempResource);
+        for (let i = 0; i < collect.length; i++) {
+          collect[i].innerHTML = p1TempResourceArr[i][1];
+        }
+      }
+
+
+      transferTemp();
+
     };
 
 

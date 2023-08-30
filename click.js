@@ -49,6 +49,11 @@ const p1GoldValue = document.getElementById(`p1GoldValue`);
 const p1IdeaValue = document.getElementById(`p1IdeaValue`);
 const p1MoraleValue = document.getElementById(`p1MoraleValue`);
 
+const collect = Array.from(document.querySelectorAll(`.collect`));
+
+
+
+
 const foodCollect = document.getElementById(`foodCollect`);
 const woodCollect = document.getElementById(`woodCollect`);
 const stoneCollect = document.getElementById(`stoneCollect`);
@@ -73,7 +78,9 @@ const p1TempResource = {
   gold: 0,
   idea: 0,
   morale: 0,
-};
+}
+
+
 
 p1FoodValue.innerHTML = p1GlobalResource.food;
 p1WoodValue.innerHTML = p1GlobalResource.wood;
@@ -220,9 +227,9 @@ hexAll.forEach((el) => {
   });
 });
 
+// Update p1GlobalResource. Last stage odfcollect
 confirmCollectBtn.addEventListener(`click`, function() {
   updateGlobalResource();
-
 })
 
 
