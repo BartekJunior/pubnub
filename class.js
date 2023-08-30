@@ -292,8 +292,8 @@ class PossibleResource {
 
       const transferTemp = function() {
         p1TempResourceArr = Object.entries(p1TempResource);
-        for (let i = 0; i < collect.length; i++) {
-          collect[i].innerHTML = p1TempResourceArr[i][1];
+        for (let i = 0; i < collecting.length; i++) {
+          collecting[i].innerHTML = p1TempResourceArr[i][1];
         }
       }
 
@@ -313,6 +313,7 @@ window.updateGlobalResource = () => {
   for (let i = 0; i < p1GlobalResourceArr.length; i++) {
     p1GlobalResourceArr[i][1] = p1GlobalResourceArr[i][1] + p1TempResourceArr[i][1];
     p1GlobalResourceDiv[i].innerHTML = p1GlobalResourceArr[i][1];
+    collecting[i].innerHTML = 0;
   }
 
     arr = [];

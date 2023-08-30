@@ -22,18 +22,19 @@ setPlayer.addEventListener(`click`, function () {
 
 // HUD Display
 const hudMerchant = document.querySelector(`.hud-merchant`);
-const hudTown = document.querySelector(`.hud-town`);
-
 const settleBtn = document.getElementById(`settleBtn`);
 
+
+const hudTown = document.querySelector(`.hud-town`);
+const containerStructure = document.getElementById(`containerStructure`);
+
+const buildStructure = document.getElementById(`buildStructure`);
 const collectResourceBtn = document.getElementById(`collectResourceBtn`);
 const confirmCollectBtn = document.getElementById(`confirmCollectBtn`);
 
-const buildStructure = document.getElementById(`buildStructure`);
-const burnTown = document.getElementById(`burnTown`);
 
-const containerStructure = document.getElementById(`containerStructure`);
 
+// building buttons
 const academyBtn = document.getElementById(`academyBtn`);
 const fortressBtn = document.getElementById(`fortressBtn`);
 const portBtn = document.getElementById(`portBtn`);
@@ -41,26 +42,6 @@ const marketBtn = document.getElementById(`marketBtn`);
 const obeliskBtn = document.getElementById(`obeliskBtn`);
 const templeBtn = document.getElementById(`templeBtn`);
 const observatoryBtn = document.getElementById(`observatoryBtn`);
-
-
-
-const p1FoodValue = document.getElementById(`p1FoodValue`);
-const p1WoodValue = document.getElementById(`p1WoodValue`);
-const p1StoneValue = document.getElementById(`p1StoneValue`);
-const p1GoldValue = document.getElementById(`p1GoldValue`);
-const p1IdeaValue = document.getElementById(`p1IdeaValue`);
-const p1MoraleValue = document.getElementById(`p1MoraleValue`);
-
-
-
-const collect = Array.from(document.querySelectorAll(`.collect`));
-
-const foodCollect = document.getElementById(`foodCollect`);
-const woodCollect = document.getElementById(`woodCollect`);
-const stoneCollect = document.getElementById(`stoneCollect`);
-const goldCollect = document.getElementById(`goldCollect`);
-const ideaCollect = document.getElementById(`ideaCollect`);
-const moraleCollect = document.getElementById(`moraleCollect`);
 
 
 
@@ -83,20 +64,18 @@ const p1TempResource = {
 }
 
 const p1GlobalResourceDiv = Array.from(document.querySelectorAll(`.resource-value`));
+const collecting = Array.from(document.querySelectorAll(`.collecting`));
 
 let p1GlobalResourceArr;
 let p1TempResourceArr;
 
+// show start resource
+for (let i = 0; i < p1GlobalResourceDiv.length; i++) {
+  const p1GlobalResourceArr2 = Object.entries(p1GlobalResource);
+  p1GlobalResourceDiv[i].innerHTML = p1GlobalResourceArr2[i][1];
+}
 
 
-p1FoodValue.innerHTML = p1GlobalResource.food;
-p1WoodValue.innerHTML = p1GlobalResource.wood;
-p1StoneValue.innerHTML = p1GlobalResource.stone;
-p1GoldValue.innerHTML = p1GlobalResource.gold;
-p1IdeaValue.innerHTML = p1GlobalResource.idea;
-p1MoraleValue.innerHTML = p1GlobalResource.morale;
-
-// HUD Display
 
 // --------------- CLICK LISTENERS FIRES METHODS --------------------
 // where to go, create PossibleMove //
