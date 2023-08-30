@@ -215,9 +215,15 @@ hexAll.forEach((el) => {
 
 // Update p1GlobalResource. Last stage odfcollect
 confirmCollectBtn.addEventListener(`click`, function() {
-  updateGlobalResource();
+  window.possibleResource.updateGlobalResource();
+  window.possibleResource.showGlobalResource();
+
+
 })
 
 
 
-
+// const resourceValue = document.querySelectorAll(`.resource-value`);
+// resourceValue.forEach((el) => {
+//   el.innerHTML = `value`;
+// });
