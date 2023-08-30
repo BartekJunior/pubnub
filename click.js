@@ -208,6 +208,7 @@ hexAll.forEach((el) => {
   });
 });
 
+<<<<<<< HEAD
 // Update p1GlobalResource. Last stage odfcollect
 confirmCollectBtn.addEventListener(`click`, function () {
   window.updateGlobalResource();
@@ -217,6 +218,17 @@ confirmCollectBtn.addEventListener(`click`, function () {
 
 
 
+=======
+confirmCollectBtn.addEventListener(`click`, function() {
+  window.possibleResource.updateGlobalResource();
+  window.possibleResource.showGlobalResource();
+
+
+})
+
+
+
+>>>>>>> parent of d747b10 (confirmCollectBtn works but in very ugly way, correct it)
 // const resourceValue = document.querySelectorAll(`.resource-value`);
 // resourceValue.forEach((el) => {
 //   el.innerHTML = `value`;

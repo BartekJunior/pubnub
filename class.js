@@ -301,12 +301,23 @@ class PossibleResource {
     };
 
    
+    this.showGlobalResource = () => {
+      p1FoodValue.innerHTML = p1GlobalResource.food;
+      p1WoodValue.innerHTML = p1GlobalResource.wood;
+      p1StoneValue.innerHTML = p1GlobalResource.stone;
+      p1GoldValue.innerHTML = p1GlobalResource.gold;
+      p1IdeaValue.innerHTML = p1GlobalResource.idea;
+      p1MoraleValue.innerHTML = p1GlobalResource.morale;
 
-    this.showPossibleResource(); //fires after create object
-  }
+    }
 
-}
-
+    this.updateGlobalResource = () => {
+        p1GlobalResource.food = p1GlobalResource.food + p1TempResource.food;
+        p1GlobalResource.wood = p1GlobalResource.wood + p1TempResource.wood;
+        p1GlobalResource.stone = p1GlobalResource.stone + p1TempResource.stone;
+        p1GlobalResource.gold = p1GlobalResource.gold + p1TempResource.gold;
+        p1GlobalResource.idea = p1GlobalResource.idea + p1TempResource.idea;
+        p1GlobalResource.morale = p1GlobalResource.morale + p1TempResource.morale;
 
 
 window.showGlobalResource = () => {
@@ -327,4 +338,9 @@ window.updateGlobalResource = () => {
     p1GlobalResource.idea = p1GlobalResource.idea + p1TempResource.idea;
     p1GlobalResource.morale = p1GlobalResource.morale + p1TempResource.morale;
 
+
+    }
+
+    this.showPossibleResource(); //fires after create object
+  }
 }
