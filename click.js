@@ -42,6 +42,8 @@ const obeliskBtn = document.getElementById(`obeliskBtn`);
 const templeBtn = document.getElementById(`templeBtn`);
 const observatoryBtn = document.getElementById(`observatoryBtn`);
 
+
+
 const p1FoodValue = document.getElementById(`p1FoodValue`);
 const p1WoodValue = document.getElementById(`p1WoodValue`);
 const p1StoneValue = document.getElementById(`p1StoneValue`);
@@ -49,10 +51,9 @@ const p1GoldValue = document.getElementById(`p1GoldValue`);
 const p1IdeaValue = document.getElementById(`p1IdeaValue`);
 const p1MoraleValue = document.getElementById(`p1MoraleValue`);
 
+
+
 const collect = Array.from(document.querySelectorAll(`.collect`));
-
-
-
 
 const foodCollect = document.getElementById(`foodCollect`);
 const woodCollect = document.getElementById(`woodCollect`);
@@ -60,6 +61,7 @@ const stoneCollect = document.getElementById(`stoneCollect`);
 const goldCollect = document.getElementById(`goldCollect`);
 const ideaCollect = document.getElementById(`ideaCollect`);
 const moraleCollect = document.getElementById(`moraleCollect`);
+
 
 
 const p1GlobalResource = {
@@ -79,6 +81,11 @@ const p1TempResource = {
   idea: 0,
   morale: 0,
 }
+
+const p1GlobalResourceDiv = Array.from(document.querySelectorAll(`.resource-value`));
+
+let p1GlobalResourceArr;
+let p1TempResourceArr;
 
 
 
