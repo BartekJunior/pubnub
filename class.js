@@ -311,11 +311,17 @@ window.updateGlobalResource = () => {
 
   p1GlobalResourceArr = Object.entries(p1GlobalResource);
   for (let i = 0; i < p1GlobalResourceArr.length; i++) {
-    p1GlobalResourceArr[i][1] = p1GlobalResourceArr[i][1] + p1TempResourceArr[i][1];
-    p1GlobalResourceDiv[i].innerHTML = p1GlobalResourceArr[i][1];
-    collecting[i].innerHTML = 0;
-  }
 
+    p1GlobalResourceArr[i][1] = p1GlobalResourceArr[i][1] + p1TempResourceArr[i][1];
+    
+    p1GlobalResourceDiv[i].innerHTML = p1GlobalResourceArr[i][1];
+
+
+    collecting[i].innerHTML = 0;
+    
+  }
+  
+    p1TempResourceArr = [];
     arr = [];
 
 }
