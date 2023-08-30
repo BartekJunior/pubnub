@@ -40,6 +40,7 @@ const obeliskBtn = document.getElementById(`obeliskBtn`);
 const templeBtn = document.getElementById(`templeBtn`);
 const observatoryBtn = document.getElementById(`observatoryBtn`);
 
+const res = [`food`, `wood`, `stone`, `gold`, `idea`, `morale`];
 const p1GlobalResource = {
   food: 2,
   wood: 1,
@@ -58,13 +59,11 @@ const p1TempResource = {
   morale: 0,
 };
 
-const p1GlobalResourceDiv = Array.from(
-  document.querySelectorAll(`.resource-value`)
-);
+const p1GlobalResourceDiv = Array.from(document.querySelectorAll(`.resource-value`));
 const collecting = Array.from(document.querySelectorAll(`.collecting`));
 
-let p1GlobalResourceArr;
-let p1TempResourceArr;
+// let p1GlobalResourceArr;
+// let p1TempResourceArr;
 
 // show start resource
 for (let i = 0; i < p1GlobalResourceDiv.length; i++) {
@@ -208,28 +207,14 @@ hexAll.forEach((el) => {
   });
 });
 
-<<<<<<< HEAD
+
+
 // Update p1GlobalResource. Last stage odfcollect
 confirmCollectBtn.addEventListener(`click`, function () {
   window.updateGlobalResource();
-  window.showGlobalResource();
 });
 
 
 
 
-=======
-confirmCollectBtn.addEventListener(`click`, function() {
-  window.possibleResource.updateGlobalResource();
-  window.possibleResource.showGlobalResource();
 
-
-})
-
-
-
->>>>>>> parent of d747b10 (confirmCollectBtn works but in very ugly way, correct it)
-// const resourceValue = document.querySelectorAll(`.resource-value`);
-// resourceValue.forEach((el) => {
-//   el.innerHTML = `value`;
-// });

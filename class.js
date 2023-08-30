@@ -114,13 +114,11 @@ class Town {
     this.temple = temple;
     this.observatory = observatory;
 
-    this.showHudTown = () => hudTown.style.display = `block`;
-    this.hideHudTown = () => hudTown.style.display = `none`;
+    this.showHudTown = () => (hudTown.style.display = `block`);
+    this.hideHudTown = () => (hudTown.style.display = `none`);
 
-    this.hideConfirmCollectBtn = () => confirmCollectBtn.style.display = `none`;
-
-
-
+    this.hideConfirmCollectBtn = () =>
+      (confirmCollectBtn.style.display = `none`);
 
     this.showContainerStructure = () =>
       (containerStructure.style.display = `block`);
@@ -151,8 +149,8 @@ class Town {
         Number(this.market),
         Number(this.obelisk),
         Number(this.temple),
-        Number(this.observatory)
-      ]
+        Number(this.observatory),
+      ];
       this.size = buildings.reduce((partialSum, a) => partialSum + a, 0) + 1;
     };
 
@@ -276,8 +274,10 @@ class PossibleResource {
 
     this.showPossibleResource = () => this.id.classList.add(`possible-collect`);
 
-    this.showConfirmCollectBtn = () => confirmCollectBtn.style.display = `block`;
-    this.hideConfirmCollectBtn = () => confirmCollectBtn.style.display = `none`;
+    this.showConfirmCollectBtn = () =>
+      (confirmCollectBtn.style.display = `block`);
+    this.hideConfirmCollectBtn = () =>
+      (confirmCollectBtn.style.display = `none`);
 
     this.deletePossibleResource = () => {
       id.classList.remove(`possible-collect`);
@@ -289,58 +289,30 @@ class PossibleResource {
       else if (arr[arr.length - 1] === `wood`) p1TempResource.wood++;
       else if (arr[arr.length - 1] === `stone`) p1TempResource.stone++;
       else if (arr[arr.length - 1] === `gold`) p1TempResource.gold++;
+      else if (arr[arr.length - 1] === `idea`) p1TempResource.idea++;
+      else if (arr[arr.length - 1] === `morale`) p1TempResource.morale++;
 
-      const transferTemp = function() {
-        p1TempResourceArr = Object.entries(p1TempResource);
-        for (let i = 0; i < collecting.length; i++) {
-          collecting[i].innerHTML = p1TempResourceArr[i][1];
-        }
+      for (let i = 0; i < collecting.length; i++) {
+        collecting[i].innerHTML = p1TempResource[res[i]]
       }
-
-      transferTemp();
     };
-
-   
-    this.showGlobalResource = () => {
-      p1FoodValue.innerHTML = p1GlobalResource.food;
-      p1WoodValue.innerHTML = p1GlobalResource.wood;
-      p1StoneValue.innerHTML = p1GlobalResource.stone;
-      p1GoldValue.innerHTML = p1GlobalResource.gold;
-      p1IdeaValue.innerHTML = p1GlobalResource.idea;
-      p1MoraleValue.innerHTML = p1GlobalResource.morale;
-
-    }
-
-    this.updateGlobalResource = () => {
-        p1GlobalResource.food = p1GlobalResource.food + p1TempResource.food;
-        p1GlobalResource.wood = p1GlobalResource.wood + p1TempResource.wood;
-        p1GlobalResource.stone = p1GlobalResource.stone + p1TempResource.stone;
-        p1GlobalResource.gold = p1GlobalResource.gold + p1TempResource.gold;
-        p1GlobalResource.idea = p1GlobalResource.idea + p1TempResource.idea;
-        p1GlobalResource.morale = p1GlobalResource.morale + p1TempResource.morale;
-
-
-window.showGlobalResource = () => {
-  p1FoodValue.innerHTML = p1GlobalResource.food;
-  p1WoodValue.innerHTML = p1GlobalResource.wood;
-  p1StoneValue.innerHTML = p1GlobalResource.stone;
-  p1GoldValue.innerHTML = p1GlobalResource.gold;
-  p1IdeaValue.innerHTML = p1GlobalResource.idea;
-  p1MoraleValue.innerHTML = p1GlobalResource.morale;
-
-}
-
-window.updateGlobalResource = () => {
-    p1GlobalResource.food = p1GlobalResource.food + p1TempResource.food;
-    p1GlobalResource.wood = p1GlobalResource.wood + p1TempResource.wood;
-    p1GlobalResource.stone = p1GlobalResource.stone + p1TempResource.stone;
-    p1GlobalResource.gold = p1GlobalResource.gold + p1TempResource.gold;
-    p1GlobalResource.idea = p1GlobalResource.idea + p1TempResource.idea;
-    p1GlobalResource.morale = p1GlobalResource.morale + p1TempResource.morale;
-
-
-    }
 
     this.showPossibleResource(); //fires after create object
   }
 }
+
+
+
+window.updateGlobalResource = () => {
+  for (let i = 0; i < p1GlobalResourceDiv.length; i++) {
+    p1GlobalResource[res[i]] = p1GlobalResource[res[i]] + p1TempResource[res[i]];
+    p1GlobalResourceDiv[i].innerHTML = p1GlobalResource[res[i]]
+    p1TempResource[res[i]] = 0;
+    collecting[i].innerHTML = p1TempResource[res[i]];
+  }
+  arr = [];
+};
+
+
+
+
