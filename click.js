@@ -24,15 +24,12 @@ setPlayer.addEventListener(`click`, function () {
 const hudMerchant = document.querySelector(`.hud-merchant`);
 const settleBtn = document.getElementById(`settleBtn`);
 
-
 const hudTown = document.querySelector(`.hud-town`);
 const containerStructure = document.getElementById(`containerStructure`);
 
 const buildStructure = document.getElementById(`buildStructure`);
 const collectResourceBtn = document.getElementById(`collectResourceBtn`);
 const confirmCollectBtn = document.getElementById(`confirmCollectBtn`);
-
-
 
 // building buttons
 const academyBtn = document.getElementById(`academyBtn`);
@@ -42,8 +39,6 @@ const marketBtn = document.getElementById(`marketBtn`);
 const obeliskBtn = document.getElementById(`obeliskBtn`);
 const templeBtn = document.getElementById(`templeBtn`);
 const observatoryBtn = document.getElementById(`observatoryBtn`);
-
-
 
 const p1GlobalResource = {
   food: 2,
@@ -61,9 +56,11 @@ const p1TempResource = {
   gold: 0,
   idea: 0,
   morale: 0,
-}
+};
 
-const p1GlobalResourceDiv = Array.from(document.querySelectorAll(`.resource-value`));
+const p1GlobalResourceDiv = Array.from(
+  document.querySelectorAll(`.resource-value`)
+);
 const collecting = Array.from(document.querySelectorAll(`.collecting`));
 
 let p1GlobalResourceArr;
@@ -74,8 +71,6 @@ for (let i = 0; i < p1GlobalResourceDiv.length; i++) {
   const p1GlobalResourceArr2 = Object.entries(p1GlobalResource);
   p1GlobalResourceDiv[i].innerHTML = p1GlobalResourceArr2[i][1];
 }
-
-
 
 // --------------- CLICK LISTENERS FIRES METHODS --------------------
 // where to go, create PossibleMove //
@@ -214,12 +209,11 @@ hexAll.forEach((el) => {
 });
 
 // Update p1GlobalResource. Last stage odfcollect
-confirmCollectBtn.addEventListener(`click`, function() {
-  window.possibleResource.updateGlobalResource();
-  window.possibleResource.showGlobalResource();
+confirmCollectBtn.addEventListener(`click`, function () {
+  window.updateGlobalResource();
+  window.showGlobalResource();
+});
 
-
-})
 
 
 

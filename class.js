@@ -300,57 +300,31 @@ class PossibleResource {
       transferTemp();
     };
 
-<<<<<<< HEAD
+   
+
     this.showPossibleResource(); //fires after create object
   }
+
 }
 
 
 
+window.showGlobalResource = () => {
+  p1FoodValue.innerHTML = p1GlobalResource.food;
+  p1WoodValue.innerHTML = p1GlobalResource.wood;
+  p1StoneValue.innerHTML = p1GlobalResource.stone;
+  p1GoldValue.innerHTML = p1GlobalResource.gold;
+  p1IdeaValue.innerHTML = p1GlobalResource.idea;
+  p1MoraleValue.innerHTML = p1GlobalResource.morale;
+
+}
 
 window.updateGlobalResource = () => {
-
-  p1GlobalResourceArr = Object.entries(p1GlobalResource);
-  for (let i = 0; i < p1GlobalResourceArr.length; i++) {
-
-    p1GlobalResourceArr[i][1] = p1GlobalResourceArr[i][1] + p1TempResourceArr[i][1];
-    
-    p1GlobalResourceDiv[i].innerHTML = p1GlobalResourceArr[i][1];
-
-
-    collecting[i].innerHTML = 0;
-    
-  }
-  
-    p1TempResourceArr = [];
-    arr = [];
+    p1GlobalResource.food = p1GlobalResource.food + p1TempResource.food;
+    p1GlobalResource.wood = p1GlobalResource.wood + p1TempResource.wood;
+    p1GlobalResource.stone = p1GlobalResource.stone + p1TempResource.stone;
+    p1GlobalResource.gold = p1GlobalResource.gold + p1TempResource.gold;
+    p1GlobalResource.idea = p1GlobalResource.idea + p1TempResource.idea;
+    p1GlobalResource.morale = p1GlobalResource.morale + p1TempResource.morale;
 
 }
-
-//POSSIBLERESOURCE object musi byc wyrzucony do global scope jako array, zeby moc korzystac z niego tak samo jak z town
-=======
-    this.showGlobalResource = () => {
-      p1FoodValue.innerHTML = p1GlobalResource.food;
-      p1WoodValue.innerHTML = p1GlobalResource.wood;
-      p1StoneValue.innerHTML = p1GlobalResource.stone;
-      p1GoldValue.innerHTML = p1GlobalResource.gold;
-      p1IdeaValue.innerHTML = p1GlobalResource.idea;
-      p1MoraleValue.innerHTML = p1GlobalResource.morale;
-
-    }
-
-    this.updateGlobalResource = () => {
-        p1GlobalResource.food = p1GlobalResource.food + p1TempResource.food;
-        p1GlobalResource.wood = p1GlobalResource.wood + p1TempResource.wood;
-        p1GlobalResource.stone = p1GlobalResource.stone + p1TempResource.stone;
-        p1GlobalResource.gold = p1GlobalResource.gold + p1TempResource.gold;
-        p1GlobalResource.idea = p1GlobalResource.idea + p1TempResource.idea;
-        p1GlobalResource.morale = p1GlobalResource.morale + p1TempResource.morale;
-
-
-    }
-
-    this.showPossibleResource(); //fires after create object
-  }
-}
->>>>>>> parent of d747b10 (confirmCollectBtn works but in very ugly way, correct it)
