@@ -1,7 +1,6 @@
 `use strict`;
 
 // CLASS PLAYER //
-
 class Player {
   constructor(name, nr, color, food, wood, stone, gold, idea, morale) {
     this.name = name;
@@ -50,6 +49,7 @@ class Hex {
 
     this.createSmall = function () {
       let hexChild = [];
+      if(this.id.childNodes.length === 0) {
       for (let i = 0; i < 9; i++) {
         const hexSmall = document.createElement("div");
         // hexSmall.style.backgroundColor = colorArr[i];
@@ -60,6 +60,8 @@ class Hex {
       for (let i = 0; i < hexChild.length; i++) {
         this.id.appendChild(hexChild[i]);
       }
+    }
+
     };
 
     // Draw the type of the land
@@ -285,12 +287,12 @@ class PossibleResource {
     };
 
     this.showTempResource = () => {
-      if (arr[arr.length - 1] === `food`) p1TempResource.food++;
-      else if (arr[arr.length - 1] === `wood`) p1TempResource.wood++;
-      else if (arr[arr.length - 1] === `stone`) p1TempResource.stone++;
-      else if (arr[arr.length - 1] === `gold`) p1TempResource.gold++;
-      else if (arr[arr.length - 1] === `idea`) p1TempResource.idea++;
-      else if (arr[arr.length - 1] === `morale`) p1TempResource.morale++;
+      if (clickedRes[clickedRes.length - 1] === `food`) p1TempResource.food++;
+      else if (clickedRes[clickedRes.length - 1] === `wood`) p1TempResource.wood++;
+      else if (clickedRes[clickedRes.length - 1] === `stone`) p1TempResource.stone++;
+      else if (clickedRes[clickedRes.length - 1] === `gold`) p1TempResource.gold++;
+      else if (clickedRes[clickedRes.length - 1] === `idea`) p1TempResource.idea++;
+      else if (clickedRes[clickedRes.length - 1] === `morale`) p1TempResource.morale++;
 
       for (let i = 0; i < collecting.length; i++) {
         collecting[i].innerHTML = p1TempResource[res[i]]
@@ -310,7 +312,7 @@ window.updateGlobalResource = () => {
     p1TempResource[res[i]] = 0;
     collecting[i].innerHTML = p1TempResource[res[i]];
   }
-  arr = [];
+  clickedRes = [];
 };
 
 

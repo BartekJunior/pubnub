@@ -1,24 +1,6 @@
 `use strict`;
 
-//Put Merchants on the board
-hexAll[0].merchant = new Merchant(UUID, hexAll[0]);
-hexAll[35].merchant = new Merchant(UUID, hexAll[35]);
 
-//Create all HEXES on the board
-hexAll.forEach((el) => {
-  const newHex = new Hex(el, undefined, false, undefined, false);
-  el.object = newHex;
-});
-
-const setPlayer = document.getElementById(`setPlayer`);
-setPlayer.addEventListener(`click`, function () {
-  const num = Math.ceil(playersNumber / onlineUsers.size);
-  if (onlineUsers.size === 3) color = `red`;
-  else if (onlineUsers.size === 2) color = `blue`;
-  else if (onlineUsers.size === 1) color = `green`;
-  else alert(`Liczba graczy musi wynosic 1-3`);
-  window["player" + num] = new Player(UUID, num, color, 2, 1, 0, 0, 0, 2);
-});
 
 // HUD Display
 const hudMerchant = document.querySelector(`.hud-merchant`);
@@ -59,11 +41,10 @@ const p1TempResource = {
   morale: 0,
 };
 
-const p1GlobalResourceDiv = Array.from(document.querySelectorAll(`.resource-value`));
+const p1GlobalResourceDiv = Array.from(
+  document.querySelectorAll(`.resource-value`)
+);
 const collecting = Array.from(document.querySelectorAll(`.collecting`));
-
-// let p1GlobalResourceArr;
-// let p1TempResourceArr;
 
 // show start resource
 for (let i = 0; i < p1GlobalResourceDiv.length; i++) {
@@ -163,13 +144,9 @@ academyBtn.addEventListener(`click`, function () {
   town.buildStructure(`academy`);
 });
 
-portBtn.addEventListener(
-  `click`,
-  function () {
-    town.buildStructure(`port`);
-  },
-  { once: true }
-);
+portBtn.addEventListener(`click`, function () {
+  town.buildStructure(`port`);
+});
 
 marketBtn.addEventListener(`click`, function () {
   town.buildStructure(`market`);
@@ -194,27 +171,22 @@ collectResourceBtn.addEventListener(`click`, function () {
 });
 
 /// Collect Temporary resource with global wariable arr. Middle collecting ///
-let arr = [];
+let clickedRes = [];
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
-    if (el.possibleResource && arr.length < town.size) {
-      arr.push(el.possibleResource.resource);
+    if (el.possibleResource && clickedRes.length < town.size) {
+      clickedRes.push(el.possibleResource.resource);
       el.possibleResource.showConfirmCollectBtn();
       el.possibleResource.showTempResource();
-      console.log(arr);
+      console.log(clickedRes);
       el.removeEventListener("click", arguments.callee);
     }
   });
 });
 
-
-
 // Update p1GlobalResource. Last stage odfcollect
 confirmCollectBtn.addEventListener(`click`, function () {
   window.updateGlobalResource();
 });
-
-
-
 
 

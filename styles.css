@@ -114,11 +114,11 @@ h2 {
 /* ------------------------- */
 
 .class-mountain {
-  background-color: brown;
+  background-color: rgb(65, 57, 57);
 }
 
 .class-forest {
-  background-color: rgb(85, 37, 37);
+  background-color: rgba(226, 12, 12, 0.555);
 }
 
 .class-grass {
@@ -250,7 +250,6 @@ h2 {
   display: none;
 }
 
-
 .collecting {
   width: 150px;
   height: 50px;
@@ -258,8 +257,6 @@ h2 {
   font-weight: bold;
   color: bisque;
 }
-
-
 
 .hud-technology-container {
   margin-top: 50px;
@@ -299,8 +296,6 @@ h2 {
 .settle-btn:hover {
   background-color: #66ff66;
 }
-
-
 
 
 
