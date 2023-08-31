@@ -259,6 +259,7 @@ h2 {
 }
 
 .hud-technology-container {
+  display: flex;
   margin-top: 50px;
 }
 
@@ -277,18 +278,26 @@ h2 {
   height: 40px;
 }
 
+.turn-img {
+  background-color: #2984b9;
+}
+
+.turn-value {
+  width: 150px;
+  height: 70px;
+  background-color: #2984b9;
+}
+
 
 /* ------------ GAMEPLAY  ----------------- */
 
 .possible-move {
   opacity: 0.4;
 }
-
 .possible-collect {
   opacity: 0.9;
   filter: contrast(0.5);
 }
-
 .settle-btn {
   width: 100px;
   border-radius: 5px;

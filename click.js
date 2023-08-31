@@ -176,6 +176,7 @@ hexAll.forEach((el) => {
 // Update p1GlobalResource. Last stage odfcollect
 confirmCollectBtn.addEventListener(`click`, function () {
   window.updateGlobalResource();
+  town.hideConfirmCollectBtn();
 });
 
 

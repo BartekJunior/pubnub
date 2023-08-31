@@ -286,16 +286,16 @@ class PossibleResource {
     this.resource = resource;
 
     this.showPossibleResource = () => this.id.classList.add(`possible-collect`);
+    this.deletePossibleResource = () => {
+      id.classList.remove(`possible-collect`);
+      delete this.id.possibleResource;
+    };
 
     this.showConfirmCollectBtn = () =>
       (confirmCollectBtn.style.display = `block`);
     this.hideConfirmCollectBtn = () =>
       (confirmCollectBtn.style.display = `none`);
 
-    this.deletePossibleResource = () => {
-      id.classList.remove(`possible-collect`);
-      delete this.id.possibleResource;
-    };
 
     this.showTempResource = () => {
       if (clickedRes[clickedRes.length - 1] === `food`) p1TempResource.food++;
