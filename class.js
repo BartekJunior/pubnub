@@ -325,6 +325,22 @@ class PossibleResource {
       }
     };
 
+    /////hmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm/////
+    this.collectTempResource = () => {
+      if (this.id.possibleResource && clickedRes.length < town.size) {
+        if (this.id.object.collectible) {
+          clickedRes.push(this.id.possibleResource.resource);
+          this.id.possibleResource.showConfirmCollectBtn();
+          this.id.possibleResource.showTempResource();
+          console.log(clickedRes);
+          this.id.removeEventListener("click", arguments.callee);
+        } else
+          alert(
+            `Nie możesz zbierac z tego pola. Brakuje Ci rozwinięcia, lub jest to jałowa ziemia.`
+          );
+      }
+    }
+
     this.showPossibleResource(); //fires after create object
   }
 }
@@ -342,6 +358,9 @@ class PossibleResource {
 
 
 
+const collectTempResourceH = () => {
+  console.log(`hyyyyyyt`);
 
+}
 
 

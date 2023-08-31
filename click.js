@@ -10,6 +10,7 @@ const containerStructure = document.getElementById(`containerStructure`);
 const buildStructure = document.getElementById(`buildStructure`);
 const collectResourceBtn = document.getElementById(`collectResourceBtn`);
 const confirmCollectBtn = document.getElementById(`confirmCollectBtn`);
+const cancelCollectBtn = document.getElementById(`cancelCollectBtn`);
 
 // building buttons
 const academyBtn = document.getElementById(`academyBtn`);
@@ -21,7 +22,7 @@ const templeBtn = document.getElementById(`templeBtn`);
 const observatoryBtn = document.getElementById(`observatoryBtn`);
 
 const res = [`food`, `wood`, `stone`, `gold`, `idea`, `morale`];
-const p1TempResource = {
+let p1TempResource = {
   food: 0,
   wood: 0,
   stone: 0,
@@ -155,26 +156,63 @@ collectResourceBtn.addEventListener(`click`, function () {
 });
 
 /// Collect Temporary resource with global wariable arr. Middle collecting ///
+// let clickedRes = [];
+// hexAll.forEach((el) => {
+//   el.addEventListener(`click`, function () {
+//     if (el.possibleResource && clickedRes.length < town.size) {
+//       if (el.object.collectible) {
+//         clickedRes.push(el.possibleResource.resource);
+//         el.possibleResource.showConfirmCollectBtn();
+//         el.possibleResource.showTempResource();
+//         console.log(clickedRes);
+//         el.removeEventListener("click", arguments.callee);
+//       } else
+//         alert(
+//           `Nie możesz zbierac z tego pola. Brakuje Ci rozwinięcia, lub jest to jałowa ziemia.`
+//         );
+//     }
+//   });
+// });
+
+
 let clickedRes = [];
+
 hexAll.forEach((el) => {
-  el.addEventListener(`click`, function () {
-    if (el.possibleResource && clickedRes.length < town.size) {
-      if (el.object.collectible) {
-        clickedRes.push(el.possibleResource.resource);
-        el.possibleResource.showConfirmCollectBtn();
-        el.possibleResource.showTempResource();
-        console.log(clickedRes);
-        el.removeEventListener("click", arguments.callee);
-      } else
-        alert(
-          `Nie możesz zbierac z tego pola. Brakuje Ci rozwinięcia, lub jest to jałowa ziemia.`
-        );
-    }
-  });
+
+    el.addEventListener(`click`, function() {
+      if (el.possibleResource)
+
+      el.possibleResource.collectTempResource();
+  }); 
+
 });
+
+
 
 // Update p1GlobalResource. Last stage odfcollect
 confirmCollectBtn.addEventListener(`click`, function () {
   town.updateGlobalResource();
   town.hideConfirmCollectBtn();
 });
+
+cancelCollectBtn.addEventListener(`click`, function() {
+  hexAll.forEach((el) => {
+    if (el.possibleResource) el.possibleResource.deletePossibleResource();
+    clickedRes = [];
+    p1TempResource = {
+      food: 0,
+      wood: 0,
+      stone: 0,
+      gold: 0,
+      idea: 0,
+      morale: 0,
+    };
+
+    for (let i = 0; i < collecting.length; i++) {
+      collecting[i].innerHTML = p1TempResource[res[i]]
+    }
+
+
+  });
+
+})
