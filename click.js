@@ -22,16 +22,8 @@ const obeliskBtn = document.getElementById(`obeliskBtn`);
 const templeBtn = document.getElementById(`templeBtn`);
 const observatoryBtn = document.getElementById(`observatoryBtn`);
 
-const res = [`food`, `wood`, `stone`, `gold`, `idea`, `morale`];
-const p1GlobalResource = {
-  food: 2,
-  wood: 1,
-  stone: 0,
-  gold: 0,
-  idea: 2,
-  morale: 2,
-};
 
+const res = [`food`, `wood`, `stone`, `gold`, `idea`, `morale`];
 const p1TempResource = {
   food: 0,
   wood: 0,
@@ -46,11 +38,6 @@ const p1GlobalResourceDiv = Array.from(
 );
 const collecting = Array.from(document.querySelectorAll(`.collecting`));
 
-// show start resource
-for (let i = 0; i < p1GlobalResourceDiv.length; i++) {
-  const p1GlobalResourceArr2 = Object.entries(p1GlobalResource);
-  p1GlobalResourceDiv[i].innerHTML = p1GlobalResourceArr2[i][1];
-}
 
 // --------------- CLICK LISTENERS FIRES METHODS --------------------
 // where to go, create PossibleMove //
@@ -163,6 +150,8 @@ templeBtn.addEventListener(`click`, function () {
 observatoryBtn.addEventListener(`click`, function () {
   town.buildStructure(`observatory`);
 });
+
+
 
 //click Collect resource. Start collecting //
 collectResourceBtn.addEventListener(`click`, function () {

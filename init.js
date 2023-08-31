@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 // Init start Hexes
 const hexAll = Array.from(document.querySelectorAll(`.hex`));
@@ -14,7 +14,6 @@ hexAll.forEach((el) => {
 //Put Merchants on the board
 hexAll[0].merchant = new Merchant(UUID, hexAll[0]);
 hexAll[35].merchant = new Merchant(UUID, hexAll[35]);
-
 
 // Make start Hexes
 hexAll[0].object = new Hex(hexAll[0], `grass`, true, `food`, true);
@@ -51,7 +50,6 @@ for (let i = (hexAll.length / 6) * 4; i < (hexAll.length / 6) * 5; i = i + 2) {
 }
 // Array of 4 land piece. One big array of 12 cafelkas. Each one has 4 Hexes of land//
 
-
 const setPlayer = document.getElementById(`setPlayer`);
 setPlayer.addEventListener(`click`, function () {
   const num = Math.ceil(playersNumber / onlineUsers.size);
@@ -60,15 +58,16 @@ setPlayer.addEventListener(`click`, function () {
   else if (onlineUsers.size === 1) color = `green`;
   else alert(`Liczba graczy musi wynosic 1-3`);
   window["player" + num] = new Player(UUID, num, color, 2, 1, 0, 0, 0, 2);
-});
 
+  // show start resource
+  for (let i = 0; i < p1GlobalResourceDiv.length; i++) {
+    // const p1GlobalResourceArr2 = Object.entries(p1GlobalResource);
+    p1GlobalResourceDiv[i].innerHTML = player2.resource[res[i]];
+  }
+});
 
 hexAll.forEach((el, index) =>
   el.addEventListener(`click`, function (e) {
     console.log(index);
   })
 );
-
-
-
-

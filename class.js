@@ -6,18 +6,29 @@ class Player {
     this.name = name;
     this.nr = nr;
     this.color = color;
-    this.food = food;
-    this.wood = wood;
-    this.stone = stone;
-    this.gold = gold;
-    this.idea = idea;
-    this.morale = morale;
+    // this.food = food;
+    // this.wood = wood;
+    // this.stone = stone;
+    // this.gold = gold;
+    // this.idea = idea;
+    // this.morale = morale;
+
+    this.resource = {
+      food: food,
+      wood: wood,
+      stone: stone,
+      gold: gold,
+      idea: idea,
+      morale: morale,
+    }
 
     this.showResourceValue = (resource) => {
       window[`p1` + resource + `Value`].innerHTML = this[resource];
     };
   }
 }
+
+
 
 // CLASS HEX //
 class Hex {
@@ -303,15 +314,27 @@ class PossibleResource {
   }
 }
 
+// window.updateGlobalResource = () => {
+//   for (let i = 0; i < p1GlobalResourceDiv.length; i++) {
+//     p1GlobalResource[res[i]] = p1GlobalResource[res[i]] + p1TempResource[res[i]];
+//     p1GlobalResourceDiv[i].innerHTML = p1GlobalResource[res[i]]
+//     p1TempResource[res[i]] = 0;
+//     collecting[i].innerHTML = p1TempResource[res[i]];
+//   }
+//   clickedRes = [];
+// };
 
 
 window.updateGlobalResource = () => {
   for (let i = 0; i < p1GlobalResourceDiv.length; i++) {
-    p1GlobalResource[res[i]] = p1GlobalResource[res[i]] + p1TempResource[res[i]];
-    p1GlobalResourceDiv[i].innerHTML = p1GlobalResource[res[i]]
+    player2.resource[res[i]] = player2.resource[res[i]] + p1TempResource[res[i]];
+    p1GlobalResourceDiv[i].innerHTML = player2.resource[res[i]];
     p1TempResource[res[i]] = 0;
     collecting[i].innerHTML = p1TempResource[res[i]];
   }
+  hexAll.forEach(el => {
+    if(el.possibleResource) el.possibleResource.deletePossibleResource();
+  })
   clickedRes = [];
 };
 
