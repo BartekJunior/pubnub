@@ -178,8 +178,8 @@ class Town {
           offsetAll[i][0] > this.id.offsetLeft - 130 &&
           offsetAll[i][0] < this.id.offsetLeft + 130 &&
           offsetAll[i][1] < this.id.offsetTop + 130 &&
-          offsetAll[i][1] > this.id.offsetTop - 130 &&
-          hexAll[i].object.collectible
+          offsetAll[i][1] > this.id.offsetTop - 130
+          // hexAll[i].object.collectible
         ) {
           const possibleResource = new PossibleResource(
             UUID,
@@ -190,6 +190,21 @@ class Town {
         }
       }
     };
+
+    this.updateGlobalResource = () => {
+      for (let i = 0; i < p1GlobalResourceDiv.length; i++) {
+        player2.resource[res[i]] = player2.resource[res[i]] + p1TempResource[res[i]];
+        p1GlobalResourceDiv[i].innerHTML = player2.resource[res[i]];
+        p1TempResource[res[i]] = 0;
+        collecting[i].innerHTML = p1TempResource[res[i]];
+      }
+      hexAll.forEach(el => {
+        if(el.possibleResource) el.possibleResource.deletePossibleResource();
+      })
+      clickedRes = [];
+    };
+
+
   }
 }
 
@@ -325,18 +340,7 @@ class PossibleResource {
 // };
 
 
-window.updateGlobalResource = () => {
-  for (let i = 0; i < p1GlobalResourceDiv.length; i++) {
-    player2.resource[res[i]] = player2.resource[res[i]] + p1TempResource[res[i]];
-    p1GlobalResourceDiv[i].innerHTML = player2.resource[res[i]];
-    p1TempResource[res[i]] = 0;
-    collecting[i].innerHTML = p1TempResource[res[i]];
-  }
-  hexAll.forEach(el => {
-    if(el.possibleResource) el.possibleResource.deletePossibleResource();
-  })
-  clickedRes = [];
-};
+
 
 
 

@@ -1,7 +1,5 @@
 `use strict`;
 
-
-
 // HUD Display
 const hudMerchant = document.querySelector(`.hud-merchant`);
 const settleBtn = document.getElementById(`settleBtn`);
@@ -22,7 +20,6 @@ const obeliskBtn = document.getElementById(`obeliskBtn`);
 const templeBtn = document.getElementById(`templeBtn`);
 const observatoryBtn = document.getElementById(`observatoryBtn`);
 
-
 const res = [`food`, `wood`, `stone`, `gold`, `idea`, `morale`];
 const p1TempResource = {
   food: 0,
@@ -37,7 +34,6 @@ const p1GlobalResourceDiv = Array.from(
   document.querySelectorAll(`.resource-value`)
 );
 const collecting = Array.from(document.querySelectorAll(`.collecting`));
-
 
 // --------------- CLICK LISTENERS FIRES METHODS --------------------
 // where to go, create PossibleMove //
@@ -104,11 +100,12 @@ hexAll.forEach((el) => {
     if (el.town) {
       town = el.town;
       town.showHudTown();
+    } else if (town && !el.possibleResource && clickedRes.length) {
+      alert(`Dokończ zbieranie surowców`)
     } else if (town && !el.possibleResource) {
       town.hideHudTown();
       town.hideContainerStructure();
       town.hideConfirmCollectBtn();
-
       town = undefined;
     } // I need to make prototype of each object and call function hideHudTown from proto //
   });
@@ -151,8 +148,6 @@ observatoryBtn.addEventListener(`click`, function () {
   town.buildStructure(`observatory`);
 });
 
-
-
 //click Collect resource. Start collecting //
 collectResourceBtn.addEventListener(`click`, function () {
   town.hideContainerStructure();
@@ -164,19 +159,22 @@ let clickedRes = [];
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     if (el.possibleResource && clickedRes.length < town.size) {
-      clickedRes.push(el.possibleResource.resource);
-      el.possibleResource.showConfirmCollectBtn();
-      el.possibleResource.showTempResource();
-      console.log(clickedRes);
-      el.removeEventListener("click", arguments.callee);
+      if (el.object.collectible) {
+        clickedRes.push(el.possibleResource.resource);
+        el.possibleResource.showConfirmCollectBtn();
+        el.possibleResource.showTempResource();
+        console.log(clickedRes);
+        el.removeEventListener("click", arguments.callee);
+      } else
+        alert(
+          `Nie możesz zbierac z tego pola. Brakuje Ci rozwinięcia, lub jest to jałowa ziemia.`
+        );
     }
   });
 });
 
 // Update p1GlobalResource. Last stage odfcollect
 confirmCollectBtn.addEventListener(`click`, function () {
-  window.updateGlobalResource();
+  town.updateGlobalResource();
   town.hideConfirmCollectBtn();
 });
-
-
