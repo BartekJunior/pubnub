@@ -155,46 +155,24 @@ collectResourceBtn.addEventListener(`click`, function () {
   town.possibleResource();
 });
 
-/// Collect Temporary resource with global wariable arr. Middle collecting ///
-// let clickedRes = [];
-// hexAll.forEach((el) => {
-//   el.addEventListener(`click`, function () {
-//     if (el.possibleResource && clickedRes.length < town.size) {
-//       if (el.object.collectible) {
-//         clickedRes.push(el.possibleResource.resource);
-//         el.possibleResource.showConfirmCollectBtn();
-//         el.possibleResource.showTempResource();
-//         console.log(clickedRes);
-//         el.removeEventListener("click", arguments.callee);
-//       } else
-//         alert(
-//           `Nie możesz zbierac z tego pola. Brakuje Ci rozwinięcia, lub jest to jałowa ziemia.`
-//         );
-//     }
-//   });
-// });
 
-
+/// Collect tempResource with global wariable arr. Middle collecting ///
 let clickedRes = [];
-
 hexAll.forEach((el) => {
-
     el.addEventListener(`click`, function() {
       if (el.possibleResource)
-
       el.possibleResource.collectTempResource();
   }); 
 
 });
 
-
-
-// Update p1GlobalResource. Last stage odfcollect
+// Update GlobalResource. Last stage odfcollect
 confirmCollectBtn.addEventListener(`click`, function () {
   town.updateGlobalResource();
   town.hideConfirmCollectBtn();
 });
 
+// Cancel collect resources
 cancelCollectBtn.addEventListener(`click`, function() {
   hexAll.forEach((el) => {
     if (el.possibleResource) el.possibleResource.deletePossibleResource();
@@ -211,7 +189,6 @@ cancelCollectBtn.addEventListener(`click`, function() {
     for (let i = 0; i < collecting.length; i++) {
       collecting[i].innerHTML = p1TempResource[res[i]]
     }
-
 
   });
 

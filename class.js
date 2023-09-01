@@ -2,16 +2,11 @@
 
 // CLASS PLAYER //
 class Player {
-  constructor(name, nr, color, food, wood, stone, gold, idea, morale) {
+  constructor(name, nr, color, food, wood, stone, gold, idea, morale, action) {
     this.name = name;
     this.nr = nr;
     this.color = color;
-    // this.food = food;
-    // this.wood = wood;
-    // this.stone = stone;
-    // this.gold = gold;
-    // this.idea = idea;
-    // this.morale = morale;
+    this.action = action;
 
     this.resource = {
       food: food,
@@ -22,6 +17,7 @@ class Player {
       morale: morale,
     }
 
+    // not used //
     this.showResourceValue = (resource) => {
       window[`p1` + resource + `Value`].innerHTML = this[resource];
     };
@@ -184,7 +180,8 @@ class Town {
           const possibleResource = new PossibleResource(
             UUID,
             hexAll[i],
-            hexAll[i].object.resource
+            hexAll[i].object.resource,
+            false
           );
           hexAll[i].possibleResource = possibleResource;
         }
@@ -248,6 +245,7 @@ class Merchant {
       this.hideHudMerchant();
       this.deleteMerchant();
       merchantPosition = undefined;
+      // window[player + ``]
     };
 
     this.whereToGo = () => {
@@ -295,10 +293,11 @@ class PossibleMove {
 
 ///// CLASS POSSIBLERESOURCE /////
 class PossibleResource {
-  constructor(player, id, resource) {
+  constructor(player, id, resource, collected) {
     this.player = player;
     this.id = id;
     this.resource = resource;
+    this.collected = collected;
 
     this.showPossibleResource = () => this.id.classList.add(`possible-collect`);
     this.deletePossibleResource = () => {
@@ -325,42 +324,24 @@ class PossibleResource {
       }
     };
 
-    /////hmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm/////
     this.collectTempResource = () => {
       if (this.id.possibleResource && clickedRes.length < town.size) {
-        if (this.id.object.collectible) {
+        if (this.id.object.collectible && !this.collected) {
           clickedRes.push(this.id.possibleResource.resource);
           this.id.possibleResource.showConfirmCollectBtn();
           this.id.possibleResource.showTempResource();
           console.log(clickedRes);
-          this.id.removeEventListener("click", arguments.callee);
-        } else
+          this.collected = true;
+        } else if (!this.id.object.collectible)
           alert(
-            `Nie możesz zbierac z tego pola. Brakuje Ci rozwinięcia, lub jest to jałowa ziemia.`
+            `Nie możesz zbierac z tego pola. Brakuje Ci rozwinięcia / jałowa ziemia / wróg / inne miasto etc.`
           );
+          else if (this.collected) alert(`Juz zebrałeś z tego pola`)
       }
     }
 
     this.showPossibleResource(); //fires after create object
   }
-}
-
-// window.updateGlobalResource = () => {
-//   for (let i = 0; i < p1GlobalResourceDiv.length; i++) {
-//     p1GlobalResource[res[i]] = p1GlobalResource[res[i]] + p1TempResource[res[i]];
-//     p1GlobalResourceDiv[i].innerHTML = p1GlobalResource[res[i]]
-//     p1TempResource[res[i]] = 0;
-//     collecting[i].innerHTML = p1TempResource[res[i]];
-//   }
-//   clickedRes = [];
-// };
-
-
-
-
-const collectTempResourceH = () => {
-  console.log(`hyyyyyyt`);
-
 }
 
 

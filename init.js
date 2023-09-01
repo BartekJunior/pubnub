@@ -57,7 +57,7 @@ setPlayer.addEventListener(`click`, function () {
   else if (onlineUsers.size === 2) color = `blue`;
   else if (onlineUsers.size === 1) color = `green`;
   else alert(`Liczba graczy musi wynosic 1-3`);
-  window["player" + num] = new Player(UUID, num, color, 2, 1, 0, 0, 0, 2);
+  window["player" + num] = new Player(UUID, num, color, 2, 1, 0, 0, 0, 2, 3);
 
   // show start resource
   for (let i = 0; i < p1GlobalResourceDiv.length; i++) {
