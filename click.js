@@ -69,9 +69,12 @@ hexAll.forEach((el) => {
       });
       el.merchant.hideHudMerchant();
       merchantPosition = undefined;
+      window[`player` + UUID].action--;
     }
+
   });
 });
+
 //delete possiblemove when clicked somewhere else and not move merchant
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
@@ -154,8 +157,6 @@ collectResourceBtn.addEventListener(`click`, function () {
   town.hideContainerStructure();
   town.possibleResource();
 });
-
-
 /// Collect tempResource with global wariable arr. Middle collecting ///
 let clickedRes = [];
 hexAll.forEach((el) => {
@@ -165,12 +166,14 @@ hexAll.forEach((el) => {
   }); 
 
 });
-
 // Update GlobalResource. Last stage odfcollect
 confirmCollectBtn.addEventListener(`click`, function () {
   town.updateGlobalResource();
   town.hideConfirmCollectBtn();
+  window[`player` + UUID].action--;
 });
+
+
 
 // Cancel collect resources
 cancelCollectBtn.addEventListener(`click`, function() {
@@ -189,7 +192,20 @@ cancelCollectBtn.addEventListener(`click`, function() {
     for (let i = 0; i < collecting.length; i++) {
       collecting[i].innerHTML = p1TempResource[res[i]]
     }
-
   });
-
 })
+
+
+
+
+
+
+
+//// O JASNY CHUJ ///
+let luj = true;
+setInterval(() => {
+  if (window[`player` + UUID].action === 0 && luj) {
+    alert(`Twoja tura sie skonczyła`);
+    luj = false;
+  }
+}, 1000); // Check every second

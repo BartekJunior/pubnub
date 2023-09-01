@@ -190,8 +190,8 @@ class Town {
 
     this.updateGlobalResource = () => {
       for (let i = 0; i < p1GlobalResourceDiv.length; i++) {
-        player2.resource[res[i]] = player2.resource[res[i]] + p1TempResource[res[i]];
-        p1GlobalResourceDiv[i].innerHTML = player2.resource[res[i]];
+        window[`player` + UUID].resource[res[i]] = window[`player` + UUID].resource[res[i]] + p1TempResource[res[i]];
+        p1GlobalResourceDiv[i].innerHTML = window[`player` + UUID].resource[res[i]];
         p1TempResource[res[i]] = 0;
         collecting[i].innerHTML = p1TempResource[res[i]];
       }
@@ -245,7 +245,7 @@ class Merchant {
       this.hideHudMerchant();
       this.deleteMerchant();
       merchantPosition = undefined;
-      // window[player + ``]
+      window[`player` + UUID].action--;
     };
 
     this.whereToGo = () => {
