@@ -324,6 +324,7 @@ class PossibleResource {
       }
     };
 
+
     this.collectTempResource = () => {
       if (this.id.possibleResource && clickedRes.length < town.size) {
         if (this.id.object.collectible && !this.collected) {
@@ -337,6 +338,15 @@ class PossibleResource {
             `Nie możesz zbierac z tego pola. Brakuje Ci rozwinięcia / jałowa ziemia / wróg / inne miasto etc.`
           );
           else if (this.collected) alert(`Juz zebrałeś z tego pola`)
+      }
+    }
+
+    this.deleteTempResource = () => {
+      for (const res in p1TempResource) {
+        p1TempResource[res] = 0;
+      }
+      for (let i = 0; i < collecting.length; i++) {
+        collecting[i].innerHTML = p1TempResource[res[i]]
       }
     }
 

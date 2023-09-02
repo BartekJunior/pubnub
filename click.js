@@ -164,7 +164,6 @@ hexAll.forEach((el) => {
       if (el.possibleResource)
       el.possibleResource.collectTempResource();
   }); 
-
 });
 // Update GlobalResource. Last stage odfcollect
 confirmCollectBtn.addEventListener(`click`, function () {
@@ -173,24 +172,13 @@ confirmCollectBtn.addEventListener(`click`, function () {
   window[`player` + UUID].action--;
 });
 
-
-
 // Cancel collect resources
 cancelCollectBtn.addEventListener(`click`, function() {
   hexAll.forEach((el) => {
-    if (el.possibleResource) el.possibleResource.deletePossibleResource();
-    clickedRes = [];
-    p1TempResource = {
-      food: 0,
-      wood: 0,
-      stone: 0,
-      gold: 0,
-      idea: 0,
-      morale: 0,
-    };
-
-    for (let i = 0; i < collecting.length; i++) {
-      collecting[i].innerHTML = p1TempResource[res[i]]
+    if (el.possibleResource) {
+      el.possibleResource.deleteTempResource();
+      clickedRes = [];
+      el.possibleResource.deletePossibleResource();
     }
   });
 })
