@@ -1,6 +1,8 @@
 `use strict`;
 
 // HUD Display
+const gameContainer = document.getElementById(`gameContainer`);
+
 const hudMerchant = document.querySelector(`.hud-merchant`);
 const settleBtn = document.getElementById(`settleBtn`);
 
@@ -71,7 +73,6 @@ hexAll.forEach((el) => {
       merchantPosition = undefined;
       window[`player` + UUID].action--;
     }
-
   });
 });
 
@@ -105,7 +106,7 @@ hexAll.forEach((el) => {
       town = el.town;
       town.showHudTown();
     } else if (town && !el.possibleResource && clickedRes.length) {
-      alert(`Dokończ zbieranie surowców`)
+      alert(`Dokończ zbieranie surowców`);
     } else if (town && !el.possibleResource) {
       town.hideHudTown();
       town.hideContainerStructure();
@@ -160,10 +161,9 @@ collectResourceBtn.addEventListener(`click`, function () {
 /// Collect tempResource with global wariable arr. Middle collecting ///
 let clickedRes = [];
 hexAll.forEach((el) => {
-    el.addEventListener(`click`, function() {
-      if (el.possibleResource)
-      el.possibleResource.collectTempResource();
-  }); 
+  el.addEventListener(`click`, function () {
+    if (el.possibleResource) el.possibleResource.collectTempResource();
+  });
 });
 // Update GlobalResource. Last stage odfcollect
 confirmCollectBtn.addEventListener(`click`, function () {
@@ -173,7 +173,7 @@ confirmCollectBtn.addEventListener(`click`, function () {
 });
 
 // Cancel collect resources
-cancelCollectBtn.addEventListener(`click`, function() {
+cancelCollectBtn.addEventListener(`click`, function () {
   hexAll.forEach((el) => {
     if (el.possibleResource) {
       el.possibleResource.deleteTempResource();
@@ -181,7 +181,16 @@ cancelCollectBtn.addEventListener(`click`, function() {
       el.possibleResource.deletePossibleResource();
     }
   });
-})
+});
+
+// Disable click when its not your turn
+
+// const gameContainer = document.getElementById(`gameContainer`);
+// const someShit = () => gameContainer.addEventListener(`click`, function() {
+//   if (window[`player` + UUID].action === 0) alert(`Its not your turn`)
+// })
+
+// Add a click event listener to the window
 
 
 
@@ -190,10 +199,16 @@ cancelCollectBtn.addEventListener(`click`, function() {
 
 
 //// O JASNY CHUJ ///
-let luj = true;
+let turnActive = true;
 setInterval(() => {
-  if (window[`player` + UUID].action === 0 && luj) {
+  if (window[`player` + UUID].action === 0 && turnActive) {
     alert(`Twoja tura sie skonczyła`);
-    luj = false;
+    gameContainer.addEventListener("click", handler, true);
+    function handler(e) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
+
+    turnActive = false;
   }
 }, 1000); // Check every second
