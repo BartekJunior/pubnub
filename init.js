@@ -12,8 +12,8 @@ hexAll.forEach((el) => {
 });
 
 //Put Merchants on the board
-hexAll[0].merchant = new Merchant(UUID, hexAll[0]);
-hexAll[35].merchant = new Merchant(UUID, hexAll[35]);
+// hexAll[0].merchant = new Merchant(UUID, hexAll[0]);
+// hexAll[35].merchant = new Merchant(UUID, hexAll[35]);
 
 // Make start Hexes
 hexAll[0].object = new Hex(hexAll[0], `grass`, true, `food`, true);
@@ -50,18 +50,28 @@ for (let i = (hexAll.length / 6) * 4; i < (hexAll.length / 6) * 5; i = i + 2) {
 }
 // Array of 4 land piece. One big array of 12 cafelkas. Each one has 4 Hexes of land//
 
+//SET PLAYER, CREATE FIRST MERCHANT for each user. playersNumber must be SET well!!!
 const setPlayer = document.getElementById(`setPlayer`);
 setPlayer.addEventListener(`click`, function () {
   const num = Math.ceil(playersNumber / onlineUsers.size);
-  if (onlineUsers.size === 3) color = `red`;
-  else if (onlineUsers.size === 2) color = `blue`;
+  let color;
+  if (onlineUsers.size === 3) color = `blue`;
+  else if (onlineUsers.size === 2) color = `red`;
   else if (onlineUsers.size === 1) color = `green`;
   else alert(`Liczba graczy musi wynosic 1-3`);
+
+  //set individual player for each user
   window["player" + UUID] = new Player(UUID, num, color, 2, 1, 0, 0, 0, 2, 3);
 
-  // show start resource
+  //add individual merchan for each user
+  if (window[`player` + UUID].nr == 1) hexAll[0].merchant = new Merchant(UUID, hexAll[0], window[`player` + UUID].color);
+  else if (window[`player` + UUID].nr == 2) hexAll[35].merchant = new Merchant(UUID, hexAll[35], window[`player` + UUID].color);
+  else if (window[`player` + UUID].nr == 3) hexAll[5].merchant = new Merchant(UUID, hexAll[5], window[`player` + UUID].color);
+  
+
+
+  // show start resource. edit this for each user
   for (let i = 0; i < p1GlobalResourceDiv.length; i++) {
-    // const p1GlobalResourceArr2 = Object.entries(p1GlobalResource);
     p1GlobalResourceDiv[i].innerHTML = window[`player` + UUID].resource[res[i]];
   }
 });

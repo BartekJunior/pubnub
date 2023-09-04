@@ -103,6 +103,7 @@ class Town {
   constructor(
     player,
     id,
+    color,
     size,
     port,
     academy,
@@ -114,6 +115,7 @@ class Town {
   ) {
     this.player = player;
     this.id = id;
+    this.color = color;
     this.size = size;
     this.port = port;
     this.academy = academy;
@@ -208,17 +210,21 @@ class Town {
 ///// CLASS MERCHANT /////
 let merchantPosition;
 class Merchant {
-  constructor(player, id) {
+  constructor(player, id, color) {
     this.player = player;
     this.id = id;
+    this.color = color;
+    
+    const merchantClass = `merchant${color}`;
+    const townClass = `town${this.color}`;
 
-    this.showMerchant = () => id.classList.add(`merchant`);
-    this.hideMerchant = () => id.classList.remove(`merchant`);
+    this.showMerchant = () => id.classList.add(merchantClass);
+    this.hideMerchant = () => id.classList.remove(merchantClass);
     this.showHudMerchant = () => (hudMerchant.style.display = `block`);
     this.hideHudMerchant = () => (hudMerchant.style.display = `none`);
 
     this.deleteMerchant = () => {
-      id.classList.remove(`merchant`);
+      id.classList.remove(merchantClass);
       delete this.id.merchant;
     };
 
@@ -226,6 +232,7 @@ class Merchant {
       this.id.town = new Town(
         UUID,
         this.id,
+        window[`player` + UUID].color,
         1,
         false,
         false,
@@ -235,7 +242,7 @@ class Merchant {
         false,
         false
       );
-      this.id.childNodes[4].classList.add(`town`);
+      this.id.childNodes[4].classList.add(townClass);
       this.id.object.collectible = false;
       hexAll.forEach((el) => {
         if (el.possibleMove) {

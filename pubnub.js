@@ -1,3 +1,7 @@
+
+
+
+
 "use strict";
 
 const UUID = prompt(`Jak masz na imie?`);
@@ -62,13 +66,13 @@ input.addEventListener("keydown", function (event) {
   }
 });
 
-let color;
-document.addEventListener(`click`, function (e) {
-  if (e.target === alpha) {
-    color = `blue`;
-    e.target.style.backgroundColor = color;
-  }
-});
+// let color;
+// document.addEventListener(`click`, function (e) {
+//   if (e.target === alpha) {
+//     color = `blue`;
+//     e.target.style.backgroundColor = color;
+//   }
+// });
 
 let same = {
   player: UUID,

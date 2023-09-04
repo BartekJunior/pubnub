@@ -142,16 +142,45 @@ h2 {
 }
 
 /* ------------ TOWN Images ----------------- */
-.merchant {
-  background-image: url(./img/merchant.png);
+.merchantred {
+  background-image: url(./img/merchantRed.png);
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 100%;
+  background-size: 50%;
+}
+
+.merchantgreen {
+  background-image: url(./img/merchantGreen.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50%;
+}
+
+.merchantblue {
+  background-image: url(./img/merchantBlue.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50%;
+}
+
+.townred {
+  background-image: url(./img/townred.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 110%;
   /* position: relative; */
 }
 
-.town {
-  background-image: url(./img/town.png);
+.towngreen {
+  background-image: url(./img/towngreen.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 110%;
+  /* position: relative; */
+}
+
+.townblue {
+  background-image: url(./img/townblue.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 110%;

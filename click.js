@@ -61,7 +61,7 @@ hexAll.forEach((el) => {
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     if (el.possibleMove) {
-      el.merchant = new Merchant(UUID, el);
+      el.merchant = new Merchant(UUID, el, window[`player` + UUID].color);
       merchantPosition.merchant.deleteMerchant();
 
       hexAll.forEach((el) => {
@@ -183,22 +183,10 @@ cancelCollectBtn.addEventListener(`click`, function () {
   });
 });
 
+
+
+
 // Disable click when its not your turn
-
-// const gameContainer = document.getElementById(`gameContainer`);
-// const someShit = () => gameContainer.addEventListener(`click`, function() {
-//   if (window[`player` + UUID].action === 0) alert(`Its not your turn`)
-// })
-
-// Add a click event listener to the window
-
-
-
-
-
-
-
-//// O JASNY CHUJ ///
 let turnActive = true;
 setInterval(() => {
   if (window[`player` + UUID].action === 0 && turnActive) {
@@ -208,7 +196,6 @@ setInterval(() => {
       e.stopPropagation();
       e.preventDefault();
     }
-
     turnActive = false;
   }
 }, 1000); // Check every second
