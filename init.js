@@ -62,7 +62,6 @@ setPlayer.addEventListener(`click`, function () {
 
   //set individual player for each user
   window["player" + UUID] = new Player(UUID, num, color, 2, 1, 0, 0, 0, 2, 3);
-  publishMessage(window["player" + UUID]);
 
   //add individual merchan for each user
   if (window[`player` + UUID].nr == 1) hexAll[0].merchant = new Merchant(UUID, hexAll[0], window[`player` + UUID].color);

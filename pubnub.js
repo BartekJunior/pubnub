@@ -85,7 +85,7 @@ gamma.addEventListener(`click`, function () {
 
 sigma.addEventListener(`click`, function () {
   // publishMessage(same);
-  publishMessage(chuj);
+  publishMessage(window["player" + UUID]);
 });
 
 // const myListener3 = (msg) => {
@@ -96,8 +96,9 @@ sigma.addEventListener(`click`, function () {
 
 let chuj;
 const playerListener = (msg) => {
-  console.log(msg);
-  chuj = msg;
+  console.log(window[`player` + UUID].name);
+  console.log(msg.name);
+  if (msg.name !== window[`player` + UUID].name) chuj = msg;
 }
 
 
