@@ -94,11 +94,10 @@ sigma.addEventListener(`click`, function () {
 // };
 
 
-let chuj;
 const playerListener = (msg) => {
   console.log(window[`player` + UUID].name);
   console.log(msg.name);
-  if (msg.name !== window[`player` + UUID].name) chuj = msg;
+  if (msg.name !== window[`player` + UUID].name) window[`player` + msg.name] = msg;
 }
 
 
