@@ -1,7 +1,3 @@
-
-
-
-
 "use strict";
 
 const UUID = prompt(`Jak masz na imie?`);
@@ -66,13 +62,7 @@ input.addEventListener("keydown", function (event) {
   }
 });
 
-// let color;
-// document.addEventListener(`click`, function (e) {
-//   if (e.target === alpha) {
-//     color = `blue`;
-//     e.target.style.backgroundColor = color;
-//   }
-// });
+
 
 let same = {
   player: UUID,
@@ -88,14 +78,30 @@ gamma.addEventListener(`click`, function () {
   };
 });
 
+
+
+
+
+
 sigma.addEventListener(`click`, function () {
-  publishMessage(same);
+  // publishMessage(same);
+  publishMessage(chuj);
 });
 
-const myListener3 = (msg) => {
+// const myListener3 = (msg) => {
+//   console.log(msg);
+//   if (same !== msg) same = msg;
+// };
+
+
+let chuj;
+const playerListener = (msg) => {
   console.log(msg);
-  if (same !== msg) same = msg;
-};
+  chuj = msg;
+}
+
+
+
 
 ///// PUBNUB /////
 const buttonClick = () => {
@@ -135,6 +141,7 @@ const setupPubNub = () => {
       showMessage(messageEvent.message.description);
       checkUser(messageEvent.message.description);
       // myListener3(messageEvent.message.description);
+      playerListener(messageEvent.message.description);
 
       console.log(messageEvent);
 
@@ -191,7 +198,3 @@ const publishMessage = async (message) => {
 // window.onbeforeunload = function() {
 //     return `Dude`
 // }
-
-
-
-
