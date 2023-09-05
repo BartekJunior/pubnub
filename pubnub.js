@@ -7,17 +7,12 @@ const lastDiv = document.getElementById(`lastDiv`);
 
 firstDiv.style.backgroundColor = `red`;
 
-
-
 const sendPlayer = document.getElementById(`sendPlayer`);
-
-
-
 
 // ------------ TURN CHANGE BART is the first player. TURN FUNCTION MADE FOR X PLAYERS!!! ------------- //
 // PlayersNumber tells how many players are in the game! IT MUST BE THE RIGHT VALUE!
 let onlineUsers = new Set();
-const playersNumber = 2;
+const playersNumber = 3;
 let turn = 1;
 
 document.addEventListener(
@@ -52,8 +47,6 @@ for (i = 1; i < 4; i++) {
 }
 // Dynamic variables
 
-
-
 const input = document.getElementById("message-body");
 const send = document.getElementById("send");
 input.disabled = true;
@@ -64,7 +57,6 @@ input.addEventListener("keydown", function (event) {
   }
 });
 
-
 let same = {
   player: UUID,
   wood: 12,
@@ -72,64 +64,35 @@ let same = {
 };
 
 
-
-
-
-
-const shit = function() {
-
-  const player = window[`player` + UUID];
-
-  //add individual merchant for each user
-  if (player.nr == 1) hexAll[0].merchant = new Merchant(UUID, hexAll[0], player.color);
-  else if (player.nr == 2) hexAll[35].merchant = new Merchant(UUID, hexAll[35], player.color);
-  else if (player.nr == 3) hexAll[5].merchant = new Merchant(UUID, hexAll[5], player.color);
-  
-
-  // show start resource
-  for (let i = 0; i < window.p1GlobalResourceDiv.length; i++) {
-    window[`p` + player.nr + `GlobalResourceDiv`][i].innerHTML = player.resource[res[i]];
-  }
-
-  // Show player name and whole playerGlobalHud
-  window[`p` + player.nr + `Global`].children[0].innerHTML = UUID;
-  window[`p` + player.nr + `Global`].children[0].style.backgroundColor = player.color;
-  window[`p` + player.nr + `Global`].style.display = `block`;
-}
-
-
-
-
-
 sendPlayer.addEventListener(`click`, function () {
   publishMessage(window["player" + UUID]);
 });
 
-
-
-
 const playerListener = (msg) => {
   // console.log(window[`player` + UUID].name);
   // console.log(msg.name);
-  if (msg.name !== window[`player` + UUID].name) window[`player` + msg.name] = msg;
+  if (msg.name !== window[`player` + UUID].name)
+    window[`player` + msg.name] = msg;
 
   //send merchant to another user
-  if (msg.nr == 1) hexAll[0].merchant = new Merchant(msg.name, hexAll[0], msg.color);
-  else if (msg.nr == 2) hexAll[35].merchant = new Merchant(msg.name, hexAll[35], msg.color);
-  else if (msg.nr == 3) hexAll[5].merchant = new Merchant(msg.name, hexAll[5], msg.color);
+  if (msg.nr == 1)
+    hexAll[0].merchant = new Merchant(msg.name, hexAll[0], msg.color);
+  else if (msg.nr == 2)
+    hexAll[35].merchant = new Merchant(msg.name, hexAll[35], msg.color);
+  else if (msg.nr == 3)
+    hexAll[5].merchant = new Merchant(msg.name, hexAll[5], msg.color);
 
-    // show start resource
-    for (let i = 0; i < window.p1GlobalResourceDiv.length; i++) {
-      window[`p` + msg.nr + `GlobalResourceDiv`][i].innerHTML = msg.resource[res[i]];
-    }
+  // show start resource
+  for (let i = 0; i < window.p1GlobalResourceDiv.length; i++) {
+    window[`p` + msg.nr + `GlobalResourceDiv`][i].innerHTML =
+      msg.resource[res[i]];
+  }
 
-      // Show player name and whole playerGlobalHud
+  // Show player name and whole playerGlobalHud
   window[`p` + msg.nr + `Global`].children[0].innerHTML = msg.name;
   window[`p` + msg.nr + `Global`].children[0].style.backgroundColor = msg.color;
   window[`p` + msg.nr + `Global`].style.display = `block`;
-
-
-}
+};
 
 
 

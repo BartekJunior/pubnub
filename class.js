@@ -194,6 +194,7 @@ class Town {
       for (let i = 0; i < p1GlobalResourceDiv.length; i++) {
         window[`player` + UUID].resource[res[i]] = window[`player` + UUID].resource[res[i]] + p1TempResource[res[i]];
         p1GlobalResourceDiv[i].innerHTML = window[`player` + UUID].resource[res[i]];
+        window[`p` + window[`player` + UUID].nr + `GlobalResourceDiv`][i].innerHTML = window[`player` + UUID].resource[res[i]];
         p1TempResource[res[i]] = 0;
         collecting[i].innerHTML = p1TempResource[res[i]];
       }

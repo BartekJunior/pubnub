@@ -190,7 +190,7 @@ hexAll.forEach((el) => {
     if (el.possibleResource) el.possibleResource.collectTempResource();
   });
 });
-// Update GlobalResource. Last stage odfcollect
+// Update GlobalResource. Last stage of collect
 confirmCollectBtn.addEventListener(`click`, function () {
   town.updateGlobalResource();
   town.hideConfirmCollectBtn();
