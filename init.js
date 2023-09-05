@@ -63,18 +63,19 @@ setPlayer.addEventListener(`click`, function () {
   //set individual player for each user
   window["player" + UUID] = new Player(UUID, num, color, 2, 1, 0, 0, 0, 2, 3);
 
-  //add individual merchan for each user
+  //add individual merchant for each user
   if (window[`player` + UUID].nr == 1) hexAll[0].merchant = new Merchant(UUID, hexAll[0], window[`player` + UUID].color);
   else if (window[`player` + UUID].nr == 2) hexAll[35].merchant = new Merchant(UUID, hexAll[35], window[`player` + UUID].color);
   else if (window[`player` + UUID].nr == 3) hexAll[5].merchant = new Merchant(UUID, hexAll[5], window[`player` + UUID].color);
   
 
-
-  // show start resource. edit this for each user
-  for (let i = 0; i < p1GlobalResourceDiv.length; i++) {
-    p1GlobalResourceDiv[i].innerHTML = window[`player` + UUID].resource[res[i]];
+  // show start resource
+  for (let i = 0; i < window.p1GlobalResourceDiv.length; i++) {
+    window[`p` + window[`player` + UUID].nr + `GlobalResourceDiv`][i].innerHTML = window[`player` + UUID].resource[res[i]];
   }
 
+  // Show player name and whole playerGlobalHud
+  window[`p` + window["player" + UUID].nr + `Global`].children[0].innerHTML = UUID;
   window[`p` + window["player" + UUID].nr + `Global`].style.display = `block`;
 });
 

@@ -6,6 +6,8 @@ const p1Global = document.getElementById(`p1Global`);
 const p2Global = document.getElementById(`p2Global`);
 const p3Global = document.getElementById(`p3Global`);
 
+const playerName = document.getElementById(`playerName`);
+
 p1Global.style.display = `none`;
 p2Global.style.display = `none`;
 p3Global.style.display = `none`;
@@ -48,15 +50,16 @@ let p1TempResource = {
   morale: 0,
 };
 
-const p1GlobalResourceDiv = Array.from(
+
+window.p1GlobalResourceDiv = Array.from(
   document.querySelectorAll(`.p1-resource-value`)
 );
 
-const p2GlobalResourceDiv = Array.from(
+window.p2GlobalResourceDiv = Array.from(
   document.querySelectorAll(`.p2-resource-value`)
 );
 
-const p3GlobalResourceDiv = Array.from(
+window.p3GlobalResourceDiv = Array.from(
   document.querySelectorAll(`.p3-resource-value`)
 );
 

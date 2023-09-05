@@ -302,7 +302,7 @@ h2 {
   text-align: center;
 }
 
-.resource-value {
+.p1-resource-value, .p2-resource-value, .p3-resource-value {
   width: 80px;
   height: 40px;
 }
