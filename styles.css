@@ -10,26 +10,6 @@ body {
   display: inline-block;
 }
 
-.simpleDiv {
-  display: inline-block;
-  width: 120px;
-  height: 100px;
-  margin-top: 40px;
-  vertical-align: top;
-}
-
-#alpha {
-  background-color: rgb(34, 110, 110);
-}
-#betha {
-  background-color: rgb(130, 155, 20);
-}
-#gamma {
-  background-color: rgb(173, 40, 151);
-}
-#sigma {
-  background-color: rgb(93, 79, 168);
-}
 
 body {
   background-color: azure;
@@ -50,7 +30,16 @@ body {
       supported by Chrome and Opera */
 }
 
-#setPlayer {
+
+
+/* #setPlayer {
+  display: inline-block;
+  width: 150px;
+  height: 70px;
+  background-color: #66ff66;
+} */
+
+.player-btn {
   display: inline-block;
   width: 150px;
   height: 70px;
@@ -244,7 +233,7 @@ h2 {
 }
 
 
-/* ------------ HUD ----------------- */
+/* ------------ HUD Tlown ----------------- */
 .game-container {
   margin-top: 80px;
   height: 800px;
@@ -287,39 +276,50 @@ h2 {
   color: bisque;
 }
 
+
+
+
+/* ------------ HUD Tlown ----------------- */
 .hud-technology-container {
   display: flex;
+  justify-content: space-around;
+  justify-items: center;
   margin-top: 50px;
+}
+
+.player-name {
+  text-align: center;
 }
 
 .p1-resource-container {
   display: flex;
-  width: 650px;
+  width: auto;
   background-color: #9edb9e;
 }
 
 .resource-container {
-  width: 100px;
+  width: 80px;
+  text-align: center;
 }
 
 .resource-value {
-  width: 100px;
+  width: 80px;
   height: 40px;
 }
 
 .turn-img {
   background-color: #2984b9;
+  text-align: center;
 }
 
 .turn-value {
-  width: 150px;
-  height: 70px;
   background-color: #2984b9;
 }
 
 
-/* ------------ GAMEPLAY  ----------------- */
 
+
+/* ------------ GAMEPLAY  ----------------- */
 .possible-move {
   opacity: 0.4;
 }
@@ -334,8 +334,6 @@ h2 {
 .settle-btn:hover {
   background-color: #66ff66;
 }
-
-
 
 
 

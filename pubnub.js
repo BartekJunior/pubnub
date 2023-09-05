@@ -7,10 +7,10 @@ const lastDiv = document.getElementById(`lastDiv`);
 
 firstDiv.style.backgroundColor = `red`;
 
-const alpha = document.getElementById(`alpha`);
-const betha = document.getElementById(`betha`);
-const gamma = document.getElementById(`gamma`);
-const sigma = document.getElementById(`sigma`);
+
+
+const sendPlayer = document.getElementById(`sendPlayer`);
+
 
 
 
@@ -52,6 +52,8 @@ for (i = 1; i < 4; i++) {
 }
 // Dynamic variables
 
+
+
 const input = document.getElementById("message-body");
 const send = document.getElementById("send");
 input.disabled = true;
@@ -63,27 +65,15 @@ input.addEventListener("keydown", function (event) {
 });
 
 
-
 let same = {
   player: UUID,
   wood: 12,
   stone: 40,
 };
 
-gamma.addEventListener(`click`, function () {
-  same = {
-    player: UUID,
-    wood: 77,
-    stone: 109,
-  };
-});
 
 
-
-
-
-
-sigma.addEventListener(`click`, function () {
+sendPlayer.addEventListener(`click`, function () {
   // publishMessage(same);
   publishMessage(window["player" + UUID]);
 });
@@ -95,8 +85,8 @@ sigma.addEventListener(`click`, function () {
 
 
 const playerListener = (msg) => {
-  console.log(window[`player` + UUID].name);
-  console.log(msg.name);
+  // console.log(window[`player` + UUID].name);
+  // console.log(msg.name);
   if (msg.name !== window[`player` + UUID].name) window[`player` + msg.name] = msg;
 }
 
@@ -140,10 +130,9 @@ const setupPubNub = () => {
     message: (messageEvent) => {
       showMessage(messageEvent.message.description);
       checkUser(messageEvent.message.description);
-      // myListener3(messageEvent.message.description);
       playerListener(messageEvent.message.description);
 
-      console.log(messageEvent);
+      console.log(messageEvent.message.description);
 
       // if(messageEvent.publisher !== UUID) {
       //   input.disabled = false;

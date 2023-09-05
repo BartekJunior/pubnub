@@ -74,6 +74,8 @@ setPlayer.addEventListener(`click`, function () {
   for (let i = 0; i < p1GlobalResourceDiv.length; i++) {
     p1GlobalResourceDiv[i].innerHTML = window[`player` + UUID].resource[res[i]];
   }
+
+  window[`p` + window["player" + UUID].nr + `Global`].style.display = `block`;
 });
 
 hexAll.forEach((el, index) =>

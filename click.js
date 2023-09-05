@@ -1,6 +1,21 @@
 `use strict`;
 
-// HUD Display
+// HUD Player
+
+const p1Global = document.getElementById(`p1Global`);
+const p2Global = document.getElementById(`p2Global`);
+const p3Global = document.getElementById(`p3Global`);
+
+p1Global.style.display = `none`;
+p2Global.style.display = `none`;
+p3Global.style.display = `none`;
+
+
+
+
+
+
+// HUD Town
 const gameContainer = document.getElementById(`gameContainer`);
 
 const hudMerchant = document.querySelector(`.hud-merchant`);
@@ -34,8 +49,17 @@ let p1TempResource = {
 };
 
 const p1GlobalResourceDiv = Array.from(
-  document.querySelectorAll(`.resource-value`)
+  document.querySelectorAll(`.p1-resource-value`)
 );
+
+const p2GlobalResourceDiv = Array.from(
+  document.querySelectorAll(`.p2-resource-value`)
+);
+
+const p3GlobalResourceDiv = Array.from(
+  document.querySelectorAll(`.p3-resource-value`)
+);
+
 const collecting = Array.from(document.querySelectorAll(`.collecting`));
 
 // --------------- CLICK LISTENERS FIRES METHODS --------------------
