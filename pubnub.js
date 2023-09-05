@@ -73,21 +73,62 @@ let same = {
 
 
 
+
+
+
+const shit = function() {
+
+  const player = window[`player` + UUID];
+
+  //add individual merchant for each user
+  if (player.nr == 1) hexAll[0].merchant = new Merchant(UUID, hexAll[0], player.color);
+  else if (player.nr == 2) hexAll[35].merchant = new Merchant(UUID, hexAll[35], player.color);
+  else if (player.nr == 3) hexAll[5].merchant = new Merchant(UUID, hexAll[5], player.color);
+  
+
+  // show start resource
+  for (let i = 0; i < window.p1GlobalResourceDiv.length; i++) {
+    window[`p` + player.nr + `GlobalResourceDiv`][i].innerHTML = player.resource[res[i]];
+  }
+
+  // Show player name and whole playerGlobalHud
+  window[`p` + player.nr + `Global`].children[0].innerHTML = UUID;
+  window[`p` + player.nr + `Global`].children[0].style.backgroundColor = player.color;
+  window[`p` + player.nr + `Global`].style.display = `block`;
+}
+
+
+
+
+
 sendPlayer.addEventListener(`click`, function () {
-  // publishMessage(same);
   publishMessage(window["player" + UUID]);
 });
 
-// const myListener3 = (msg) => {
-//   console.log(msg);
-//   if (same !== msg) same = msg;
-// };
+
 
 
 const playerListener = (msg) => {
   // console.log(window[`player` + UUID].name);
   // console.log(msg.name);
   if (msg.name !== window[`player` + UUID].name) window[`player` + msg.name] = msg;
+
+  //send merchant to another user
+  if (msg.nr == 1) hexAll[0].merchant = new Merchant(msg.name, hexAll[0], msg.color);
+  else if (msg.nr == 2) hexAll[35].merchant = new Merchant(msg.name, hexAll[35], msg.color);
+  else if (msg.nr == 3) hexAll[5].merchant = new Merchant(msg.name, hexAll[5], msg.color);
+
+    // show start resource
+    for (let i = 0; i < window.p1GlobalResourceDiv.length; i++) {
+      window[`p` + msg.nr + `GlobalResourceDiv`][i].innerHTML = msg.resource[res[i]];
+    }
+
+      // Show player name and whole playerGlobalHud
+  window[`p` + msg.nr + `Global`].children[0].innerHTML = msg.name;
+  window[`p` + msg.nr + `Global`].children[0].style.backgroundColor = msg.color;
+  window[`p` + msg.nr + `Global`].style.display = `block`;
+
+
 }
 
 
@@ -131,6 +172,7 @@ const setupPubNub = () => {
       showMessage(messageEvent.message.description);
       checkUser(messageEvent.message.description);
       playerListener(messageEvent.message.description);
+      // shitListener(messageEvent.message.description)
 
       console.log(messageEvent.message.description);
 

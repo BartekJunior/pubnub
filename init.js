@@ -62,21 +62,23 @@ setPlayer.addEventListener(`click`, function () {
 
   //set individual player for each user
   window["player" + UUID] = new Player(UUID, num, color, 2, 1, 0, 0, 0, 2, 3);
+  const player = window[`player` + UUID];
 
   //add individual merchant for each user
-  if (window[`player` + UUID].nr == 1) hexAll[0].merchant = new Merchant(UUID, hexAll[0], window[`player` + UUID].color);
-  else if (window[`player` + UUID].nr == 2) hexAll[35].merchant = new Merchant(UUID, hexAll[35], window[`player` + UUID].color);
-  else if (window[`player` + UUID].nr == 3) hexAll[5].merchant = new Merchant(UUID, hexAll[5], window[`player` + UUID].color);
+  if (player.nr == 1) hexAll[0].merchant = new Merchant(UUID, hexAll[0], player.color);
+  else if (player.nr == 2) hexAll[35].merchant = new Merchant(UUID, hexAll[35], player.color);
+  else if (player.nr == 3) hexAll[5].merchant = new Merchant(UUID, hexAll[5], player.color);
   
 
   // show start resource
   for (let i = 0; i < window.p1GlobalResourceDiv.length; i++) {
-    window[`p` + window[`player` + UUID].nr + `GlobalResourceDiv`][i].innerHTML = window[`player` + UUID].resource[res[i]];
+    window[`p` + player.nr + `GlobalResourceDiv`][i].innerHTML = player.resource[res[i]];
   }
 
   // Show player name and whole playerGlobalHud
-  window[`p` + window["player" + UUID].nr + `Global`].children[0].innerHTML = UUID;
-  window[`p` + window["player" + UUID].nr + `Global`].style.display = `block`;
+  window[`p` + player.nr + `Global`].children[0].innerHTML = UUID;
+  window[`p` + player.nr + `Global`].children[0].style.backgroundColor = player.color;
+  window[`p` + player.nr + `Global`].style.display = `block`;
 });
 
 hexAll.forEach((el, index) =>

@@ -54,11 +54,9 @@ let p1TempResource = {
 window.p1GlobalResourceDiv = Array.from(
   document.querySelectorAll(`.p1-resource-value`)
 );
-
 window.p2GlobalResourceDiv = Array.from(
   document.querySelectorAll(`.p2-resource-value`)
 );
-
 window.p3GlobalResourceDiv = Array.from(
   document.querySelectorAll(`.p3-resource-value`)
 );
