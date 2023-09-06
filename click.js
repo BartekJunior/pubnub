@@ -227,19 +227,27 @@ function handler(e) {
 
 
 // Disable click when its not your turn
-let turnActive = true;
+let turnActive;
 setInterval(() => {
-  if (window[`player` + UUID].action === 0 && turnActive) {
-    publishMessage(window["player" + UUID]);
-    alert(`Twoja tura sie skonczyła`);
+  const player = window[`player` + UUID];
+
+
+  if (!player.turnActive) {
+    // publishMessage(player);
+
+    // alert(`Twoja tura sie skonczyła`);
     gameContainer.addEventListener("click", handler, true);
     function handler(e) {
       e.stopPropagation();
       e.preventDefault();
     }
-    turnActive = false;
+    // player.turnActive = false;
+    // player.action = 3;
+
   }
 }, 1000); // Check every second
+
+
 
 
 

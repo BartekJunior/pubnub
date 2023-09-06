@@ -26,7 +26,19 @@ document.addEventListener(
   { once: true }
 );
 
+const input = document.getElementById("message-body");
+const send = document.getElementById("send");
+input.disabled = true;
+send.disabled = true;
+input.addEventListener("keydown", function (event) {
+  if (event.keyCode === 13) {
+    buttonClick();
+  }
+});
+
 const checkUser = () => {
+  console.log(`checkUser() starts`);
+  
   const num = Math.ceil(playersNumber / onlineUsers.size);
   turn++;
   if (turn === 1 + playersNumber) turn = 1;
@@ -47,22 +59,13 @@ for (i = 1; i < 4; i++) {
 }
 // Dynamic variables
 
-const input = document.getElementById("message-body");
-const send = document.getElementById("send");
-input.disabled = true;
-send.disabled = true;
-input.addEventListener("keydown", function (event) {
-  if (event.keyCode === 13) {
-    buttonClick();
-  }
-});
+
 
 let same = {
   player: UUID,
   wood: 12,
   stone: 40,
 };
-
 
 sendPlayer.addEventListener(`click`, function () {
   publishMessage(window["player" + UUID]);
@@ -94,19 +97,27 @@ const playerListener = (msg) => {
   // window[`p` + msg.nr + `Global`].style.display = `block`;
 };
 
-
 const resourceListener = (msg) => {
-    // show start resource
-    for (let i = 0; i < window.p1GlobalResourceDiv.length; i++) {
-      window[`p` + msg.nr + `GlobalResourceDiv`][i].innerHTML =
-        msg.resource[res[i]];
-    }
-    // Show player name and whole playerGlobalHud
-    window[`p` + msg.nr + `Global`].children[0].innerHTML = msg.name;
-    window[`p` + msg.nr + `Global`].children[0].style.backgroundColor = msg.color;
-    window[`p` + msg.nr + `Global`].style.display = `block`;
+  // show start resource
+  for (let i = 0; i < window.p1GlobalResourceDiv.length; i++) {
+    window[`p` + msg.nr + `GlobalResourceDiv`][i].innerHTML =
+      msg.resource[res[i]];
+  }
+  // Show player name and whole playerGlobalHud
+  window[`p` + msg.nr + `Global`].children[0].innerHTML = msg.name;
+  window[`p` + msg.nr + `Global`].children[0].style.backgroundColor = msg.color;
+  window[`p` + msg.nr + `Global`].style.display = `block`;
+};
 
-}
+
+const devilListener = (msg) => {
+// if (msg.nr === 1) window[`player` + UUID].turnActive = true;
+// else if (msg.nr === 2) window[`player` + UUID].turnActive = true;
+
+};
+
+
+
 
 
 
@@ -150,6 +161,9 @@ const setupPubNub = () => {
       checkUser(messageEvent.message.description);
       playerListener(messageEvent.message.description);
       resourceListener(messageEvent.message.description);
+      devilListener(messageEvent.message.description);
+      // turnListener(messageEvent.message.description);
+
       // shitListener(messageEvent.message.description)
 
       console.log(messageEvent.message.description);

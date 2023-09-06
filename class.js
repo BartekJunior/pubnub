@@ -2,10 +2,11 @@
 
 // CLASS PLAYER //
 class Player {
-  constructor(name, nr, color, food, wood, stone, gold, idea, morale, action) {
+  constructor(name, nr, color, turnActive, food, wood, stone, gold, idea, morale, action) {
     this.name = name;
     this.nr = nr;
     this.color = color;
+    this.turnActive = turnActive;
     this.action = action;
 
     this.resource = {
