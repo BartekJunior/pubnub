@@ -192,11 +192,11 @@ class Town {
 
     this.updateGlobalResource = () => {
       for (let i = 0; i < p1GlobalResourceDiv.length; i++) {
-        window[`player` + UUID].resource[res[i]] = window[`player` + UUID].resource[res[i]] + p1TempResource[res[i]];
-        p1GlobalResourceDiv[i].innerHTML = window[`player` + UUID].resource[res[i]];
-        window[`p` + window[`player` + UUID].nr + `GlobalResourceDiv`][i].innerHTML = window[`player` + UUID].resource[res[i]];
-        p1TempResource[res[i]] = 0;
-        collecting[i].innerHTML = p1TempResource[res[i]];
+        const player = window[`player` + UUID];
+        player.resource[res[i]] = player.resource[res[i]] + tempResource[res[i]];
+        window[`p` + player.nr + `GlobalResourceDiv`][i].innerHTML = player.resource[res[i]];
+        tempResource[res[i]] = 0;
+        collecting[i].innerHTML = tempResource[res[i]];
       }
       hexAll.forEach(el => {
         if(el.possibleResource) el.possibleResource.deletePossibleResource();
@@ -320,15 +320,15 @@ class PossibleResource {
 
 
     this.showTempResource = () => {
-      if (clickedRes[clickedRes.length - 1] === `food`) p1TempResource.food++;
-      else if (clickedRes[clickedRes.length - 1] === `wood`) p1TempResource.wood++;
-      else if (clickedRes[clickedRes.length - 1] === `stone`) p1TempResource.stone++;
-      else if (clickedRes[clickedRes.length - 1] === `gold`) p1TempResource.gold++;
-      else if (clickedRes[clickedRes.length - 1] === `idea`) p1TempResource.idea++;
-      else if (clickedRes[clickedRes.length - 1] === `morale`) p1TempResource.morale++;
+      if (clickedRes[clickedRes.length - 1] === `food`) tempResource.food++;
+      else if (clickedRes[clickedRes.length - 1] === `wood`) tempResource.wood++;
+      else if (clickedRes[clickedRes.length - 1] === `stone`) tempResource.stone++;
+      else if (clickedRes[clickedRes.length - 1] === `gold`) tempResource.gold++;
+      else if (clickedRes[clickedRes.length - 1] === `idea`) tempResource.idea++;
+      else if (clickedRes[clickedRes.length - 1] === `morale`) tempResource.morale++;
 
       for (let i = 0; i < collecting.length; i++) {
-        collecting[i].innerHTML = p1TempResource[res[i]]
+        collecting[i].innerHTML = tempResource[res[i]]
       }
     };
 
@@ -350,11 +350,11 @@ class PossibleResource {
     }
 
     this.deleteTempResource = () => {
-      for (const res in p1TempResource) {
-        p1TempResource[res] = 0;
+      for (const res in tempResource) {
+        tempResource[res] = 0;
       }
       for (let i = 0; i < collecting.length; i++) {
-        collecting[i].innerHTML = p1TempResource[res[i]]
+        collecting[i].innerHTML = tempResource[res[i]]
       }
     }
 

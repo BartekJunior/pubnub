@@ -41,7 +41,7 @@ const templeBtn = document.getElementById(`templeBtn`);
 const observatoryBtn = document.getElementById(`observatoryBtn`);
 
 const res = [`food`, `wood`, `stone`, `gold`, `idea`, `morale`];
-let p1TempResource = {
+let tempResource = {
   food: 0,
   wood: 0,
   stone: 0,
@@ -219,7 +219,7 @@ cancelCollectBtn.addEventListener(`click`, function () {
 gameContainer.addEventListener("click", handler, true);
 function handler(e) {
   if (e.target.merchant.player !== UUID) {
-    console.log(e.target);
+    // console.log(e.target);
     e.stopPropagation();
     e.preventDefault();
   }
@@ -230,6 +230,7 @@ function handler(e) {
 let turnActive = true;
 setInterval(() => {
   if (window[`player` + UUID].action === 0 && turnActive) {
+    publishMessage(window["player" + UUID]);
     alert(`Twoja tura sie skonczyła`);
     gameContainer.addEventListener("click", handler, true);
     function handler(e) {

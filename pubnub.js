@@ -83,16 +83,30 @@ const playerListener = (msg) => {
     hexAll[5].merchant = new Merchant(msg.name, hexAll[5], msg.color);
 
   // show start resource
-  for (let i = 0; i < window.p1GlobalResourceDiv.length; i++) {
-    window[`p` + msg.nr + `GlobalResourceDiv`][i].innerHTML =
-      msg.resource[res[i]];
-  }
+  // for (let i = 0; i < window.p1GlobalResourceDiv.length; i++) {
+  //   window[`p` + msg.nr + `GlobalResourceDiv`][i].innerHTML =
+  //     msg.resource[res[i]];
+  // }
 
   // Show player name and whole playerGlobalHud
-  window[`p` + msg.nr + `Global`].children[0].innerHTML = msg.name;
-  window[`p` + msg.nr + `Global`].children[0].style.backgroundColor = msg.color;
-  window[`p` + msg.nr + `Global`].style.display = `block`;
+  // window[`p` + msg.nr + `Global`].children[0].innerHTML = msg.name;
+  // window[`p` + msg.nr + `Global`].children[0].style.backgroundColor = msg.color;
+  // window[`p` + msg.nr + `Global`].style.display = `block`;
 };
+
+
+const resourceListener = (msg) => {
+    // show start resource
+    for (let i = 0; i < window.p1GlobalResourceDiv.length; i++) {
+      window[`p` + msg.nr + `GlobalResourceDiv`][i].innerHTML =
+        msg.resource[res[i]];
+    }
+    // Show player name and whole playerGlobalHud
+    window[`p` + msg.nr + `Global`].children[0].innerHTML = msg.name;
+    window[`p` + msg.nr + `Global`].children[0].style.backgroundColor = msg.color;
+    window[`p` + msg.nr + `Global`].style.display = `block`;
+
+}
 
 
 
@@ -135,6 +149,7 @@ const setupPubNub = () => {
       showMessage(messageEvent.message.description);
       checkUser(messageEvent.message.description);
       playerListener(messageEvent.message.description);
+      resourceListener(messageEvent.message.description);
       // shitListener(messageEvent.message.description)
 
       console.log(messageEvent.message.description);
