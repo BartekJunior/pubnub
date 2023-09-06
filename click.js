@@ -211,6 +211,21 @@ cancelCollectBtn.addEventListener(`click`, function () {
 
 
 
+
+
+// --------------- DISABLE CLICKS ---------------- //
+
+// Disable click when you click on enemy merchant
+gameContainer.addEventListener("click", handler, true);
+function handler(e) {
+  if (e.target.merchant.player !== UUID) {
+    console.log(e.target);
+    e.stopPropagation();
+    e.preventDefault();
+  }
+}
+
+
 // Disable click when its not your turn
 let turnActive = true;
 setInterval(() => {
@@ -224,3 +239,6 @@ setInterval(() => {
     turnActive = false;
   }
 }, 1000); // Check every second
+
+
+

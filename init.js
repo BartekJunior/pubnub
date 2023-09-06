@@ -11,9 +11,6 @@ hexAll.forEach((el) => {
   el.object = newHex;
 });
 
-//Put Merchants on the board
-// hexAll[0].merchant = new Merchant(UUID, hexAll[0]);
-// hexAll[35].merchant = new Merchant(UUID, hexAll[35]);
 
 // Make start Hexes
 hexAll[0].object = new Hex(hexAll[0], `grass`, true, `food`, true);
@@ -69,7 +66,6 @@ setPlayer.addEventListener(`click`, function () {
   else if (player.nr == 2) hexAll[35].merchant = new Merchant(UUID, hexAll[35], player.color);
   else if (player.nr == 3) hexAll[5].merchant = new Merchant(UUID, hexAll[5], player.color);
   
-
   // show start resource
   for (let i = 0; i < window.p1GlobalResourceDiv.length; i++) {
     window[`p` + player.nr + `GlobalResourceDiv`][i].innerHTML = player.resource[res[i]];
