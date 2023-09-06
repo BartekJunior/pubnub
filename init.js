@@ -12,6 +12,9 @@ hexAll.forEach((el) => {
 });
 
 
+
+
+
 // Make start Hexes
 hexAll[0].object = new Hex(hexAll[0], `grass`, true, `food`, true);
 hexAll[1].object = new Hex(hexAll[1], `forest`, true, `wood`, true);
@@ -48,7 +51,6 @@ for (let i = (hexAll.length / 6) * 4; i < (hexAll.length / 6) * 5; i = i + 2) {
 // Array of 4 land piece. One big array of 12 cafelkas. Each one has 4 Hexes of land//
 
 //SET PLAYER, CREATE FIRST MERCHANT for each user. playersNumber must be SET well!!!
-const setPlayer = document.getElementById(`setPlayer`);
 setPlayer.addEventListener(`click`, function () {
   const num = Math.ceil(playersNumber / onlineUsers.size);
   let color;

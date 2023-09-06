@@ -31,13 +31,9 @@ body {
 }
 
 
-
-/* #setPlayer {
-  display: inline-block;
-  width: 150px;
-  height: 70px;
-  background-color: #66ff66;
-} */
+#endTurn {
+  display: none;
+}
 
 .player-btn {
   display: inline-block;
@@ -91,6 +87,10 @@ h2 {
   height: 38px;
   /* opacity: 0.3; */
   border: rgb(201, 196, 196) 1px dotted;
+  pointer-events: none;
+}
+
+.delete-click {
   pointer-events: none;
 }
 

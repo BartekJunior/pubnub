@@ -12,8 +12,9 @@ p1Global.style.display = `none`;
 p2Global.style.display = `none`;
 p3Global.style.display = `none`;
 
-
-
+const setPlayer = document.getElementById(`setPlayer`);
+const sendPlayer = document.getElementById(`sendPlayer`);
+const endTurn = document.getElementById(`endTurn`);
 
 
 
@@ -227,25 +228,27 @@ function handler(e) {
 
 
 // Disable click when its not your turn
-let turnActive;
 setInterval(() => {
   const player = window[`player` + UUID];
 
+  if (!player.turnActive) hexAll.forEach((el) => el.classList.add(`delete-click`))
+  else if (player.turnActive) hexAll.forEach((el) => el.classList.remove(`delete-click`))
 
-  if (!player.turnActive) {
-    // publishMessage(player);
-
-    // alert(`Twoja tura sie skonczyła`);
-    gameContainer.addEventListener("click", handler, true);
-    function handler(e) {
-      e.stopPropagation();
-      e.preventDefault();
-    }
-    // player.turnActive = false;
-    // player.action = 3;
-
+  if (player.action === 0) {
+    player.turnActive = false;
+    endTurn.style.display = `block`;
   }
+
 }, 1000); // Check every second
+
+endTurn.addEventListener(`click`, () => {
+  publishMessage(window[`player` + UUID]);
+  endTurn.style.display = `none`;
+
+})
+
+
+// TRY ADD POINTER EVENTS IN StyleSheet.CSS TO DISABLE ALL CLICKS AT ALL HEX!!!
 
 
 

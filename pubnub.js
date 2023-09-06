@@ -7,7 +7,9 @@ const lastDiv = document.getElementById(`lastDiv`);
 
 firstDiv.style.backgroundColor = `red`;
 
-const sendPlayer = document.getElementById(`sendPlayer`);
+
+
+
 
 // ------------ TURN CHANGE BART is the first player. TURN FUNCTION MADE FOR X PLAYERS!!! ------------- //
 // PlayersNumber tells how many players are in the game! IT MUST BE THE RIGHT VALUE!
@@ -111,6 +113,11 @@ const resourceListener = (msg) => {
 
 
 const devilListener = (msg) => {
+  const player = window[`player` + UUID];
+  if (msg.nr === 1 && msg.action === 0 && player.nr === 2) {
+    player.turnActive = true;
+
+  }
 // if (msg.nr === 1) window[`player` + UUID].turnActive = true;
 // else if (msg.nr === 2) window[`player` + UUID].turnActive = true;
 
