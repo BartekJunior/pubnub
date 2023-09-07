@@ -16,8 +16,6 @@ const setPlayer = document.getElementById(`setPlayer`);
 const sendPlayer = document.getElementById(`sendPlayer`);
 const endTurn = document.getElementById(`endTurn`);
 
-
-
 // HUD Town
 const gameContainer = document.getElementById(`gameContainer`);
 
@@ -50,7 +48,6 @@ let tempResource = {
   idea: 0,
   morale: 0,
 };
-
 
 window.p1GlobalResourceDiv = Array.from(
   document.querySelectorAll(`.p1-resource-value`)
@@ -209,11 +206,6 @@ cancelCollectBtn.addEventListener(`click`, function () {
   });
 });
 
-
-
-
-
-
 // --------------- DISABLE CLICKS ---------------- //
 
 // Disable click when you click on enemy merchant
@@ -227,30 +219,57 @@ function handler(e) {
 }
 
 
+
+
+
+
+
 // Disable click when its not your turn
-setInterval(() => {
-  const player = window[`player` + UUID];
 
-  if (!player.turnActive) hexAll.forEach((el) => el.classList.add(`delete-click`))
-  else if (player.turnActive) hexAll.forEach((el) => el.classList.remove(`delete-click`))
-
-  if (player.action === 0) {
+const checkActionFirst = function () {
+  if (player.action === 3) {
+    hexAll.forEach((el) => el.classList.remove(`delete-click`));
+    player.turnActive = true;
+  } else if (player.action <= 0) {
+    hexAll.forEach((el) => el.classList.add(`delete-click`));
     player.turnActive = false;
-    endTurn.style.display = `block`;
   }
+};
 
-}, 1000); // Check every second
+
+
+
+
+
+const checkAction = function () {
+  if (player.action > 0) {
+    hexAll.forEach((el) => el.classList.remove(`delete-click`));
+    player.turnActive = true;
+  } else if (player.action <= 0) {
+    hexAll.forEach((el) => el.classList.add(`delete-click`));
+    player.turnActive = false;
+
+    alert(`Twoja tura sie zakonczyla, click end turn`)
+    endTurn.style.display = `block`;
+    clearInterval(turnInterval);
+  }
+};
+
+
+
+let turnInterval;
+
+function startTurnInterval() {
+  turnInterval = setInterval(() => {
+    console.log(`checkAction is running`);
+    
+    checkAction();
+  }, 1000);
+}
+
 
 endTurn.addEventListener(`click`, () => {
   publishMessage(window[`player` + UUID]);
   endTurn.style.display = `none`;
-
-})
-
-
-// TRY ADD POINTER EVENTS IN StyleSheet.CSS TO DISABLE ALL CLICKS AT ALL HEX!!!
-
-
-
-
+});
 

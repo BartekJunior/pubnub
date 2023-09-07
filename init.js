@@ -60,13 +60,15 @@ setPlayer.addEventListener(`click`, function () {
   else alert(`Liczba graczy musi wynosic 1-3`);
 
   //set individual player for each user
-  window["player" + UUID] = new Player(UUID, num, color, false, 2, 1, 0, 0, 0, 2, 3);
-  const player = window[`player` + UUID];
+  window["player" + UUID] = new Player(UUID, num, color, false, 2, 1, 0, 0, 0, 2, 0);
+  player = window[`player` + UUID];
 
   //set active turn to first player
-  if (player.nr === 1) player.turnActive = true
-  else if (player.nr === 2) player.turnActive = false
-  else if (player.nr === 3) player.turnActive = false;
+  if (player.nr === 1) player.action = 3;
+  checkActionFirst();
+  
+
+
 
   //add individual merchant for each user
   if (player.nr == 1) hexAll[0].merchant = new Merchant(UUID, hexAll[0], player.color);

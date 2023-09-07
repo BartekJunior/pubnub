@@ -1,15 +1,12 @@
 "use strict";
 
 const UUID = prompt(`Jak masz na imie?`);
+let player;
 
 const firstDiv = document.getElementById(`firstDiv`);
 const lastDiv = document.getElementById(`lastDiv`);
 
 firstDiv.style.backgroundColor = `red`;
-
-
-
-
 
 // ------------ TURN CHANGE BART is the first player. TURN FUNCTION MADE FOR X PLAYERS!!! ------------- //
 // PlayersNumber tells how many players are in the game! IT MUST BE THE RIGHT VALUE!
@@ -39,8 +36,6 @@ input.addEventListener("keydown", function (event) {
 });
 
 const checkUser = () => {
-  console.log(`checkUser() starts`);
-  
   const num = Math.ceil(playersNumber / onlineUsers.size);
   turn++;
   if (turn === 1 + playersNumber) turn = 1;
@@ -60,8 +55,6 @@ for (i = 1; i < 4; i++) {
   window["value" + i] = i;
 }
 // Dynamic variables
-
-
 
 let same = {
   player: UUID,
@@ -111,20 +104,22 @@ const resourceListener = (msg) => {
   window[`p` + msg.nr + `Global`].style.display = `block`;
 };
 
-
+let shit;
 const devilListener = (msg) => {
-  const player = window[`player` + UUID];
-  if (msg.nr === 1 && msg.action === 0 && player.nr === 2) {
-    player.turnActive = true;
+  shit = msg;
 
-  }
-// if (msg.nr === 1) window[`player` + UUID].turnActive = true;
-// else if (msg.nr === 2) window[`player` + UUID].turnActive = true;
+
+if (msg.turnActive === false) {
+
+  player.turnActive = true;
+  player.action = 3;
+
+  
+  startTurnInterval();
+}
+
 
 };
-
-
-
 
 
 
@@ -163,23 +158,31 @@ const setupPubNub = () => {
       }
     },
 
+    
+
+    // message: (messageEvent) => {
+    //   showMessage(messageEvent.message.description);
+    //   checkUser(messageEvent.message.description);
+    //   playerListener(messageEvent.message.description);
+    //   resourceListener(messageEvent.message.description);
+    //   devilListener(messageEvent.message.description);
+    //   console.log(messageEvent.message.description);
+    // },
+
+
     message: (messageEvent) => {
-      showMessage(messageEvent.message.description);
-      checkUser(messageEvent.message.description);
-      playerListener(messageEvent.message.description);
-      resourceListener(messageEvent.message.description);
-      devilListener(messageEvent.message.description);
-      // turnListener(messageEvent.message.description);
+      if (messageEvent.publisher !== UUID) {
+        showMessage(messageEvent.message.description);
+        checkUser(messageEvent.message.description);
+        playerListener(messageEvent.message.description);
+        resourceListener(messageEvent.message.description);
+        devilListener(messageEvent.message.description);
+        console.log(messageEvent.message.description);
+      }
 
-      // shitListener(messageEvent.message.description)
 
-      console.log(messageEvent.message.description);
-
-      // if(messageEvent.publisher !== UUID) {
-      //   input.disabled = false;
-      //   send.disabled = false;
-      // }
     },
+    
 
     presence: (event) => {
       if (event.action === "join") {
