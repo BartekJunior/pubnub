@@ -247,6 +247,7 @@ class Merchant {
         player: this.player,
         id: checkIndex(),
         color: this.color,
+        merchantPast: 0,
       }
     };
 

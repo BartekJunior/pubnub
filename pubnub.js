@@ -117,13 +117,13 @@ const turnListener = (msg) => {
 
 
 const merchantDataListener = (msg) => {
- {
     console.log(`the msg was merchant`);
-    
     merchantData = msg;
     console.log(merchantData);
-    
-  }
+    const mrt = new Merchant (merchantData.player, hexAll[merchantData.id], merchantData.color)
+    hexAll[merchantData.id].merchant = mrt;
+    hexAll[merchantData.id].merchant.showMerchant();
+    hexAll[merchantData.merchantPast].merchant.deleteMerchant();
 }
 
 
@@ -163,13 +163,6 @@ const setupPubNub = () => {
       }
     },
 
-    // message: (messageEvent) => {
-    //   showMessage(messageEvent.message.description);
-    //   checkUser(messageEvent.message.description);
-    //   playerListener(messageEvent.message.description);
-    //   resourceListener(messageEvent.message.description);
-    //   console.log(messageEvent.message.description);
-    // },
 
     message: (messageEvent) => {
       if (messageEvent.publisher !== UUID && messageEvent.message.description.type === `player`) {
@@ -180,7 +173,6 @@ const setupPubNub = () => {
         resourceListener(messageEvent.message.description);
 
         turnListener(messageEvent.message.description);
-
 
         console.log(messageEvent);
       }
