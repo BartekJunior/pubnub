@@ -81,11 +81,14 @@ hexAll.forEach((el) => {
 });
 
 // ----- move merchant ----- //
+
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     if (el.possibleMove) {
       el.merchant = new Merchant(UUID, el, window[`player` + UUID].color);
       merchantPosition.merchant.deleteMerchant();
+      el.merchant.createMerchantData();
+
 
       hexAll.forEach((el) => {
         if (el.possibleMove) {
@@ -94,6 +97,7 @@ hexAll.forEach((el) => {
       });
       el.merchant.hideHudMerchant();
       merchantPosition = undefined;
+
       window[`player` + UUID].action--;
     }
   });
@@ -268,8 +272,18 @@ function startTurnInterval() {
 }
 
 
+
+
+const shit = {
+  name: `hey`,
+  surname: `you`,
+  age: 15,
+}
+
+
 endTurn.addEventListener(`click`, () => {
   publishMessage(window[`player` + UUID]);
+  publishMessage(merchantData);
   endTurn.style.display = `none`;
 });
 

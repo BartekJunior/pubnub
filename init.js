@@ -69,7 +69,6 @@ setPlayer.addEventListener(`click`, function () {
   
 
 
-
   //add individual merchant for each user
   if (player.nr == 1) hexAll[0].merchant = new Merchant(UUID, hexAll[0], player.color);
   else if (player.nr == 2) hexAll[35].merchant = new Merchant(UUID, hexAll[35], player.color);
@@ -86,8 +85,10 @@ setPlayer.addEventListener(`click`, function () {
   window[`p` + player.nr + `Global`].style.display = `block`;
 });
 
+
 hexAll.forEach((el, index) =>
   el.addEventListener(`click`, function (e) {
-    console.log(index);
+    console.log(index);    
   })
 );
+

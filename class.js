@@ -3,6 +3,7 @@
 // CLASS PLAYER //
 class Player {
   constructor(name, nr, color, turnActive, food, wood, stone, gold, idea, morale, action) {
+    this.type = `player`;
     this.name = name;
     this.nr = nr;
     this.color = color;
@@ -209,10 +210,14 @@ class Town {
   }
 }
 
+
+let merchantData = 1;
+
 ///// CLASS MERCHANT /////
 let merchantPosition;
 class Merchant {
   constructor(player, id, color) {
+    this.type = `merchant`;
     this.player = player;
     this.id = id;
     this.color = color;
@@ -229,6 +234,22 @@ class Merchant {
       id.classList.remove(merchantClass);
       delete this.id.merchant;
     };
+
+    this.createMerchantData = () => {
+      const checkIndex = function() {
+        for (let i = 0; i < hexAll.length; i++) {
+          const el = hexAll[i];
+          if (el.merchant) return i; 
+        }
+      }
+      merchantData = {
+        type: this.type,
+        player: this.player,
+        id: checkIndex(),
+        color: this.color,
+      }
+    };
+
 
     this.settle = () => {
       this.id.town = new Town(
@@ -284,6 +305,8 @@ class Merchant {
   }
 }
 
+
+
 ///// CLASS POSSIBLEMOVE /////
 class PossibleMove {
   constructor(player, id) {
@@ -297,6 +320,8 @@ class PossibleMove {
     };
 
     this.showPossibleMove(); //fires after create object
+
+
   }
 }
 

@@ -104,22 +104,27 @@ const resourceListener = (msg) => {
   window[`p` + msg.nr + `Global`].style.display = `block`;
 };
 
-let shit;
-const devilListener = (msg) => {
-  shit = msg;
 
 
-if (msg.turnActive === false) {
-
-  player.turnActive = true;
-  player.action = 3;
-
-  
-  startTurnInterval();
-}
-
-
+const turnListener = (msg) => {
+  if (msg.turnActive === false) {
+    player.turnActive = true;
+    player.action = 3;
+    startTurnInterval();
+  }
 };
+
+
+
+const merchantDataListener = (msg) => {
+ {
+    console.log(`the msg was merchant`);
+    
+    merchantData = msg;
+    console.log(merchantData);
+    
+  }
+}
 
 
 
@@ -158,31 +163,33 @@ const setupPubNub = () => {
       }
     },
 
-    
-
     // message: (messageEvent) => {
     //   showMessage(messageEvent.message.description);
     //   checkUser(messageEvent.message.description);
     //   playerListener(messageEvent.message.description);
     //   resourceListener(messageEvent.message.description);
-    //   devilListener(messageEvent.message.description);
     //   console.log(messageEvent.message.description);
     // },
 
-
     message: (messageEvent) => {
-      if (messageEvent.publisher !== UUID) {
+      if (messageEvent.publisher !== UUID && messageEvent.message.description.type === `player`) {
+
         showMessage(messageEvent.message.description);
         checkUser(messageEvent.message.description);
         playerListener(messageEvent.message.description);
         resourceListener(messageEvent.message.description);
-        devilListener(messageEvent.message.description);
-        console.log(messageEvent.message.description);
+
+        turnListener(messageEvent.message.description);
+
+
+        console.log(messageEvent);
       }
 
+      else if (messageEvent.publisher !== UUID && messageEvent.message.description.type === `merchant`) {
+        merchantDataListener(messageEvent.message.description);
+      }
 
     },
-    
 
     presence: (event) => {
       if (event.action === "join") {
@@ -223,7 +230,7 @@ const publishMessage = async (message) => {
     },
   };
 
-  console.log(publishPayload);
+  // console.log(publishPayload);
   await pubnub.publish(publishPayload);
 };
 
