@@ -12,10 +12,7 @@ hexAll.forEach((el) => {
 });
 
 
-
-
-
-// Make start Hexes
+// Make start Hexes. It must be conected to set player functiion. Edit this
 hexAll[0].hex = new Hex(hexAll[0], `grass`, true, `food`, true);
 hexAll[1].hex = new Hex(hexAll[1], `forest`, true, `wood`, true);
 hexAll[6].hex = new Hex(hexAll[6], `mountain`, true, `stone`, true);
@@ -86,9 +83,5 @@ setPlayer.addEventListener(`click`, function () {
 });
 
 
-hexAll.forEach((el, index) =>
-  el.addEventListener(`click`, function (e) {
-    console.log(index);    
-  })
-);
+
 

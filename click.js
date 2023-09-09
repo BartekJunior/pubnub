@@ -1,7 +1,6 @@
 `use strict`;
 
 // HUD Player
-
 const p1Global = document.getElementById(`p1Global`);
 const p2Global = document.getElementById(`p2Global`);
 const p3Global = document.getElementById(`p3Global`);
@@ -61,7 +60,16 @@ window.p3GlobalResourceDiv = Array.from(
 
 const collecting = Array.from(document.querySelectorAll(`.collecting`));
 
+
+
 // --------------- CLICK LISTENERS FIRES METHODS --------------------
+// Console deafult index of clicked Hex
+hexAll.forEach((el, index) =>
+  el.addEventListener(`click`, function (e) {
+    console.log(index);    
+  })
+);
+
 // where to go, create PossibleMove //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
@@ -81,7 +89,6 @@ hexAll.forEach((el) => {
 });
 
 // ----- move merchant ----- //
-
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     if (el.possibleMove) {
@@ -123,6 +130,7 @@ hexAll.forEach((el) => {
     }
   });
 });
+
 
 let town;
 // ----- show/hide hudTown  ----- //
@@ -184,8 +192,10 @@ collectResourceBtn.addEventListener(`click`, function () {
   town.hideContainerStructure();
   town.possibleResource();
 });
-/// Collect tempResource with global wariable arr. Middle collecting ///
+
+
 let clickedRes = [];
+/// Collect tempResource with global variable arr. Middle collecting ///
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     if (el.possibleResource) el.possibleResource.collectTempResource();
@@ -209,19 +219,17 @@ cancelCollectBtn.addEventListener(`click`, function () {
   });
 });
 
+
 // --------------- DISABLE CLICKS ---------------- //
 
 // Disable click when you click on enemy merchant
 gameContainer.addEventListener("click", handler, true);
 function handler(e) {
   if (e.target.merchant.player !== UUID) {
-    // console.log(e.target);
     e.stopPropagation();
     e.preventDefault();
   }
 }
-
-
 
 // Disable click when its not your turn
 const checkActionFirst = function () {
@@ -235,6 +243,8 @@ const checkActionFirst = function () {
 };
 
 
+
+// Turn mechanics.. Dont ask me.. But it works.. Please God let it work..
 const checkAction = function () {
   if (player.action > 0) {
     hexAll.forEach((el) => el.classList.remove(`delete-click`));
@@ -248,13 +258,10 @@ const checkAction = function () {
     clearInterval(turnInterval);
   }
 };
-
-
 let turnInterval;
 function startTurnInterval() {
   turnInterval = setInterval(() => {
     console.log(`checkAction is running`);
-    
     checkAction();
   }, 1000);
 }
@@ -265,7 +272,6 @@ function startTurnInterval() {
 
 
 // --------------- READ MAP FUNCTION ---------------- //
-
 let hexesOnMapArr = [];
 let hexesOnMap;
 let merchantOnMap;
@@ -307,7 +313,6 @@ const paintHex = () => {
 
   })
 }
-
 
 
 endTurn.addEventListener(`click`, () => {

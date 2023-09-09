@@ -19,13 +19,8 @@ class Player {
       morale: morale,
     }
 
-    // not used //
-    this.showResourceValue = (resource) => {
-      window[`p1` + resource + `Value`].innerHTML = this[resource];
-    };
   }
 }
-
 
 
 // CLASS HEX //
@@ -62,7 +57,6 @@ class Hex {
       if(this.id.childNodes.length === 0) {
       for (let i = 0; i < 9; i++) {
         const hexSmall = document.createElement("div");
-        // hexSmall.style.backgroundColor = colorArr[i];
         hexSmall.classList.add(`hex-small`);
         hexChild.push(hexSmall);
       }
@@ -235,23 +229,6 @@ class Merchant {
       id.classList.remove(merchantClass);
       delete this.id.merchant;
     };
-
-    // this.createMerchantData = () => {
-    //   const checkIndex = function() {
-    //     for (let i = 0; i < hexAll.length; i++) {
-    //       const el = hexAll[i];
-    //       if (el.merchant) return i; 
-    //     }
-    //   }
-    //   merchantData = {
-    //     type: this.type,
-    //     player: this.player,
-    //     id: checkIndex(),
-    //     color: this.color,
-    //     merchantPast: 0,
-    //   }
-    // };
-
 
     this.settle = () => {
       this.id.town = new Town(
