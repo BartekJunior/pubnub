@@ -301,6 +301,7 @@ const paintHex = () => {
     for (let i = 0; i < hexesOnMap.value.length; i++) {
       if (index === hexesOnMap.value[i].id) {
         el.object = new Hex(el, hexesOnMap.value[i].land, hexesOnMap.value[i].vis, hexesOnMap.value[i].resource, hexesOnMap.value[i].collectible);
+        el.classList.add(`class-${el.object.land}`);
       }
     }
 
