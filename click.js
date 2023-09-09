@@ -75,7 +75,7 @@ hexAll.forEach((el) => {
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     if (!el.object.vis && el.possibleMove) {
-      el.object.getType(); //Get type and resource from each new discovered Hex
+      el.object.getLand(); //Get type and resource from each new discovered Hex
     }
   });
 });
@@ -87,7 +87,6 @@ hexAll.forEach((el) => {
     if (el.possibleMove) {
       el.merchant = new Merchant(UUID, el, window[`player` + UUID].color);
       merchantPosition.merchant.deleteMerchant();
-      el.merchant.createMerchantData();
 
 
       hexAll.forEach((el) => {
@@ -283,7 +282,7 @@ const shit = {
 
 endTurn.addEventListener(`click`, () => {
   publishMessage(window[`player` + UUID]);
-  publishMessage(merchantData);
+  // publishMessage(drawMap);
   endTurn.style.display = `none`;
 });
 

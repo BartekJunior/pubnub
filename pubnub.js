@@ -116,14 +116,9 @@ const turnListener = (msg) => {
 
 
 
-const merchantDataListener = (msg) => {
-    console.log(`the msg was merchant`);
-    merchantData = msg;
-    console.log(merchantData);
-    const mrt = new Merchant (merchantData.player, hexAll[merchantData.id], merchantData.color)
-    hexAll[merchantData.id].merchant = mrt;
-    hexAll[merchantData.id].merchant.showMerchant();
-    hexAll[merchantData.merchantPast].merchant.deleteMerchant();
+const mapListener = (msg) => {
+
+  
 }
 
 
@@ -177,8 +172,8 @@ const setupPubNub = () => {
         console.log(messageEvent);
       }
 
-      else if (messageEvent.publisher !== UUID && messageEvent.message.description.type === `merchant`) {
-        merchantDataListener(messageEvent.message.description);
+      else if (messageEvent.publisher !== UUID && messageEvent.message.description.type === `map`) {
+        mapListener(messageEvent.message.description);
       }
 
     },

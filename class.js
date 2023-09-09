@@ -30,28 +30,29 @@ class Player {
 
 // CLASS HEX //
 class Hex {
-  constructor(id, type, vis, resource, collectible) {
+  constructor(id, land, vis, resource, collectible) {
+    this.type = `hex`;
     this.id = id;
-    this.type = type;
+    this.land = land;
     this.vis = vis;
     this.resource = resource;
     this.collectible = collectible;
 
     this.checkResource = () => {
-      if (this.type === `grass`) return (this.resource = `food`);
-      else if (this.type === `forest`) return (this.resource = `wood`);
-      else if (this.type === `mountain`) return (this.resource = `stone`);
-      else if (this.type === `plain`) return (this.resource = `food`);
-      else if (this.type === `water`) return (this.resource = `gold`);
+      if (this.land === `grass`) return (this.resource = `food`);
+      else if (this.land === `forest`) return (this.resource = `wood`);
+      else if (this.land === `mountain`) return (this.resource = `stone`);
+      else if (this.land === `plain`) return (this.resource = `food`);
+      else if (this.land === `water`) return (this.resource = `gold`);
     };
 
     this.checkCollectible = () => {
-      if (this.type === `water` || this.type === `plain`)
+      if (this.land === `water` || this.land === `plain`)
         return (this.collectible = false);
       else if (
-        this.type === `grass` ||
-        this.type === `forest` ||
-        this.type === `mountain`
+        this.land === `grass` ||
+        this.land === `forest` ||
+        this.land === `mountain`
       )
         return (this.collectible = true);
     };
@@ -73,7 +74,7 @@ class Hex {
 
     };
 
-    // Draw the type of the land
+    // Draw the land
     this.chooseLand = function () {
       const x = Math.ceil(Math.random() * 5);
       if (x === 1) return `water`;
@@ -83,13 +84,13 @@ class Hex {
       else if (x === 5) return `plain`;
     };
 
-    this.getType = () => {
+    this.getLand = () => {
       hexArea.forEach((el) => {
         if (el.includes(this.id)) {
           el.forEach((el) => {
-            el.object.type = this.chooseLand();
+            el.object.land = this.chooseLand();
             el.object.vis = true;
-            el.classList.add(`class-${el.object.type}`);
+            el.classList.add(`class-${el.object.land}`);
             el.object.checkResource();
             el.object.checkCollectible();
           });
@@ -115,6 +116,7 @@ class Town {
     temple,
     observatory
   ) {
+    this.type = `town`;
     this.player = player;
     this.id = id;
     this.color = color;
@@ -211,7 +213,6 @@ class Town {
 }
 
 
-let merchantData = 1;
 
 ///// CLASS MERCHANT /////
 let merchantPosition;
@@ -235,21 +236,21 @@ class Merchant {
       delete this.id.merchant;
     };
 
-    this.createMerchantData = () => {
-      const checkIndex = function() {
-        for (let i = 0; i < hexAll.length; i++) {
-          const el = hexAll[i];
-          if (el.merchant) return i; 
-        }
-      }
-      merchantData = {
-        type: this.type,
-        player: this.player,
-        id: checkIndex(),
-        color: this.color,
-        merchantPast: 0,
-      }
-    };
+    // this.createMerchantData = () => {
+    //   const checkIndex = function() {
+    //     for (let i = 0; i < hexAll.length; i++) {
+    //       const el = hexAll[i];
+    //       if (el.merchant) return i; 
+    //     }
+    //   }
+    //   merchantData = {
+    //     type: this.type,
+    //     player: this.player,
+    //     id: checkIndex(),
+    //     color: this.color,
+    //     merchantPast: 0,
+    //   }
+    // };
 
 
     this.settle = () => {

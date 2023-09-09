@@ -20,10 +20,10 @@ hexAll[0].object = new Hex(hexAll[0], `grass`, true, `food`, true);
 hexAll[1].object = new Hex(hexAll[1], `forest`, true, `wood`, true);
 hexAll[6].object = new Hex(hexAll[6], `mountain`, true, `stone`, true);
 hexAll[7].object = new Hex(hexAll[7], `plain`, true, `food`, false);
-hexAll[0].classList.add(`class-${hexAll[0].object.type}`);
-hexAll[1].classList.add(`class-${hexAll[1].object.type}`);
-hexAll[6].classList.add(`class-${hexAll[6].object.type}`);
-hexAll[7].classList.add(`class-${hexAll[7].object.type}`);
+hexAll[0].classList.add(`class-${hexAll[0].object.land}`);
+hexAll[1].classList.add(`class-${hexAll[1].object.land}`);
+hexAll[6].classList.add(`class-${hexAll[6].object.land}`);
+hexAll[7].classList.add(`class-${hexAll[7].object.land}`);
 
 // Array of 4 land piece. One big array of 12 cafelkas. Each one has 4 Hexes of land//
 const hexArea = [];
