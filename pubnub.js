@@ -117,6 +117,8 @@ const turnListener = (msg) => {
 
 
 const mapListener = (msg) => {
+  hexesOnMap = msg;
+  paintHex();  
 
   
 }
@@ -172,8 +174,12 @@ const setupPubNub = () => {
         console.log(messageEvent);
       }
 
-      else if (messageEvent.publisher !== UUID && messageEvent.message.description.type === `map`) {
+      if (messageEvent.publisher !== UUID && messageEvent.message.description.type === `hex`) {
+        console.log(`this was hex`);
+        
         mapListener(messageEvent.message.description);
+
+
       }
 
     },

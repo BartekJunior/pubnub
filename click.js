@@ -223,12 +223,7 @@ function handler(e) {
 
 
 
-
-
-
-
 // Disable click when its not your turn
-
 const checkActionFirst = function () {
   if (player.action === 3) {
     hexAll.forEach((el) => el.classList.remove(`delete-click`));
@@ -238,10 +233,6 @@ const checkActionFirst = function () {
     player.turnActive = false;
   }
 };
-
-
-
-
 
 
 const checkAction = function () {
@@ -259,9 +250,7 @@ const checkAction = function () {
 };
 
 
-
 let turnInterval;
-
 function startTurnInterval() {
   turnInterval = setInterval(() => {
     console.log(`checkAction is running`);
@@ -273,16 +262,56 @@ function startTurnInterval() {
 
 
 
-const shit = {
-  name: `hey`,
-  surname: `you`,
-  age: 15,
+
+
+// --------------- READ MAP FUNCTION ---------------- //
+
+let hexesOnMapArr = [];
+let hexesOnMap;
+let merchantOnMap;
+let townOnMap;
+
+
+const readMap = () => {
+  hexAll.forEach((el, index) => {
+    if (el.object.type === 'hex' && el.object.vis === true) {
+      let hexOnMap = {
+        type: el.object.type,
+        id: index,
+        land: el.object.land,
+        vis: el.object.vis,
+        resource: el.object.resource,
+        collectible: el.object.collectible,
+      };
+      hexesOnMapArr.push(hexOnMap);
+    }
+    hexesOnMap = {
+      type: `hex`,
+      value: hexesOnMapArr,
+    }
+  });
+};
+
+
+
+
+
+const paintHex = () => {
+  hexAll.forEach((el, index) => {
+    for (let i = 0; i < hexesOnMap.value.length; i++) {
+      if (index === hexesOnMap.value[i].id) {
+        el.object = new Hex(el, hexesOnMap.value[i].land, hexesOnMap.value[i].vis, hexesOnMap.value[i].resource, hexesOnMap.value[i].collectible);
+      }
+    }
+
+  })
 }
 
 
+
 endTurn.addEventListener(`click`, () => {
+  readMap();
+  publishMessage(hexesOnMap);
   publishMessage(window[`player` + UUID]);
-  // publishMessage(drawMap);
   endTurn.style.display = `none`;
 });
-
