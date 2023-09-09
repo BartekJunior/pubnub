@@ -71,11 +71,11 @@ hexAll.forEach((el) => {
   });
 });
 
-// Edit this function. getType fires when new troops object is creating in Hex!!! //
+// Edit this function. getType fires when new troops hex is creating in Hex!!! //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
-    if (!el.object.vis && el.possibleMove) {
-      el.object.getLand(); //Get type and resource from each new discovered Hex
+    if (!el.hex.vis && el.possibleMove) {
+      el.hex.getLand(); //Get type and resource from each new discovered Hex
     }
   });
 });
@@ -138,7 +138,7 @@ hexAll.forEach((el) => {
       town.hideContainerStructure();
       town.hideConfirmCollectBtn();
       town = undefined;
-    } // I need to make prototype of each object and call function hideHudTown from proto //
+    } 
   });
 });
 
@@ -274,14 +274,14 @@ let townOnMap;
 
 const readMap = () => {
   hexAll.forEach((el, index) => {
-    if (el.object.type === 'hex' && el.object.vis === true) {
+    if (el.hex.type === 'hex' && el.hex.vis === true) {
       let hexOnMap = {
-        type: el.object.type,
+        type: el.hex.type,
         id: index,
-        land: el.object.land,
-        vis: el.object.vis,
-        resource: el.object.resource,
-        collectible: el.object.collectible,
+        land: el.hex.land,
+        vis: el.hex.vis,
+        resource: el.hex.resource,
+        collectible: el.hex.collectible,
       };
       hexesOnMapArr.push(hexOnMap);
     }
@@ -300,8 +300,8 @@ const paintHex = () => {
   hexAll.forEach((el, index) => {
     for (let i = 0; i < hexesOnMap.value.length; i++) {
       if (index === hexesOnMap.value[i].id) {
-        el.object = new Hex(el, hexesOnMap.value[i].land, hexesOnMap.value[i].vis, hexesOnMap.value[i].resource, hexesOnMap.value[i].collectible);
-        el.classList.add(`class-${el.object.land}`);
+        el.hex = new Hex(el, hexesOnMap.value[i].land, hexesOnMap.value[i].vis, hexesOnMap.value[i].resource, hexesOnMap.value[i].collectible);
+        el.classList.add(`class-${el.hex.land}`);
       }
     }
 

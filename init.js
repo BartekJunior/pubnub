@@ -8,7 +8,7 @@ hexRow = hexRow.map((m) => Array.from(m.children));
 //Create all HEXES on the board
 hexAll.forEach((el) => {
   const newHex = new Hex(el, undefined, false, undefined, false);
-  el.object = newHex;
+  el.hex = newHex;
 });
 
 
@@ -16,14 +16,14 @@ hexAll.forEach((el) => {
 
 
 // Make start Hexes
-hexAll[0].object = new Hex(hexAll[0], `grass`, true, `food`, true);
-hexAll[1].object = new Hex(hexAll[1], `forest`, true, `wood`, true);
-hexAll[6].object = new Hex(hexAll[6], `mountain`, true, `stone`, true);
-hexAll[7].object = new Hex(hexAll[7], `plain`, true, `food`, false);
-hexAll[0].classList.add(`class-${hexAll[0].object.land}`);
-hexAll[1].classList.add(`class-${hexAll[1].object.land}`);
-hexAll[6].classList.add(`class-${hexAll[6].object.land}`);
-hexAll[7].classList.add(`class-${hexAll[7].object.land}`);
+hexAll[0].hex = new Hex(hexAll[0], `grass`, true, `food`, true);
+hexAll[1].hex = new Hex(hexAll[1], `forest`, true, `wood`, true);
+hexAll[6].hex = new Hex(hexAll[6], `mountain`, true, `stone`, true);
+hexAll[7].hex = new Hex(hexAll[7], `plain`, true, `food`, false);
+hexAll[0].classList.add(`class-${hexAll[0].hex.land}`);
+hexAll[1].classList.add(`class-${hexAll[1].hex.land}`);
+hexAll[6].classList.add(`class-${hexAll[6].hex.land}`);
+hexAll[7].classList.add(`class-${hexAll[7].hex.land}`);
 
 // Array of 4 land piece. One big array of 12 cafelkas. Each one has 4 Hexes of land//
 const hexArea = [];

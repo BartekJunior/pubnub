@@ -88,17 +88,17 @@ class Hex {
       hexArea.forEach((el) => {
         if (el.includes(this.id)) {
           el.forEach((el) => {
-            el.object.land = this.chooseLand();
-            el.object.vis = true;
-            el.classList.add(`class-${el.object.land}`);
-            el.object.checkResource();
-            el.object.checkCollectible();
+            el.hex.land = this.chooseLand();
+            el.hex.vis = true;
+            el.classList.add(`class-${el.hex.land}`);
+            el.hex.checkResource();
+            el.hex.checkCollectible();
           });
         }
       });
     };
 
-    this.createSmall(); //Fires after object begin. Create 9 small divs inside big Hex.
+    this.createSmall(); //Fires after hex begin. Create 9 small divs inside big Hex.
   }
 }
 
@@ -181,12 +181,12 @@ class Town {
           offsetAll[i][0] < this.id.offsetLeft + 130 &&
           offsetAll[i][1] < this.id.offsetTop + 130 &&
           offsetAll[i][1] > this.id.offsetTop - 130
-          // hexAll[i].object.collectible
+          // hexAll[i].hex.collectible
         ) {
           const possibleResource = new PossibleResource(
             UUID,
             hexAll[i],
-            hexAll[i].object.resource,
+            hexAll[i].hex.resource,
             false
           );
           hexAll[i].possibleResource = possibleResource;
@@ -268,7 +268,7 @@ class Merchant {
         false
       );
       this.id.childNodes[4].classList.add(townClass);
-      this.id.object.collectible = false;
+      this.id.hex.collectible = false;
       hexAll.forEach((el) => {
         if (el.possibleMove) {
           el.possibleMove.deletePossibleMove();
@@ -303,7 +303,7 @@ class Merchant {
       }
     };
 
-    this.showMerchant(); //fires after create object
+    this.showMerchant(); //fires after create hex
   }
 }
 
@@ -321,7 +321,7 @@ class PossibleMove {
       delete this.id.possibleMove;
     };
 
-    this.showPossibleMove(); //fires after create object
+    this.showPossibleMove(); //fires after create hex
 
 
   }
@@ -363,13 +363,13 @@ class PossibleResource {
 
     this.collectTempResource = () => {
       if (this.id.possibleResource && clickedRes.length < town.size) {
-        if (this.id.object.collectible && !this.collected) {
+        if (this.id.hex.collectible && !this.collected) {
           clickedRes.push(this.id.possibleResource.resource);
           this.id.possibleResource.showConfirmCollectBtn();
           this.id.possibleResource.showTempResource();
           console.log(clickedRes);
           this.collected = true;
-        } else if (!this.id.object.collectible)
+        } else if (!this.id.hex.collectible)
           alert(
             `Nie możesz zbierac z tego pola. Brakuje Ci rozwinięcia / jałowa ziemia / wróg / inne miasto etc.`
           );
@@ -386,7 +386,7 @@ class PossibleResource {
       }
     }
 
-    this.showPossibleResource(); //fires after create object
+    this.showPossibleResource(); //fires after create hex
   }
 }
 
