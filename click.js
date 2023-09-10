@@ -15,7 +15,7 @@ const setPlayer = document.getElementById(`setPlayer`);
 const sendPlayer = document.getElementById(`sendPlayer`);
 const endTurn = document.getElementById(`endTurn`);
 const startGame = document.getElementById(`startGame`);
-
+startGame.style.display = `none`;
 
 // HUD Town
 const gameContainer = document.getElementById(`gameContainer`);
@@ -62,13 +62,11 @@ window.p3GlobalResourceDiv = Array.from(
 
 const collecting = Array.from(document.querySelectorAll(`.collecting`));
 
-
-
 // --------------- CLICK LISTENERS FIRES METHODS --------------------
 // Console deafult index of clicked Hex
 hexAll.forEach((el, index) =>
   el.addEventListener(`click`, function (e) {
-    console.log(index);    
+    console.log(index);
   })
 );
 
@@ -96,7 +94,6 @@ hexAll.forEach((el) => {
     if (el.possibleMove) {
       el.merchant = new Merchant(UUID, el, window[`player` + UUID].color);
       merchantPosition.merchant.deleteMerchant();
-
 
       hexAll.forEach((el) => {
         if (el.possibleMove) {
@@ -133,7 +130,6 @@ hexAll.forEach((el) => {
   });
 });
 
-
 let town;
 // ----- show/hide hudTown  ----- //
 hexAll.forEach((el) => {
@@ -148,7 +144,7 @@ hexAll.forEach((el) => {
       town.hideContainerStructure();
       town.hideConfirmCollectBtn();
       town = undefined;
-    } 
+    }
   });
 });
 
@@ -195,7 +191,6 @@ collectResourceBtn.addEventListener(`click`, function () {
   town.possibleResource();
 });
 
-
 let clickedRes = [];
 /// Collect tempResource with global variable arr. Middle collecting ///
 hexAll.forEach((el) => {
@@ -221,9 +216,7 @@ cancelCollectBtn.addEventListener(`click`, function () {
   });
 });
 
-
 // --------------- DISABLE CLICKS ---------------- //
-
 // Disable click when you click on enemy merchant
 gameContainer.addEventListener("click", handler, true);
 function handler(e) {
@@ -233,6 +226,7 @@ function handler(e) {
   }
 }
 
+// ---------------  TURN MECHANICS ---------------- //
 // Disable click when its not your turn
 const checkActionFirst = function () {
   if (player.action === 3) {
@@ -244,8 +238,6 @@ const checkActionFirst = function () {
   }
 };
 
-
-
 // Turn mechanics.. Dont ask me.. But it works.. Please God let it work..
 const checkAction = function () {
   if (player.action > 0) {
@@ -256,11 +248,12 @@ const checkAction = function () {
     player.turnActive = false;
     player.actionDone = true;
 
-    alert(`Twoja tura sie zakonczyla, click end turn`)
+    alert(`Twoja tura sie zakonczyla, click end turn`);
     endTurn.style.display = `block`;
     clearInterval(turnInterval);
   }
 };
+
 let turnInterval;
 function startTurnInterval() {
   turnInterval = setInterval(() => {
@@ -269,21 +262,19 @@ function startTurnInterval() {
   }, 1000);
 }
 
-
-
-
-
-
-// --------------- READ MAP FUNCTION ---------------- //
+// --------------- READ MAP FUNCTIONS ---------------- //
 let hexesOnMapArr = [];
+let townsOnMapArr = [];
+
 let hexesOnMap;
+let townsOnMap;
+
+
 let merchantOnMap;
-let townOnMap;
 
-
-const readMap = () => {
+const readHex = () => {
   hexAll.forEach((el, index) => {
-    if (el.hex.type === 'hex' && el.hex.vis === true) {
+    if (el.hex.type === `hex` && el.hex.vis === true) {
       let hexOnMap = {
         type: el.hex.type,
         id: index,
@@ -297,6 +288,75 @@ const readMap = () => {
     hexesOnMap = {
       type: `hex`,
       value: hexesOnMapArr,
+    };
+  });
+};
+
+const paintHex = () => {
+  hexAll.forEach((el, index) => {
+    for (let i = 0; i < hexesOnMap.value.length; i++) {
+      if (index === hexesOnMap.value[i].id) {
+        el.hex = new Hex(
+          el,
+          hexesOnMap.value[i].land,
+          hexesOnMap.value[i].vis,
+          hexesOnMap.value[i].resource,
+          hexesOnMap.value[i].collectible
+        );
+        el.classList.add(`class-${el.hex.land}`);
+      }
+    }
+  });
+};
+
+
+
+const readTown = () => {
+  hexAll.forEach((el, index) => {
+    if (el.town.player === UUID) {
+      let townOnMap = {
+        type: el.town.type,
+        player: el.town.player,
+        id: index,
+        color: el.town.color,
+        size: el.town.size,
+        port: el.town.port,
+        academy: el.town.academy,
+        fortress: el.town.fortress,
+        market: el.town.market,
+        obelisk: el.town.obelisk,
+        temple: el.town.temple,
+        observatory: el.town.observatory,
+      };
+      townsOnMapArr.push(townOnMap);
+    }
+    townsOnMap = {
+      type: `town`,
+      value: townsOnMapArr,
+    };
+  });
+};
+
+
+const paintTown = () => {
+  hexAll.forEach((el, index) => {
+    for (let i = 0; i < townsOnMap.value.length; i++) {
+      if (index === townsOnMap.value[i].id) {
+        el.town = new Town(
+          townsOnMap.value[i].player,
+          el,
+          townsOnMap.value[i].color,
+          townsOnMap.value[i].size,
+          townsOnMap.value[i].port,
+          townsOnMap.value[i].academy,
+          townsOnMap.value[i].fortress,
+          townsOnMap.value[i].market,
+          townsOnMap.value[i].obelisk,
+          townsOnMap.value[i].temple,
+          townsOnMap.value[i].observatory,
+        );
+        el.classList.add(`townred`);
+      }
     }
   });
 };
@@ -305,17 +365,7 @@ const readMap = () => {
 
 
 
-const paintHex = () => {
-  hexAll.forEach((el, index) => {
-    for (let i = 0; i < hexesOnMap.value.length; i++) {
-      if (index === hexesOnMap.value[i].id) {
-        el.hex = new Hex(el, hexesOnMap.value[i].land, hexesOnMap.value[i].vis, hexesOnMap.value[i].resource, hexesOnMap.value[i].collectible);
-        el.classList.add(`class-${el.hex.land}`);
-      }
-    }
 
-  })
-}
 
 
 startGame.addEventListener(`click`, () => {
@@ -323,12 +373,11 @@ startGame.addEventListener(`click`, () => {
   startTurnInterval();
 });
 
-
-
-
 endTurn.addEventListener(`click`, () => {
-  readMap();
+  readHex();
+  readTown();
   publishMessage(hexesOnMap);
+  publishMessage(townsOnMap);
   publishMessage(window[`player` + UUID]);
   endTurn.style.display = `none`;
 });

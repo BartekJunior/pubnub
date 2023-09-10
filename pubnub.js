@@ -104,6 +104,11 @@ const resourceListener = (msg) => {
   window[`p` + msg.nr + `Global`].style.display = `block`;
 };
 
+
+
+
+
+
 const turnListener = (msg) => {
   if (msg.turnActive === false) {
     player.turnActive = true;
@@ -116,6 +121,11 @@ const mapListener = (msg) => {
   hexesOnMap = msg;
   paintHex();
 };
+
+const townListener = (msg) => {
+  townsOnMap = msg;
+  paintTown();
+}
 
 ///// PUBNUB /////
 const buttonClick = () => {
@@ -165,8 +175,8 @@ const setupPubNub = () => {
       }
 
 
-
-
+      
+      // TURN CONDITION FOR TURN LISTENER
       if (
         messageEvent.publisher !== UUID &&
         messageEvent.message.description.nr === player.nr - 1 &&
@@ -184,7 +194,7 @@ const setupPubNub = () => {
 
 
 
-
+      // MAP Listener condition
       if (
         messageEvent.publisher !== UUID &&
         messageEvent.message.description.type === `hex`
@@ -193,6 +203,21 @@ const setupPubNub = () => {
 
         mapListener(messageEvent.message.description);
       }
+
+      if (
+        messageEvent.publisher !== UUID &&
+        messageEvent.message.description.type === `town`
+      ) {
+        console.log(`this was town`);
+        townListener(messageEvent.message.description);
+      }
+
+
+
+
+
+
+
     },
 
     presence: (event) => {

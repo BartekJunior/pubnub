@@ -60,9 +60,13 @@ setPlayer.addEventListener(`click`, function () {
   window["player" + UUID] = new Player(UUID, num, color, false, 2, 1, 0, 0, 0, 2, 0);
   player = window[`player` + UUID];
 
+
   //set active turn to first player
-  if (player.nr === 1) player.action = 3;
-  checkActionFirst();
+  if (player.nr === 1) {
+    player.action = 3;
+    checkActionFirst();
+    startGame.style.display = `block`;
+  }
   
 
 
