@@ -14,6 +14,8 @@ p3Global.style.display = `none`;
 const setPlayer = document.getElementById(`setPlayer`);
 const sendPlayer = document.getElementById(`sendPlayer`);
 const endTurn = document.getElementById(`endTurn`);
+const startGame = document.getElementById(`startGame`);
+
 
 // HUD Town
 const gameContainer = document.getElementById(`gameContainer`);
@@ -252,6 +254,7 @@ const checkAction = function () {
   } else if (player.action <= 0) {
     hexAll.forEach((el) => el.classList.add(`delete-click`));
     player.turnActive = false;
+    player.actionDone = true;
 
     alert(`Twoja tura sie zakonczyla, click end turn`)
     endTurn.style.display = `block`;
@@ -313,6 +316,14 @@ const paintHex = () => {
 
   })
 }
+
+
+startGame.addEventListener(`click`, () => {
+  startGame.style.display = `none`;
+  startTurnInterval();
+});
+
+
 
 
 endTurn.addEventListener(`click`, () => {

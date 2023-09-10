@@ -4,6 +4,7 @@
 class Player {
   constructor(name, nr, color, turnActive, food, wood, stone, gold, idea, morale, action) {
     this.type = `player`;
+    this.actionDone = false;
     this.name = name;
     this.nr = nr;
     this.color = color;
