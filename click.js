@@ -102,7 +102,6 @@ hexAll.forEach((el) => {
       });
       el.merchant.hideHudMerchant();
       merchantPosition = undefined;
-
       window[`player` + UUID].action--;
     }
   });
@@ -134,7 +133,7 @@ let town;
 // ----- show/hide hudTown  ----- //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
-    if (el.town) {
+    if (el.town && el.town.player === UUID) {
       town = el.town;
       town.showHudTown();
     } else if (town && !el.possibleResource && clickedRes.length) {
@@ -310,10 +309,9 @@ const paintHex = () => {
 };
 
 
-
 const readTown = () => {
   hexAll.forEach((el, index) => {
-    if (el.town.player === UUID) {
+    if (el.town && el.town.player === UUID) {
       let townOnMap = {
         type: el.town.type,
         player: el.town.player,
@@ -355,7 +353,7 @@ const paintTown = () => {
           townsOnMap.value[i].temple,
           townsOnMap.value[i].observatory,
         );
-        el.classList.add(`townred`);
+        el.childNodes[4].classList.add(`town${el.town.color}`);
       }
     }
   });
