@@ -325,13 +325,13 @@ const readTown = () => {
         id: index,
         color: el.town.color,
         size: el.town.size,
-        port: el.town.port,
-        academy: el.town.academy,
-        fortress: el.town.fortress,
-        market: el.town.market,
-        obelisk: el.town.obelisk,
-        temple: el.town.temple,
-        observatory: el.town.observatory,
+        port: el.town.structure.port,
+        academy: el.town.structure.academy,
+        fortress: el.town.structure.fortress,
+        market: el.town.structure.market,
+        obelisk: el.town.structure.obelisk,
+        temple: el.town.structure.temple,
+        observatory: el.town.structure.observatory,
       };
       townsOnMapArr.push(townOnMap);
     }
@@ -342,6 +342,9 @@ const readTown = () => {
   });
 };
 
+
+
+let keysAsString = [];
 
 const paintTown = () => {
   hexAll.forEach((el, index) => {
@@ -361,6 +364,38 @@ const paintTown = () => {
           townsOnMap.value[i].observatory,
         );
         el.childNodes[4].classList.add(`town${el.town.color}`);
+
+        if (el.town.structure.port) el.town.buildStructure(`port`);
+        if (el.town.structure.academy) el.town.buildStructure(`academy`);
+        if (el.town.structure.fortress) el.town.buildStructure(`fortress`);
+        if (el.town.structure.market) el.town.buildStructure(`market`);
+        if (el.town.structure.obelisk) el.town.buildStructure(`obelisk`);
+        if (el.town.structure.temple) el.town.buildStructure(`temple`);
+        if (el.town.structure.observatory) el.town.buildStructure(`observatory`);
+
+
+
+       
+
+
+        // this.structurePlace = (building) => {
+        //   if (building === `fortress`) return 1;
+        //   else if (building === `obelisk`) return 0;
+        //   else if (building === `temple`) return 2;
+        //   else if (building === `observatory`) return 6;
+        //   else if (building === `market`) return 3;
+        //   else if (building === `academy`) return 5;
+        //   else if (building === `port`) return 7;
+        // };
+    
+        // this.buildStructure = (building) => {
+        //   this.id.childNodes[this.structurePlace(building)].classList.add(building);
+        //   this.structure[building] = true;
+        //   this.calcSize();
+        // };
+
+
+
       }
     }
   });
