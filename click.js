@@ -118,16 +118,18 @@ hexAll.forEach((el) => {
   });
 });
 
+
+
 //delete possibleResource when clicked somewhere else and not collect
-hexAll.forEach((el) => {
-  el.addEventListener(`click`, function () {
-    if (!el.possibleResource) {
-      hexAll.forEach((el) => {
-        if (el.possibleResource) el.possibleResource.deletePossibleResource();
-      });
-    }
-  });
-});
+// hexAll.forEach((el) => {
+//   el.addEventListener(`click`, function () {
+//     if (!el.possibleResource) {
+//       hexAll.forEach((el) => {
+//         if (el.possibleResource) el.possibleResource.deletePossibleResource();
+//       });
+//     }
+//   });
+// });
 
 let town;
 // ----- show/hide hudTown  ----- //
@@ -136,9 +138,14 @@ hexAll.forEach((el) => {
     if (el.town && el.town.player === UUID) {
       town = el.town;
       town.showHudTown();
+
     } else if (town && !el.possibleResource && clickedRes.length) {
       alert(`Dokończ zbieranie surowców`);
-    } else if (town && !el.possibleResource) {
+
+    } else if (town && !el.possibleResource && !clickedRes.length) {
+      hexAll.forEach(el => {
+        if (el.possibleResource) el.possibleResource.deletePossibleResource()
+      })
       town.hideHudTown();
       town.hideContainerStructure();
       town.hideConfirmCollectBtn();
@@ -219,7 +226,7 @@ cancelCollectBtn.addEventListener(`click`, function () {
 // Disable click when you click on enemy merchant
 gameContainer.addEventListener("click", handler, true);
 function handler(e) {
-  if (e.target.merchant.player !== UUID) {
+  if (e.target.merchant && e.target.merchant.player !== UUID) {
     e.stopPropagation();
     e.preventDefault();
   }

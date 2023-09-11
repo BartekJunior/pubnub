@@ -116,13 +116,16 @@ class Town {
     this.id = id;
     this.color = color;
     this.size = size;
-    this.port = port;
-    this.academy = academy;
-    this.fortress = fortress;
-    this.market = market;
-    this.obelisk = obelisk;
-    this.temple = temple;
-    this.observatory = observatory;
+
+    this.structure = {
+      port: port,
+      academy: academy,
+      fortress: fortress,
+      market: market,
+      obelisk: obelisk,
+      temple: temple,
+      observatory: observatory,
+    }
 
     this.showHudTown = () => (hudTown.style.display = `block`);
     this.hideHudTown = () => (hudTown.style.display = `none`);
@@ -147,19 +150,19 @@ class Town {
 
     this.buildStructure = (building) => {
       this.id.childNodes[this.structurePlace(building)].classList.add(building);
-      this[building] = true;
+      this.structure[building] = true;
       this.calcSize();
     };
 
     this.calcSize = () => {
       const buildings = [
-        Number(this.port),
-        Number(this.academy),
-        Number(this.fortress),
-        Number(this.market),
-        Number(this.obelisk),
-        Number(this.temple),
-        Number(this.observatory),
+        Number(this.structure.port),
+        Number(this.structure.academy),
+        Number(this.structure.fortress),
+        Number(this.structure.market),
+        Number(this.structure.obelisk),
+        Number(this.structure.temple),
+        Number(this.structure.observatory),
       ];
       this.size = buildings.reduce((partialSum, a) => partialSum + a, 0) + 1;
     };
