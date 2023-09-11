@@ -137,6 +137,11 @@ class Town {
       (containerStructure.style.display = `block`);
     this.hideContainerStructure = () =>
       (containerStructure.style.display = `none`);
+    
+    this.showContainerRecruit = () =>
+      (containerRecruit.style.display = `block`);
+    this.hideContainerRecruit = () =>
+      (containerRecruit.style.display = `none`);
 
     this.structurePlace = (building) => {
       if (building === `fortress`) return 1;
@@ -283,7 +288,7 @@ class Merchant {
       }
     };
 
-    this.showMerchant(); //fires after create hex
+    this.showMerchant(); //fires after create merchant
   }
 }
 

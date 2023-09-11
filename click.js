@@ -25,9 +25,13 @@ const settleBtn = document.getElementById(`settleBtn`);
 
 const hudTown = document.querySelector(`.hud-town`);
 const containerStructure = document.getElementById(`containerStructure`);
+const containerRecruit = document.getElementById(`containerRecruit`);
+
 
 const buildStructure = document.getElementById(`buildStructure`);
 const collectResourceBtn = document.getElementById(`collectResourceBtn`);
+const recruitBtn = document.getElementById(`recruitBtn`);
+
 const confirmCollectBtn = document.getElementById(`confirmCollectBtn`);
 const cancelCollectBtn = document.getElementById(`cancelCollectBtn`);
 
@@ -39,6 +43,14 @@ const marketBtn = document.getElementById(`marketBtn`);
 const obeliskBtn = document.getElementById(`obeliskBtn`);
 const templeBtn = document.getElementById(`templeBtn`);
 const observatoryBtn = document.getElementById(`observatoryBtn`);
+
+// troops buttons
+const merchantBtn = document.getElementById(`merchantBtn`);
+const soldierBtn = document.getElementById(`soldierBtn`);
+const cavalryBtn = document.getElementById(`cavalryBtn`);
+const elephantBtn = document.getElementById(`elephantBtn`);
+
+
 
 const res = [`food`, `wood`, `stone`, `gold`, `idea`, `morale`];
 let tempResource = {
@@ -119,7 +131,6 @@ hexAll.forEach((el) => {
 });
 
 
-
 //delete possibleResource when clicked somewhere else and not collect
 // hexAll.forEach((el) => {
 //   el.addEventListener(`click`, function () {
@@ -148,6 +159,7 @@ hexAll.forEach((el) => {
       })
       town.hideHudTown();
       town.hideContainerStructure();
+      town.hideContainerRecruit();
       town.hideConfirmCollectBtn();
       town = undefined;
     }
@@ -190,6 +202,22 @@ templeBtn.addEventListener(`click`, function () {
 observatoryBtn.addEventListener(`click`, function () {
   town.buildStructure(`observatory`);
 });
+
+
+// RECRUITING TROOPS //
+recruitBtn.addEventListener(`click`, function() {
+  town.showContainerRecruit();
+})
+
+merchantBtn.addEventListener(`click`, function() {
+  town.id.merchant = new Merchant(UUID, town.id, town.color);
+  town.hideContainerRecruit();
+})
+
+
+
+
+
 
 //click Collect resource. Start collecting //
 collectResourceBtn.addEventListener(`click`, function () {
@@ -257,6 +285,8 @@ const checkAction = function () {
     alert(`Twoja tura sie zakonczyla, click end turn`);
     endTurn.style.display = `block`;
     clearInterval(turnInterval);
+    town.hideHudTown();
+
   }
 };
 
@@ -271,12 +301,14 @@ function startTurnInterval() {
 // --------------- READ MAP FUNCTIONS ---------------- //
 let hexesOnMapArr = [];
 let townsOnMapArr = [];
+let merchantsOnMapArr = [];
+
 
 let hexesOnMap;
 let townsOnMap;
+let merchantsOnMap;
 
 
-let merchantOnMap;
 
 const readHex = () => {
   hexAll.forEach((el, index) => {
@@ -344,8 +376,6 @@ const readTown = () => {
 
 
 
-let keysAsString = [];
-
 const paintTown = () => {
   hexAll.forEach((el, index) => {
     for (let i = 0; i < townsOnMap.value.length; i++) {
@@ -372,29 +402,6 @@ const paintTown = () => {
         if (el.town.structure.obelisk) el.town.buildStructure(`obelisk`);
         if (el.town.structure.temple) el.town.buildStructure(`temple`);
         if (el.town.structure.observatory) el.town.buildStructure(`observatory`);
-
-
-
-       
-
-
-        // this.structurePlace = (building) => {
-        //   if (building === `fortress`) return 1;
-        //   else if (building === `obelisk`) return 0;
-        //   else if (building === `temple`) return 2;
-        //   else if (building === `observatory`) return 6;
-        //   else if (building === `market`) return 3;
-        //   else if (building === `academy`) return 5;
-        //   else if (building === `port`) return 7;
-        // };
-    
-        // this.buildStructure = (building) => {
-        //   this.id.childNodes[this.structurePlace(building)].classList.add(building);
-        //   this.structure[building] = true;
-        //   this.calcSize();
-        // };
-
-
 
       }
     }
