@@ -316,32 +316,37 @@ const readMerchant = () => {
 
 const paintMerchant = () => {
   hexAll.forEach((el, index) => {
+    if (el.merchant) {
 
+      el.merchant.deleteMerchant();
 
-      if (el.merchant && el.merchant.player === merchantsOnMap.sender) {
-        console.log(`deleting merchant from ${index}`);
-        // console.log(messageEvent.publisher);
-        el.merchant.deleteMerchant();
+      el.style.backgroundColor = `black`;
+      console.log(`deleting merchant from ${index}`);
 
-      } else if (!el.merchant) {
+      
 
-        for (let i = 0; i < merchantsOnMap.value.length; i++) {
-          if (index === merchantsOnMap.value[i].id) 
-          {
-            console.log(`creating merchant on ${index}`);
-    
-            el.merchant = new Merchant(
-              merchantsOnMap.value[i].player,
-              el,
-              merchantsOnMap.value[i].color
-            );
-    
-            el.classList.add(`merchant${el.merchant.color}`);
-          }
+    }
+
+    if (index === 15) {
+      el.style.backgroundColor = `black`;
+    }
+
+    if (!el.merchant) {
+
+      for (let i = 0; i < merchantsOnMap.value.length; i++) {
+        if (index === merchantsOnMap.value[i].id) {
+          console.log(`creating merchant on ${index}`);
+
+          el.merchant = new Merchant(
+            merchantsOnMap.value[i].player,
+            el,
+            merchantsOnMap.value[i].color
+          );
+
+          // el.classList.add(`merchant${el.merchant.color}`);
         }
       }
-
-  
+    }
   });
 };
 
