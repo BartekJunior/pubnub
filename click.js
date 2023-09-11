@@ -27,7 +27,6 @@ const hudTown = document.querySelector(`.hud-town`);
 const containerStructure = document.getElementById(`containerStructure`);
 const containerRecruit = document.getElementById(`containerRecruit`);
 
-
 const buildStructure = document.getElementById(`buildStructure`);
 const collectResourceBtn = document.getElementById(`collectResourceBtn`);
 const recruitBtn = document.getElementById(`recruitBtn`);
@@ -49,8 +48,6 @@ const merchantBtn = document.getElementById(`merchantBtn`);
 const soldierBtn = document.getElementById(`soldierBtn`);
 const cavalryBtn = document.getElementById(`cavalryBtn`);
 const elephantBtn = document.getElementById(`elephantBtn`);
-
-
 
 const res = [`food`, `wood`, `stone`, `gold`, `idea`, `morale`];
 let tempResource = {
@@ -130,7 +127,6 @@ hexAll.forEach((el) => {
   });
 });
 
-
 //delete possibleResource when clicked somewhere else and not collect
 // hexAll.forEach((el) => {
 //   el.addEventListener(`click`, function () {
@@ -149,14 +145,12 @@ hexAll.forEach((el) => {
     if (el.town && el.town.player === UUID) {
       town = el.town;
       town.showHudTown();
-
     } else if (town && !el.possibleResource && clickedRes.length) {
       alert(`Dokończ zbieranie surowców`);
-
     } else if (town && !el.possibleResource && !clickedRes.length) {
-      hexAll.forEach(el => {
-        if (el.possibleResource) el.possibleResource.deletePossibleResource()
-      })
+      hexAll.forEach((el) => {
+        if (el.possibleResource) el.possibleResource.deletePossibleResource();
+      });
       town.hideHudTown();
       town.hideContainerStructure();
       town.hideContainerRecruit();
@@ -203,20 +197,15 @@ observatoryBtn.addEventListener(`click`, function () {
   town.buildStructure(`observatory`);
 });
 
-
 //----------- RECRUITING TROOPS -----------//
-recruitBtn.addEventListener(`click`, function() {
+recruitBtn.addEventListener(`click`, function () {
   town.showContainerRecruit();
-})
+});
 
-merchantBtn.addEventListener(`click`, function() {
+merchantBtn.addEventListener(`click`, function () {
   town.id.merchant = new Merchant(UUID, town.id, town.color);
   town.hideContainerRecruit();
-})
-
-
-
-
+});
 
 //----------- COLLECTING RESOURCE -----------//
 //click Collect resource. Start collecting //
@@ -250,8 +239,6 @@ cancelCollectBtn.addEventListener(`click`, function () {
   });
 });
 
-
-
 // --------------- DISABLE CLICKS ---------------- //
 // Disable click when you click on enemy merchant
 gameContainer.addEventListener("click", handler, true);
@@ -261,8 +248,6 @@ function handler(e) {
     e.preventDefault();
   }
 }
-
-
 
 // ---------------  TURN MECHANICS ---------------- //
 // Disable click when its not your turn
@@ -290,7 +275,6 @@ const checkAction = function () {
     endTurn.style.display = `block`;
     clearInterval(turnInterval);
     town.hideHudTown();
-
   }
 };
 
@@ -307,11 +291,9 @@ let hexesOnMapArr = [];
 let townsOnMapArr = [];
 let merchantsOnMapArr = [];
 
-
 let hexesOnMap;
 let townsOnMap;
 let merchantsOnMap;
-
 
 const readMerchant = () => {
   hexAll.forEach((el, index) => {
@@ -326,6 +308,7 @@ const readMerchant = () => {
     }
     merchantsOnMap = {
       type: `merchant`,
+      sender: UUID,
       value: merchantsOnMapArr,
     };
   });
@@ -333,20 +316,34 @@ const readMerchant = () => {
 
 const paintMerchant = () => {
   hexAll.forEach((el, index) => {
-    for (let i = 0; i < merchantsOnMap.value.length; i++) {
-      if (index === merchantsOnMap.value[i].id) {
 
-        el.merchant = new Merchant(
-          merchantsOnMap.value[i].player, 
-          el, 
-          merchantsOnMap.value[i].color);
 
-        el.classList.add(`merchant-${el.merchant.color}`);
+      if (el.merchant && el.merchant.player === merchantsOnMap.sender) {
+        console.log(`deleting merchant from ${index}`);
+        // console.log(messageEvent.publisher);
+        el.merchant.deleteMerchant();
+
+      } else if (!el.merchant) {
+
+        for (let i = 0; i < merchantsOnMap.value.length; i++) {
+          if (index === merchantsOnMap.value[i].id) 
+          {
+            console.log(`creating merchant on ${index}`);
+    
+            el.merchant = new Merchant(
+              merchantsOnMap.value[i].player,
+              el,
+              merchantsOnMap.value[i].color
+            );
+    
+            el.classList.add(`merchant${el.merchant.color}`);
+          }
+        }
       }
-    }
+
+  
   });
 };
-
 
 const readHex = () => {
   hexAll.forEach((el, index) => {
@@ -385,7 +382,6 @@ const paintHex = () => {
   });
 };
 
-
 const readTown = () => {
   hexAll.forEach((el, index) => {
     if (el.town && el.town.player === UUID) {
@@ -412,8 +408,6 @@ const readTown = () => {
   });
 };
 
-
-
 const paintTown = () => {
   hexAll.forEach((el, index) => {
     for (let i = 0; i < townsOnMap.value.length; i++) {
@@ -429,7 +423,7 @@ const paintTown = () => {
           townsOnMap.value[i].market,
           townsOnMap.value[i].obelisk,
           townsOnMap.value[i].temple,
-          townsOnMap.value[i].observatory,
+          townsOnMap.value[i].observatory
         );
         el.childNodes[4].classList.add(`town${el.town.color}`);
 
@@ -439,19 +433,12 @@ const paintTown = () => {
         if (el.town.structure.market) el.town.buildStructure(`market`);
         if (el.town.structure.obelisk) el.town.buildStructure(`obelisk`);
         if (el.town.structure.temple) el.town.buildStructure(`temple`);
-        if (el.town.structure.observatory) el.town.buildStructure(`observatory`);
-
+        if (el.town.structure.observatory)
+          el.town.buildStructure(`observatory`);
       }
     }
   });
 };
-
-
-
-
-
-
-
 
 startGame.addEventListener(`click`, () => {
   startGame.style.display = `none`;
