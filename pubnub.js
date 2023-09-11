@@ -127,6 +127,13 @@ const townListener = (msg) => {
   paintTown();
 }
 
+const merchantListener = (msg) => {
+  merchantsOnMap = msg;
+  paintMerchant();
+}
+
+
+
 ///// PUBNUB /////
 const buttonClick = () => {
   publishMessage(input.value);
@@ -200,7 +207,6 @@ const setupPubNub = () => {
         messageEvent.message.description.type === `hex`
       ) {
         console.log(`this was hex`);
-
         mapListener(messageEvent.message.description);
       }
 
@@ -212,7 +218,13 @@ const setupPubNub = () => {
         townListener(messageEvent.message.description);
       }
 
-
+      if (
+        messageEvent.publisher !== UUID &&
+        messageEvent.message.description.type === `merchant`
+      ) {
+        console.log(`this was merchant`);
+        merchantListener(messageEvent.message.description);
+      }
 
 
 

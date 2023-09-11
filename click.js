@@ -204,7 +204,7 @@ observatoryBtn.addEventListener(`click`, function () {
 });
 
 
-// RECRUITING TROOPS //
+//----------- RECRUITING TROOPS -----------//
 recruitBtn.addEventListener(`click`, function() {
   town.showContainerRecruit();
 })
@@ -218,7 +218,7 @@ merchantBtn.addEventListener(`click`, function() {
 
 
 
-
+//----------- COLLECTING RESOURCE -----------//
 //click Collect resource. Start collecting //
 collectResourceBtn.addEventListener(`click`, function () {
   town.hideContainerStructure();
@@ -250,6 +250,8 @@ cancelCollectBtn.addEventListener(`click`, function () {
   });
 });
 
+
+
 // --------------- DISABLE CLICKS ---------------- //
 // Disable click when you click on enemy merchant
 gameContainer.addEventListener("click", handler, true);
@@ -259,6 +261,8 @@ function handler(e) {
     e.preventDefault();
   }
 }
+
+
 
 // ---------------  TURN MECHANICS ---------------- //
 // Disable click when its not your turn
@@ -308,6 +312,40 @@ let hexesOnMap;
 let townsOnMap;
 let merchantsOnMap;
 
+
+const readMerchant = () => {
+  hexAll.forEach((el, index) => {
+    if (el.merchant) {
+      let merchantOnMap = {
+        type: el.merchant.type,
+        player: el.merchant.player,
+        id: index,
+        color: el.merchant.color,
+      };
+      merchantsOnMapArr.push(merchantOnMap);
+    }
+    merchantsOnMap = {
+      type: `merchant`,
+      value: merchantsOnMapArr,
+    };
+  });
+};
+
+const paintMerchant = () => {
+  hexAll.forEach((el, index) => {
+    for (let i = 0; i < merchantsOnMap.value.length; i++) {
+      if (index === merchantsOnMap.value[i].id) {
+
+        el.merchant = new Merchant(
+          merchantsOnMap.value[i].player, 
+          el, 
+          merchantsOnMap.value[i].color);
+
+        el.classList.add(`merchant-${el.merchant.color}`);
+      }
+    }
+  });
+};
 
 
 const readHex = () => {
@@ -423,8 +461,11 @@ startGame.addEventListener(`click`, () => {
 endTurn.addEventListener(`click`, () => {
   readHex();
   readTown();
+  readMerchant();
   publishMessage(hexesOnMap);
   publishMessage(townsOnMap);
+  publishMessage(merchantsOnMap);
+
   publishMessage(window[`player` + UUID]);
   endTurn.style.display = `none`;
 });
