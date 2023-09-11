@@ -67,18 +67,20 @@ sendPlayer.addEventListener(`click`, function () {
 });
 
 const playerListener = (msg) => {
-  // console.log(window[`player` + UUID].name);
-  // console.log(msg.name);
   if (msg.name !== window[`player` + UUID].name)
     window[`player` + msg.name] = msg;
 
-  //send merchant to another user
-  if (msg.nr == 1)
-    hexAll[0].merchant = new Merchant(msg.name, hexAll[0], msg.color);
-  else if (msg.nr == 2)
-    hexAll[35].merchant = new Merchant(msg.name, hexAll[35], msg.color);
-  else if (msg.nr == 3)
-    hexAll[5].merchant = new Merchant(msg.name, hexAll[5], msg.color);
+  //send merchant to another users
+  if (!turnInterval) {
+    console.log(`CREATE START MERCHANTS`);
+    
+    if (msg.nr == 1)
+      hexAll[0].merchant = new Merchant(msg.name, hexAll[0], msg.color);
+    else if (msg.nr == 2)
+      hexAll[35].merchant = new Merchant(msg.name, hexAll[35], msg.color);
+    else if (msg.nr == 3)
+      hexAll[5].merchant = new Merchant(msg.name, hexAll[5], msg.color);
+  }
 
   // show start resource
   // for (let i = 0; i < window.p1GlobalResourceDiv.length; i++) {
@@ -104,11 +106,6 @@ const resourceListener = (msg) => {
   window[`p` + msg.nr + `Global`].style.display = `block`;
 };
 
-
-
-
-
-
 const turnListener = (msg) => {
   if (msg.turnActive === false) {
     player.turnActive = true;
@@ -125,14 +122,12 @@ const mapListener = (msg) => {
 const townListener = (msg) => {
   townsOnMap = msg;
   paintTown();
-}
+};
 
 const merchantListener = (msg) => {
   merchantsOnMap = msg;
   paintMerchant();
-}
-
-
+};
 
 ///// PUBNUB /////
 const buttonClick = () => {
@@ -181,8 +176,6 @@ const setupPubNub = () => {
         console.log(messageEvent);
       }
 
-
-      
       // TURN CONDITION FOR TURN LISTENER
       if (
         messageEvent.publisher !== UUID &&
@@ -197,9 +190,6 @@ const setupPubNub = () => {
         messageEvent.message.description.nr === playersNumber
       )
         turnListener(messageEvent.message.description);
-
-
-
 
       // MAP Listener condition
       if (
@@ -225,11 +215,6 @@ const setupPubNub = () => {
         console.log(`this was merchant`);
         merchantListener(messageEvent.message.description);
       }
-
-
-
-
-
     },
 
     presence: (event) => {

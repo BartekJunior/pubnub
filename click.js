@@ -317,14 +317,10 @@ const readMerchant = () => {
 const paintMerchant = () => {
   hexAll.forEach((el, index) => {
     if (el.merchant) {
-
       el.merchant.deleteMerchant();
 
       el.style.backgroundColor = `black`;
       console.log(`deleting merchant from ${index}`);
-
-      
-
     }
 
     if (index === 15) {
@@ -332,7 +328,6 @@ const paintMerchant = () => {
     }
 
     if (!el.merchant) {
-
       for (let i = 0; i < merchantsOnMap.value.length; i++) {
         if (index === merchantsOnMap.value[i].id) {
           console.log(`creating merchant on ${index}`);
@@ -457,6 +452,14 @@ endTurn.addEventListener(`click`, () => {
   publishMessage(hexesOnMap);
   publishMessage(townsOnMap);
   publishMessage(merchantsOnMap);
+
+  hexesOnMapArr = [];
+  townsOnMapArr = [];
+  merchantsOnMapArr = [];
+
+  hexesOnMap = undefined;
+  townsOnMap = undefined;
+  merchantsOnMap = undefined;
 
   publishMessage(window[`player` + UUID]);
   endTurn.style.display = `none`;
