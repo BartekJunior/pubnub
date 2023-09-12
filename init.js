@@ -64,10 +64,11 @@ setPlayer.addEventListener(`click`, function () {
   //set active turn to first player
   if (player.nr === 1) {
     player.action = 3;
-    checkActionFirst();
+    // checkActionFirst();
     startGame.style.display = `block`;
   }
-  
+  checkActionFirst();
+
 
 
   //add individual merchant for each user
