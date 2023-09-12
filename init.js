@@ -64,14 +64,11 @@ setPlayer.addEventListener(`click`, function () {
   //set active turn to first player
   if (player.nr === 1) {
     player.action = 3;
-    // checkActionFirst();
     startGame.style.display = `block`;
   }
   checkActionFirst();
 
-
-
-  //add individual merchant for each user
+  //add individual merchant for each user (seen only for current user)
   if (player.nr == 1) hexAll[0].merchant = new Merchant(UUID, hexAll[0], player.color);
   else if (player.nr == 2) hexAll[35].merchant = new Merchant(UUID, hexAll[35], player.color);
   else if (player.nr == 3) hexAll[5].merchant = new Merchant(UUID, hexAll[5], player.color);

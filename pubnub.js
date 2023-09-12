@@ -11,7 +11,7 @@ firstDiv.style.backgroundColor = `red`;
 // ------------ TURN CHANGE BART is the first player. TURN FUNCTION MADE FOR X PLAYERS!!! ------------- //
 // PlayersNumber tells how many players are in the game! IT MUST BE THE RIGHT VALUE!
 let onlineUsers = new Set();
-const playersNumber = 3;
+const playersNumber = 2;
 let turn = 1;
 
 document.addEventListener(
@@ -64,7 +64,7 @@ let same = {
 
 sendPlayer.addEventListener(`click`, function () {
   publishMessage(window["player" + UUID]);
-  player.start = undefined;
+  player.start = undefined; // disable player.start to not sending the position of first merchant anymore
 });
 
 
