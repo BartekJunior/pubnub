@@ -143,6 +143,8 @@ let town;
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     if (el.town && el.town.player === UUID) {
+      if (town) town.id.hex.collectible = false;
+      else 
       town = el.town;
       town.showHudTown();
     } else if (town && !el.possibleResource && clickedRes.length) {
@@ -150,6 +152,8 @@ hexAll.forEach((el) => {
     } else if (town && !el.possibleResource && !clickedRes.length) {
       hexAll.forEach((el) => {
         if (el.possibleResource) el.possibleResource.deletePossibleResource();
+        town.id.hex.collectible = false;
+
       });
       town.hideHudTown();
       town.hideContainerStructure();
@@ -318,20 +322,14 @@ const paintMerchant = () => {
   hexAll.forEach((el, index) => {
     if (el.merchant) {
       el.merchant.deleteMerchant();
-
-      el.style.backgroundColor = `black`;
       console.log(`deleting merchant from ${index}`);
-    }
-
-    if (index === 15) {
-      el.style.backgroundColor = `black`;
     }
 
     if (!el.merchant) {
       for (let i = 0; i < merchantsOnMap.value.length; i++) {
         if (index === merchantsOnMap.value[i].id) {
+          
           console.log(`creating merchant on ${index}`);
-
           el.merchant = new Merchant(
             merchantsOnMap.value[i].player,
             el,

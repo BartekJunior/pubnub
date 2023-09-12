@@ -195,6 +195,7 @@ class Town {
           hexAll[i].possibleResource = possibleResource;
         }
       }
+      town.id.hex.collectible = true;
     };
 
     this.updateGlobalResource = () => {
