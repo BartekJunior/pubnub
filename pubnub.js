@@ -11,7 +11,7 @@ firstDiv.style.backgroundColor = `red`;
 // ------------ TURN CHANGE BART is the first player. TURN FUNCTION MADE FOR X PLAYERS!!! ------------- //
 // PlayersNumber tells how many players are in the game! IT MUST BE THE RIGHT VALUE!
 let onlineUsers = new Set();
-const playersNumber = 2;
+const playersNumber = 3;
 let turn = 1;
 
 document.addEventListener(
@@ -64,34 +64,36 @@ let same = {
 
 sendPlayer.addEventListener(`click`, function () {
   publishMessage(window["player" + UUID]);
+  player.start = undefined;
 });
+
 
 const playerListener = (msg) => {
   if (msg.name !== window[`player` + UUID].name)
     window[`player` + msg.name] = msg;
 
   //send merchant to another users
-  if (!turnInterval) {
-    console.log(`CREATE START MERCHANTS`);
-    
-    if (msg.nr == 1)
-      hexAll[0].merchant = new Merchant(msg.name, hexAll[0], msg.color);
-    else if (msg.nr == 2)
-      hexAll[35].merchant = new Merchant(msg.name, hexAll[35], msg.color);
-    else if (msg.nr == 3)
-      hexAll[5].merchant = new Merchant(msg.name, hexAll[5], msg.color);
-  }
+  console.log(`CREATE START MERCHANTS`);
 
-  // show start resource
-  // for (let i = 0; i < window.p1GlobalResourceDiv.length; i++) {
-  //   window[`p` + msg.nr + `GlobalResourceDiv`][i].innerHTML =
-  //     msg.resource[res[i]];
-  // }
 
-  // Show player name and whole playerGlobalHud
-  // window[`p` + msg.nr + `Global`].children[0].innerHTML = msg.name;
-  // window[`p` + msg.nr + `Global`].children[0].style.backgroundColor = msg.color;
-  // window[`p` + msg.nr + `Global`].style.display = `block`;
+  if (msg.nr === 1 && msg.start === 0)
+    hexAll[msg.start].merchant = new Merchant(
+      msg.name,
+      hexAll[msg.start],
+      msg.color
+    );
+  else if (msg.nr === 2 && msg.start)
+    hexAll[msg.start].merchant = new Merchant(
+      msg.name,
+      hexAll[msg.start],
+      msg.color
+    );
+  else if (msg.nr === 3 && msg.start)
+    hexAll[msg.start].merchant = new Merchant(
+      msg.name,
+      hexAll[msg.start],
+      msg.color
+    );
 };
 
 const resourceListener = (msg) => {

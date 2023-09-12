@@ -20,6 +20,15 @@ class Player {
       morale: morale,
     }
 
+    this.checkStart = () => {
+      if (this.nr == 1) return 0
+      else if (this.nr == 2) return 35
+      else if (this.nr == 3) return 5
+    }
+
+    this.start = this.checkStart();
+
+
   }
 }
 
