@@ -304,6 +304,78 @@ class Merchant {
 
 
 
+///// CLASS TROOPS /////
+let troopsPosition;
+class Troops {
+  constructor(player, id, color, size) {
+    this.type = `troops`;
+    this.player = player;
+    this.id = id;
+    this.color = color;
+    this.size = size;
+    
+    this.showHudTroops = () => (hudTroops.style.display = `block`);
+    this.hideHudTroops = () => (hudTroops.style.display = `none`);
+
+    this.deleteTroops = () => {
+      // id.classList.remove(troopsClass);
+      delete this.id.troops;
+    };
+
+    this.showtroops(); //fires after create merchant
+  }
+}
+
+///// CLASS CAVALRY /////
+let cavalryPosition;
+class Cavalry {
+  constructor(player, id, color, size) {
+    this.type = `cavalry`;
+    this.player = player;
+    this.id = id;
+    this.color = color;
+    
+    const cavalryClass = `cavalry${color}`;
+
+    this.showCavalry = () => id.classList.add(cavalryClass);
+    this.hideCavalry = () => id.classList.remove(cavalryClass);
+    this.showHudCavalry = () => (hudCavalry.style.display = `block`);
+    this.hideHudCavalry = () => (hudCavalry.style.display = `none`);
+
+    this.deleteCavalry = () => {
+      id.classList.remove(cavalryClass);
+      delete this.id.cavalry;
+    };
+
+    this.whereToGo = () => {
+      cavalryPosition = this.id;
+      let offsetAll = [];
+      for (let i = 0; i < hexAll.length; i++) {
+        offsetAll[i] = [hexAll[i].offsetLeft, hexAll[i].offsetTop];
+      }
+
+      this.showHudCavalry();
+
+      for (let i = 0; i < hexAll.length; i++) {
+        if (
+          offsetAll[i][0] > this.id.offsetLeft - 130 &&
+          offsetAll[i][0] < this.id.offsetLeft + 130 &&
+          offsetAll[i][1] < this.id.offsetTop + 130 &&
+          offsetAll[i][1] > this.id.offsetTop - 130 &&
+          !hexAll[i].cavalry
+        ) {
+          const possibleMove = new PossibleMove(UUID, hexAll[i]);
+          hexAll[i].possibleMove = possibleMove;
+        }
+      }
+    };
+
+    this.showcavalry(); //fires after create merchant
+  }
+}
+
+
+
 ///// CLASS POSSIBLEMOVE /////
 class PossibleMove {
   constructor(player, id) {
