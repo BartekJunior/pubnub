@@ -189,15 +189,39 @@ class Town {
       this.size = buildings.reduce((partialSum, a) => partialSum + a, 0) + 1;
     };
 
-    // Recruit soldiers //
-    this.recruitSoldier = (soldier) => {
-      if (!this.id.troops)
-        this.id.troops = new Troops(this.player, this.id, this.color);
-      tempTroops.push(new Cavalry(this.player, this.color));
-
-      // this.id.childNodes[8].classList.add(soldier + this.color);
+    //-------------- Recruit soldiers in Town --------------//
+    this.recruitTempSoldier = (soldier) => {
+      if (soldier === `infantry`) tempSoldiers.push(new Infantry(this.player, this.color));
+      if (soldier === `cavalry`) tempSoldiers.push(new Cavalry(this.player, this.color));
+      if (soldier === `elephant`) tempSoldiers.push(new Elephant(this.player, this.color));
+      this.updateRecruitNr();
     };
 
+    
+    this.updateRecruitNr = () => {
+      infantryRecruitNr.textContent = tempSoldiers.filter(item => item.type === `infantry`).length
+      cavalryRecruitNr.textContent = tempSoldiers.filter(item => item.type === `cavalry`).length;
+      elephantRecruitNr.textContent = tempSoldiers.filter(item => item.type === `elephant`).length
+    }
+
+    this.confirmRecruit = () => {
+      if (!this.id.troops) {this.id.troops = new Troops(this.player, this.id, this.color)};
+        this.id.troops.soldiers.push(...tempSoldiers);
+        tempSoldiers = [];
+        this.updateRecruitNr();
+
+        // Now you have to paint the soldiers on the Town map. Some like this under...
+      // this.id.childNodes[8].classList.add(soldier + this.color);
+    }
+
+
+    this.cancelRecruit = () => {
+      tempSoldiers = [];
+      this.updateRecruitNr();
+    }
+
+
+    //-------------- Collect Resource in Town --------------//
     this.possibleResource = () => {
       let offsetAll = [];
       for (let i = 0; i < hexAll.length; i++) {
@@ -367,7 +391,6 @@ class Troops {
 
 ///// CLASS CAVALRY /////
 // let cavalryPosition;
-
 class Cavalry {
   constructor(player, color) {
     this.type = `cavalry`;
@@ -376,19 +399,56 @@ class Cavalry {
 
     // const cavalryClass = `cavalry${color}`;
 
-    this.showCavalry = () => id.classList.add(cavalryClass);
-    this.hideCavalry = () => id.classList.remove(cavalryClass);
-    // this.showHudCavalry = () => (hudCavalry.style.display = `block`);
-    // this.hideHudCavalry = () => (hudCavalry.style.display = `none`);
+    // this.showCavalry = () => id.classList.add(cavalryClass);
+    // this.hideCavalry = () => id.classList.remove(cavalryClass);
 
     this.deleteCavalry = () => {
       id.classList.remove(cavalryClass);
       delete this.id.cavalry;
     };
-
     // this.showcavalry(); //fires after create merchant
   }
 }
+
+class Infantry {
+  constructor(player, color) {
+    this.type = `infantry`;
+    this.player = player;
+    this.color = color;
+
+    // const infantryClass = `infantry${color}`;
+
+    // this.showInfantry = () => id.classList.add(infantryClass);
+    // this.hideInfantry = () => id.classList.remove(infantryClass);
+
+    this.deleteInfantry = () => {
+      id.classList.remove(infantryClass);
+      delete this.id.infantry;
+    };
+    // this.showinfantry(); //fires after create merchant
+  }
+}
+
+class Elephant {
+  constructor(player, color) {
+    this.type = `elephant`;
+    this.player = player;
+    this.color = color;
+
+    // const elephantClass = `elephant${color}`;
+
+    // this.showElephant = () => id.classList.add(elephantClass);
+    // this.hideElephant = () => id.classList.remove(elephantClass);
+
+    this.deleteElephant = () => {
+      id.classList.remove(elephantClass);
+      delete this.id.elephant;
+    };
+    // this.showinfantry(); //fires after create merchant
+  }
+}
+
+
 
 ///// CLASS POSSIBLEMOVE /////
 class PossibleMove {

@@ -260,7 +260,7 @@ h2 {
 /* ------------ HUD Town ----------------- */
 .game-container {
   margin-top: 80px;
-  height: 800px;
+  height: 630px;
 }
 
 .hud-global {
@@ -290,6 +290,10 @@ h2 {
 
 #confirmCollectBtn, #cancelCollectBtn {
   display: none;
+}
+
+#confirmRecruitBtn, #cancelRecruitBtn {
+  display: block;
 }
 
 

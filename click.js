@@ -49,8 +49,17 @@ const infantryBtn = document.getElementById(`infantryBtn`);
 const cavalryBtn = document.getElementById(`cavalryBtn`);
 const elephantBtn = document.getElementById(`elephantBtn`);
 
+const infantryRecruitNr = document.getElementById(`infantryRecruitNr`);
+const cavalryRecruitNr = document.getElementById(`cavalryRecruitNr`);
+const elephantRecruitNr = document.getElementById(`elephantRecruitNr`);
+
+
+const confirmRecruitBtn = document.getElementById(`confirmRecruitBtn`);
+const cancelRecruitBtn = document.getElementById(`cancelRecruitBtn`);
+
+
 // troops variables
-let tempTroops = [];
+let tempSoldiers = [];
 
 
 //resource variables
@@ -132,16 +141,6 @@ hexAll.forEach((el) => {
   });
 });
 
-//delete possibleResource when clicked somewhere else and not collect
-// hexAll.forEach((el) => {
-//   el.addEventListener(`click`, function () {
-//     if (!el.possibleResource) {
-//       hexAll.forEach((el) => {
-//         if (el.possibleResource) el.possibleResource.deletePossibleResource();
-//       });
-//     }
-//   });
-// });
 
 let town;
 // ----- show/hide hudTown  ----- //
@@ -207,24 +206,42 @@ observatoryBtn.addEventListener(`click`, function () {
   town.buildStructure(`observatory`);
 });
 
+
+
+
 //----------- RECRUITING TROOPS -----------//
+// HUD buttons Recruit //
 recruitBtn.addEventListener(`click`, function () {
   town.showContainerRecruit();
 });
 
+confirmRecruitBtn.addEventListener(`click`, function () {
+  town.confirmRecruit();
+});
+
+cancelRecruitBtn.addEventListener(`click`, function () {
+  town.cancelRecruit();
+});
+
+
+// Recruiting //
 merchantBtn.addEventListener(`click`, function () {
   town.id.merchant = new Merchant(UUID, town.id, town.color);
   // town.hideContainerRecruit();
 });
 
-
-
+infantryBtn.addEventListener(`click`, function () {
+  town.recruitTempSoldier(`infantry`);
+});
 
 cavalryBtn.addEventListener(`click`, function () {
-  // town.id.troops = new Troops(town.player, town.id, town.color);
-  town.recruitSoldier(`cavalry`);
-  // town.hideContainerRecruit();
+  town.recruitTempSoldier(`cavalry`);
 });
+
+elephantBtn.addEventListener(`click`, function () {
+  town.recruitTempSoldier(`elephant`);
+});
+
 
 
 
