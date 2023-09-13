@@ -110,6 +110,8 @@ class Hex {
       });
     };
 
+
+
     this.createSmall(); //Fires after hex begin. Create 9 small divs inside big Hex.
   }
 }
@@ -210,35 +212,14 @@ class Town {
       if (this.id.troops && (this.id.troops.soldiers.length + tempSoldiers.length) <= 4) {
 
         this.id.troops.soldiers.push(...tempSoldiers);
-        this.installRecruitedTroops();
+        this.id.troops.showTroops();
+        tempSoldiers = [];
         this.updateRecruitNr();
       } else alert(`Na jednym Hexie mogą znajdować sie maksymalnie 4 jednostki wojskowe`)
         
         // Now you have to paint the soldiers on the Town map. Some like this under...
       // this.id.childNodes[8].classList.add(soldier + this.color);
     }
-
-    this.installRecruitedTroops = () => {
-      for (let i = 0; i < tempSoldiers.length; i++) {
-        if (tempSoldiers[i].type === `cavalry`) {
-          const newCavalry = document.createElement(`div`);
-          newCavalry.classList.add(`cavalry${this.color}Hud`);
-          cavalryRecruited.appendChild(newCavalry);
-        } 
-        if (tempSoldiers[i].type === `infantry`) {
-          const newInfantry = document.createElement(`div`);
-          newInfantry.classList.add(`infantry${this.color}Hud`);
-          infantryRecruited.appendChild(newInfantry);
-        }
-        if (tempSoldiers[i].type === `elephant`) {
-          const newElephant = document.createElement(`div`);
-          newElephant.classList.add(`elephant${this.color}Hud`);
-          elephantRecruited.appendChild(newElephant);
-        }
-      }
-      tempSoldiers = [];
-    }
-
 
     this.cancelRecruit = () => {
       tempSoldiers = [];
@@ -381,6 +362,26 @@ class Troops {
 
     this.showHudTroops = () => (hudTroops.style.display = `block`);
     this.hideHudTroops = () => (hudTroops.style.display = `none`);
+
+    this.showTroops = () => {
+      for (let i = 0; i < tempSoldiers.length; i++) {
+        if (tempSoldiers[i].type === `cavalry`) {
+          const newCavalry = document.createElement(`div`);
+          newCavalry.classList.add(`cavalry${this.color}Hud`);
+          cavalryRecruited.appendChild(newCavalry);
+        } 
+        if (tempSoldiers[i].type === `infantry`) {
+          const newInfantry = document.createElement(`div`);
+          newInfantry.classList.add(`infantry${this.color}Hud`);
+          infantryRecruited.appendChild(newInfantry);
+        }
+        if (tempSoldiers[i].type === `elephant`) {
+          const newElephant = document.createElement(`div`);
+          newElephant.classList.add(`elephant${this.color}Hud`);
+          elephantRecruited.appendChild(newElephant);
+        }
+      }
+    }
 
  
     this.deleteTroops = () => {

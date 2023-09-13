@@ -172,6 +172,16 @@ hexAll.forEach((el) => {
   });
 });
 
+
+// ----- show Troops  ----- //
+// hexAll.forEach((el) => {
+//   el.addEventListener(`click`, function () {
+//     if (el.troops) el.troops.showTroops();
+//   })
+// });
+
+
+
 // settle Town and build structures //
 settleBtn.addEventListener(`click`, function () {
   merchantPosition.merchant.settle();
