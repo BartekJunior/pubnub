@@ -178,6 +178,28 @@ h2 {
   /* position: relative; */
 }
 
+/* ------------ Soldiers Images ----------------- */
+.cavalryred {
+  background-image: url(./img/merchantRed.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50%;
+}
+
+
+.soldier-div {
+
+}
+
+.soldier-img {
+  display: flex;
+  width: 100px;
+  height: 60px;
+  background-color: #2984b9;
+}
+
+
+/* ------------ Structure Images ----------------- */
 .fortress {
   background-image: url(./img/fortress.png);
   background-repeat: no-repeat;
@@ -235,7 +257,7 @@ h2 {
 }
 
 
-/* ------------ HUD Tlown ----------------- */
+/* ------------ HUD Town ----------------- */
 .game-container {
   margin-top: 80px;
   height: 800px;
@@ -266,9 +288,10 @@ h2 {
   display: flex;
 }
 
-#confirmCollectBtn {
+#confirmCollectBtn, #cancelCollectBtn {
   display: none;
 }
+
 
 .collecting {
   width: 150px;

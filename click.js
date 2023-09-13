@@ -45,10 +45,15 @@ const observatoryBtn = document.getElementById(`observatoryBtn`);
 
 // troops buttons
 const merchantBtn = document.getElementById(`merchantBtn`);
-const soldierBtn = document.getElementById(`soldierBtn`);
+const infantryBtn = document.getElementById(`infantryBtn`);
 const cavalryBtn = document.getElementById(`cavalryBtn`);
 const elephantBtn = document.getElementById(`elephantBtn`);
 
+// troops variables
+let tempTroops = [];
+
+
+//resource variables
 const res = [`food`, `wood`, `stone`, `gold`, `idea`, `morale`];
 let tempResource = {
   food: 0,
@@ -159,6 +164,7 @@ hexAll.forEach((el) => {
       town.hideContainerStructure();
       town.hideContainerRecruit();
       town.hideConfirmCollectBtn();
+      town.hideCancelCollectBtn();
       town = undefined;
     }
   });
@@ -208,8 +214,20 @@ recruitBtn.addEventListener(`click`, function () {
 
 merchantBtn.addEventListener(`click`, function () {
   town.id.merchant = new Merchant(UUID, town.id, town.color);
-  town.hideContainerRecruit();
+  // town.hideContainerRecruit();
 });
+
+
+
+
+cavalryBtn.addEventListener(`click`, function () {
+  // town.id.troops = new Troops(town.player, town.id, town.color);
+  town.recruitSoldier(`cavalry`);
+  // town.hideContainerRecruit();
+});
+
+
+
 
 //----------- COLLECTING RESOURCE -----------//
 //click Collect resource. Start collecting //
@@ -241,6 +259,8 @@ cancelCollectBtn.addEventListener(`click`, function () {
       el.possibleResource.deletePossibleResource();
     }
   });
+  town.hideConfirmCollectBtn();
+  town.hideCancelCollectBtn();
 });
 
 // --------------- DISABLE CLICKS ---------------- //

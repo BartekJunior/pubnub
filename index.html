@@ -46,14 +46,9 @@
     <button id="sendPlayer" class="player-btn">Send Player</button>
     <button id="endTurn" class="player-btn">End Turn</button>
     <button id="startGame" class="player-btn">Start Game</button>
-
-
   </div>
 
-
-
   <div class="hud-technology-container container-fluid">
-
     <div id="p1Global" class="player-global-container">
       <div id="playerName" class="player-name">Player Name</div>
       <div class="p1-resource-container">
@@ -86,7 +81,6 @@
           <div id="action-value" class="action-value resource-value"></div>
         </div>
       </div>
-
     </div>
 
     <div id="p2Global" class="player-global-container">
@@ -121,7 +115,6 @@
           <div id="action-value" class="action-value resource-value"></div>
         </div>
       </div>
-
     </div>
 
     <div id="p3Global" class="player-global-container">
@@ -156,12 +149,8 @@
           <div id="action-value" class="action-value resource-value"></div>
         </div>
       </div>
-
     </div>
-
   </div>
-
-
 
   <div id="gameContainer" class="container-fluid game-container row">
     <div class="col col-8">
@@ -223,11 +212,12 @@
       </div>
       <div class="hud-town">
         <div class="">
-          <button class="hud-town-btn" id="collectResourceBtn">Zbierz zasoby</button>
+          <button class="hud-town-btn" id="collectResourceBtn">
+            Zbierz zasoby
+          </button>
           <button class="hud-town-btn" id="buildStructure">Buduj</button>
           <button class="hud-town-btn" id="burnTown">Spal miasto</button>
           <button class="hud-town-btn" id="recruitBtn">Rekrutuj</button>
-
         </div>
         <div class="container-temp-collect">
           <div class="class-grass collecting">0</div>
@@ -252,13 +242,27 @@
           <button class="hud-town-btn" id="marketBtn">Market</button>
           <button class="hud-town-btn" id="templeBtn">Świątynia</button>
           <button class="hud-town-btn" id="obeliskBtn">Obelisk</button>
-          <button class="hud-town-btn" id="observatoryBtn">Obserwatorium</button>
+          <button class="hud-town-btn" id="observatoryBtn">
+            Obserwatorium
+          </button>
         </div>
         <div class="container-structure" id="containerRecruit">
-          <button class="hud-town-btn" id="merchantBtn">Merchant</button>
-          <button class="hud-town-btn" id="soldierBtn">Soldier</button>
-          <button class="hud-town-btn" id="cavalryBtn">Cavalry</button>
-          <button class="hud-town-btn" id="elephantBtn">Elephant</button>
+          <div class="soldier-div">
+            <button class="hud-town-btn" id="merchantBtn">Merchant</button>
+            <div class="soldier-img" id="merchantRecruitNr">Nr</div>
+          </div>
+          <div class="soldier-div">
+            <button class="hud-town-btn" id="infantryBtn">Infantry</button>
+            <div class="soldier-img" id="infantryRecruitNr">Nr</div>
+          </div>
+          <div class="soldier-div">
+            <button class="hud-town-btn" id="cavalryBtn">Cavalry</button>
+            <div class="soldier-img" id="cavalryRecruitNr">Nr</div>
+          </div>
+          <div class="soldier-div">
+            <button class="hud-town-btn" id="elephantBtn">Elephant</button>
+            <div class="soldier-img" id="elephantRecruitNr">Nr</div>
+          </div>
         </div>
       </div>
     </div>

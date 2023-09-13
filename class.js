@@ -2,7 +2,19 @@
 
 // CLASS PLAYER //
 class Player {
-  constructor(name, nr, color, turnActive, food, wood, stone, gold, idea, morale, action) {
+  constructor(
+    name,
+    nr,
+    color,
+    turnActive,
+    food,
+    wood,
+    stone,
+    gold,
+    idea,
+    morale,
+    action
+  ) {
     this.type = `player`;
     this.actionDone = false;
     this.name = name;
@@ -18,20 +30,17 @@ class Player {
       gold: gold,
       idea: idea,
       morale: morale,
-    }
+    };
 
     this.checkStart = () => {
-      if (this.nr == 1) return 0
-      else if (this.nr == 2) return 35
-      else if (this.nr == 3) return 5
-    }
+      if (this.nr == 1) return 0;
+      else if (this.nr == 2) return 35;
+      else if (this.nr == 3) return 5;
+    };
 
     this.start = this.checkStart();
-
-
   }
 }
-
 
 // CLASS HEX //
 class Hex {
@@ -64,18 +73,17 @@ class Hex {
 
     this.createSmall = function () {
       let hexChild = [];
-      if(this.id.childNodes.length === 0) {
-      for (let i = 0; i < 9; i++) {
-        const hexSmall = document.createElement("div");
-        hexSmall.classList.add(`hex-small`);
-        hexChild.push(hexSmall);
-      }
+      if (this.id.childNodes.length === 0) {
+        for (let i = 0; i < 9; i++) {
+          const hexSmall = document.createElement("div");
+          hexSmall.classList.add(`hex-small`);
+          hexChild.push(hexSmall);
+        }
 
-      for (let i = 0; i < hexChild.length; i++) {
-        this.id.appendChild(hexChild[i]);
+        for (let i = 0; i < hexChild.length; i++) {
+          this.id.appendChild(hexChild[i]);
+        }
       }
-    }
-
     };
 
     // Draw the land
@@ -134,23 +142,23 @@ class Town {
       obelisk: obelisk,
       temple: temple,
       observatory: observatory,
-    }
+    };
 
     this.showHudTown = () => (hudTown.style.display = `block`);
     this.hideHudTown = () => (hudTown.style.display = `none`);
 
     this.hideConfirmCollectBtn = () =>
       (confirmCollectBtn.style.display = `none`);
+    this.hideCancelCollectBtn = () =>
+      (cancelCollectBtn.style.display = `none`);
 
     this.showContainerStructure = () =>
       (containerStructure.style.display = `block`);
     this.hideContainerStructure = () =>
       (containerStructure.style.display = `none`);
-    
-    this.showContainerRecruit = () =>
-      (containerRecruit.style.display = `block`);
-    this.hideContainerRecruit = () =>
-      (containerRecruit.style.display = `none`);
+
+    this.showContainerRecruit = () => (containerRecruit.style.display = `flex`);
+    this.hideContainerRecruit = () => (containerRecruit.style.display = `none`);
 
     this.structurePlace = (building) => {
       if (building === `fortress`) return 1;
@@ -179,6 +187,15 @@ class Town {
         Number(this.structure.observatory),
       ];
       this.size = buildings.reduce((partialSum, a) => partialSum + a, 0) + 1;
+    };
+
+    // Recruit soldiers //
+    this.recruitSoldier = (soldier) => {
+      if (!this.id.troops)
+        this.id.troops = new Troops(this.player, this.id, this.color);
+      tempTroops.push(new Cavalry(this.player, this.color));
+
+      // this.id.childNodes[8].classList.add(soldier + this.color);
     };
 
     this.possibleResource = () => {
@@ -210,21 +227,20 @@ class Town {
     this.updateGlobalResource = () => {
       for (let i = 0; i < p1GlobalResourceDiv.length; i++) {
         const player = window[`player` + UUID];
-        player.resource[res[i]] = player.resource[res[i]] + tempResource[res[i]];
-        window[`p` + player.nr + `GlobalResourceDiv`][i].innerHTML = player.resource[res[i]];
+        player.resource[res[i]] =
+          player.resource[res[i]] + tempResource[res[i]];
+        window[`p` + player.nr + `GlobalResourceDiv`][i].innerHTML =
+          player.resource[res[i]];
         tempResource[res[i]] = 0;
         collecting[i].innerHTML = tempResource[res[i]];
       }
-      hexAll.forEach(el => {
-        if(el.possibleResource) el.possibleResource.deletePossibleResource();
-      })
+      hexAll.forEach((el) => {
+        if (el.possibleResource) el.possibleResource.deletePossibleResource();
+      });
       clickedRes = [];
     };
-
   }
 }
-
-
 
 ///// CLASS MERCHANT /////
 let merchantPosition;
@@ -234,7 +250,7 @@ class Merchant {
     this.player = player;
     this.id = id;
     this.color = color;
-    
+
     const merchantClass = `merchant${color}`;
     const townClass = `town${this.color}`;
 
@@ -302,8 +318,6 @@ class Merchant {
   }
 }
 
-
-
 ///// CLASS TROOPS /////
 let troopsPosition;
 class Troops {
@@ -313,38 +327,15 @@ class Troops {
     this.id = id;
     this.color = color;
     this.size = size;
-    
+
+    this.soldiers = [];
+
     this.showHudTroops = () => (hudTroops.style.display = `block`);
     this.hideHudTroops = () => (hudTroops.style.display = `none`);
 
     this.deleteTroops = () => {
       // id.classList.remove(troopsClass);
       delete this.id.troops;
-    };
-
-    this.showtroops(); //fires after create merchant
-  }
-}
-
-///// CLASS CAVALRY /////
-let cavalryPosition;
-class Cavalry {
-  constructor(player, id, color, size) {
-    this.type = `cavalry`;
-    this.player = player;
-    this.id = id;
-    this.color = color;
-    
-    const cavalryClass = `cavalry${color}`;
-
-    this.showCavalry = () => id.classList.add(cavalryClass);
-    this.hideCavalry = () => id.classList.remove(cavalryClass);
-    this.showHudCavalry = () => (hudCavalry.style.display = `block`);
-    this.hideHudCavalry = () => (hudCavalry.style.display = `none`);
-
-    this.deleteCavalry = () => {
-      id.classList.remove(cavalryClass);
-      delete this.id.cavalry;
     };
 
     this.whereToGo = () => {
@@ -370,11 +361,34 @@ class Cavalry {
       }
     };
 
-    this.showcavalry(); //fires after create merchant
+    // this.showtroops(); //fires after create merchant
   }
 }
 
+///// CLASS CAVALRY /////
+// let cavalryPosition;
 
+class Cavalry {
+  constructor(player, color) {
+    this.type = `cavalry`;
+    this.player = player;
+    this.color = color;
+
+    // const cavalryClass = `cavalry${color}`;
+
+    this.showCavalry = () => id.classList.add(cavalryClass);
+    this.hideCavalry = () => id.classList.remove(cavalryClass);
+    // this.showHudCavalry = () => (hudCavalry.style.display = `block`);
+    // this.hideHudCavalry = () => (hudCavalry.style.display = `none`);
+
+    this.deleteCavalry = () => {
+      id.classList.remove(cavalryClass);
+      delete this.id.cavalry;
+    };
+
+    // this.showcavalry(); //fires after create merchant
+  }
+}
 
 ///// CLASS POSSIBLEMOVE /////
 class PossibleMove {
@@ -389,8 +403,6 @@ class PossibleMove {
     };
 
     this.showPossibleMove(); //fires after create hex
-
-
   }
 }
 
@@ -413,26 +425,37 @@ class PossibleResource {
     this.hideConfirmCollectBtn = () =>
       (confirmCollectBtn.style.display = `none`);
 
+    this.showCancelCollectBtn = () =>
+      (cancelCollectBtn.style.display = `block`);
+    this.hideCancelCollectBtn = () =>
+      (cancelCollectBtn.style.display = `none`);
+
+
 
     this.showTempResource = () => {
       if (clickedRes[clickedRes.length - 1] === `food`) tempResource.food++;
-      else if (clickedRes[clickedRes.length - 1] === `wood`) tempResource.wood++;
-      else if (clickedRes[clickedRes.length - 1] === `stone`) tempResource.stone++;
-      else if (clickedRes[clickedRes.length - 1] === `gold`) tempResource.gold++;
-      else if (clickedRes[clickedRes.length - 1] === `idea`) tempResource.idea++;
-      else if (clickedRes[clickedRes.length - 1] === `morale`) tempResource.morale++;
+      else if (clickedRes[clickedRes.length - 1] === `wood`)
+        tempResource.wood++;
+      else if (clickedRes[clickedRes.length - 1] === `stone`)
+        tempResource.stone++;
+      else if (clickedRes[clickedRes.length - 1] === `gold`)
+        tempResource.gold++;
+      else if (clickedRes[clickedRes.length - 1] === `idea`)
+        tempResource.idea++;
+      else if (clickedRes[clickedRes.length - 1] === `morale`)
+        tempResource.morale++;
 
       for (let i = 0; i < collecting.length; i++) {
-        collecting[i].innerHTML = tempResource[res[i]]
+        collecting[i].innerHTML = tempResource[res[i]];
       }
     };
-
 
     this.collectTempResource = () => {
       if (this.id.possibleResource && clickedRes.length < town.size) {
         if (this.id.hex.collectible && !this.collected) {
           clickedRes.push(this.id.possibleResource.resource);
           this.id.possibleResource.showConfirmCollectBtn();
+          this.id.possibleResource.showCancelCollectBtn();
           this.id.possibleResource.showTempResource();
           console.log(clickedRes);
           this.collected = true;
@@ -440,21 +463,19 @@ class PossibleResource {
           alert(
             `Nie możesz zbierac z tego pola. Brakuje Ci rozwinięcia / jałowa ziemia / wróg / inne miasto etc.`
           );
-          else if (this.collected) alert(`Juz zebrałeś z tego pola`)
+        else if (this.collected) alert(`Juz zebrałeś z tego pola`);
       }
-    }
+    };
 
     this.deleteTempResource = () => {
       for (const res in tempResource) {
         tempResource[res] = 0;
       }
       for (let i = 0; i < collecting.length; i++) {
-        collecting[i].innerHTML = tempResource[res[i]]
+        collecting[i].innerHTML = tempResource[res[i]];
       }
-    }
+    };
 
     this.showPossibleResource(); //fires after create hex
   }
 }
-
-
