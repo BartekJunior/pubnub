@@ -53,14 +53,20 @@ const infantryRecruitNr = document.getElementById(`infantryRecruitNr`);
 const cavalryRecruitNr = document.getElementById(`cavalryRecruitNr`);
 const elephantRecruitNr = document.getElementById(`elephantRecruitNr`);
 
-
 const confirmRecruitBtn = document.getElementById(`confirmRecruitBtn`);
 const cancelRecruitBtn = document.getElementById(`cancelRecruitBtn`);
+
+const containerTroops = document.getElementById(`containerTroops`);
+const infantryRecruited = document.getElementById(`infantryRecruited`);
+const cavalryRecruited = document.getElementById(`cavalryRecruited`);
+const elephantRecruited = document.getElementById(`elephantRecruited`);
+
+
+
 
 
 // troops variables
 let tempSoldiers = [];
-
 
 //resource variables
 const res = [`food`, `wood`, `stone`, `gold`, `idea`, `morale`];
@@ -141,15 +147,13 @@ hexAll.forEach((el) => {
   });
 });
 
-
 let town;
 // ----- show/hide hudTown  ----- //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     if (el.town && el.town.player === UUID) {
       if (town) town.id.hex.collectible = false;
-      else 
-      town = el.town;
+      else town = el.town;
       town.showHudTown();
     } else if (town && !el.possibleResource && clickedRes.length) {
       alert(`Dokończ zbieranie surowców`);
@@ -157,7 +161,6 @@ hexAll.forEach((el) => {
       hexAll.forEach((el) => {
         if (el.possibleResource) el.possibleResource.deletePossibleResource();
         town.id.hex.collectible = false;
-
       });
       town.hideHudTown();
       town.hideContainerStructure();
@@ -206,9 +209,6 @@ observatoryBtn.addEventListener(`click`, function () {
   town.buildStructure(`observatory`);
 });
 
-
-
-
 //----------- RECRUITING TROOPS -----------//
 // HUD buttons Recruit //
 recruitBtn.addEventListener(`click`, function () {
@@ -222,7 +222,6 @@ confirmRecruitBtn.addEventListener(`click`, function () {
 cancelRecruitBtn.addEventListener(`click`, function () {
   town.cancelRecruit();
 });
-
 
 // Recruiting //
 merchantBtn.addEventListener(`click`, function () {
@@ -241,10 +240,6 @@ cavalryBtn.addEventListener(`click`, function () {
 elephantBtn.addEventListener(`click`, function () {
   town.recruitTempSoldier(`elephant`);
 });
-
-
-
-
 
 //----------- COLLECTING RESOURCE -----------//
 //click Collect resource. Start collecting //
@@ -365,7 +360,6 @@ const paintMerchant = () => {
     if (!el.merchant) {
       for (let i = 0; i < merchantsOnMap.value.length; i++) {
         if (index === merchantsOnMap.value[i].id) {
-          
           console.log(`creating merchant on ${index}`);
           el.merchant = new Merchant(
             merchantsOnMap.value[i].player,

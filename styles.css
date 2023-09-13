@@ -180,23 +180,22 @@ h2 {
 
 /* ------------ Soldiers Images ----------------- */
 .cavalryred {
-  background-image: url(./img/merchantRed.png);
+  background-image: url(./img/cavalryred.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 50%;
 }
 
-
-.soldier-div {
-
-}
-
-.soldier-img {
-  display: flex;
+.cavalryredHud {
+  display: block;
+  background-image: url(./img/cavalryred.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
   width: 100px;
-  height: 60px;
-  background-color: #2984b9;
+  height: 100px;
 }
+
 
 
 /* ------------ Structure Images ----------------- */
@@ -296,7 +295,6 @@ h2 {
   display: block;
 }
 
-
 .collecting {
   width: 150px;
   height: 50px;
@@ -305,10 +303,29 @@ h2 {
   color: bisque;
 }
 
+/* HUD Troops */
+.recruited-div {
+  display: flex;
+}
+
+.soldier-img {
+  display: flex;
+  width: 100px;
+  height: 60px;
+  background-color: #2984b9;
+}
+
+#containerTroops {
+  display: block;
+  width: 100%;
+  height: 200px;
+  background-color: azure;
+}
 
 
 
-/* ------------ HUD Tlown ----------------- */
+
+/* ------------ HUD Player ----------------- */
 .hud-technology-container {
   display: flex;
   justify-content: space-around;
@@ -370,7 +387,6 @@ h2 {
 
 
 /* ------------ TEST  ----------------- */
-
 .divGrid {
   width: 150px;
   display: inline-grid;

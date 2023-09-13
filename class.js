@@ -189,6 +189,8 @@ class Town {
       this.size = buildings.reduce((partialSum, a) => partialSum + a, 0) + 1;
     };
 
+
+
     //-------------- Recruit soldiers in Town --------------//
     this.recruitTempSoldier = (soldier) => {
       if (soldier === `infantry`) tempSoldiers.push(new Infantry(this.player, this.color));
@@ -197,7 +199,6 @@ class Town {
       this.updateRecruitNr();
     };
 
-    
     this.updateRecruitNr = () => {
       infantryRecruitNr.textContent = tempSoldiers.filter(item => item.type === `infantry`).length
       cavalryRecruitNr.textContent = tempSoldiers.filter(item => item.type === `cavalry`).length;
@@ -207,11 +208,22 @@ class Town {
     this.confirmRecruit = () => {
       if (!this.id.troops) {this.id.troops = new Troops(this.player, this.id, this.color)};
         this.id.troops.soldiers.push(...tempSoldiers);
-        tempSoldiers = [];
+        this.installRecruitedTroops();
         this.updateRecruitNr();
 
         // Now you have to paint the soldiers on the Town map. Some like this under...
       // this.id.childNodes[8].classList.add(soldier + this.color);
+    }
+
+    this.installRecruitedTroops = () => {
+      for (let i = 0; i < tempSoldiers.length; i++) {
+        if (tempSoldiers[i].type === `cavalry`) {
+          const newCavalry = document.createElement(`div`);
+          newCavalry.classList.add(`cavalryredHud`);
+          cavalryRecruited.appendChild(newCavalry);
+        }
+      }
+      tempSoldiers = [];
     }
 
 
@@ -357,35 +369,12 @@ class Troops {
     this.showHudTroops = () => (hudTroops.style.display = `block`);
     this.hideHudTroops = () => (hudTroops.style.display = `none`);
 
+ 
     this.deleteTroops = () => {
       // id.classList.remove(troopsClass);
       delete this.id.troops;
     };
 
-    this.whereToGo = () => {
-      cavalryPosition = this.id;
-      let offsetAll = [];
-      for (let i = 0; i < hexAll.length; i++) {
-        offsetAll[i] = [hexAll[i].offsetLeft, hexAll[i].offsetTop];
-      }
-
-      this.showHudCavalry();
-
-      for (let i = 0; i < hexAll.length; i++) {
-        if (
-          offsetAll[i][0] > this.id.offsetLeft - 130 &&
-          offsetAll[i][0] < this.id.offsetLeft + 130 &&
-          offsetAll[i][1] < this.id.offsetTop + 130 &&
-          offsetAll[i][1] > this.id.offsetTop - 130 &&
-          !hexAll[i].cavalry
-        ) {
-          const possibleMove = new PossibleMove(UUID, hexAll[i]);
-          hexAll[i].possibleMove = possibleMove;
-        }
-      }
-    };
-
-    // this.showtroops(); //fires after create merchant
   }
 }
 
