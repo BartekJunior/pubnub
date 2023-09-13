@@ -196,6 +196,86 @@ h2 {
   height: 100px;
 }
 
+.cavalrygreenHud {
+  display: block;
+  background-image: url(./img/cavalrygreen.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  width: 100px;
+  height: 100px;
+}
+
+.cavalryblueHud {
+  display: block;
+  background-image: url(./img/cavalryblue.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  width: 100px;
+  height: 100px;
+}
+
+.infantryredHud {
+  display: block;
+  background-image: url(./img/infantryred.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  width: 100px;
+  height: 100px;
+}
+
+.infantrygreenHud {
+  display: block;
+  background-image: url(./img/infantrygreen.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  width: 100px;
+  height: 100px;
+}
+
+.infantryblueHud {
+  display: block;
+  background-image: url(./img/infantryblue.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  width: 100px;
+  height: 100px;
+}
+
+.elephantredHud {
+  display: block;
+  background-image: url(./img/elephantred.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  width: 100px;
+  height: 100px;
+}
+
+.elephantgreenHud {
+  display: block;
+  background-image: url(./img/elephantgreen.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  width: 100px;
+  height: 100px;
+}
+
+.elephantblueHud {
+  display: block;
+  background-image: url(./img/elephantblue.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  width: 100px;
+  height: 100px;
+}
+
 
 
 /* ------------ Structure Images ----------------- */
@@ -318,7 +398,7 @@ h2 {
 #containerTroops {
   display: block;
   width: 100%;
-  height: 200px;
+  height: auto;
   background-color: azure;
 }
 

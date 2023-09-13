@@ -193,9 +193,9 @@ class Town {
 
     //-------------- Recruit soldiers in Town --------------//
     this.recruitTempSoldier = (soldier) => {
-      if (soldier === `infantry`) tempSoldiers.push(new Infantry(this.player, this.color));
-      if (soldier === `cavalry`) tempSoldiers.push(new Cavalry(this.player, this.color));
-      if (soldier === `elephant`) tempSoldiers.push(new Elephant(this.player, this.color));
+      if (soldier === `infantry` && tempSoldiers.length < 4) tempSoldiers.push(new Infantry(this.player, this.color));
+      if (soldier === `cavalry` && tempSoldiers.length < 4) tempSoldiers.push(new Cavalry(this.player, this.color));
+      if (soldier === `elephant` && tempSoldiers.length < 4) tempSoldiers.push(new Elephant(this.player, this.color));
       this.updateRecruitNr();
     };
 
@@ -207,10 +207,13 @@ class Town {
 
     this.confirmRecruit = () => {
       if (!this.id.troops) {this.id.troops = new Troops(this.player, this.id, this.color)};
+      if (this.id.troops && (this.id.troops.soldiers.length + tempSoldiers.length) <= 4) {
+
         this.id.troops.soldiers.push(...tempSoldiers);
         this.installRecruitedTroops();
         this.updateRecruitNr();
-
+      } else alert(`Na jednym Hexie mogą znajdować sie maksymalnie 4 jednostki wojskowe`)
+        
         // Now you have to paint the soldiers on the Town map. Some like this under...
       // this.id.childNodes[8].classList.add(soldier + this.color);
     }
@@ -219,8 +222,18 @@ class Town {
       for (let i = 0; i < tempSoldiers.length; i++) {
         if (tempSoldiers[i].type === `cavalry`) {
           const newCavalry = document.createElement(`div`);
-          newCavalry.classList.add(`cavalryredHud`);
+          newCavalry.classList.add(`cavalry${this.color}Hud`);
           cavalryRecruited.appendChild(newCavalry);
+        } 
+        if (tempSoldiers[i].type === `infantry`) {
+          const newInfantry = document.createElement(`div`);
+          newInfantry.classList.add(`infantry${this.color}Hud`);
+          infantryRecruited.appendChild(newInfantry);
+        }
+        if (tempSoldiers[i].type === `elephant`) {
+          const newElephant = document.createElement(`div`);
+          newElephant.classList.add(`elephant${this.color}Hud`);
+          elephantRecruited.appendChild(newElephant);
         }
       }
       tempSoldiers = [];
