@@ -56,7 +56,7 @@ const elephantRecruitNr = document.getElementById(`elephantRecruitNr`);
 const confirmRecruitBtn = document.getElementById(`confirmRecruitBtn`);
 const cancelRecruitBtn = document.getElementById(`cancelRecruitBtn`);
 
-const containerTroops = document.getElementById(`containerTroops`);
+const hudTroops = document.getElementById(`hudTroops`);
 const infantryRecruited = document.getElementById(`infantryRecruited`);
 const cavalryRecruited = document.getElementById(`cavalryRecruited`);
 const elephantRecruited = document.getElementById(`elephantRecruited`);
@@ -96,6 +96,7 @@ const collecting = Array.from(document.querySelectorAll(`.collecting`));
 hexAll.forEach((el, index) =>
   el.addEventListener(`click`, function (e) {
     console.log(index);
+    if (!el.troops) el.hex.hideTroopsHud();
   })
 );
 
@@ -174,11 +175,14 @@ hexAll.forEach((el) => {
 
 
 // ----- show Troops  ----- //
-// hexAll.forEach((el) => {
-//   el.addEventListener(`click`, function () {
-//     if (el.troops) el.troops.showTroops();
-//   })
-// });
+hexAll.forEach((el) => {
+  el.addEventListener(`click`, function () {
+    if (el.troops) {
+      el.hex.hideTroopsHud();
+      el.troops.showTroopsHud();
+    }
+  })
+});
 
 
 

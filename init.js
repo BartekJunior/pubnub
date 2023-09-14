@@ -22,6 +22,13 @@ hexAll[1].classList.add(`class-${hexAll[1].hex.land}`);
 hexAll[6].classList.add(`class-${hexAll[6].hex.land}`);
 hexAll[7].classList.add(`class-${hexAll[7].hex.land}`);
 
+hexAll[2].troops = new Troops (UUID, hexAll[2], `green`, 3);
+hexAll[2].troops.soldiers = [new Cavalry (UUID, `green`), new Infantry (UUID, `green`)];
+
+hexAll[4].troops = new Troops (UUID, hexAll[4], `green`, 3);
+hexAll[4].troops.soldiers = [new Elephant (UUID, `green`), new Elephant (UUID, `green`)];
+
+
 // Array of 4 land piece. One big array of 12 cafelkas. Each one has 4 Hexes of land//
 const hexArea = [];
 const hexInRow = hexAll.length / 6; //!!!!!!!Devine by 6 only when you have 6 HEX ROWS on the map!!!!!!!!!!!!

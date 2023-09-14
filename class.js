@@ -110,10 +110,23 @@ class Hex {
       });
     };
 
+    this.hideTroopsHud = () => {
+      const recruitedDiv = document.querySelectorAll(".recruited-div");
+      // Loop through each "recruited-div" element
+      recruitedDiv.forEach((div) => {
+        const soldiers = div.querySelectorAll("div");
+        soldiers.forEach((el) => {
+          el.remove();
+        });
+      });
+    };
+
     this.createSmall(); //Fires after hex begin. Create 9 small divs inside big Hex.
   }
 }
 
+
+// CLASS TOWN //
 let town;
 class Town {
   constructor(
@@ -163,10 +176,7 @@ class Town {
     this.changeStructureBtn = (structure, display) =>
       (window[structure + `Btn`].style.display = display);
 
-
-
     this.checkBuildedStructure = (param) => {
-
       // const trueKeys = [];
 
       for (const key in this.structure) {
@@ -174,13 +184,10 @@ class Town {
           this.changeStructureBtn(key, `none`);
           // trueKeys.push(key);
           // console.log(trueKeys);
-        } else if (this.structure[key] === false) this.changeStructureBtn(key, `inline-block`);
-
+        } else if (this.structure[key] === false)
+          this.changeStructureBtn(key, `inline-block`);
       }
     };
-
-
-
 
     this.structurePlace = (building) => {
       if (building === `fortress`) return 1;
@@ -416,28 +423,25 @@ class Troops {
       }
     };
 
-    // this.showTroops2 = () => {
-    //   if (this.el.troops) {
-
-    //   for (let i = 0; i < this.el.troops.soldiers.length; i++) {
-    //     if (this.el.troops.soldiers[i].type === `cavalry`) {
-    //       const newCavalry = document.createElement(`div`);
-    //       newCavalry.classList.add(`cavalry${this.color}Hud`);
-    //       cavalryRecruited.appendChild(newCavalry);
-    //     }
-    //     if (this.el.troops.soldiers[i].type === `infantry`) {
-    //       const newInfantry = document.createElement(`div`);
-    //       newInfantry.classList.add(`infantry${this.color}Hud`);
-    //       infantryRecruited.appendChild(newInfantry);
-    //     }
-    //     if (this.el.troops.soldiers[i].type === `elephant`) {
-    //       const newElephant = document.createElement(`div`);
-    //       newElephant.classList.add(`elephant${this.color}Hud`);
-    //       elephantRecruited.appendChild(newElephant);
-    //     }
-    //   }
-    // }
-    // }
+    this.showTroopsHud = () => {
+      for (let i = 0; i < this.soldiers.length; i++) {
+        if (this.soldiers[i].type === `cavalry`) {
+          const newCavalry = document.createElement(`div`);
+          newCavalry.classList.add(`cavalry${this.color}Hud`);
+          cavalryRecruited.appendChild(newCavalry);
+        }
+        if (this.soldiers[i].type === `infantry`) {
+          const newInfantry = document.createElement(`div`);
+          newInfantry.classList.add(`infantry${this.color}Hud`);
+          infantryRecruited.appendChild(newInfantry);
+        }
+        if (this.soldiers[i].type === `elephant`) {
+          const newElephant = document.createElement(`div`);
+          newElephant.classList.add(`elephant${this.color}Hud`);
+          elephantRecruited.appendChild(newElephant);
+        }
+      }
+    };
 
     this.deleteTroops = () => {
       // id.classList.remove(troopsClass);
