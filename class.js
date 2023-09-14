@@ -250,7 +250,7 @@ class Town {
         this.id.troops.soldiers.length + tempSoldiers.length <= 4
       ) {
         this.id.troops.soldiers.push(...tempSoldiers);
-        this.id.troops.showTroops();
+        this.id.troops.showTroopsHud();
         tempSoldiers = [];
         this.updateRecruitNr();
       } else
@@ -400,28 +400,8 @@ class Troops {
 
     this.soldiers = [];
 
-    this.showHudTroops = () => (hudTroops.style.display = `block`);
+    // this.showHudTroops = () => (hudTroops.style.display = `block`);
     this.hideHudTroops = () => (hudTroops.style.display = `none`);
-
-    this.showTroops = () => {
-      for (let i = 0; i < tempSoldiers.length; i++) {
-        if (tempSoldiers[i].type === `cavalry`) {
-          const newCavalry = document.createElement(`div`);
-          newCavalry.classList.add(`cavalry${this.color}Hud`);
-          cavalryRecruited.appendChild(newCavalry);
-        }
-        if (tempSoldiers[i].type === `infantry`) {
-          const newInfantry = document.createElement(`div`);
-          newInfantry.classList.add(`infantry${this.color}Hud`);
-          infantryRecruited.appendChild(newInfantry);
-        }
-        if (tempSoldiers[i].type === `elephant`) {
-          const newElephant = document.createElement(`div`);
-          newElephant.classList.add(`elephant${this.color}Hud`);
-          elephantRecruited.appendChild(newElephant);
-        }
-      }
-    };
 
     this.showTroopsHud = () => {
       for (let i = 0; i < this.soldiers.length; i++) {
