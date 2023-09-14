@@ -147,7 +147,6 @@ hexAll.forEach((el) => {
   });
 });
 
-let town;
 // ----- show/hide hudTown  ----- //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
@@ -155,6 +154,7 @@ hexAll.forEach((el) => {
       if (town) town.id.hex.collectible = false;
       else town = el.town;
       town.showHudTown();
+      town.checkBuildedStructure();
     } else if (town && !el.possibleResource && clickedRes.length) {
       alert(`Dokończ zbieranie surowców`);
     } else if (town && !el.possibleResource && !clickedRes.length) {
@@ -193,30 +193,44 @@ buildStructure.addEventListener(`click`, function () {
 
 fortressBtn.addEventListener(`click`, function () {
   town.buildStructure(`fortress`);
+  town.changeStructureBtn(`fortress`, `none`);
+
 });
 
 academyBtn.addEventListener(`click`, function () {
   town.buildStructure(`academy`);
+  town.changeStructureBtn(`academy`, `none`);
+
 });
 
 portBtn.addEventListener(`click`, function () {
   town.buildStructure(`port`);
+  town.changeStructureBtn(`port`, `none`);
+
 });
 
 marketBtn.addEventListener(`click`, function () {
   town.buildStructure(`market`);
+  town.changeStructureBtn(`market`, `none`);
+
 });
 
 obeliskBtn.addEventListener(`click`, function () {
   town.buildStructure(`obelisk`);
+  town.changeStructureBtn(`obelisk`, `none`);
+
 });
 
 templeBtn.addEventListener(`click`, function () {
   town.buildStructure(`temple`);
+  town.changeStructureBtn(`temple`, `none`);
+
 });
 
 observatoryBtn.addEventListener(`click`, function () {
   town.buildStructure(`observatory`);
+  town.changeStructureBtn(`observatory`, `none`);
+
 });
 
 //----------- RECRUITING TROOPS -----------//

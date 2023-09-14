@@ -110,12 +110,11 @@ class Hex {
       });
     };
 
-
-
     this.createSmall(); //Fires after hex begin. Create 9 small divs inside big Hex.
   }
 }
 
+let town;
 class Town {
   constructor(
     player,
@@ -151,8 +150,7 @@ class Town {
 
     this.hideConfirmCollectBtn = () =>
       (confirmCollectBtn.style.display = `none`);
-    this.hideCancelCollectBtn = () =>
-      (cancelCollectBtn.style.display = `none`);
+    this.hideCancelCollectBtn = () => (cancelCollectBtn.style.display = `none`);
 
     this.showContainerStructure = () =>
       (containerStructure.style.display = `block`);
@@ -161,6 +159,28 @@ class Town {
 
     this.showContainerRecruit = () => (containerRecruit.style.display = `flex`);
     this.hideContainerRecruit = () => (containerRecruit.style.display = `none`);
+
+    this.changeStructureBtn = (structure, display) =>
+      (window[structure + `Btn`].style.display = display);
+
+
+
+    this.checkBuildedStructure = (param) => {
+
+      // const trueKeys = [];
+
+      for (const key in this.structure) {
+        if (this.structure[key] === true) {
+          this.changeStructureBtn(key, `none`);
+          // trueKeys.push(key);
+          // console.log(trueKeys);
+        } else if (this.structure[key] === false) this.changeStructureBtn(key, `inline-block`);
+
+      }
+    };
+
+
+
 
     this.structurePlace = (building) => {
       if (building === `fortress`) return 1;
@@ -191,41 +211,54 @@ class Town {
       this.size = buildings.reduce((partialSum, a) => partialSum + a, 0) + 1;
     };
 
-
-
     //-------------- Recruit soldiers in Town --------------//
     this.recruitTempSoldier = (soldier) => {
-      if (soldier === `infantry` && tempSoldiers.length < 4) tempSoldiers.push(new Infantry(this.player, this.color));
-      if (soldier === `cavalry` && tempSoldiers.length < 4) tempSoldiers.push(new Cavalry(this.player, this.color));
-      if (soldier === `elephant` && tempSoldiers.length < 4) tempSoldiers.push(new Elephant(this.player, this.color));
+      if (soldier === `infantry` && tempSoldiers.length < 4)
+        tempSoldiers.push(new Infantry(this.player, this.color));
+      if (soldier === `cavalry` && tempSoldiers.length < 4)
+        tempSoldiers.push(new Cavalry(this.player, this.color));
+      if (soldier === `elephant` && tempSoldiers.length < 4)
+        tempSoldiers.push(new Elephant(this.player, this.color));
       this.updateRecruitNr();
     };
 
     this.updateRecruitNr = () => {
-      infantryRecruitNr.textContent = tempSoldiers.filter(item => item.type === `infantry`).length
-      cavalryRecruitNr.textContent = tempSoldiers.filter(item => item.type === `cavalry`).length;
-      elephantRecruitNr.textContent = tempSoldiers.filter(item => item.type === `elephant`).length
-    }
+      infantryRecruitNr.textContent = tempSoldiers.filter(
+        (item) => item.type === `infantry`
+      ).length;
+      cavalryRecruitNr.textContent = tempSoldiers.filter(
+        (item) => item.type === `cavalry`
+      ).length;
+      elephantRecruitNr.textContent = tempSoldiers.filter(
+        (item) => item.type === `elephant`
+      ).length;
+    };
 
     this.confirmRecruit = () => {
-      if (!this.id.troops) {this.id.troops = new Troops(this.player, this.id, this.color)};
-      if (this.id.troops && (this.id.troops.soldiers.length + tempSoldiers.length) <= 4) {
-
+      if (!this.id.troops) {
+        this.id.troops = new Troops(this.player, this.id, this.color);
+      }
+      if (
+        this.id.troops &&
+        this.id.troops.soldiers.length + tempSoldiers.length <= 4
+      ) {
         this.id.troops.soldiers.push(...tempSoldiers);
         this.id.troops.showTroops();
         tempSoldiers = [];
         this.updateRecruitNr();
-      } else alert(`Na jednym Hexie mogą znajdować sie maksymalnie 4 jednostki wojskowe`)
-        
-        // Now you have to paint the soldiers on the Town map. Some like this under...
+      } else
+        alert(
+          `Na jednym Hexie mogą znajdować sie maksymalnie 4 jednostki wojskowe`
+        );
+
+      // Now you have to paint the soldiers on the Town map. Some like this under...
       // this.id.childNodes[8].classList.add(soldier + this.color);
-    }
+    };
 
     this.cancelRecruit = () => {
       tempSoldiers = [];
       this.updateRecruitNr();
-    }
-
+    };
 
     //-------------- Collect Resource in Town --------------//
     this.possibleResource = () => {
@@ -369,7 +402,7 @@ class Troops {
           const newCavalry = document.createElement(`div`);
           newCavalry.classList.add(`cavalry${this.color}Hud`);
           cavalryRecruited.appendChild(newCavalry);
-        } 
+        }
         if (tempSoldiers[i].type === `infantry`) {
           const newInfantry = document.createElement(`div`);
           newInfantry.classList.add(`infantry${this.color}Hud`);
@@ -381,14 +414,35 @@ class Troops {
           elephantRecruited.appendChild(newElephant);
         }
       }
-    }
+    };
 
- 
+    // this.showTroops2 = () => {
+    //   if (this.el.troops) {
+
+    //   for (let i = 0; i < this.el.troops.soldiers.length; i++) {
+    //     if (this.el.troops.soldiers[i].type === `cavalry`) {
+    //       const newCavalry = document.createElement(`div`);
+    //       newCavalry.classList.add(`cavalry${this.color}Hud`);
+    //       cavalryRecruited.appendChild(newCavalry);
+    //     }
+    //     if (this.el.troops.soldiers[i].type === `infantry`) {
+    //       const newInfantry = document.createElement(`div`);
+    //       newInfantry.classList.add(`infantry${this.color}Hud`);
+    //       infantryRecruited.appendChild(newInfantry);
+    //     }
+    //     if (this.el.troops.soldiers[i].type === `elephant`) {
+    //       const newElephant = document.createElement(`div`);
+    //       newElephant.classList.add(`elephant${this.color}Hud`);
+    //       elephantRecruited.appendChild(newElephant);
+    //     }
+    //   }
+    // }
+    // }
+
     this.deleteTroops = () => {
       // id.classList.remove(troopsClass);
       delete this.id.troops;
     };
-
   }
 }
 
@@ -451,8 +505,6 @@ class Elephant {
   }
 }
 
-
-
 ///// CLASS POSSIBLEMOVE /////
 class PossibleMove {
   constructor(player, id) {
@@ -490,10 +542,7 @@ class PossibleResource {
 
     this.showCancelCollectBtn = () =>
       (cancelCollectBtn.style.display = `block`);
-    this.hideCancelCollectBtn = () =>
-      (cancelCollectBtn.style.display = `none`);
-
-
+    this.hideCancelCollectBtn = () => (cancelCollectBtn.style.display = `none`);
 
     this.showTempResource = () => {
       if (clickedRes[clickedRes.length - 1] === `food`) tempResource.food++;
