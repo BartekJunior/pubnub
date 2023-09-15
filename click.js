@@ -96,7 +96,6 @@ const collecting = Array.from(document.querySelectorAll(`.collecting`));
 hexAll.forEach((el, index) =>
   el.addEventListener(`click`, function (e) {
     console.log(index);
-    if (!el.troops) el.hex.hideTroopsHud();
   })
 );
 
@@ -180,7 +179,7 @@ hexAll.forEach((el) => {
     if (el.troops) {
       el.hex.hideTroopsHud();
       el.troops.showTroopsHud();
-    }
+    } else el.hex.hideTroopsHud();
   })
 });
 

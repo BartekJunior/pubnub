@@ -121,6 +121,8 @@ class Hex {
       });
     };
 
+ 
+
     this.createSmall(); //Fires after hex begin. Create 9 small divs inside big Hex.
   }
 }
@@ -176,14 +178,11 @@ class Town {
     this.changeStructureBtn = (structure, display) =>
       (window[structure + `Btn`].style.display = display);
 
-    this.checkBuildedStructure = (param) => {
-      // const trueKeys = [];
 
+    this.checkBuildedStructure = () => {
       for (const key in this.structure) {
         if (this.structure[key] === true) {
           this.changeStructureBtn(key, `none`);
-          // trueKeys.push(key);
-          // console.log(trueKeys);
         } else if (this.structure[key] === false)
           this.changeStructureBtn(key, `inline-block`);
       }
@@ -221,11 +220,11 @@ class Town {
     //-------------- Recruit soldiers in Town --------------//
     this.recruitTempSoldier = (soldier) => {
       if (soldier === `infantry` && tempSoldiers.length < 4)
-        tempSoldiers.push(new Infantry(this.player, this.color));
+        tempSoldiers.push(new Infantry(this.player, this.id, this.color));
       if (soldier === `cavalry` && tempSoldiers.length < 4)
-        tempSoldiers.push(new Cavalry(this.player, this.color));
+        tempSoldiers.push(new Cavalry(this.player, this.id, this.color));
       if (soldier === `elephant` && tempSoldiers.length < 4)
-        tempSoldiers.push(new Elephant(this.player, this.color));
+        tempSoldiers.push(new Elephant(this.player, this.id, this.color));
       this.updateRecruitNr();
     };
 
@@ -250,8 +249,9 @@ class Town {
         this.id.troops.soldiers.length + tempSoldiers.length <= 4
       ) {
         this.id.troops.soldiers.push(...tempSoldiers);
-        this.id.troops.showTroopsHud();
         tempSoldiers = [];
+        this.id.hex.hideTroopsHud();
+        this.id.troops.showTroopsHud();
         this.updateRecruitNr();
       } else
         alert(
@@ -433,12 +433,13 @@ class Troops {
 ///// CLASS CAVALRY /////
 // let cavalryPosition;
 class Cavalry {
-  constructor(player, color) {
+  constructor(player, id, color) {
     this.type = `cavalry`;
     this.player = player;
+    this.id = id;
     this.color = color;
 
-    // const cavalryClass = `cavalry${color}`;
+    // const cavalryClass = `cavalry${this.color}`;
 
     // this.showCavalry = () => id.classList.add(cavalryClass);
     // this.hideCavalry = () => id.classList.remove(cavalryClass);
@@ -452,42 +453,33 @@ class Cavalry {
 }
 
 class Infantry {
-  constructor(player, color) {
+  constructor(player, id, color) {
     this.type = `infantry`;
     this.player = player;
+    this.id = id;
     this.color = color;
-
-    // const infantryClass = `infantry${color}`;
-
-    // this.showInfantry = () => id.classList.add(infantryClass);
-    // this.hideInfantry = () => id.classList.remove(infantryClass);
 
     this.deleteInfantry = () => {
       id.classList.remove(infantryClass);
       delete this.id.infantry;
     };
-    // this.showinfantry(); //fires after create merchant
   }
 }
 
 class Elephant {
-  constructor(player, color) {
+  constructor(player, id, color) {
     this.type = `elephant`;
     this.player = player;
+    this.id = id;
     this.color = color;
-
-    // const elephantClass = `elephant${color}`;
-
-    // this.showElephant = () => id.classList.add(elephantClass);
-    // this.hideElephant = () => id.classList.remove(elephantClass);
 
     this.deleteElephant = () => {
       id.classList.remove(elephantClass);
       delete this.id.elephant;
     };
-    // this.showinfantry(); //fires after create merchant
   }
 }
+
 
 ///// CLASS POSSIBLEMOVE /////
 class PossibleMove {
