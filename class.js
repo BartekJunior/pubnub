@@ -121,12 +121,9 @@ class Hex {
       });
     };
 
- 
-
     this.createSmall(); //Fires after hex begin. Create 9 small divs inside big Hex.
   }
 }
-
 
 // CLASS TOWN //
 let town;
@@ -178,7 +175,6 @@ class Town {
     this.changeStructureBtn = (structure, display) =>
       (window[structure + `Btn`].style.display = display);
 
-
     this.checkBuildedStructure = () => {
       for (const key in this.structure) {
         if (this.structure[key] === true) {
@@ -219,12 +215,17 @@ class Town {
 
     //-------------- Recruit soldiers in Town --------------//
     this.recruitTempSoldier = (soldier) => {
-      if (soldier === `infantry` && tempSoldiers.length < 4)
+      const merchantLength = tempSoldiers.filter(
+        (item) => item.type === `merchant`
+      ).length;
+      if (soldier === `infantry` && tempSoldiers.length - merchantLength < 4)
         tempSoldiers.push(new Infantry(this.player, this.id, this.color));
-      if (soldier === `cavalry` && tempSoldiers.length < 4)
+      if (soldier === `cavalry` && tempSoldiers.length - merchantLength < 4)
         tempSoldiers.push(new Cavalry(this.player, this.id, this.color));
-      if (soldier === `elephant` && tempSoldiers.length < 4)
+      if (soldier === `elephant` && tempSoldiers.length - merchantLength < 4)
         tempSoldiers.push(new Elephant(this.player, this.id, this.color));
+      if (soldier === `merchant`)
+        tempSoldiers.push(new Merchant(this.player, this.id, this.color));
       this.updateRecruitNr();
     };
 
@@ -238,15 +239,26 @@ class Town {
       elephantRecruitNr.textContent = tempSoldiers.filter(
         (item) => item.type === `elephant`
       ).length;
+      merchantRecruitNr.textContent = tempSoldiers.filter(
+        (item) => item.type === `merchant`
+      ).length;
     };
 
     this.confirmRecruit = () => {
+      let merchantTownLength;
+      let merchantTempLength;
+
+      // this.id.troops.soldiers.filter((item) => item.type === `merchant`).length;
+
       if (!this.id.troops) {
         this.id.troops = new Troops(this.player, this.id, this.color);
       }
       if (
         this.id.troops &&
-        this.id.troops.soldiers.length + tempSoldiers.length <= 4
+        this.id.troops.soldiers.filter((item) => item.type !== `merchant`)
+          .length +
+          tempSoldiers.filter((item) => item.type !== `merchant`).length <=
+          4
       ) {
         this.id.troops.soldiers.push(...tempSoldiers);
         tempSoldiers = [];
@@ -479,7 +491,6 @@ class Elephant {
     };
   }
 }
-
 
 ///// CLASS POSSIBLEMOVE /////
 class PossibleMove {

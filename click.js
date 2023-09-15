@@ -52,6 +52,8 @@ const elephantBtn = document.getElementById(`elephantBtn`);
 const infantryRecruitNr = document.getElementById(`infantryRecruitNr`);
 const cavalryRecruitNr = document.getElementById(`cavalryRecruitNr`);
 const elephantRecruitNr = document.getElementById(`elephantRecruitNr`);
+const merchantRecruitNr = document.getElementById(`merchantRecruitNr`);
+
 
 const confirmRecruitBtn = document.getElementById(`confirmRecruitBtn`);
 const cancelRecruitBtn = document.getElementById(`cancelRecruitBtn`);
@@ -252,8 +254,8 @@ cancelRecruitBtn.addEventListener(`click`, function () {
 
 // Recruiting //
 merchantBtn.addEventListener(`click`, function () {
+  town.recruitTempSoldier(`merchant`);
   town.id.merchant = new Merchant(UUID, town.id, town.color);
-  // town.hideContainerRecruit();
 });
 
 infantryBtn.addEventListener(`click`, function () {
