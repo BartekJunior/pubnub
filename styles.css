@@ -276,6 +276,36 @@ h2 {
   height: 100px;
 }
 
+.merchantredHud {
+  display: block;
+  background-image: url(./img/merchantred.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  width: 100px;
+  height: 100px;
+}
+
+.merchantgreenHud {
+  display: block;
+  background-image: url(./img/merchantgreen.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  width: 100px;
+  height: 100px;
+}
+
+.merchantblueHud {
+  display: block;
+  background-image: url(./img/merchantblue.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  width: 100px;
+  height: 100px;
+}
+
 
 
 /* ------------ Structure Images ----------------- */

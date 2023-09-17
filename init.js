@@ -76,10 +76,23 @@ setPlayer.addEventListener(`click`, function () {
   checkActionFirst();
 
   //add individual merchant for each user (seen only for current user)
-  if (player.nr == 1) hexAll[0].merchant = new Merchant(UUID, hexAll[0], player.color);
-  else if (player.nr == 2) hexAll[35].merchant = new Merchant(UUID, hexAll[35], player.color);
-  else if (player.nr == 3) hexAll[5].merchant = new Merchant(UUID, hexAll[5], player.color);
+  if (player.nr == 1) {
+    hexAll[0].troops = new Troops (UUID, hexAll[0], player.color, 1);
+    hexAll[0].troops.soldiers.push(new Merchant(UUID, hexAll[0], player.color));
+    hexAll[0].troops.soldiers[0].showMerchant();
+  }
+  else if (player.nr == 2) {
+    hexAll[35].troops = new Troops (UUID, hexAll[35], player.color, 1);
+    hexAll[35].troops.soldiers.push(new Merchant(UUID, hexAll[35], player.color));
+    hexAll[35].troops.soldiers[0].showMerchant();
+  }
+  else if (player.nr == 3) {
+    hexAll[5].troops = new Troops (UUID, hexAll[5], player.color, 1);
+    hexAll[5].troops.soldiers.push(new Merchant(UUID, hexAll[5], player.color));
+    hexAll[5].troops.soldiers[0].showMerchant();
+  }
   
+
   // show start resource
   for (let i = 0; i < window.p1GlobalResourceDiv.length; i++) {
     window[`p` + player.nr + `GlobalResourceDiv`][i].innerHTML = player.resource[res[i]];

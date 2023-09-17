@@ -59,11 +59,10 @@ const confirmRecruitBtn = document.getElementById(`confirmRecruitBtn`);
 const cancelRecruitBtn = document.getElementById(`cancelRecruitBtn`);
 
 const hudTroops = document.getElementById(`hudTroops`);
+const merchantRecruited = document.getElementById(`merchantRecruited`);
 const infantryRecruited = document.getElementById(`infantryRecruited`);
 const cavalryRecruited = document.getElementById(`cavalryRecruited`);
 const elephantRecruited = document.getElementById(`elephantRecruited`);
-
-
 
 
 
@@ -101,6 +100,14 @@ hexAll.forEach((el, index) =>
   })
 );
 
+// Show HudMerchant
+hexAll.forEach(el =>
+  el.addEventListener(`click`, function (e) {
+    if (el.troops && el.troops.soldiers.some(el => el.type === `merchant`)) Merchant.prototype.showHudMerchant();
+    else Merchant.prototype.hideHudMerchant()
+ })
+);
+
 // where to go, create PossibleMove //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
@@ -120,23 +127,23 @@ hexAll.forEach((el) => {
 });
 
 // ----- move merchant ----- //
-hexAll.forEach((el) => {
-  el.addEventListener(`click`, function () {
-    if (el.possibleMove) {
-      el.merchant = new Merchant(UUID, el, window[`player` + UUID].color);
-      merchantPosition.merchant.deleteMerchant();
+// hexAll.forEach((el) => {
+//   el.addEventListener(`click`, function () {
+//     if (el.possibleMove) {
+//       el.merchant = new Merchant(UUID, el, window[`player` + UUID].color);
+//       merchantPosition.merchant.deleteMerchant();
 
-      hexAll.forEach((el) => {
-        if (el.possibleMove) {
-          el.possibleMove.deletePossibleMove();
-        }
-      });
-      el.merchant.hideHudMerchant();
-      merchantPosition = undefined;
-      window[`player` + UUID].action--;
-    }
-  });
-});
+//       hexAll.forEach((el) => {
+//         if (el.possibleMove) {
+//           el.possibleMove.deletePossibleMove();
+//         }
+//       });
+//       el.merchant.hideHudMerchant();
+//       merchantPosition = undefined;
+//       window[`player` + UUID].action--;
+//     }
+//   });
+// });
 
 //delete possiblemove when clicked somewhere else and not move merchant
 hexAll.forEach((el) => {
@@ -179,9 +186,9 @@ hexAll.forEach((el) => {
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     if (el.troops) {
-      el.hex.hideTroopsHud();
-      el.troops.showTroopsHud();
-    } else el.hex.hideTroopsHud();
+      Troops.prototype.hideHudTroops();
+      el.troops.showHudTroops();
+    } else Troops.prototype.hideHudTroops();
   })
 });
 
@@ -189,7 +196,7 @@ hexAll.forEach((el) => {
 
 // settle Town and build structures //
 settleBtn.addEventListener(`click`, function () {
-  merchantPosition.merchant.settle();
+  Merchant.prototype.settle();
 });
 
 buildStructure.addEventListener(`click`, function () {
@@ -255,7 +262,7 @@ cancelRecruitBtn.addEventListener(`click`, function () {
 // Recruiting //
 merchantBtn.addEventListener(`click`, function () {
   town.recruitTempSoldier(`merchant`);
-  town.id.merchant = new Merchant(UUID, town.id, town.color);
+  // town.id.merchant = new Merchant(UUID, town.id, town.color);
 });
 
 infantryBtn.addEventListener(`click`, function () {

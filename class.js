@@ -110,16 +110,7 @@ class Hex {
       });
     };
 
-    this.hideTroopsHud = () => {
-      const recruitedDiv = document.querySelectorAll(".recruited-div");
-      // Loop through each "recruited-div" element
-      recruitedDiv.forEach((div) => {
-        const soldiers = div.querySelectorAll("div");
-        soldiers.forEach((el) => {
-          el.remove();
-        });
-      });
-    };
+ 
 
     this.createSmall(); //Fires after hex begin. Create 9 small divs inside big Hex.
   }
@@ -245,11 +236,6 @@ class Town {
     };
 
     this.confirmRecruit = () => {
-      let merchantTownLength;
-      let merchantTempLength;
-
-      // this.id.troops.soldiers.filter((item) => item.type === `merchant`).length;
-
       if (!this.id.troops) {
         this.id.troops = new Troops(this.player, this.id, this.color);
       }
@@ -262,8 +248,8 @@ class Town {
       ) {
         this.id.troops.soldiers.push(...tempSoldiers);
         tempSoldiers = [];
-        this.id.hex.hideTroopsHud();
-        this.id.troops.showTroopsHud();
+        Troops.prototype.hideHudTroops();
+        this.id.troops.showHudTroops();
         this.updateRecruitNr();
       } else
         alert(
@@ -336,17 +322,28 @@ class Merchant {
     const merchantClass = `merchant${color}`;
     const townClass = `town${this.color}`;
 
-    this.showMerchant = () => id.classList.add(merchantClass);
-    this.hideMerchant = () => id.classList.remove(merchantClass);
-    this.showHudMerchant = () => (hudMerchant.style.display = `block`);
-    this.hideHudMerchant = () => (hudMerchant.style.display = `none`);
+    Merchant.prototype.showMerchant = () => id.classList.add(merchantClass);
+    Merchant.prototype.hideMerchant = () => id.classList.remove(merchantClass);
 
-    this.deleteMerchant = () => {
-      id.classList.remove(merchantClass);
-      delete this.id.merchant;
+    Merchant.prototype.showHudMerchant = () =>
+      (hudMerchant.style.display = `block`);
+    Merchant.prototype.hideHudMerchant = () =>
+      (hudMerchant.style.display = `none`);
+
+    Merchant.prototype.deleteMerchant = () => {
+      if (
+        id.troops.soldiers &&
+        id.troops.soldiers.map((el) => el.type === `merchant`)
+      ) {
+        id.classList.remove(merchantClass);
+        const merchantToRemove = id.troops.soldiers.findIndex(
+          (soldier) => soldier.type === "merchant"
+        );
+        id.troops.soldiers.splice(merchantToRemove, 1);
+      }
     };
 
-    this.settle = () => {
+    Merchant.prototype.settle = () => {
       this.id.town = new Town(
         UUID,
         this.id,
@@ -361,7 +358,7 @@ class Merchant {
         false
       );
       this.id.childNodes[4].classList.add(townClass);
-      this.id.hex.collectible = false;
+      // this.id.hex.collectible = false;
       hexAll.forEach((el) => {
         if (el.possibleMove) {
           el.possibleMove.deletePossibleMove();
@@ -369,6 +366,8 @@ class Merchant {
       });
       this.hideHudMerchant();
       this.deleteMerchant();
+      Troops.prototype.hideHudTroops();
+
       merchantPosition = undefined;
       window[`player` + UUID].action--;
     };
@@ -396,7 +395,7 @@ class Merchant {
       }
     };
 
-    this.showMerchant(); //fires after create merchant
+    // this.showMerchant(); //fires after create merchant
   }
 }
 
@@ -413,9 +412,20 @@ class Troops {
     this.soldiers = [];
 
     // this.showHudTroops = () => (hudTroops.style.display = `block`);
-    this.hideHudTroops = () => (hudTroops.style.display = `none`);
+    // Troops.prototype.hideHudTroops = () => (hudTroops.style.display = `none`);
 
-    this.showTroopsHud = () => {
+    Troops.prototype.hideHudTroops = () => {
+      const recruitedDiv = document.querySelectorAll(".recruited-div");
+      // Loop through each "recruited-div" element
+      recruitedDiv.forEach((div) => {
+        const soldiers = div.querySelectorAll("div");
+        soldiers.forEach((el) => {
+          el.remove();
+        });
+      });
+    };
+
+    this.showHudTroops = () => {
       for (let i = 0; i < this.soldiers.length; i++) {
         if (this.soldiers[i].type === `cavalry`) {
           const newCavalry = document.createElement(`div`);
@@ -431,6 +441,11 @@ class Troops {
           const newElephant = document.createElement(`div`);
           newElephant.classList.add(`elephant${this.color}Hud`);
           elephantRecruited.appendChild(newElephant);
+        }
+        if (this.soldiers[i].type === `merchant`) {
+          const newMerchant = document.createElement(`div`);
+          newMerchant.classList.add(`merchant${this.color}Hud`);
+          merchantRecruited.appendChild(newMerchant);
         }
       }
     };
