@@ -153,8 +153,8 @@ hexAll.forEach((el) => {
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     if (el.town && el.town.player === UUID) {
-      if (town) town.id.hex.collectible = false;
-      else town = el.town;
+      // if (town) town.id.hex.collectible = false;
+      town = el.town;
       town.showHudTown();
       town.checkBuildedStructure();
     } else if (town && !el.possibleResource && clickedRes.length) {
