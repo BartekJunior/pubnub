@@ -64,6 +64,11 @@ const infantryRecruited = document.getElementById(`infantryRecruited`);
 const cavalryRecruited = document.getElementById(`cavalryRecruited`);
 const elephantRecruited = document.getElementById(`elephantRecruited`);
 
+// move buttons
+const containerMoveBtn = document.getElementById(`containerMoveBtn`);
+
+
+
 
 
 // troops variables

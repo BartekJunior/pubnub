@@ -416,6 +416,7 @@ h2 {
 /* HUD Troops */
 .recruited-div {
   display: flex;
+  width: 80%;
 }
 
 .soldier-img {
@@ -430,6 +431,11 @@ h2 {
   width: 100%;
   height: auto;
   background-color: azure;
+}
+
+#containerMoveBtn {
+  display: inline-flex;
+  /* flex-direction: column; */
 }
 
 
