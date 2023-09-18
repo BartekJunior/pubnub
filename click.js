@@ -132,22 +132,26 @@ hexAll.forEach(el =>
 );
 
 // where to go, create PossibleMove //
-hexAll.forEach((el) => {
-  el.addEventListener(`click`, function () {
-    if (el.merchant) {
-      el.merchant.whereToGo();
-    }
-  });
-});
+// hexAll.forEach((el) => {
+//   el.addEventListener(`click`, function () {
+//     if (el.merchant) {
+//       el.merchant.whereToGo();
+//     }
+//   });
+// });
+
 
 // Edit this function. getType fires when new troops hex is creating in Hex!!! //
-hexAll.forEach((el) => {
-  el.addEventListener(`click`, function () {
-    if (!el.hex.vis && el.possibleMove) {
-      el.hex.getLand(); //Get type and resource from each new discovered Hex
-    }
-  });
-});
+// hexAll.forEach((el) => {
+//   el.addEventListener(`click`, function () {
+//     if (!el.hex.vis && el.possibleMove) {
+//       el.hex.getLand(); 
+//     }
+//   });
+// });
+
+
+
 
 // ----- move merchant ----- //
 // hexAll.forEach((el) => {
@@ -168,16 +172,18 @@ hexAll.forEach((el) => {
 //   });
 // });
 
+
+
 //delete possiblemove when clicked somewhere else and not move merchant
-hexAll.forEach((el) => {
-  el.addEventListener(`click`, function () {
-    if (!el.possibleMove && !el.merchant) {
-      hexAll.forEach((el) => {
-        if (el.possibleMove) el.possibleMove.deletePossibleMove();
-      });
-    }
-  });
-});
+// hexAll.forEach((el) => {
+//   el.addEventListener(`click`, function () {
+//     if (!el.possibleMove && !el.merchant) {
+//       hexAll.forEach((el) => {
+//         if (el.possibleMove) el.possibleMove.deletePossibleMove();
+//       });
+//     }
+//   });
+// });
 
 // ----- show/hide hudTown  ----- //
 hexAll.forEach((el) => {

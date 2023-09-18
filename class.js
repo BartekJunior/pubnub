@@ -459,7 +459,6 @@ class Troops {
 
     // Choose group, Assuming soldiers have the class "soldier"
     Troops.prototype.chooseTroopGroup = function () {
-
       let soldiers = document.querySelectorAll(".soldier");
       let group = [];
 
@@ -494,6 +493,10 @@ class Troops {
         });
         group = [];
 
+        hexAll.forEach(el => {
+          if (el.possibleMove) el.possibleMove.deletePossibleMove();
+        })
+
         // Reset the soldiers variable (if needed)
         soldiers = document.querySelectorAll(".soldier");
         console.log("Selection canceled");
@@ -501,7 +504,6 @@ class Troops {
     };
 
     Troops.prototype.whereToGo = () => {
-      // troopsPosition = this.id;
       let offsetAll = [];
       for (let i = 0; i < hexAll.length; i++) {
         offsetAll[i] = [hexAll[i].offsetLeft, hexAll[i].offsetTop];
@@ -533,16 +535,17 @@ class Cavalry {
     this.id = id;
     this.color = color;
 
-    // const cavalryClass = `cavalry${this.color}`;
+    const soldierClass = `cavalry${this.color}Hud`;
 
-    // this.showCavalry = () => id.classList.add(cavalryClass);
-    // this.hideCavalry = () => id.classList.remove(cavalryClass);
+    this.showCavalry = () => id.childNodes[7].classList.add(soldierClass);
+    // this.hideCavalry = () => id.classList.remove(soldierClass);
 
     this.deleteCavalry = () => {
-      id.classList.remove(cavalryClass);
+      id.classList.remove(soldierClass);
       delete this.id.cavalry;
     };
-    // this.showcavalry(); //fires after create merchant
+
+    this.showCavalry(); //fires after create merchant
   }
 }
 
