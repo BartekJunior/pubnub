@@ -426,11 +426,15 @@ h2 {
   background-color: #2984b9;
 }
 
+.soldier-selected {
+  background-color: rgb(82, 73, 73);
+}
+
 #hudTroops {
   display: block;
   width: 100%;
   height: auto;
-  background-color: azure;
+  background-color: rgb(200, 212, 212);
 }
 
 #containerMoveBtn {

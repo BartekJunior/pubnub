@@ -67,6 +67,24 @@ const elephantRecruited = document.getElementById(`elephantRecruited`);
 // move buttons
 const containerMoveBtn = document.getElementById(`containerMoveBtn`);
 
+const startMoveBtn = document.getElementById(`startMoveBtn`);
+const confirmGroupBtn = document.getElementById(`confirmGroupBtn`);
+const confirmMoveBtn = document.getElementById(`confirmMoveBtn`);
+const cancelMoveBtn = document.getElementById(`cancelMoveBtn`);
+
+
+// OOOOOOOOOOOOOOOMMMMMMMMMMMMMMMMMGGGGGGGGGGGGGGGGGGGGGG //
+
+startMoveBtn.addEventListener(`click`, function() {
+  Troops.prototype.chooseTroopGroup();
+})
+
+
+
+
+
+
+
 
 
 

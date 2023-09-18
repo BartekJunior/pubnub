@@ -110,8 +110,6 @@ class Hex {
       });
     };
 
- 
-
     this.createSmall(); //Fires after hex begin. Create 9 small divs inside big Hex.
   }
 }
@@ -430,21 +428,25 @@ class Troops {
         if (this.soldiers[i].type === `cavalry`) {
           const newCavalry = document.createElement(`div`);
           newCavalry.classList.add(`cavalry${this.color}Hud`);
+          newCavalry.classList.add(`soldier`);
           cavalryRecruited.appendChild(newCavalry);
         }
         if (this.soldiers[i].type === `infantry`) {
           const newInfantry = document.createElement(`div`);
           newInfantry.classList.add(`infantry${this.color}Hud`);
+          newInfantry.classList.add(`soldier`);
           infantryRecruited.appendChild(newInfantry);
         }
         if (this.soldiers[i].type === `elephant`) {
           const newElephant = document.createElement(`div`);
           newElephant.classList.add(`elephant${this.color}Hud`);
+          newElephant.classList.add(`soldier`);
           elephantRecruited.appendChild(newElephant);
         }
         if (this.soldiers[i].type === `merchant`) {
           const newMerchant = document.createElement(`div`);
           newMerchant.classList.add(`merchant${this.color}Hud`);
+          newMerchant.classList.add(`soldier`);
           merchantRecruited.appendChild(newMerchant);
         }
       }
@@ -454,6 +456,31 @@ class Troops {
       // id.classList.remove(troopsClass);
       delete this.id.troops;
     };
+
+
+
+
+    // Assuming soldiers have the class "soldier"
+    Troops.prototype.chooseTroopGroup = function () {
+      let soldiers = document.querySelectorAll(".soldier");
+      let group = [];
+
+      soldiers.forEach((el) => {
+        el.addEventListener("click", function () {
+          if (!group.includes(el)) {
+            group.push(el);
+            el.classList.add("soldier-selected"); // You can add a "selected" class for styling
+            console.log(group);
+          } else {
+            group = group.filter((soldier) => soldier !== el);
+            el.classList.remove("soldier-selected");
+            console.log(group);
+          }
+        });
+      });
+    };
+
+
   }
 }
 
