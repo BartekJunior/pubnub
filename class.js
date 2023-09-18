@@ -370,28 +370,28 @@ class Merchant {
       window[`player` + UUID].action--;
     };
 
-    this.whereToGo = () => {
-      merchantPosition = this.id;
-      let offsetAll = [];
-      for (let i = 0; i < hexAll.length; i++) {
-        offsetAll[i] = [hexAll[i].offsetLeft, hexAll[i].offsetTop];
-      }
+    // this.whereToGo = () => {
+    //   merchantPosition = this.id;
+    //   let offsetAll = [];
+    //   for (let i = 0; i < hexAll.length; i++) {
+    //     offsetAll[i] = [hexAll[i].offsetLeft, hexAll[i].offsetTop];
+    //   }
 
-      this.showHudMerchant();
+    //   this.showHudMerchant();
 
-      for (let i = 0; i < hexAll.length; i++) {
-        if (
-          offsetAll[i][0] > this.id.offsetLeft - 130 &&
-          offsetAll[i][0] < this.id.offsetLeft + 130 &&
-          offsetAll[i][1] < this.id.offsetTop + 130 &&
-          offsetAll[i][1] > this.id.offsetTop - 130 &&
-          !hexAll[i].merchant
-        ) {
-          const possibleMove = new PossibleMove(UUID, hexAll[i]);
-          hexAll[i].possibleMove = possibleMove;
-        }
-      }
-    };
+    //   for (let i = 0; i < hexAll.length; i++) {
+    //     if (
+    //       offsetAll[i][0] > this.id.offsetLeft - 130 &&
+    //       offsetAll[i][0] < this.id.offsetLeft + 130 &&
+    //       offsetAll[i][1] < this.id.offsetTop + 130 &&
+    //       offsetAll[i][1] > this.id.offsetTop - 130 &&
+    //       !hexAll[i].merchant
+    //     ) {
+    //       const possibleMove = new PossibleMove(UUID, hexAll[i]);
+    //       hexAll[i].possibleMove = possibleMove;
+    //     }
+    //   }
+    // };
 
     // this.showMerchant(); //fires after create merchant
   }
@@ -457,11 +457,9 @@ class Troops {
       delete this.id.troops;
     };
 
-
-
-
-    // Assuming soldiers have the class "soldier"
+    // Choose group, Assuming soldiers have the class "soldier"
     Troops.prototype.chooseTroopGroup = function () {
+
       let soldiers = document.querySelectorAll(".soldier");
       let group = [];
 
@@ -478,9 +476,51 @@ class Troops {
           }
         });
       });
+
+      confirmGroupBtn.addEventListener("click", () => {
+        // Call your function here that handles the confirmed group
+        this.whereToGo();
+
+        // Optionally, clear the group or perform other actions after confirmation
+        // group = [];
+        // Disable the confirm button after confirmation
+        //  confirmGroupBtn.disabled = true;
+      });
+
+      cancelMoveBtn.addEventListener("click", function () {
+        // Unselect all soldiers and clear the group array
+        group.forEach((el) => {
+          el.classList.remove("soldier-selected");
+        });
+        group = [];
+
+        // Reset the soldiers variable (if needed)
+        soldiers = document.querySelectorAll(".soldier");
+        console.log("Selection canceled");
+      });
     };
 
+    Troops.prototype.whereToGo = () => {
+      // troopsPosition = this.id;
+      let offsetAll = [];
+      for (let i = 0; i < hexAll.length; i++) {
+        offsetAll[i] = [hexAll[i].offsetLeft, hexAll[i].offsetTop];
+      }
 
+      // this.showHudMerchant();
+
+      for (let i = 0; i < hexAll.length; i++) {
+        if (
+          offsetAll[i][0] > troopsPosition.offsetLeft - 130 &&
+          offsetAll[i][0] < troopsPosition.offsetLeft + 130 &&
+          offsetAll[i][1] < troopsPosition.offsetTop + 130 &&
+          offsetAll[i][1] > troopsPosition.offsetTop - 130
+          // !hexAll[i].merchant
+        ) {
+          hexAll[i].possibleMove = new PossibleMove(UUID, hexAll[i]);
+        }
+      }
+    };
   }
 }
 

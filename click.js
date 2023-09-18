@@ -211,6 +211,7 @@ hexAll.forEach((el) => {
     if (el.troops) {
       Troops.prototype.hideHudTroops();
       el.troops.showHudTroops();
+      troopsPosition = el;
     } else Troops.prototype.hideHudTroops();
   })
 });
