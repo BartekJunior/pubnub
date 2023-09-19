@@ -123,7 +123,8 @@ hexAll.forEach((el) =>
 // Click possibleMove, create troopsMoveInfo, //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
-    if (el.possibleMove) {
+
+    if (el.possibleMove && troopsMoveGlobal.length < 3) {
       troopsDestination = el;
       troopsMoveInfo = [selectedSoldiers, troopsPosition, troopsDestination];
       troopsMoveGlobal.push(troopsMoveInfo);
@@ -139,7 +140,13 @@ hexAll.forEach((el) => {
         }
       });
 
-      if (troopsMoveGlobal.length >= 3) alert(`Wybrałeś już 3 grupy jednostek!`)
+    } else if (troopsMoveGlobal.length >= 3) {
+      hexAll.forEach((el) => {
+        if (el.possibleMove) {
+          el.possibleMove.deletePossibleMove();
+        }
+      });
+      alert(`Wybrałeś już 3 grupy jednostek! Zatwierdź ruch albo anuluj`);
     }
   });
 });

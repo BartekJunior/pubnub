@@ -478,25 +478,37 @@ class Troops {
           if (!groupHud.includes(el)) {
             groupHud.push(el);
             el.classList.add("soldier-selected"); // You can add a "selected" class for styling
-            console.log(groupHud);
+            console.log(`groupHud is`, groupHud);
 
             let soldierId = el.dataset.soldierId; // Assuming you have a data attribute with soldier ID
-            console.log(`this is soldier id ${soldierId}`);
+            console.log(`soldierId is`, soldierId);
 
             let soldierObject = troopsPosition.troops.soldiers.find(
               (soldier) => soldier.type === soldierId && !soldier.selected
             );
+
             soldierObject.selected = true;
+            console.log(`soldierObject is`, soldierObject);
+
             if (!selectedSoldiers.includes(soldierObject)) {
               selectedSoldiers.push(soldierObject);
               // troopsPosition.troops.soldiers.splice(troopsPosition.troops.soldiers.indexOf(soldierObject), 1);
             }
+            console.log(`selectedSoldiers`, selectedSoldiers);
 
-            console.log(selectedSoldiers);
           } else {
             groupHud = groupHud.filter((soldier) => soldier !== el);
             el.classList.remove("soldier-selected");
-            console.log(groupHud);
+            console.log(`groupHud is`, groupHud);
+
+            let soldierId = el.dataset.soldierId; // Assuming you have a data attribute with soldier ID
+
+            let soldierObject = troopsPosition.troops.soldiers.find(
+              (soldier) => soldier.type === soldierId && soldier.selected
+            );
+
+            soldierObject.selected = false;
+            console.log(`soldierObject is`, soldierObject);
           }
         });
       });
