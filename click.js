@@ -54,7 +54,6 @@ const cavalryRecruitNr = document.getElementById(`cavalryRecruitNr`);
 const elephantRecruitNr = document.getElementById(`elephantRecruitNr`);
 const merchantRecruitNr = document.getElementById(`merchantRecruitNr`);
 
-
 const confirmRecruitBtn = document.getElementById(`confirmRecruitBtn`);
 const cancelRecruitBtn = document.getElementById(`cancelRecruitBtn`);
 
@@ -72,22 +71,11 @@ const confirmGroupBtn = document.getElementById(`confirmGroupBtn`);
 const confirmMoveBtn = document.getElementById(`confirmMoveBtn`);
 const cancelMoveBtn = document.getElementById(`cancelMoveBtn`);
 
-
 // OOOOOOOOOOOOOOOMMMMMMMMMMMMMMMMMGGGGGGGGGGGGGGGGGGGGGG //
 
-startMoveBtn.addEventListener(`click`, function() {
+startMoveBtn.addEventListener(`click`, function () {
   Troops.prototype.startMoveBtn();
-})
-
-
-
-
-
-
-
-
-
-
+});
 
 // troops variables
 let tempSoldiers = [];
@@ -124,34 +112,46 @@ hexAll.forEach((el, index) =>
 );
 
 // Show HudMerchant
-hexAll.forEach(el =>
+hexAll.forEach((el) =>
   el.addEventListener(`click`, function (e) {
-    if (el.troops && el.troops.soldiers.some(el => el.type === `merchant`)) Merchant.prototype.showHudMerchant();
-    else Merchant.prototype.hideHudMerchant()
- })
+    if (el.troops && el.troops.soldiers.some((el) => el.type === `merchant`))
+      Merchant.prototype.showHudMerchant();
+    else Merchant.prototype.hideHudMerchant();
+  })
 );
 
-// where to go, create PossibleMove //
-// hexAll.forEach((el) => {
-//   el.addEventListener(`click`, function () {
-//     if (el.merchant) {
-//       el.merchant.whereToGo();
-//     }
-//   });
-// });
+// Click possibleMove, create troopsMoveInfo, //
+hexAll.forEach((el) => {
+  el.addEventListener(`click`, function () {
+    if (el.possibleMove) {
+      troopsDestination = el;
+      troopsMoveInfo = [selectedSoldiers, troopsPosition, troopsDestination];
+      troopsMoveGlobal.push(troopsMoveInfo);
 
+      selectedSoldiers = [];
+      troopsPosition = undefined;
+      troopsDestination = undefined;
+      troopsMoveInfo = [];
+
+      hexAll.forEach((el) => {
+        if (el.possibleMove) {
+          el.possibleMove.deletePossibleMove();
+        }
+      });
+
+      if (troopsMoveGlobal.length >= 3) alert(`Wybrałeś już 3 grupy jednostek!`)
+    }
+  });
+});
 
 // Edit this function. getType fires when new troops hex is creating in Hex!!! //
 // hexAll.forEach((el) => {
 //   el.addEventListener(`click`, function () {
 //     if (!el.hex.vis && el.possibleMove) {
-//       el.hex.getLand(); 
+//       el.hex.getLand();
 //     }
 //   });
 // });
-
-
-
 
 // ----- move merchant ----- //
 // hexAll.forEach((el) => {
@@ -171,8 +171,6 @@ hexAll.forEach(el =>
 //     }
 //   });
 // });
-
-
 
 //delete possiblemove when clicked somewhere else and not move merchant
 // hexAll.forEach((el) => {
@@ -210,7 +208,6 @@ hexAll.forEach((el) => {
   });
 });
 
-
 // ----- show Troops  ----- //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
@@ -219,10 +216,8 @@ hexAll.forEach((el) => {
       el.troops.showHudTroops();
       troopsPosition = el;
     } else Troops.prototype.hideHudTroops();
-  })
+  });
 });
-
-
 
 // settle Town and build structures //
 settleBtn.addEventListener(`click`, function () {
@@ -236,43 +231,36 @@ buildStructure.addEventListener(`click`, function () {
 fortressBtn.addEventListener(`click`, function () {
   town.buildStructure(`fortress`);
   town.changeStructureBtn(`fortress`, `none`);
-
 });
 
 academyBtn.addEventListener(`click`, function () {
   town.buildStructure(`academy`);
   town.changeStructureBtn(`academy`, `none`);
-
 });
 
 portBtn.addEventListener(`click`, function () {
   town.buildStructure(`port`);
   town.changeStructureBtn(`port`, `none`);
-
 });
 
 marketBtn.addEventListener(`click`, function () {
   town.buildStructure(`market`);
   town.changeStructureBtn(`market`, `none`);
-
 });
 
 obeliskBtn.addEventListener(`click`, function () {
   town.buildStructure(`obelisk`);
   town.changeStructureBtn(`obelisk`, `none`);
-
 });
 
 templeBtn.addEventListener(`click`, function () {
   town.buildStructure(`temple`);
   town.changeStructureBtn(`temple`, `none`);
-
 });
 
 observatoryBtn.addEventListener(`click`, function () {
   town.buildStructure(`observatory`);
   town.changeStructureBtn(`observatory`, `none`);
-
 });
 
 //----------- RECRUITING TROOPS -----------//

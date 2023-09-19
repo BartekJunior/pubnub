@@ -398,7 +398,12 @@ class Merchant {
 }
 
 ///// CLASS TROOPS /////
+let selectedSoldiers = []; // An array to store selected soldiers
 let troopsPosition;
+let troopsDestination;
+let troopsMoveInfo = [];
+let troopsMoveGlobal = [];
+
 class Troops {
   constructor(player, id, color, size) {
     this.type = `troops`;
@@ -461,22 +466,15 @@ class Troops {
       delete this.id.troops;
     };
 
-
-
-
     // Choose group, Assuming soldiers have the class "soldier"
     Troops.prototype.startMoveBtn = function () {
-
       let soldiers = troopsPosition.troops.soldiers; // Reference to the soldiers in troops
-      let selectedSoldiers = []; // An array to store selected soldiers
 
-  
       let soldiersHud = document.querySelectorAll(".soldier");
       let groupHud = [];
 
       soldiersHud.forEach((el) => {
         el.addEventListener("click", function () {
-
           if (!groupHud.includes(el)) {
             groupHud.push(el);
             el.classList.add("soldier-selected"); // You can add a "selected" class for styling
@@ -484,8 +482,10 @@ class Troops {
 
             let soldierId = el.dataset.soldierId; // Assuming you have a data attribute with soldier ID
             console.log(`this is soldier id ${soldierId}`);
-            
-            let soldierObject = troopsPosition.troops.soldiers.find(soldier => soldier.type === soldierId && !soldier.selected);
+
+            let soldierObject = troopsPosition.troops.soldiers.find(
+              (soldier) => soldier.type === soldierId && !soldier.selected
+            );
             soldierObject.selected = true;
             if (!selectedSoldiers.includes(soldierObject)) {
               selectedSoldiers.push(soldierObject);
@@ -493,16 +493,11 @@ class Troops {
             }
 
             console.log(selectedSoldiers);
-            
-
-
           } else {
             groupHud = groupHud.filter((soldier) => soldier !== el);
             el.classList.remove("soldier-selected");
             console.log(groupHud);
           }
-
-
         });
       });
 
@@ -511,28 +506,29 @@ class Troops {
         this.whereToGo();
       });
 
+
       cancelMoveBtn.addEventListener("click", function () {
         // Unselect all soldiers and clear the group array
         groupHud.forEach((el) => {
           el.classList.remove("soldier-selected");
         });
 
+        troopsPosition.troops.soldiers.map(
+          (soldier) => (soldier.selected = false)
+        );
+
         groupHud = [];
-        troopsPosition.troops.soldiers.map(soldier => soldier.selected = false);
-        selectedSoldiers = [];
+        selectedSoldiers = []; // An array to store selected soldiers
+        troopsPosition;
+        troopsDestination;
+        troopsMoveInfo = [];
+        troopsMoveGlobal = [];
 
-
-        hexAll.forEach(el => {
+        hexAll.forEach((el) => {
           if (el.possibleMove) el.possibleMove.deletePossibleMove();
-        })
+        });
 
-
-        // Reset the soldiers variable (if needed)
-        // soldiers = document.querySelectorAll(".soldier");
         console.log("Selection canceled");
-
-
-
       });
     };
 
