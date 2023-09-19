@@ -76,7 +76,7 @@ const cancelMoveBtn = document.getElementById(`cancelMoveBtn`);
 // OOOOOOOOOOOOOOOMMMMMMMMMMMMMMMMMGGGGGGGGGGGGGGGGGGGGGG //
 
 startMoveBtn.addEventListener(`click`, function() {
-  Troops.prototype.chooseTroopGroup();
+  Troops.prototype.startMoveBtn();
 })
 
 

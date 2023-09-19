@@ -429,24 +429,28 @@ class Troops {
           const newCavalry = document.createElement(`div`);
           newCavalry.classList.add(`cavalry${this.color}Hud`);
           newCavalry.classList.add(`soldier`);
+          newCavalry.dataset.soldierId = i;
           cavalryRecruited.appendChild(newCavalry);
         }
         if (this.soldiers[i].type === `infantry`) {
           const newInfantry = document.createElement(`div`);
           newInfantry.classList.add(`infantry${this.color}Hud`);
           newInfantry.classList.add(`soldier`);
+          newInfantry.dataset.soldierId = i;
           infantryRecruited.appendChild(newInfantry);
         }
         if (this.soldiers[i].type === `elephant`) {
           const newElephant = document.createElement(`div`);
           newElephant.classList.add(`elephant${this.color}Hud`);
           newElephant.classList.add(`soldier`);
+          newElephant.dataset.soldierId = i;
           elephantRecruited.appendChild(newElephant);
         }
         if (this.soldiers[i].type === `merchant`) {
           const newMerchant = document.createElement(`div`);
           newMerchant.classList.add(`merchant${this.color}Hud`);
           newMerchant.classList.add(`soldier`);
+          newMerchant.dataset.soldierId = i;
           merchantRecruited.appendChild(newMerchant);
         }
       }
@@ -458,40 +462,45 @@ class Troops {
     };
 
     // Choose group, Assuming soldiers have the class "soldier"
-    Troops.prototype.chooseTroopGroup = function () {
-      let soldiers = document.querySelectorAll(".soldier");
-      let group = [];
+    Troops.prototype.startMoveBtn = function () {
 
-      soldiers.forEach((el) => {
+      let soldiers = troopsPosition.troops.soldiers; // Reference to the soldiers in troops
+      let selectedSoldiers = []; // An array to store selected soldiers
+      
+
+      let soldiersHud = document.querySelectorAll(".soldier");
+      let groupHud = [];
+
+      soldiersHud.forEach((el) => {
         el.addEventListener("click", function () {
-          if (!group.includes(el)) {
-            group.push(el);
+
+          if (!groupHud.includes(el)) {
+            groupHud.push(el);
             el.classList.add("soldier-selected"); // You can add a "selected" class for styling
-            console.log(group);
+            console.log(groupHud);
+
           } else {
-            group = group.filter((soldier) => soldier !== el);
+            groupHud = groupHud.filter((soldier) => soldier !== el);
             el.classList.remove("soldier-selected");
-            console.log(group);
+            console.log(groupHud);
           }
+
+
+
         });
       });
 
       confirmGroupBtn.addEventListener("click", () => {
         // Call your function here that handles the confirmed group
         this.whereToGo();
-
-        // Optionally, clear the group or perform other actions after confirmation
-        // group = [];
-        // Disable the confirm button after confirmation
-        //  confirmGroupBtn.disabled = true;
       });
 
       cancelMoveBtn.addEventListener("click", function () {
         // Unselect all soldiers and clear the group array
-        group.forEach((el) => {
+        groupHud.forEach((el) => {
           el.classList.remove("soldier-selected");
         });
-        group = [];
+        groupHud = [];
 
         hexAll.forEach(el => {
           if (el.possibleMove) el.possibleMove.deletePossibleMove();
@@ -536,7 +545,6 @@ class Cavalry {
     this.color = color;
 
     const soldierClass = `cavalry${this.color}Hud`;
-
     this.showCavalry = () => id.childNodes[7].classList.add(soldierClass);
     // this.hideCavalry = () => id.classList.remove(soldierClass);
 
@@ -556,10 +564,16 @@ class Infantry {
     this.id = id;
     this.color = color;
 
+    const soldierClass = `infantry${this.color}Hud`;
+    this.showInfantry = () => id.childNodes[5].classList.add(soldierClass);
+    // this.hideCavalry = () => id.classList.remove(soldierClass);
+
     this.deleteInfantry = () => {
       id.classList.remove(infantryClass);
       delete this.id.infantry;
     };
+
+    this.showInfantry(); //fires after create merchant
   }
 }
 
@@ -570,10 +584,16 @@ class Elephant {
     this.id = id;
     this.color = color;
 
+    const soldierClass = `elephant${this.color}Hud`;
+    this.showElephant = () => id.childNodes[3].classList.add(soldierClass);
+    // this.hideCavalry = () => id.classList.remove(soldierClass);
+
     this.deleteElephant = () => {
       id.classList.remove(elephantClass);
       delete this.id.elephant;
     };
+
+    this.showElephant(); //fires after create merchant
   }
 }
 
