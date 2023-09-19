@@ -11,7 +11,6 @@ hexAll.forEach((el) => {
   el.hex = newHex;
 });
 
-
 // Make start Hexes. It must be conected to set player functiion. Edit this
 hexAll[0].hex = new Hex(hexAll[0], `grass`, true, `food`, true);
 hexAll[1].hex = new Hex(hexAll[1], `forest`, true, `wood`, true);
@@ -22,12 +21,19 @@ hexAll[1].classList.add(`class-${hexAll[1].hex.land}`);
 hexAll[6].classList.add(`class-${hexAll[6].hex.land}`);
 hexAll[7].classList.add(`class-${hexAll[7].hex.land}`);
 
-hexAll[2].troops = new Troops (UUID, hexAll[2], `green`, 3);
-hexAll[2].troops.soldiers = [new Cavalry (UUID, hexAll[2], `green`), new Infantry (UUID, hexAll[2], `green`)];
+hexAll[2].troops = new Troops(UUID, hexAll[2], `green`, 3);
+hexAll[2].troops.soldiers = [
+  new Cavalry(UUID, hexAll[2], `green`),
+  new Infantry(UUID, hexAll[2], `green`),
+];
 
-hexAll[4].troops = new Troops (UUID, hexAll[4], `green`, 3);
-hexAll[4].troops.soldiers = [new Elephant (UUID, hexAll[4], `green`), new Elephant (UUID, hexAll[4], `green`)];
-
+hexAll[4].troops = new Troops(UUID, hexAll[4], `green`, 3);
+hexAll[4].troops.soldiers = [
+  new Elephant(UUID, hexAll[4], `green`),
+  new Elephant(UUID, hexAll[4], `green`),
+  new Cavalry(UUID, hexAll[4], `green`),
+  new Cavalry(UUID, hexAll[4], `green`),
+];
 
 // Array of 4 land piece. One big array of 12 cafelkas. Each one has 4 Hexes of land//
 const hexArea = [];
@@ -64,9 +70,20 @@ setPlayer.addEventListener(`click`, function () {
   else alert(`Liczba graczy musi wynosic 1-3`);
 
   //set individual player for each user
-  window["player" + UUID] = new Player(UUID, num, color, false, 2, 1, 0, 0, 0, 2, 0);
+  window["player" + UUID] = new Player(
+    UUID,
+    num,
+    color,
+    false,
+    2,
+    1,
+    0,
+    0,
+    0,
+    2,
+    0
+  );
   player = window[`player` + UUID];
-
 
   //set active turn to first player
   if (player.nr === 1) {
@@ -77,33 +94,30 @@ setPlayer.addEventListener(`click`, function () {
 
   //add individual merchant for each user (seen only for current user)
   if (player.nr == 1) {
-    hexAll[0].troops = new Troops (UUID, hexAll[0], player.color, 1);
+    hexAll[0].troops = new Troops(UUID, hexAll[0], player.color, 1);
     hexAll[0].troops.soldiers.push(new Merchant(UUID, hexAll[0], player.color));
     hexAll[0].troops.soldiers[0].showMerchant();
-  }
-  else if (player.nr == 2) {
-    hexAll[35].troops = new Troops (UUID, hexAll[35], player.color, 1);
-    hexAll[35].troops.soldiers.push(new Merchant(UUID, hexAll[35], player.color));
+  } else if (player.nr == 2) {
+    hexAll[35].troops = new Troops(UUID, hexAll[35], player.color, 1);
+    hexAll[35].troops.soldiers.push(
+      new Merchant(UUID, hexAll[35], player.color)
+    );
     hexAll[35].troops.soldiers[0].showMerchant();
-  }
-  else if (player.nr == 3) {
-    hexAll[5].troops = new Troops (UUID, hexAll[5], player.color, 1);
+  } else if (player.nr == 3) {
+    hexAll[5].troops = new Troops(UUID, hexAll[5], player.color, 1);
     hexAll[5].troops.soldiers.push(new Merchant(UUID, hexAll[5], player.color));
     hexAll[5].troops.soldiers[0].showMerchant();
   }
-  
 
   // show start resource
   for (let i = 0; i < window.p1GlobalResourceDiv.length; i++) {
-    window[`p` + player.nr + `GlobalResourceDiv`][i].innerHTML = player.resource[res[i]];
+    window[`p` + player.nr + `GlobalResourceDiv`][i].innerHTML =
+      player.resource[res[i]];
   }
 
   // Show player name and whole playerGlobalHud
   window[`p` + player.nr + `Global`].children[0].innerHTML = UUID;
-  window[`p` + player.nr + `Global`].children[0].style.backgroundColor = player.color;
+  window[`p` + player.nr + `Global`].children[0].style.backgroundColor =
+    player.color;
   window[`p` + player.nr + `Global`].style.display = `block`;
 });
-
-
-
-

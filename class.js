@@ -429,28 +429,28 @@ class Troops {
           const newCavalry = document.createElement(`div`);
           newCavalry.classList.add(`cavalry${this.color}Hud`);
           newCavalry.classList.add(`soldier`);
-          newCavalry.dataset.soldierId = i;
+          newCavalry.dataset.soldierId = `cavalry`;
           cavalryRecruited.appendChild(newCavalry);
         }
         if (this.soldiers[i].type === `infantry`) {
           const newInfantry = document.createElement(`div`);
           newInfantry.classList.add(`infantry${this.color}Hud`);
           newInfantry.classList.add(`soldier`);
-          newInfantry.dataset.soldierId = i;
+          newInfantry.dataset.soldierId = `infantry`;
           infantryRecruited.appendChild(newInfantry);
         }
         if (this.soldiers[i].type === `elephant`) {
           const newElephant = document.createElement(`div`);
           newElephant.classList.add(`elephant${this.color}Hud`);
           newElephant.classList.add(`soldier`);
-          newElephant.dataset.soldierId = i;
+          newElephant.dataset.soldierId = `elephant`;
           elephantRecruited.appendChild(newElephant);
         }
         if (this.soldiers[i].type === `merchant`) {
           const newMerchant = document.createElement(`div`);
           newMerchant.classList.add(`merchant${this.color}Hud`);
           newMerchant.classList.add(`soldier`);
-          newMerchant.dataset.soldierId = i;
+          newMerchant.dataset.soldierId = `merchant`;
           merchantRecruited.appendChild(newMerchant);
         }
       }
@@ -461,13 +461,16 @@ class Troops {
       delete this.id.troops;
     };
 
+
+
+
     // Choose group, Assuming soldiers have the class "soldier"
     Troops.prototype.startMoveBtn = function () {
 
       let soldiers = troopsPosition.troops.soldiers; // Reference to the soldiers in troops
       let selectedSoldiers = []; // An array to store selected soldiers
-      
 
+  
       let soldiersHud = document.querySelectorAll(".soldier");
       let groupHud = [];
 
@@ -479,12 +482,27 @@ class Troops {
             el.classList.add("soldier-selected"); // You can add a "selected" class for styling
             console.log(groupHud);
 
+
+            let soldierId = el.dataset.soldierId; // Assuming you have a data attribute with soldier ID
+            console.log(`this is soldier id ${soldierId}`);
+            
+            let soldierObject = troopsPosition.troops.soldiers.find(soldier => soldier.type === soldierId);
+
+            if (soldierObject) {
+              // Add the soldier object to the selectedSoldiers array
+              selectedSoldiers.push(soldierObject);
+              troopsPosition.troops.soldiers.splice(troopsPosition.troops.soldiers.indexOf(soldierObject), 1);
+            }
+
+            console.log(selectedSoldiers);
+            
+
+
           } else {
             groupHud = groupHud.filter((soldier) => soldier !== el);
             el.classList.remove("soldier-selected");
             console.log(groupHud);
           }
-
 
 
         });
@@ -509,6 +527,14 @@ class Troops {
         // Reset the soldiers variable (if needed)
         soldiers = document.querySelectorAll(".soldier");
         console.log("Selection canceled");
+
+
+        selectedSoldiers.forEach(el => {
+          el.chuj = 5;
+        })
+
+
+
       });
     };
 
