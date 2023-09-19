@@ -482,16 +482,14 @@ class Troops {
             el.classList.add("soldier-selected"); // You can add a "selected" class for styling
             console.log(groupHud);
 
-
             let soldierId = el.dataset.soldierId; // Assuming you have a data attribute with soldier ID
             console.log(`this is soldier id ${soldierId}`);
             
-            let soldierObject = troopsPosition.troops.soldiers.find(soldier => soldier.type === soldierId);
-
-            if (soldierObject) {
-              // Add the soldier object to the selectedSoldiers array
+            let soldierObject = troopsPosition.troops.soldiers.find(soldier => soldier.type === soldierId && !soldier.selected);
+            soldierObject.selected = true;
+            if (!selectedSoldiers.includes(soldierObject)) {
               selectedSoldiers.push(soldierObject);
-              troopsPosition.troops.soldiers.splice(troopsPosition.troops.soldiers.indexOf(soldierObject), 1);
+              // troopsPosition.troops.soldiers.splice(troopsPosition.troops.soldiers.indexOf(soldierObject), 1);
             }
 
             console.log(selectedSoldiers);
@@ -518,20 +516,20 @@ class Troops {
         groupHud.forEach((el) => {
           el.classList.remove("soldier-selected");
         });
+
         groupHud = [];
+        troopsPosition.troops.soldiers.map(soldier => soldier.selected = false);
+        selectedSoldiers = [];
+
 
         hexAll.forEach(el => {
           if (el.possibleMove) el.possibleMove.deletePossibleMove();
         })
 
+
         // Reset the soldiers variable (if needed)
-        soldiers = document.querySelectorAll(".soldier");
+        // soldiers = document.querySelectorAll(".soldier");
         console.log("Selection canceled");
-
-
-        selectedSoldiers.forEach(el => {
-          el.chuj = 5;
-        })
 
 
 
@@ -569,6 +567,7 @@ class Cavalry {
     this.player = player;
     this.id = id;
     this.color = color;
+    this.selected = false;
 
     const soldierClass = `cavalry${this.color}Hud`;
     this.showCavalry = () => id.childNodes[7].classList.add(soldierClass);
@@ -589,6 +588,7 @@ class Infantry {
     this.player = player;
     this.id = id;
     this.color = color;
+    this.selected = false;
 
     const soldierClass = `infantry${this.color}Hud`;
     this.showInfantry = () => id.childNodes[5].classList.add(soldierClass);
@@ -609,6 +609,7 @@ class Elephant {
     this.player = player;
     this.id = id;
     this.color = color;
+    this.selected = false;
 
     const soldierClass = `elephant${this.color}Hud`;
     this.showElephant = () => id.childNodes[3].classList.add(soldierClass);
