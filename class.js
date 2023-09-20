@@ -480,9 +480,8 @@ class Troops {
             el.classList.add("soldier-selected"); // You can add a "selected" class for styling
             console.log(`groupHud is`, groupHud);
 
-            let soldierId = el.dataset.soldierId; // Assuming you have a data attribute with soldier ID
+            let soldierId = el.dataset.soldierId; // Compare and find selected troopsHud with troops.soldiers
             console.log(`soldierId is`, soldierId);
-
             let soldierObject = troopsPosition.troops.soldiers.find(
               (soldier) => soldier.type === soldierId && !soldier.selected
             );
@@ -492,17 +491,14 @@ class Troops {
 
             if (!selectedSoldiers.includes(soldierObject)) {
               selectedSoldiers.push(soldierObject);
-              // troopsPosition.troops.soldiers.splice(troopsPosition.troops.soldiers.indexOf(soldierObject), 1);
             }
             console.log(`selectedSoldiers`, selectedSoldiers);
-
           } else {
             groupHud = groupHud.filter((soldier) => soldier !== el);
             el.classList.remove("soldier-selected");
             console.log(`groupHud is`, groupHud);
 
-            let soldierId = el.dataset.soldierId; // Assuming you have a data attribute with soldier ID
-
+            let soldierId = el.dataset.soldierId; // Compare and find selected troopsHud with troops.soldiers
             let soldierObject = troopsPosition.troops.soldiers.find(
               (soldier) => soldier.type === soldierId && soldier.selected
             );
@@ -517,6 +513,58 @@ class Troops {
         // Call your function here that handles the confirmed group
         this.whereToGo();
       });
+
+
+
+
+
+
+      confirmMoveBtn.addEventListener("click", () => {
+        const len = troopsMoveGlobal.length
+        let leftSoldiers = [];
+
+        for (let i = 0; i < len; i++) {
+
+          console.log(`before if`);
+
+          if (!troopsMoveGlobal[i][2].troops) {
+            troopsMoveGlobal[i][2].troops = new Troops(
+              player,
+              troopsMoveGlobal[i][2],
+              troopsMoveGlobal[i][1].troops.color,
+              troopsMoveGlobal[i][0].length              
+            );
+            console.log(`troops created`);
+          }
+
+
+          troopsMoveGlobal[i][2].troops.soldiers = troopsMoveGlobal[i][0]; //add selected soldiers to troopsDestination
+
+
+          let getType = troopsMoveGlobal[i][0].map((obj) => obj.type); // create arr type of selected solders
+
+          console.log(`troopsMoveGlobal[${i}][0] - soldiers`, troopsMoveGlobal[i][0]);
+          
+          console.log(`nowy array ze wszystkimi typami zolnierzy wyzej`, getType);
+
+          // Filter the troopsPosition to remove objects with types present in getType
+          leftSoldiers = troopsMoveGlobal[i][1].troops.soldiers.filter(
+            (obj) => (!getType.includes(obj.type) && obj.selected === false)
+          );
+
+          console.log(`troopsPosition chwile przed usnieciem`, troopsMoveGlobal[i][1].troops.soldiers);
+          
+
+
+          troopsMoveGlobal[i][1].troops.soldiers = leftSoldiers;
+          console.log(`leftSodliers`, troopsMoveGlobal[i][1].troops.soldiers);
+        }
+      });
+
+
+
+
+
 
 
       cancelMoveBtn.addEventListener("click", function () {
