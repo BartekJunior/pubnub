@@ -398,6 +398,7 @@ class Merchant {
 }
 
 ///// CLASS TROOPS /////
+let groupHud = [];
 let selectedSoldiers = []; // An array to store selected soldiers
 let troopsPosition;
 let troopsDestination;
@@ -466,15 +467,24 @@ class Troops {
       delete this.id.troops;
     };
 
+
+
     // Choose group, Assuming soldiers have the class "soldier"
     Troops.prototype.startMoveBtn = function () {
+      confirmGroupBtn.disabled = false;
+      confirmMoveBtn.disabled = false;
+    };
+
+
+    Troops.prototype.soldiersHud = () => {
       let soldiers = troopsPosition.troops.soldiers; // Reference to the soldiers in troops
 
       let soldiersHud = document.querySelectorAll(".soldier");
-      let groupHud = [];
 
       soldiersHud.forEach((el) => {
         el.addEventListener("click", function () {
+          console.log(`soldiersHud listener added`);
+          
           if (!groupHud.includes(el)) {
             groupHud.push(el);
             el.classList.add("soldier-selected"); // You can add a "selected" class for styling
@@ -483,13 +493,14 @@ class Troops {
             let soldierId = el.dataset.soldierId; // Compare and find selected troopsHud with troops.soldiers
             console.log(`soldierId is`, soldierId);
             let soldierObject = troopsPosition.troops.soldiers.find(
-              (soldier) => soldier.type === soldierId && !soldier.selected
+              (soldier) => (soldier.type === soldierId && !soldier.selected)
             );
 
             soldierObject.selected = true;
             console.log(`soldierObject is`, soldierObject);
 
             if (!selectedSoldiers.includes(soldierObject)) {
+              soldierObject.selected = false;
               selectedSoldiers.push(soldierObject);
             }
             console.log(`selectedSoldiers`, selectedSoldiers);
@@ -508,98 +519,17 @@ class Troops {
           }
         });
       });
-
-      confirmGroupBtn.addEventListener("click", () => {
-        // Call your function here that handles the confirmed group
-        this.whereToGo();
-      });
+    }
 
 
 
-
-
-
-      confirmMoveBtn.addEventListener("click", () => {
-        const len = troopsMoveGlobal.length
-        let leftSoldiers = [];
-
-        for (let i = 0; i < len; i++) {
-
-          console.log(`before if`);
-
-          if (!troopsMoveGlobal[i][2].troops) {
-            troopsMoveGlobal[i][2].troops = new Troops(
-              player,
-              troopsMoveGlobal[i][2],
-              troopsMoveGlobal[i][1].troops.color,
-              troopsMoveGlobal[i][0].length              
-            );
-            console.log(`troops created`);
-          }
-
-
-          troopsMoveGlobal[i][2].troops.soldiers = troopsMoveGlobal[i][0]; //add selected soldiers to troopsDestination
-
-
-          let getType = troopsMoveGlobal[i][0].map((obj) => obj.type); // create arr type of selected solders
-
-          console.log(`troopsMoveGlobal[${i}][0] - soldiers`, troopsMoveGlobal[i][0]);
-          
-          console.log(`nowy array ze wszystkimi typami zolnierzy wyzej`, getType);
-
-          // Filter the troopsPosition to remove objects with types present in getType
-          leftSoldiers = troopsMoveGlobal[i][1].troops.soldiers.filter(
-            (obj) => (!getType.includes(obj.type) && obj.selected === false)
-          );
-
-          console.log(`troopsPosition chwile przed usnieciem`, troopsMoveGlobal[i][1].troops.soldiers);
-          
-
-
-          troopsMoveGlobal[i][1].troops.soldiers = leftSoldiers;
-          console.log(`leftSodliers`, troopsMoveGlobal[i][1].troops.soldiers);
-        }
-      });
-
-
-
-
-
-
-
-      cancelMoveBtn.addEventListener("click", function () {
-        // Unselect all soldiers and clear the group array
-        groupHud.forEach((el) => {
-          el.classList.remove("soldier-selected");
-        });
-
-        troopsPosition.troops.soldiers.map(
-          (soldier) => (soldier.selected = false)
-        );
-
-        groupHud = [];
-        selectedSoldiers = []; // An array to store selected soldiers
-        troopsPosition;
-        troopsDestination;
-        troopsMoveInfo = [];
-        troopsMoveGlobal = [];
-
-        hexAll.forEach((el) => {
-          if (el.possibleMove) el.possibleMove.deletePossibleMove();
-        });
-
-        console.log("Selection canceled");
-      });
-    };
 
     Troops.prototype.whereToGo = () => {
       let offsetAll = [];
       for (let i = 0; i < hexAll.length; i++) {
         offsetAll[i] = [hexAll[i].offsetLeft, hexAll[i].offsetTop];
       }
-
       // this.showHudMerchant();
-
       for (let i = 0; i < hexAll.length; i++) {
         if (
           offsetAll[i][0] > troopsPosition.offsetLeft - 130 &&
@@ -612,7 +542,14 @@ class Troops {
         }
       }
     };
+
+
+
+
   }
+
+
+
 }
 
 ///// CLASS CAVALRY /////

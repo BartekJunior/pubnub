@@ -71,14 +71,11 @@ const confirmGroupBtn = document.getElementById(`confirmGroupBtn`);
 const confirmMoveBtn = document.getElementById(`confirmMoveBtn`);
 const cancelMoveBtn = document.getElementById(`cancelMoveBtn`);
 
+confirmGroupBtn.disabled = true;
+confirmMoveBtn.disabled = true;
+
 // OOOOOOOOOOOOOOOMMMMMMMMMMMMMMMMMGGGGGGGGGGGGGGGGGGGGGG //
 
-startMoveBtn.addEventListener(`click`, function () {
-  Troops.prototype.startMoveBtn();
-});
-
-// troops variables
-let tempSoldiers = [];
 
 //resource variables
 const res = [`food`, `wood`, `stone`, `gold`, `idea`, `morale`];
@@ -120,7 +117,104 @@ hexAll.forEach((el) =>
   })
 );
 
-// Click possibleMove, create troopsMoveInfo, //
+
+// OOOOOOOOOOOOOOOMMMMMMMMMMMMMMMMMGGGGGGGGGGGGGGGGGGGGGG //
+// OOOOOOOOOOOOOOOMMMMMMMMMMMMMMMMMGGGGGGGGGGGGGGGGGGGGGG //
+// OOOOOOOOOOOOOOOMMMMMMMMMMMMMMMMMGGGGGGGGGGGGGGGGGGGGGG //
+// OOOOOOOOOOOOOOOMMMMMMMMMMMMMMMMMGGGGGGGGGGGGGGGGGGGGGG //
+
+startMoveBtn.addEventListener(`click`, function () {
+  Troops.prototype.startMoveBtn();
+  Troops.prototype.soldiersHud();
+});
+
+
+confirmGroupBtn.addEventListener("click", () => {
+  // Call your function here that handles the confirmed group
+  Troops.prototype.whereToGo();
+});
+
+
+confirmMoveBtn.addEventListener("click", function () {
+
+  console.log("Before iteration, troopsMoveGlobal length:", troopsMoveGlobal.length);
+  // const hehe = [15, 20, 25];
+
+  troopsMoveGlobal.forEach((el) => {
+    console.log(el);
+
+    if (!el[2].troops) {
+      el[2].troops = new Troops(
+        player,
+        el[2],
+        el[1].troops.color,
+        el[0].length
+      );
+      console.log(`troops were created`);
+    }
+
+    el[2].troops.soldiers = el[0]; 
+
+    // console.log(el[0], `dodane do`, el[2]);
+    
+    // el[1].troops.soldiers = `chuj`;
+
+    // el[1].troops.soldiers.filter(el1 => {
+    //   return !el[0].some(el2 => el2 === el1)
+    // })
+
+    // console.log(
+    //   `iterate finish, this is troopsPosition`,
+    //   el[1].troops.soldiers
+    // );
+
+    // let getType = troopsMoveGlobal[i][0].map((obj) => obj.type); // create arr type of selected solders
+    // // Filter the troopsPosition to remove objects with types present in getType
+    // leftSoldiers = troopsMoveGlobal[i][1].troops.soldiers.filter(
+    //   (obj) => (!getType.includes(obj.type) && obj.selected === false)
+    // );
+    // troopsMoveGlobal[i][1].troops.soldiers = leftSoldiers;
+    // console.log(`leftSodliers`, troopsMoveGlobal[i][1].troops.soldiers);
+
+  });
+
+  troopsMoveGlobal = [];
+
+});
+
+
+
+cancelMoveBtn.addEventListener("click", function () {
+  // Unselect all soldiers and clear the group array
+  groupHud.forEach((el) => {
+    el.classList.remove("soldier-selected");
+  });
+
+  troopsPosition.troops.soldiers.map(
+    (soldier) => (soldier.selected = false)
+  );
+
+  groupHud = [];
+  selectedSoldiers = []; // An array to store selected soldiers
+  troopsPosition = undefined;
+  troopsDestination = undefined;
+  troopsMoveInfo = [];
+  troopsMoveGlobal = [];
+
+  hexAll.forEach((el) => {
+    if (el.possibleMove) el.possibleMove.deletePossibleMove();
+  });
+
+  console.log("Selection canceled");
+});
+
+
+
+
+// troops variables
+let tempSoldiers = [];
+
+// Click possibleMove, create troopsMoveInfo and troopsMoveGlobal //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
 
@@ -554,3 +648,24 @@ endTurn.addEventListener(`click`, () => {
   publishMessage(window[`player` + UUID]);
   endTurn.style.display = `none`;
 });
+
+
+
+const ha = {
+  name: `chuj`,
+  age: 15,
+}
+
+const he = {
+  name: `chaj`,
+  age: 67,
+}
+const arr = [[1,2,3], ha, he];
+
+arr.forEach(el => {
+  console.log(`iterararaarra`);
+  
+  el.age = el.age + 30;
+})
+
+console.log(arr);
