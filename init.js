@@ -75,13 +75,7 @@ setPlayer.addEventListener(`click`, function () {
     num,
     color,
     false,
-    2,
-    1,
     0,
-    0,
-    0,
-    2,
-    0
   );
   player = window[`player` + UUID];
 

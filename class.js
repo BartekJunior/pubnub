@@ -2,19 +2,7 @@
 
 // CLASS PLAYER //
 class Player {
-  constructor(
-    name,
-    nr,
-    color,
-    turnActive,
-    food,
-    wood,
-    stone,
-    gold,
-    idea,
-    morale,
-    action
-  ) {
+  constructor(name, nr, color, turnActive, action) {
     this.type = `player`;
     this.actionDone = false;
     this.name = name;
@@ -24,12 +12,12 @@ class Player {
     this.action = action;
 
     this.resource = {
-      food: food,
-      wood: wood,
-      stone: stone,
-      gold: gold,
-      idea: idea,
-      morale: morale,
+      food: 2,
+      wood: 1,
+      stone: 0,
+      gold: 0,
+      idea: 2,
+      morale: 2,
     };
 
     this.checkStart = () => {
@@ -117,33 +105,21 @@ class Hex {
 // CLASS TOWN //
 let town;
 class Town {
-  constructor(
-    player,
-    id,
-    color,
-    size,
-    port,
-    academy,
-    fortress,
-    market,
-    obelisk,
-    temple,
-    observatory
-  ) {
+  constructor(player, id) {
     this.type = `town`;
     this.player = player;
     this.id = id;
-    this.color = color;
-    this.size = size;
+    this.color = window[`player` + UUID].color;
+    this.size = 1;
 
     this.structure = {
-      port: port,
-      academy: academy,
-      fortress: fortress,
-      market: market,
-      obelisk: obelisk,
-      temple: temple,
-      observatory: observatory,
+      port: false,
+      academy: false,
+      fortress: false,
+      market: false,
+      obelisk: false,
+      temple: false,
+      observatory: false,
     };
 
     this.showHudTown = () => (hudTown.style.display = `block`);
@@ -342,19 +318,7 @@ class Merchant {
     };
 
     Merchant.prototype.settle = () => {
-      this.id.town = new Town(
-        UUID,
-        this.id,
-        window[`player` + UUID].color,
-        1,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      );
+      this.id.town = new Town(UUID, this.id);
       this.id.childNodes[4].classList.add(townClass);
       // this.id.hex.collectible = false;
       hexAll.forEach((el) => {
@@ -369,31 +333,6 @@ class Merchant {
       merchantPosition = undefined;
       window[`player` + UUID].action--;
     };
-
-    // this.whereToGo = () => {
-    //   merchantPosition = this.id;
-    //   let offsetAll = [];
-    //   for (let i = 0; i < hexAll.length; i++) {
-    //     offsetAll[i] = [hexAll[i].offsetLeft, hexAll[i].offsetTop];
-    //   }
-
-    //   this.showHudMerchant();
-
-    //   for (let i = 0; i < hexAll.length; i++) {
-    //     if (
-    //       offsetAll[i][0] > this.id.offsetLeft - 130 &&
-    //       offsetAll[i][0] < this.id.offsetLeft + 130 &&
-    //       offsetAll[i][1] < this.id.offsetTop + 130 &&
-    //       offsetAll[i][1] > this.id.offsetTop - 130 &&
-    //       !hexAll[i].merchant
-    //     ) {
-    //       const possibleMove = new PossibleMove(UUID, hexAll[i]);
-    //       hexAll[i].possibleMove = possibleMove;
-    //     }
-    //   }
-    // };
-
-    // this.showMerchant(); //fires after create merchant
   }
 }
 
@@ -467,14 +406,11 @@ class Troops {
       delete this.id.troops;
     };
 
-
-
     // Choose group, Assuming soldiers have the class "soldier"
     Troops.prototype.startMoveBtn = function () {
       confirmGroupBtn.disabled = false;
       confirmMoveBtn.disabled = false;
     };
-
 
     Troops.prototype.soldiersHud = () => {
       let soldiers = troopsPosition.troops.soldiers; // Reference to the soldiers in troops
@@ -484,7 +420,7 @@ class Troops {
       soldiersHud.forEach((el) => {
         el.addEventListener("click", function () {
           console.log(`soldiersHud listener added`);
-          
+
           if (!groupHud.includes(el)) {
             groupHud.push(el);
             el.classList.add("soldier-selected"); // You can add a "selected" class for styling
@@ -493,7 +429,7 @@ class Troops {
             let soldierId = el.dataset.soldierId; // Compare and find selected troopsHud with troops.soldiers
             console.log(`soldierId is`, soldierId);
             let soldierObject = troopsPosition.troops.soldiers.find(
-              (soldier) => (soldier.type === soldierId && !soldier.selected)
+              (soldier) => soldier.type === soldierId && !soldier.selected
             );
 
             soldierObject.selected = true;
@@ -519,10 +455,7 @@ class Troops {
           }
         });
       });
-    }
-
-
-
+    };
 
     Troops.prototype.whereToGo = () => {
       let offsetAll = [];
@@ -542,14 +475,7 @@ class Troops {
         }
       }
     };
-
-
-
-
   }
-
-
-
 }
 
 ///// CLASS CAVALRY /////
