@@ -116,12 +116,10 @@ hexAll.forEach((el) =>
   })
 );
 
-// OOOOOOOOOOOOOOOMMMMMMMMMMMMMMMMMGGGGGGGGGGGGGGGGGGGGGG //
-// OOOOOOOOOOOOOOOMMMMMMMMMMMMMMMMMGGGGGGGGGGGGGGGGGGGGGG //
-// OOOOOOOOOOOOOOOMMMMMMMMMMMMMMMMMGGGGGGGGGGGGGGGGGGGGGG //
-// OOOOOOOOOOOOOOOMMMMMMMMMMMMMMMMMGGGGGGGGGGGGGGGGGGGGGG //
-
-
+// MMMMMMOOOOOOOOOOOOVVVVVVVVVVVEEEEEEEEEEEEEEEEEE //
+// MMMMMMOOOOOOOOOOOOVVVVVVVVVVVEEEEEEEEEEEEEEEEEE //
+// MMMMMMOOOOOOOOOOOOVVVVVVVVVVVEEEEEEEEEEEEEEEEEE //
+// MMMMMMOOOOOOOOOOOOVVVVVVVVVVVEEEEEEEEEEEEEEEEEE //
 
 startMoveBtn.addEventListener(`click`, function () {
   Troops.prototype.startMoveBtn();
@@ -129,33 +127,35 @@ startMoveBtn.addEventListener(`click`, function () {
 });
 
 confirmGroupBtn.addEventListener("click", () => {
-  // Troops.prototype.whereToGo();
+  Troops.prototype.whereToGo();
 });
 
-confirmMoveBtn.addEventListener("click", function () {});
+confirmMoveBtn.addEventListener("click", function () {
+
+});
 
 cancelMoveBtn.addEventListener("click", function () {
-  console.log("Selection canceled");
+  groupHud.map(el => el.classList.remove(`soldier-selected`));
+  groupHud = [];
+  selectedSoldiers = [];
+  PossibleMove.prototype.deletePossibleMove();
+  console.log("Move canceled");
 });
 
-
-
-
-// Click possibleMove, create troopsMoveInfo and troopsMoveGlobal //
-hexAll.forEach((el) => {
-  el.addEventListener(`click`, function () {
+// Click PossibleMove to move Troops
+hexAll.forEach(el => {
+  el.addEventListener(`click`, function() {
     if (el.possibleMove) {
-  
-    } else {
-      hexAll.forEach((el) => {
-        if (el.possibleMove) {
-          el.possibleMove.deletePossibleMove();
-        }
-      });
-    }
-  });
-});
+      if (!el.troops) {
+        el.troops = new Troops (UUID, el, window[`player` + UUID].color, 3)
+        console.log(`troops made`);
+      }
 
+      
+    }
+
+  })
+})
 
 
 // Edit this function. getType fires when new troops hex is creating in Hex!!! //
@@ -167,35 +167,7 @@ hexAll.forEach((el) => {
 //   });
 // });
 
-// ----- move merchant ----- //
-// hexAll.forEach((el) => {
-//   el.addEventListener(`click`, function () {
-//     if (el.possibleMove) {
-//       el.merchant = new Merchant(UUID, el, window[`player` + UUID].color);
-//       merchantPosition.merchant.deleteMerchant();
 
-//       hexAll.forEach((el) => {
-//         if (el.possibleMove) {
-//           el.possibleMove.deletePossibleMove();
-//         }
-//       });
-//       el.merchant.hideHudMerchant();
-//       merchantPosition = undefined;
-//       window[`player` + UUID].action--;
-//     }
-//   });
-// });
-
-//delete possiblemove when clicked somewhere else and not move merchant
-// hexAll.forEach((el) => {
-//   el.addEventListener(`click`, function () {
-//     if (!el.possibleMove && !el.merchant) {
-//       hexAll.forEach((el) => {
-//         if (el.possibleMove) el.possibleMove.deletePossibleMove();
-//       });
-//     }
-//   });
-// });
 
 // ----- show/hide hudTown  ----- //
 hexAll.forEach((el) => {
@@ -229,6 +201,11 @@ hexAll.forEach((el) => {
       Troops.prototype.hideHudTroops();
       el.troops.showHudTroops();
       troopsPosition = el;
+
+    } else if (selectedSoldiers.length > 0 && !el.possibleMove) {
+
+      alert(`Dokończ ruch jednostek albo Anuluj ruch`);
+
     } else Troops.prototype.hideHudTroops();
   });
 });
@@ -276,8 +253,6 @@ observatoryBtn.addEventListener(`click`, function () {
   town.buildStructure(`observatory`);
   town.changeStructureBtn(`observatory`, `none`);
 });
-
-
 
 //----------- RECRUITING TROOPS -----------//
 // troops variables

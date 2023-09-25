@@ -356,11 +356,7 @@ class Troops {
     this.id = id;
     this.color = color;
     this.size = size;
-
     this.soldiers = [];
-
-    // this.showHudTroops = () => (hudTroops.style.display = `block`);
-    // Troops.prototype.hideHudTroops = () => (hudTroops.style.display = `none`);
 
     Troops.prototype.hideHudTroops = () => {
       const recruitedDiv = document.querySelectorAll(".recruited-div");
@@ -420,7 +416,6 @@ class Troops {
     Troops.prototype.soldiersHud = () => {
       let soldiersHud = document.querySelectorAll(".soldier");
       soldiersHud.forEach((el) => {
-        
         el.addEventListener("click", function () {
           if (!groupHud.includes(el)) {
             groupHud.push(el);
@@ -444,10 +439,11 @@ class Troops {
               (soldier) => soldier.num == el.dataset.num
             );
             if (selectedSoldiers.includes(soldierObject)) {
-              selectedSoldiers = selectedSoldiers.filter((soldier) => soldier !== soldierObject);
+              selectedSoldiers = selectedSoldiers.filter(
+                (soldier) => soldier !== soldierObject
+              );
             }
             console.log(`selectedSoldiers`, selectedSoldiers);
-
           }
         });
       });
@@ -549,9 +545,13 @@ class PossibleMove {
     this.id = id;
     this.showPossibleMove = () => this.id.classList.add(`possible-move`);
 
-    this.deletePossibleMove = () => {
-      id.classList.remove(`possible-move`);
-      delete this.id.possibleMove;
+    PossibleMove.prototype.deletePossibleMove = () => {
+      hexAll.forEach((el) => {
+        if (el.possibleMove) {
+        el.classList.remove(`possible-move`);
+        delete el.possibleMove;
+        }
+      });
     };
 
     this.showPossibleMove(); //fires after create hex
