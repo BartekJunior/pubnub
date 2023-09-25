@@ -147,7 +147,7 @@ hexAll.forEach(el => {
   el.addEventListener(`click`, function() {
     if (el.possibleMove) {
       if (!el.troops) {
-        el.troops = new Troops (UUID, el, window[`player` + UUID].color, 3)
+        el.troops = new Troops (UUID, el, window[`player` + UUID].color)
         console.log(`troops made`);
       }
 

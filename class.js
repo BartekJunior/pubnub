@@ -225,6 +225,7 @@ class Town {
       ) {
         this.id.troops.soldiers.push(...tempSoldiers);
         tempSoldiers = [];
+        this.id.troops.calcSize();
         Troops.prototype.hideHudTroops();
         this.id.troops.showHudTroops();
         this.updateRecruitNr();
@@ -345,18 +346,15 @@ let troopsPosition; // Store troops position for displays HUD troops and making 
 let groupHud = []; // Store selected soldiers in HUD
 let selectedSoldiers = []; // Store selected soldiers for moving
 
-let troopsDestination;
-let troopsMoveInfo = [];
-let troopsMoveGlobal = [];
 
 class Troops {
-  constructor(player, id, color, size) {
+  constructor(player, id, color) {
     this.type = `troops`;
     this.player = player;
     this.id = id;
     this.color = color;
-    this.size = size;
     this.soldiers = [];
+    this.size = undefined;
 
     Troops.prototype.hideHudTroops = () => {
       const recruitedDiv = document.querySelectorAll(".recruited-div");
@@ -468,6 +466,11 @@ class Troops {
       }
     };
 
+    this.calcSize = function() {
+      this.size = this.soldiers.length;
+      console.log(`troops size updated`);
+    };
+
     Troops.prototype.setNumber = () => {
       return setNum++;
     };
@@ -493,6 +496,7 @@ class Cavalry {
     };
 
     this.showCavalry(); //fires after create merchant
+    this.id.troops.calcSize();
   }
 }
 
@@ -514,6 +518,8 @@ class Infantry {
     };
 
     this.showInfantry(); //fires after create merchant
+    this.id.troops.calcSize();
+
   }
 }
 
@@ -535,6 +541,8 @@ class Elephant {
     };
 
     this.showElephant(); //fires after create merchant
+    this.id.troops.calcSize();
+
   }
 }
 

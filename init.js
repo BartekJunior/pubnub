@@ -21,13 +21,14 @@ hexAll[1].classList.add(`class-${hexAll[1].hex.land}`);
 hexAll[6].classList.add(`class-${hexAll[6].hex.land}`);
 hexAll[7].classList.add(`class-${hexAll[7].hex.land}`);
 
-hexAll[2].troops = new Troops(UUID, hexAll[2], `green`, 3);
+hexAll[2].troops = new Troops(UUID, hexAll[2], `green`);
 hexAll[2].troops.soldiers = [
   new Cavalry(UUID, hexAll[2], `green`),
   new Infantry(UUID, hexAll[2], `green`),
 ];
+// hexAll[2].troops.calcSize();
 
-hexAll[4].troops = new Troops(UUID, hexAll[4], `green`, 3);
+hexAll[4].troops = new Troops(UUID, hexAll[4], `green`);
 hexAll[4].troops.soldiers = [
   new Elephant(UUID, hexAll[4], `green`),
   new Elephant(UUID, hexAll[4], `green`),
@@ -90,17 +91,17 @@ setPlayer.addEventListener(`click`, function () {
 
   //add individual merchant for each user (seen only for current user)
   if (player.nr == 1) {
-    hexAll[0].troops = new Troops(UUID, hexAll[0], player.color, 1);
+    hexAll[0].troops = new Troops(UUID, hexAll[0], player.color);
     hexAll[0].troops.soldiers.push(new Merchant(UUID, hexAll[0], player.color));
     hexAll[0].troops.soldiers[0].showMerchant();
   } else if (player.nr == 2) {
-    hexAll[35].troops = new Troops(UUID, hexAll[35], player.color, 1);
+    hexAll[35].troops = new Troops(UUID, hexAll[35], player.color);
     hexAll[35].troops.soldiers.push(
       new Merchant(UUID, hexAll[35], player.color)
     );
     hexAll[35].troops.soldiers[0].showMerchant();
   } else if (player.nr == 3) {
-    hexAll[5].troops = new Troops(UUID, hexAll[5], player.color, 1);
+    hexAll[5].troops = new Troops(UUID, hexAll[5], player.color);
     hexAll[5].troops.soldiers.push(new Merchant(UUID, hexAll[5], player.color));
     hexAll[5].troops.soldiers[0].showMerchant();
   }
