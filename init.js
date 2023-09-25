@@ -35,6 +35,8 @@ hexAll[4].troops.soldiers = [
   new Cavalry(UUID, hexAll[4], `green`),
 ];
 
+
+
 // Array of 4 land piece. One big array of 12 cafelkas. Each one has 4 Hexes of land//
 const hexArea = [];
 const hexInRow = hexAll.length / 6; //!!!!!!!Devine by 6 only when you have 6 HEX ROWS on the map!!!!!!!!!!!!

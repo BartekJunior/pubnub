@@ -76,7 +76,6 @@ confirmMoveBtn.disabled = true;
 
 // OOOOOOOOOOOOOOOMMMMMMMMMMMMMMMMMGGGGGGGGGGGGGGGGGGGGGG //
 
-
 //resource variables
 const res = [`food`, `wood`, `stone`, `gold`, `idea`, `morale`];
 let tempResource = {
@@ -113,137 +112,51 @@ hexAll.forEach((el) =>
   el.addEventListener(`click`, function (e) {
     if (el.troops && el.troops.soldiers.some((el) => el.type === `merchant`))
       Merchant.prototype.showHudMerchant();
-    else Merchant.prototype.hideHudMerchant();
+    // else Merchant.prototype.hideHudMerchant();
   })
 );
 
+// OOOOOOOOOOOOOOOMMMMMMMMMMMMMMMMMGGGGGGGGGGGGGGGGGGGGGG //
+// OOOOOOOOOOOOOOOMMMMMMMMMMMMMMMMMGGGGGGGGGGGGGGGGGGGGGG //
+// OOOOOOOOOOOOOOOMMMMMMMMMMMMMMMMMGGGGGGGGGGGGGGGGGGGGGG //
+// OOOOOOOOOOOOOOOMMMMMMMMMMMMMMMMMGGGGGGGGGGGGGGGGGGGGGG //
 
-// OOOOOOOOOOOOOOOMMMMMMMMMMMMMMMMMGGGGGGGGGGGGGGGGGGGGGG //
-// OOOOOOOOOOOOOOOMMMMMMMMMMMMMMMMMGGGGGGGGGGGGGGGGGGGGGG //
-// OOOOOOOOOOOOOOOMMMMMMMMMMMMMMMMMGGGGGGGGGGGGGGGGGGGGGG //
-// OOOOOOOOOOOOOOOMMMMMMMMMMMMMMMMMGGGGGGGGGGGGGGGGGGGGGG //
+
 
 startMoveBtn.addEventListener(`click`, function () {
   Troops.prototype.startMoveBtn();
   Troops.prototype.soldiersHud();
 });
 
-
 confirmGroupBtn.addEventListener("click", () => {
-  // Call your function here that handles the confirmed group
-  Troops.prototype.whereToGo();
+  // Troops.prototype.whereToGo();
 });
 
-
-confirmMoveBtn.addEventListener("click", function () {
-
-  console.log("Before iteration, troopsMoveGlobal length:", troopsMoveGlobal.length);
-  // const hehe = [15, 20, 25];
-
-  troopsMoveGlobal.forEach((el) => {
-    console.log(el);
-
-    if (!el[2].troops) {
-      el[2].troops = new Troops(
-        player,
-        el[2],
-        el[1].troops.color,
-        el[0].length
-      );
-      console.log(`troops were created`);
-    }
-
-    el[2].troops.soldiers = el[0]; 
-
-    // console.log(el[0], `dodane do`, el[2]);
-    
-    // el[1].troops.soldiers = `chuj`;
-
-    // el[1].troops.soldiers.filter(el1 => {
-    //   return !el[0].some(el2 => el2 === el1)
-    // })
-
-    // console.log(
-    //   `iterate finish, this is troopsPosition`,
-    //   el[1].troops.soldiers
-    // );
-
-    // let getType = troopsMoveGlobal[i][0].map((obj) => obj.type); // create arr type of selected solders
-    // // Filter the troopsPosition to remove objects with types present in getType
-    // leftSoldiers = troopsMoveGlobal[i][1].troops.soldiers.filter(
-    //   (obj) => (!getType.includes(obj.type) && obj.selected === false)
-    // );
-    // troopsMoveGlobal[i][1].troops.soldiers = leftSoldiers;
-    // console.log(`leftSodliers`, troopsMoveGlobal[i][1].troops.soldiers);
-
-  });
-
-  troopsMoveGlobal = [];
-
-});
-
-
+confirmMoveBtn.addEventListener("click", function () {});
 
 cancelMoveBtn.addEventListener("click", function () {
-  // Unselect all soldiers and clear the group array
-  groupHud.forEach((el) => {
-    el.classList.remove("soldier-selected");
-  });
-
-  troopsPosition.troops.soldiers.map(
-    (soldier) => (soldier.selected = false)
-  );
-
-  groupHud = [];
-  selectedSoldiers = []; // An array to store selected soldiers
-  troopsPosition = undefined;
-  troopsDestination = undefined;
-  troopsMoveInfo = [];
-  troopsMoveGlobal = [];
-
-  hexAll.forEach((el) => {
-    if (el.possibleMove) el.possibleMove.deletePossibleMove();
-  });
-
   console.log("Selection canceled");
 });
 
 
 
 
-// troops variables
-let tempSoldiers = [];
-
 // Click possibleMove, create troopsMoveInfo and troopsMoveGlobal //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
-
-    if (el.possibleMove && troopsMoveGlobal.length < 3) {
-      troopsDestination = el;
-      troopsMoveInfo = [selectedSoldiers, troopsPosition, troopsDestination];
-      troopsMoveGlobal.push(troopsMoveInfo);
-
-      selectedSoldiers = [];
-      troopsPosition = undefined;
-      troopsDestination = undefined;
-      troopsMoveInfo = [];
-
+    if (el.possibleMove) {
+  
+    } else {
       hexAll.forEach((el) => {
         if (el.possibleMove) {
           el.possibleMove.deletePossibleMove();
         }
       });
-
-    } else if (troopsMoveGlobal.length >= 3) {
-      hexAll.forEach((el) => {
-        if (el.possibleMove) {
-          el.possibleMove.deletePossibleMove();
-        }
-      });
-      alert(`Wybrałeś już 3 grupy jednostek! Zatwierdź ruch albo anuluj`);
     }
   });
 });
+
+
 
 // Edit this function. getType fires when new troops hex is creating in Hex!!! //
 // hexAll.forEach((el) => {
@@ -364,7 +277,11 @@ observatoryBtn.addEventListener(`click`, function () {
   town.changeStructureBtn(`observatory`, `none`);
 });
 
+
+
 //----------- RECRUITING TROOPS -----------//
+// troops variables
+let tempSoldiers = [];
 // HUD buttons Recruit //
 recruitBtn.addEventListener(`click`, function () {
   town.showContainerRecruit();
@@ -649,23 +566,21 @@ endTurn.addEventListener(`click`, () => {
   endTurn.style.display = `none`;
 });
 
-
-
 const ha = {
   name: `chuj`,
   age: 15,
-}
+};
 
 const he = {
   name: `chaj`,
   age: 67,
-}
-const arr = [[1,2,3], ha, he];
+};
+const arr = [[1, 2, 3], ha, he];
 
-arr.forEach(el => {
+arr.forEach((el) => {
   console.log(`iterararaarra`);
-  
+
   el.age = el.age + 30;
-})
+});
 
 console.log(arr);

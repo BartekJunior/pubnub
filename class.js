@@ -1,5 +1,8 @@
 `use strict`;
 
+// GLOBAL VARIABLES //
+let setNum = 1; // ID of each soldier
+
 // CLASS PLAYER //
 class Player {
   constructor(name, nr, color, turnActive, action) {
@@ -292,6 +295,7 @@ class Merchant {
     this.player = player;
     this.id = id;
     this.color = color;
+    this.num = Troops.prototype.setNumber();
 
     const merchantClass = `merchant${color}`;
     const townClass = `town${this.color}`;
@@ -337,9 +341,10 @@ class Merchant {
 }
 
 ///// CLASS TROOPS /////
-let groupHud = [];
-let selectedSoldiers = []; // An array to store selected soldiers
-let troopsPosition;
+let troopsPosition; // Store troops position for displays HUD troops and making actions
+let groupHud = []; // Store selected soldiers in HUD
+let selectedSoldiers = []; // Store selected soldiers for moving
+
 let troopsDestination;
 let troopsMoveInfo = [];
 let troopsMoveGlobal = [];
@@ -374,28 +379,28 @@ class Troops {
           const newCavalry = document.createElement(`div`);
           newCavalry.classList.add(`cavalry${this.color}Hud`);
           newCavalry.classList.add(`soldier`);
-          newCavalry.dataset.soldierId = `cavalry`;
+          newCavalry.dataset.num = this.soldiers[i].num;
           cavalryRecruited.appendChild(newCavalry);
         }
         if (this.soldiers[i].type === `infantry`) {
           const newInfantry = document.createElement(`div`);
           newInfantry.classList.add(`infantry${this.color}Hud`);
           newInfantry.classList.add(`soldier`);
-          newInfantry.dataset.soldierId = `infantry`;
+          newInfantry.dataset.num = this.soldiers[i].num;
           infantryRecruited.appendChild(newInfantry);
         }
         if (this.soldiers[i].type === `elephant`) {
           const newElephant = document.createElement(`div`);
           newElephant.classList.add(`elephant${this.color}Hud`);
           newElephant.classList.add(`soldier`);
-          newElephant.dataset.soldierId = `elephant`;
+          newElephant.dataset.num = this.soldiers[i].num;
           elephantRecruited.appendChild(newElephant);
         }
         if (this.soldiers[i].type === `merchant`) {
           const newMerchant = document.createElement(`div`);
           newMerchant.classList.add(`merchant${this.color}Hud`);
           newMerchant.classList.add(`soldier`);
-          newMerchant.dataset.soldierId = `merchant`;
+          newMerchant.dataset.num = this.soldiers[i].num;
           merchantRecruited.appendChild(newMerchant);
         }
       }
@@ -413,45 +418,36 @@ class Troops {
     };
 
     Troops.prototype.soldiersHud = () => {
-      let soldiers = troopsPosition.troops.soldiers; // Reference to the soldiers in troops
-
       let soldiersHud = document.querySelectorAll(".soldier");
-
       soldiersHud.forEach((el) => {
+        
         el.addEventListener("click", function () {
-          console.log(`soldiersHud listener added`);
-
           if (!groupHud.includes(el)) {
             groupHud.push(el);
             el.classList.add("soldier-selected"); // You can add a "selected" class for styling
             console.log(`groupHud is`, groupHud);
 
-            let soldierId = el.dataset.soldierId; // Compare and find selected troopsHud with troops.soldiers
-            console.log(`soldierId is`, soldierId);
+            // Compare and find selected troopsHud with troops.soldiers
             let soldierObject = troopsPosition.troops.soldiers.find(
-              (soldier) => soldier.type === soldierId && !soldier.selected
+              (soldier) => soldier.num == el.dataset.num
             );
-
-            soldierObject.selected = true;
-            console.log(`soldierObject is`, soldierObject);
-
             if (!selectedSoldiers.includes(soldierObject)) {
-              soldierObject.selected = false;
               selectedSoldiers.push(soldierObject);
             }
             console.log(`selectedSoldiers`, selectedSoldiers);
-          } else {
+          } else if (groupHud.includes(el)) {
             groupHud = groupHud.filter((soldier) => soldier !== el);
             el.classList.remove("soldier-selected");
             console.log(`groupHud is`, groupHud);
 
-            let soldierId = el.dataset.soldierId; // Compare and find selected troopsHud with troops.soldiers
             let soldierObject = troopsPosition.troops.soldiers.find(
-              (soldier) => soldier.type === soldierId && soldier.selected
+              (soldier) => soldier.num == el.dataset.num
             );
+            if (selectedSoldiers.includes(soldierObject)) {
+              selectedSoldiers = selectedSoldiers.filter((soldier) => soldier !== soldierObject);
+            }
+            console.log(`selectedSoldiers`, selectedSoldiers);
 
-            soldierObject.selected = false;
-            console.log(`soldierObject is`, soldierObject);
           }
         });
       });
@@ -475,18 +471,21 @@ class Troops {
         }
       }
     };
+
+    Troops.prototype.setNumber = () => {
+      return setNum++;
+    };
   }
 }
 
-///// CLASS CAVALRY /////
-// let cavalryPosition;
+///// CLASS SOLDIERS /////
 class Cavalry {
   constructor(player, id, color) {
     this.type = `cavalry`;
     this.player = player;
     this.id = id;
     this.color = color;
-    this.selected = false;
+    this.num = Troops.prototype.setNumber();
 
     const soldierClass = `cavalry${this.color}Hud`;
     this.showCavalry = () => id.childNodes[7].classList.add(soldierClass);
@@ -507,7 +506,7 @@ class Infantry {
     this.player = player;
     this.id = id;
     this.color = color;
-    this.selected = false;
+    this.num = Troops.prototype.setNumber();
 
     const soldierClass = `infantry${this.color}Hud`;
     this.showInfantry = () => id.childNodes[5].classList.add(soldierClass);
@@ -528,7 +527,7 @@ class Elephant {
     this.player = player;
     this.id = id;
     this.color = color;
-    this.selected = false;
+    this.num = Troops.prototype.setNumber();
 
     const soldierClass = `elephant${this.color}Hud`;
     this.showElephant = () => id.childNodes[3].classList.add(soldierClass);
