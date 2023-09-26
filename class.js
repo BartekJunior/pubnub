@@ -227,6 +227,7 @@ class Town {
         this.id.troops.soldiers.push(...tempSoldiers);
         tempSoldiers = [];
         this.id.troops.calcSize();
+        this.id.troops.showSoldierHex();
         Troops.prototype.hideHudTroops();
         this.id.troops.showHudTroops();
         this.updateRecruitNr();
@@ -347,7 +348,6 @@ let troopsPosition; // Store troops position for displays HUD troops and making 
 let groupHud = []; // Store selected soldiers in HUD
 let selectedSoldiers = []; // Store selected soldiers for moving
 
-
 class Troops {
   constructor(player, id, color) {
     this.type = `troops`;
@@ -406,7 +406,7 @@ class Troops {
       delete this.id.troops;
     };
 
-    // Choose group, Assuming soldiers have the class "soldier"
+    // StartMoveBtn unables move buttons
     Troops.prototype.startMoveBtn = function () {
       confirmGroupBtn.disabled = false;
       confirmMoveBtn.disabled = false;
@@ -467,7 +467,28 @@ class Troops {
       }
     };
 
-    this.calcSize = function() {
+    this.showSoldierHex = () => {
+      
+      this.id.childNodes.forEach((el) => {
+        while (el.classList.length > 1) {
+          el.classList.remove(el.classList.item(1)); // Remove the class at index 1 (second class)
+        }
+      });
+
+      for (let i = 0, j = 1; i < this.soldiers.length; i++, j = j + 2) {
+        this.id.childNodes[j].classList.add(
+          this.soldiers[i].type + this.soldiers[i].color,
+          `soldierHex`
+        );
+      }
+    };
+
+  
+     
+    
+
+
+    this.calcSize = function () {
       this.size = this.soldiers.length;
       console.log(`troops size updated`);
       return this.size;
@@ -489,19 +510,15 @@ class Cavalry {
     this.num = Troops.prototype.setNumber();
 
     this.showCavalry = () => {
-      id.childNodes[7].classList.add(this.type + this.color);
-      id.childNodes[7].classList.add(`soldierHex`);
-
-
-    }
-    // this.hideCavalry = () => id.classList.remove(soldierClass);
+      id.childNodes[7].classList.add(this.type + this.color, `soldierHex`);
+    };
 
     this.deleteCavalry = () => {
       id.classList.remove(soldierClass);
       delete this.id.cavalry;
     };
 
-    this.showCavalry(); //fires after create merchant
+    // this.showCavalry();
     this.id.troops.calcSize();
   }
 }
@@ -515,19 +532,16 @@ class Infantry {
     this.num = Troops.prototype.setNumber();
 
     this.showInfantry = () => {
-      id.childNodes[5].classList.add(this.type + this.color);
-      id.childNodes[5].classList.add(`soldierHex`);
-    }
-    // this.hideCavalry = () => id.classList.remove(soldierClass);
+      id.childNodes[5].classList.add(this.type + this.color, `soldierHex`);
+    };
 
     this.deleteInfantry = () => {
       id.classList.remove(infantryClass);
       delete this.id.infantry;
     };
 
-    this.showInfantry(); //fires after create merchant
+    // this.showInfantry();
     this.id.troops.calcSize();
-
   }
 }
 
@@ -540,20 +554,16 @@ class Elephant {
     this.num = Troops.prototype.setNumber();
 
     this.showElephant = () => {
-      id.childNodes[3].classList.add(this.type + this.color);
-      id.childNodes[3].classList.add(`soldierHex`);
-
-    }
-    // this.hideCavalry = () => id.classList.remove(soldierClass);
+      id.childNodes[3].classList.add(this.type + this.color, `soldierHex`);
+    };
 
     this.deleteElephant = () => {
       id.classList.remove(elephantClass);
       delete this.id.elephant;
     };
 
-    this.showElephant(); //fires after create merchant
+    // this.showElephant();
     this.id.troops.calcSize();
-    
   }
 }
 
@@ -567,8 +577,8 @@ class PossibleMove {
     PossibleMove.prototype.deletePossibleMove = () => {
       hexAll.forEach((el) => {
         if (el.possibleMove) {
-        el.classList.remove(`possible-move`);
-        delete el.possibleMove;
+          el.classList.remove(`possible-move`);
+          delete el.possibleMove;
         }
       });
     };

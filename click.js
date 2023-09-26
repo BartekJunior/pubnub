@@ -161,7 +161,9 @@ hexAll.forEach(el => {
         el.troops.soldiers.push(...selectedSoldiers);
         troopsPosition.troops.soldiers = troopsPosition.troops.soldiers.filter(soldier => !selectedSoldiers.includes(soldier));
 
+        el.troops.showSoldierHex();
         el.troops.calcSize();
+        troopsPosition.troops.showSoldierHex();
         troopsPosition.troops.calcSize();
         PossibleMove.prototype.deletePossibleMove();
         troopsPosition = undefined;

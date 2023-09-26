@@ -26,7 +26,7 @@ hexAll[2].troops.soldiers = [
   new Cavalry(UUID, hexAll[2], `green`),
   new Infantry(UUID, hexAll[2], `green`),
 ];
-// hexAll[2].troops.calcSize();
+hexAll[2].troops.showSoldierHex();
 
 hexAll[4].troops = new Troops(UUID, hexAll[4], `green`);
 hexAll[4].troops.soldiers = [
@@ -35,6 +35,8 @@ hexAll[4].troops.soldiers = [
   new Cavalry(UUID, hexAll[4], `green`),
   new Cavalry(UUID, hexAll[4], `green`),
 ];
+hexAll[4].troops.showSoldierHex();
+
 
 
 
