@@ -178,140 +178,57 @@ h2 {
   /* position: relative; */
 }
 
-/* ------------ Soldiers Images ----------------- */
+/* ------------ Soldier Colors ----------------- */
 .cavalryred {
   background-image: url(./img/cavalryred.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 50%;
 }
 
-.soldierHud {
-  display: block;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100%;
-}
-
-.cavalryredHud {
-  display: block;
-  background-image: url(./img/cavalryred.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100%;
-  width: 100px;
-  height: 100px;
-}
-
-.cavalrygreenHud {
-  display: block;
+.cavalrygreen {
   background-image: url(./img/cavalrygreen.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100%;
-  width: 100px;
-  height: 100px;
 }
 
-.cavalryblueHud {
-  display: block;
+.cavalryblue {
   background-image: url(./img/cavalryblue.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100%;
-  width: 100px;
-  height: 100px;
 }
 
-.infantryredHud {
-  display: block;
+.infantryred {
   background-image: url(./img/infantryred.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100%;
-  width: 100px;
-  height: 100px;
 }
 
-.infantrygreenHud {
-  display: block;
+.infantrygreen {
   background-image: url(./img/infantrygreen.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100%;
-  width: 100px;
-  height: 100px;
 }
 
-.infantryblueHud {
-  display: block;
+.infantryblue {
   background-image: url(./img/infantryblue.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100%;
-  width: 100px;
-  height: 100px;
 }
 
-.elephantredHud {
-  display: block;
+.elephantred {
   background-image: url(./img/elephantred.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100%;
-  width: 100px;
-  height: 100px;
 }
 
-.elephantgreenHud {
-  display: block;
+.elephantgreen {
   background-image: url(./img/elephantgreen.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100%;
-  width: 100px;
-  height: 100px;
 }
 
-.elephantblueHud {
-  display: block;
+.elephantblue {
   background-image: url(./img/elephantblue.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100%;
-  width: 100px;
-  height: 100px;
 }
 
-.merchantredHud {
-  display: block;
+.merchantred {
   background-image: url(./img/merchantred.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100%;
-  width: 100px;
-  height: 100px;
 }
 
-.merchantgreenHud {
-  display: block;
+.merchantgreen {
   background-image: url(./img/merchantgreen.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100%;
-  width: 100px;
-  height: 100px;
 }
 
-.merchantblueHud {
-  display: block;
+.merchantblue {
   background-image: url(./img/merchantblue.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100%;
-  width: 100px;
-  height: 100px;
 }
+
+
+
 
 
 
@@ -420,10 +337,19 @@ h2 {
   color: bisque;
 }
 
-/* HUD Troops */
+/* ------------ HUD Troops ----------------- */
 .recruited-div {
   display: flex;
   width: 80%;
+}
+
+.soldierHud {
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  width: 100px;
+  height: 100px;
 }
 
 .soldier-img {
@@ -448,9 +374,6 @@ h2 {
   display: inline-flex;
   /* flex-direction: column; */
 }
-
-
-
 
 /* ------------ HUD Player ----------------- */
 .hud-technology-container {
@@ -490,9 +413,15 @@ h2 {
 }
 
 
-
-
-/* ------------ GAMEPLAY  ----------------- */
+/* ------------ MAP GAMEPLAY  ----------------- */
+.soldierHex {
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  width: 40px;
+  height: 40px;
+}
 .possible-move {
   opacity: 0.4;
 }

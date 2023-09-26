@@ -68,6 +68,7 @@ class Hex {
         for (let i = 0; i < 9; i++) {
           const hexSmall = document.createElement("div");
           hexSmall.classList.add(`hex-small`);
+          // hexSmall.classList.add(`soldierHud`);
           hexChild.push(hexSmall);
         }
 
@@ -371,29 +372,29 @@ class Troops {
       for (let i = 0; i < this.soldiers.length; i++) {
         if (this.soldiers[i].type === `cavalry`) {
           const newCavalry = document.createElement(`div`);
-          newCavalry.classList.add(`cavalry${this.color}Hud`);
-          newCavalry.classList.add(`soldier`);
+          newCavalry.classList.add(`cavalry${this.color}`);
+          newCavalry.classList.add(`soldierHud`);
           newCavalry.dataset.num = this.soldiers[i].num;
           cavalryRecruited.appendChild(newCavalry);
         }
         if (this.soldiers[i].type === `infantry`) {
           const newInfantry = document.createElement(`div`);
-          newInfantry.classList.add(`infantry${this.color}Hud`);
-          newInfantry.classList.add(`soldier`);
+          newInfantry.classList.add(`infantry${this.color}`);
+          newInfantry.classList.add(`soldierHud`);
           newInfantry.dataset.num = this.soldiers[i].num;
           infantryRecruited.appendChild(newInfantry);
         }
         if (this.soldiers[i].type === `elephant`) {
           const newElephant = document.createElement(`div`);
-          newElephant.classList.add(`elephant${this.color}Hud`);
-          newElephant.classList.add(`soldier`);
+          newElephant.classList.add(`elephant${this.color}`);
+          newElephant.classList.add(`soldierHud`);
           newElephant.dataset.num = this.soldiers[i].num;
           elephantRecruited.appendChild(newElephant);
         }
         if (this.soldiers[i].type === `merchant`) {
           const newMerchant = document.createElement(`div`);
-          newMerchant.classList.add(`merchant${this.color}Hud`);
-          newMerchant.classList.add(`soldier`);
+          newMerchant.classList.add(`merchant${this.color}`);
+          newMerchant.classList.add(`soldierHud`);
           newMerchant.dataset.num = this.soldiers[i].num;
           merchantRecruited.appendChild(newMerchant);
         }
@@ -412,7 +413,7 @@ class Troops {
     };
 
     Troops.prototype.soldiersHud = () => {
-      let soldiersHud = document.querySelectorAll(".soldier");
+      let soldiersHud = document.querySelectorAll(".soldierHud");
       soldiersHud.forEach((el) => {
         el.addEventListener("click", function () {
           if (!groupHud.includes(el)) {
@@ -488,8 +489,9 @@ class Cavalry {
     this.num = Troops.prototype.setNumber();
 
     this.showCavalry = () => {
-      const soldierClass = `cavalry${this.color}Hex`;
-      id.childNodes[7].classList.add(soldierClass);
+      id.childNodes[7].classList.add(this.type + this.color);
+      id.childNodes[7].classList.add(`soldierHex`);
+
 
     }
     // this.hideCavalry = () => id.classList.remove(soldierClass);
@@ -512,8 +514,10 @@ class Infantry {
     this.color = color;
     this.num = Troops.prototype.setNumber();
 
-    const soldierClass = `infantry${this.color}Hud`;
-    this.showInfantry = () => id.childNodes[5].classList.add(soldierClass);
+    this.showInfantry = () => {
+      id.childNodes[5].classList.add(this.type + this.color);
+      id.childNodes[5].classList.add(`soldierHex`);
+    }
     // this.hideCavalry = () => id.classList.remove(soldierClass);
 
     this.deleteInfantry = () => {
@@ -535,8 +539,11 @@ class Elephant {
     this.color = color;
     this.num = Troops.prototype.setNumber();
 
-    const soldierClass = `elephant${this.color}Hud`;
-    this.showElephant = () => id.childNodes[3].classList.add(soldierClass);
+    this.showElephant = () => {
+      id.childNodes[3].classList.add(this.type + this.color);
+      id.childNodes[3].classList.add(`soldierHex`);
+
+    }
     // this.hideCavalry = () => id.classList.remove(soldierClass);
 
     this.deleteElephant = () => {
