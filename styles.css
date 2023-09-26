@@ -186,6 +186,13 @@ h2 {
   background-size: 50%;
 }
 
+.soldierHud {
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+}
+
 .cavalryredHud {
   display: block;
   background-image: url(./img/cavalryred.png);

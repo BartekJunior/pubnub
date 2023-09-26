@@ -469,6 +469,7 @@ class Troops {
     this.calcSize = function() {
       this.size = this.soldiers.length;
       console.log(`troops size updated`);
+      return this.size;
     };
 
     Troops.prototype.setNumber = () => {
@@ -486,8 +487,11 @@ class Cavalry {
     this.color = color;
     this.num = Troops.prototype.setNumber();
 
-    const soldierClass = `cavalry${this.color}Hud`;
-    this.showCavalry = () => id.childNodes[7].classList.add(soldierClass);
+    this.showCavalry = () => {
+      const soldierClass = `cavalry${this.color}Hex`;
+      id.childNodes[7].classList.add(soldierClass);
+
+    }
     // this.hideCavalry = () => id.classList.remove(soldierClass);
 
     this.deleteCavalry = () => {

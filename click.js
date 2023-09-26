@@ -150,14 +150,25 @@ hexAll.forEach(el => {
         el.troops = new Troops (UUID, el, window[`player` + UUID].color)
         console.log(`troops made`);
       }
-      el.troops.soldiers.push(...selectedSoldiers);
-      troopsPosition.troops.soldiers = troopsPosition.troops.soldiers.filter(soldier => !selectedSoldiers.includes(soldier));
+      if ((selectedSoldiers.length + el.troops.size) > 4) {
+        alert(`Na jednym polu mogą znajdować się tylko 4 jednostki wojskowe`);
+        PossibleMove.prototype.deletePossibleMove();
+        troopsPosition = undefined;
+        selectedSoldiers = [];
+        groupHud = [];
 
-      PossibleMove.prototype.deletePossibleMove();
-      troopsPosition = undefined;
-      selectedSoldiers = [];
-      groupHud = [];
+      } else {
+        el.troops.soldiers.push(...selectedSoldiers);
+        troopsPosition.troops.soldiers = troopsPosition.troops.soldiers.filter(soldier => !selectedSoldiers.includes(soldier));
 
+        el.troops.calcSize();
+        troopsPosition.troops.calcSize();
+        PossibleMove.prototype.deletePossibleMove();
+        troopsPosition = undefined;
+        selectedSoldiers = [];
+        groupHud = [];
+      }
+        
       
     }
 
