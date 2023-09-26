@@ -150,6 +150,13 @@ hexAll.forEach(el => {
         el.troops = new Troops (UUID, el, window[`player` + UUID].color)
         console.log(`troops made`);
       }
+      el.troops.soldiers.push(...selectedSoldiers);
+      troopsPosition.troops.soldiers = troopsPosition.troops.soldiers.filter(soldier => !selectedSoldiers.includes(soldier));
+
+      PossibleMove.prototype.deletePossibleMove();
+      troopsPosition = undefined;
+      selectedSoldiers = [];
+      groupHud = [];
 
       
     }

@@ -542,7 +542,7 @@ class Elephant {
 
     this.showElephant(); //fires after create merchant
     this.id.troops.calcSize();
-
+    
   }
 }
 
