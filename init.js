@@ -26,6 +26,7 @@ hexAll[2].troops.soldiers = [
   new Cavalry(UUID, hexAll[2], `green`),
   new Infantry(UUID, hexAll[2], `green`),
   new Merchant(UUID, hexAll[2], `green`),
+  new Merchant(UUID, hexAll[2], `green`),
 ];
 hexAll[2].troops.calcSize();
 hexAll[2].troops.showSoldierHex();
@@ -89,17 +90,16 @@ setPlayer.addEventListener(`click`, function () {
   if (player.nr == 1) {
     hexAll[0].troops = new Troops(UUID, hexAll[0], player.color);
     hexAll[0].troops.soldiers.push(new Merchant(UUID, hexAll[0], player.color));
-    // hexAll[0].troops.soldiers[0].showMerchant();
+    hexAll[0].troops.calcSize();
+    hexAll[0].troops.showSoldierHex();
   } else if (player.nr == 2) {
     hexAll[35].troops = new Troops(UUID, hexAll[35], player.color);
     hexAll[35].troops.soldiers.push(
       new Merchant(UUID, hexAll[35], player.color)
     );
-    // hexAll[35].troops.soldiers[0].showMerchant();
   } else if (player.nr == 3) {
     hexAll[5].troops = new Troops(UUID, hexAll[5], player.color);
     hexAll[5].troops.soldiers.push(new Merchant(UUID, hexAll[5], player.color));
-    // hexAll[5].troops.soldiers[0].showMerchant();
   }
 
   // show start resource

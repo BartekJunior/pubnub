@@ -159,6 +159,7 @@ hexAll.forEach(el => {
 
       } else {
         el.troops.soldiers.push(...selectedSoldiers);
+        el.troops.soldiers.map(item => item.id = el);
         troopsPosition.troops.soldiers = troopsPosition.troops.soldiers.filter(soldier => !selectedSoldiers.includes(soldier));
 
         el.troops.showSoldierHex();
@@ -170,10 +171,7 @@ hexAll.forEach(el => {
         selectedSoldiers = [];
         groupHud = [];
       }
-        
-      
     }
-
   })
 })
 
@@ -223,16 +221,20 @@ hexAll.forEach((el) => {
       troopsPosition = el;
 
     } else if (selectedSoldiers.length > 0 && !el.possibleMove) {
-
       alert(`Dokończ ruch jednostek albo Anuluj ruch`);
-
     } else Troops.prototype.hideHudTroops();
   });
 });
 
+
+
 // settle Town and build structures //
 settleBtn.addEventListener(`click`, function () {
-  Merchant.prototype.settle();
+  const merchantObj =  troopsPosition.troops.soldiers.find(el => el.type === `merchant`);
+  console.log(merchantObj);
+  merchantObj.settle();
+
+  // Merchant.prototype.settle();
 });
 
 buildStructure.addEventListener(`click`, function () {
@@ -293,7 +295,6 @@ cancelRecruitBtn.addEventListener(`click`, function () {
 // Recruiting //
 merchantBtn.addEventListener(`click`, function () {
   town.recruitTempSoldier(`merchant`);
-  // town.id.merchant = new Merchant(UUID, town.id, town.color);
 });
 
 infantryBtn.addEventListener(`click`, function () {

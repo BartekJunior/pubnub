@@ -291,7 +291,7 @@ class Town {
 }
 
 ///// CLASS MERCHANT /////
-let merchantPosition;
+// let merchantPosition;
 class Merchant {
   constructor(player, id, color) {
     this.type = `merchant`;
@@ -300,22 +300,19 @@ class Merchant {
     this.color = color;
     this.num = Troops.prototype.setNumber();
 
-    const merchantClass = `merchant${color}`;
-
-    // Merchant.prototype.showMerchant = () => id.classList.add(merchantClass);
-    // Merchant.prototype.hideMerchant = () => id.classList.remove(merchantClass);
+    const merchantClass = `merchant${this.color}`;
 
     Merchant.prototype.showHudMerchant = () =>
       (hudMerchant.style.display = `block`);
     Merchant.prototype.hideHudMerchant = () =>
       (hudMerchant.style.display = `none`);
 
-    Merchant.prototype.deleteMerchant = () => {
+      this.deleteMerchant = () => {
       if (
         id.troops.soldiers &&
         id.troops.soldiers.map((el) => el.type === `merchant`)
       ) {
-        id.classList.remove(merchantClass);
+        id.childNodes[4].classList.remove(merchantClass);
         const merchantToRemove = id.troops.soldiers.findIndex(
           (soldier) => soldier.type === "merchant"
         );
@@ -323,21 +320,19 @@ class Merchant {
       }
     };
 
-    Merchant.prototype.settle = () => {
+    this.settle = () => {
       this.id.town = new Town(UUID, this.id);
       this.id.childNodes[4].classList.add(`town${this.color}`);
       // this.id.hex.collectible = false;
-      hexAll.forEach((el) => {
-        if (el.possibleMove) {
-          el.possibleMove.deletePossibleMove();
-        }
-      });
+
       this.hideHudMerchant();
       this.deleteMerchant();
       Troops.prototype.hideHudTroops();
 
-      merchantPosition = undefined;
+      // merchantPosition = undefined;
       window[`player` + UUID].action--;
+      console.log(`town created at hex nr`, this.id);
+      
     };
   }
 }
@@ -452,7 +447,6 @@ class Troops {
       for (let i = 0; i < hexAll.length; i++) {
         offsetAll[i] = [hexAll[i].offsetLeft, hexAll[i].offsetTop];
       }
-      // this.showHudMerchant();
       for (let i = 0; i < hexAll.length; i++) {
         if (
           offsetAll[i][0] > troopsPosition.offsetLeft - 130 &&
@@ -477,16 +471,20 @@ class Troops {
 
       for (let i = 0, j = 1; i < this.soldiers.length; i++, j = j + 2) {
         console.log(this.id.childNodes[j]);
-        
-        this.id.childNodes[j].classList.add(
-          this.soldiers[i].type + this.soldiers[i].color,
-          `soldierHex`
-        );
+
+        if (this.soldiers[i].type !== `merchant`) {
+          this.id.childNodes[j].classList.add(
+            this.soldiers[i].type + this.soldiers[i].color,
+            `soldierHex`
+            );
+          } else if (this.soldiers[i].type === `merchant`) {
+            this.id.childNodes[4].classList.add(`merchant` + this.color, `soldierHex`)
+          }
+
       }
 
-      if (this.soldiers.some(el => el.type === `merchant`)) {
-        this.id.childNodes[4].classList.add(`merchant` + this.color, `soldierHex`)
-      }
+      // if (this.soldiers.some(el => el.type === `merchant`)) {
+      // }
      
 
     };
