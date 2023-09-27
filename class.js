@@ -309,19 +309,21 @@ class Merchant {
 
       this.deleteMerchant = () => {
       if (
-        id.troops.soldiers &&
-        id.troops.soldiers.map((el) => el.type === `merchant`)
+        this.id.troops.soldiers &&
+        this.id.troops.soldiers.map((el) => el.type === `merchant`)
       ) {
-        id.childNodes[4].classList.remove(merchantClass);
-        const merchantToRemove = id.troops.soldiers.findIndex(
+        this.id.childNodes[4].classList.remove(merchantClass);
+        const merchantToRemove = this.id.troops.soldiers.findIndex(
           (soldier) => soldier.type === "merchant"
         );
-        id.troops.soldiers.splice(merchantToRemove, 1);
+        this.id.troops.soldiers.splice(merchantToRemove, 1);
       }
     };
 
     this.settle = () => {
       this.id.town = new Town(UUID, this.id);
+      console.log(`town created at hex nr`, this.id);
+
       this.id.childNodes[4].classList.add(`town${this.color}`);
       // this.id.hex.collectible = false;
 
@@ -331,7 +333,6 @@ class Merchant {
 
       // merchantPosition = undefined;
       window[`player` + UUID].action--;
-      console.log(`town created at hex nr`, this.id);
       
     };
   }
@@ -463,7 +464,7 @@ class Troops {
 
     this.showSoldierHex = () => {
       this.id.childNodes.forEach((el) => {
-        while (el.classList.length > 1) {
+        while (el.classList.length > 1 && !el.classList.contains(`town` + this.color)) {
           el.classList.remove(el.classList.item(1)); // Remove the class at index 1 (second class)
         }
       });
@@ -477,22 +478,18 @@ class Troops {
             this.soldiers[i].type + this.soldiers[i].color,
             `soldierHex`
             );
-          } else if (this.soldiers[i].type === `merchant`) {
+          } else if (this.soldiers[i].type === `merchant` && !this.id.town) {
             this.id.childNodes[4].classList.add(`merchant` + this.color, `soldierHex`)
           }
 
       }
-
-      // if (this.soldiers.some(el => el.type === `merchant`)) {
-      // }
-     
-
     };
 
 
 
     this.calcSize = function () {
-      this.size = this.soldiers.length;
+      const fightSoldier = this.soldiers.filter(el => el.type !== `merchant`);
+      this.size = fightSoldier.length;
       console.log(`troops size updated`);
       return this.size;
     };

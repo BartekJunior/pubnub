@@ -562,21 +562,4 @@ endTurn.addEventListener(`click`, () => {
   endTurn.style.display = `none`;
 });
 
-const ha = {
-  name: `chuj`,
-  age: 15,
-};
 
-const he = {
-  name: `chaj`,
-  age: 67,
-};
-const arr = [[1, 2, 3], ha, he];
-
-arr.forEach((el) => {
-  console.log(`iterararaarra`);
-
-  el.age = el.age + 30;
-});
-
-console.log(arr);
