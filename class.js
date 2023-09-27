@@ -227,7 +227,8 @@ class Town {
         this.id.troops.soldiers.push(...tempSoldiers);
         tempSoldiers = [];
         this.id.troops.calcSize();
-        this.id.troops.showSoldierHex();
+        this.id.childNodes[8].style.backgroundColor = `black`;
+        // this.id.troops.showSoldierHex();
         Troops.prototype.hideHudTroops();
         this.id.troops.showHudTroops();
         this.updateRecruitNr();
@@ -464,7 +465,7 @@ class Troops {
 
     this.showSoldierHex = () => {
       this.id.childNodes.forEach((el) => {
-        while (el.classList.length > 1 && !el.classList.contains(`town` + this.color)) {
+        while (el.classList.length > 1 && !this.id.town) {
           el.classList.remove(el.classList.item(1)); // Remove the class at index 1 (second class)
         }
       });
@@ -478,9 +479,11 @@ class Troops {
             this.soldiers[i].type + this.soldiers[i].color,
             `soldierHex`
             );
-          } else if (this.soldiers[i].type === `merchant` && !this.id.town) {
-            this.id.childNodes[4].classList.add(`merchant` + this.color, `soldierHex`)
-          }
+
+          } 
+          // else if (this.soldiers[i].type === `merchant`) {
+          //   this.id.childNodes[4].classList.add(`merchant` + this.color, `soldierHex`)
+          // }
 
       }
     };

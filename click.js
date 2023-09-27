@@ -112,7 +112,7 @@ hexAll.forEach((el) =>
   el.addEventListener(`click`, function (e) {
     if (el.troops && el.troops.soldiers.some((el) => el.type === `merchant`))
       Merchant.prototype.showHudMerchant();
-    // else Merchant.prototype.hideHudMerchant();
+    else Merchant.prototype.hideHudMerchant();
   })
 );
 
@@ -150,7 +150,7 @@ hexAll.forEach(el => {
         el.troops = new Troops (UUID, el, window[`player` + UUID].color)
         console.log(`troops made`);
       }
-      if ((selectedSoldiers.length + el.troops.size) > 4) {
+      if ((selectedSoldiers.filter(el => el.type !== `merchant`).length + el.troops.size) > 4) {
         alert(`Na jednym polu mogą znajdować się tylko 4 jednostki wojskowe`);
         PossibleMove.prototype.deletePossibleMove();
         troopsPosition = undefined;
