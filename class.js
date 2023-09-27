@@ -474,17 +474,18 @@ class Troops {
       for (let i = 0, j = 1; i < this.soldiers.length; i++, j = j + 2) {
         console.log(this.id.childNodes[j]);
 
-        if (this.soldiers[i].type !== `merchant`) {
+
+        if (this.soldiers[i].type === `merchant`) {
+          this.id.childNodes[4].classList.add(`merchant` + this.color, `soldierHex`);
+          j = j - 2;
+        }
+
+        else if (this.soldiers[i].type !== `merchant`) {
           this.id.childNodes[j].classList.add(
             this.soldiers[i].type + this.soldiers[i].color,
             `soldierHex`
             );
-
           } 
-          // else if (this.soldiers[i].type === `merchant`) {
-          //   this.id.childNodes[4].classList.add(`merchant` + this.color, `soldierHex`)
-          // }
-
       }
     };
 
