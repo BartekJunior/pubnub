@@ -130,12 +130,10 @@ confirmGroupBtn.addEventListener("click", () => {
   Troops.prototype.whereToGo();
 });
 
-confirmMoveBtn.addEventListener("click", function () {
-
-});
+confirmMoveBtn.addEventListener("click", function () {});
 
 cancelMoveBtn.addEventListener("click", function () {
-  groupHud.map(el => el.classList.remove(`soldier-selected`));
+  groupHud.map((el) => el.classList.remove(`soldier-selected`));
   groupHud = [];
   selectedSoldiers = [];
   PossibleMove.prototype.deletePossibleMove();
@@ -143,26 +141,37 @@ cancelMoveBtn.addEventListener("click", function () {
 });
 
 // Click PossibleMove to move Troops
-hexAll.forEach(el => {
-  el.addEventListener(`click`, function() {
+hexAll.forEach((el) => {
+  el.addEventListener(`click`, function () {
     if (el.possibleMove) {
       if (!el.troops) {
-        el.troops = new Troops (UUID, el, window[`player` + UUID].color)
+        el.troops = new Troops(UUID, el, window[`player` + UUID].color);
         console.log(`troops made`);
       }
-      if ((selectedSoldiers.filter(el => el.type !== `merchant`).length + el.troops.size) > 4) {
+      if (
+        selectedSoldiers.filter((el) => el.type !== `merchant`).length +
+          el.troops.size >
+        4
+      ) {
+        // when you reached limit 4 soldiers
         alert(`Na jednym polu mogą znajdować się tylko 4 jednostki wojskowe`);
         PossibleMove.prototype.deletePossibleMove();
         troopsPosition = undefined;
         selectedSoldiers = [];
         groupHud = [];
-
       } else {
+        // when you move Troops to notTown
         el.troops.soldiers.push(...selectedSoldiers);
-        el.troops.soldiers.map(item => item.id = el);
-        troopsPosition.troops.soldiers = troopsPosition.troops.soldiers.filter(soldier => !selectedSoldiers.includes(soldier));
+        el.troops.soldiers.map((item) => (item.id = el));
+        troopsPosition.troops.soldiers = troopsPosition.troops.soldiers.filter(
+          (soldier) => !selectedSoldiers.includes(soldier)
+        );
 
-        el.troops.showSoldierHex();
+        if (!el.town) {
+          el.troops.showSoldierHex();
+        } else if (el.town) {
+          el.childNodes[8].style.backgroundColor = `black`;
+        }
         el.troops.calcSize();
         troopsPosition.troops.showSoldierHex();
         troopsPosition.troops.calcSize();
@@ -171,10 +180,10 @@ hexAll.forEach(el => {
         selectedSoldiers = [];
         groupHud = [];
       }
-    }
-  })
-})
 
+    }
+  });
+});
 
 // Edit this function. getType fires when new troops hex is creating in Hex!!! //
 // hexAll.forEach((el) => {
@@ -184,8 +193,6 @@ hexAll.forEach(el => {
 //     }
 //   });
 // });
-
-
 
 // ----- show/hide hudTown  ----- //
 hexAll.forEach((el) => {
@@ -219,18 +226,17 @@ hexAll.forEach((el) => {
       Troops.prototype.hideHudTroops();
       el.troops.showHudTroops();
       troopsPosition = el;
-
     } else if (selectedSoldiers.length > 0 && !el.possibleMove) {
       alert(`Dokończ ruch jednostek albo Anuluj ruch`);
     } else Troops.prototype.hideHudTroops();
   });
 });
 
-
-
 // settle Town and build structures //
 settleBtn.addEventListener(`click`, function () {
-  const merchantObj =  troopsPosition.troops.soldiers.find(el => el.type === `merchant`);
+  const merchantObj = troopsPosition.troops.soldiers.find(
+    (el) => el.type === `merchant`
+  );
   console.log(merchantObj);
   merchantObj.settle();
 
@@ -561,5 +567,3 @@ endTurn.addEventListener(`click`, () => {
   publishMessage(window[`player` + UUID]);
   endTurn.style.display = `none`;
 });
-
-
