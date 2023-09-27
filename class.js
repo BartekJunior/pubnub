@@ -301,10 +301,9 @@ class Merchant {
     this.num = Troops.prototype.setNumber();
 
     const merchantClass = `merchant${color}`;
-    const townClass = `town${this.color}`;
 
-    Merchant.prototype.showMerchant = () => id.classList.add(merchantClass);
-    Merchant.prototype.hideMerchant = () => id.classList.remove(merchantClass);
+    // Merchant.prototype.showMerchant = () => id.classList.add(merchantClass);
+    // Merchant.prototype.hideMerchant = () => id.classList.remove(merchantClass);
 
     Merchant.prototype.showHudMerchant = () =>
       (hudMerchant.style.display = `block`);
@@ -326,7 +325,7 @@ class Merchant {
 
     Merchant.prototype.settle = () => {
       this.id.town = new Town(UUID, this.id);
-      this.id.childNodes[4].classList.add(townClass);
+      this.id.childNodes[4].classList.add(`town${this.color}`);
       // this.id.hex.collectible = false;
       hexAll.forEach((el) => {
         if (el.possibleMove) {
@@ -467,25 +466,31 @@ class Troops {
       }
     };
 
+
     this.showSoldierHex = () => {
-      
       this.id.childNodes.forEach((el) => {
         while (el.classList.length > 1) {
           el.classList.remove(el.classList.item(1)); // Remove the class at index 1 (second class)
         }
       });
 
+
       for (let i = 0, j = 1; i < this.soldiers.length; i++, j = j + 2) {
+        console.log(this.id.childNodes[j]);
+        
         this.id.childNodes[j].classList.add(
           this.soldiers[i].type + this.soldiers[i].color,
           `soldierHex`
         );
       }
+
+      if (this.soldiers.some(el => el.type === `merchant`)) {
+        this.id.childNodes[4].classList.add(`merchant` + this.color, `soldierHex`)
+      }
+     
+
     };
 
-  
-     
-    
 
 
     this.calcSize = function () {

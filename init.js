@@ -25,7 +25,9 @@ hexAll[2].troops = new Troops(UUID, hexAll[2], `green`);
 hexAll[2].troops.soldiers = [
   new Cavalry(UUID, hexAll[2], `green`),
   new Infantry(UUID, hexAll[2], `green`),
+  new Merchant(UUID, hexAll[2], `green`),
 ];
+hexAll[2].troops.calcSize();
 hexAll[2].troops.showSoldierHex();
 
 hexAll[4].troops = new Troops(UUID, hexAll[4], `green`);
@@ -35,10 +37,8 @@ hexAll[4].troops.soldiers = [
   new Cavalry(UUID, hexAll[4], `green`),
   new Cavalry(UUID, hexAll[4], `green`),
 ];
+hexAll[4].troops.calcSize();
 hexAll[4].troops.showSoldierHex();
-
-
-
 
 // Array of 4 land piece. One big array of 12 cafelkas. Each one has 4 Hexes of land//
 const hexArea = [];
@@ -75,13 +75,7 @@ setPlayer.addEventListener(`click`, function () {
   else alert(`Liczba graczy musi wynosic 1-3`);
 
   //set individual player for each user
-  window["player" + UUID] = new Player(
-    UUID,
-    num,
-    color,
-    false,
-    0,
-  );
+  window["player" + UUID] = new Player(UUID, num, color, false, 0);
   player = window[`player` + UUID];
 
   //set active turn to first player
@@ -95,17 +89,17 @@ setPlayer.addEventListener(`click`, function () {
   if (player.nr == 1) {
     hexAll[0].troops = new Troops(UUID, hexAll[0], player.color);
     hexAll[0].troops.soldiers.push(new Merchant(UUID, hexAll[0], player.color));
-    hexAll[0].troops.soldiers[0].showMerchant();
+    // hexAll[0].troops.soldiers[0].showMerchant();
   } else if (player.nr == 2) {
     hexAll[35].troops = new Troops(UUID, hexAll[35], player.color);
     hexAll[35].troops.soldiers.push(
       new Merchant(UUID, hexAll[35], player.color)
     );
-    hexAll[35].troops.soldiers[0].showMerchant();
+    // hexAll[35].troops.soldiers[0].showMerchant();
   } else if (player.nr == 3) {
     hexAll[5].troops = new Troops(UUID, hexAll[5], player.color);
     hexAll[5].troops.soldiers.push(new Merchant(UUID, hexAll[5], player.color));
-    hexAll[5].troops.soldiers[0].showMerchant();
+    // hexAll[5].troops.soldiers[0].showMerchant();
   }
 
   // show start resource
