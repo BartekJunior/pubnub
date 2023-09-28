@@ -227,7 +227,7 @@ class Town {
         this.id.troops.soldiers.push(...tempSoldiers);
         tempSoldiers = [];
         this.id.troops.calcSize();
-        this.id.childNodes[8].style.backgroundColor = `black`;
+        this.id.childNodes[8].classList.add(`bg-black`);
         // this.id.troops.showSoldierHex();
         Troops.prototype.hideHudTroops();
         this.id.troops.showHudTroops();
@@ -327,16 +327,16 @@ class Merchant {
       this.deleteMerchant();
 
       // Clear all troopsHex from map when settle Town
-      this.id.childNodes.forEach(el => {
+      this.id.childNodes.forEach((el) => {
         while (el.classList.length > 1) {
           el.classList.remove(el.classList.item(1)); // Remove the class at index 1 (second class)
         }
         if (this.id.troops.soldiers && this.id.troops.soldiers.length > 0) {
-          this.id.childNodes[8].style.backgroundColor = `black`;
+          this.id.childNodes[8].classList.add(`bg-black`);
         }
-      })
+      });
       console.log(`this.id.troops.soldiers`, this.id.troops.soldiers);
-        
+
       this.id.childNodes[4].classList.add(`town${this.color}`);
       // this.id.hex.collectible = false;
 
@@ -407,7 +407,6 @@ class Troops {
     };
 
     this.deleteTroops = () => {
-      // id.classList.remove(troopsClass);
       delete this.id.troops;
     };
 
@@ -463,15 +462,13 @@ class Troops {
           offsetAll[i][0] > troopsPosition.offsetLeft - 130 &&
           offsetAll[i][0] < troopsPosition.offsetLeft + 130 &&
           offsetAll[i][1] < troopsPosition.offsetTop + 130 &&
-          offsetAll[i][1] > troopsPosition.offsetTop - 130
-          // !hexAll[i].merchant
+          offsetAll[i][1] > troopsPosition.offsetTop - 130 &&
+          hexAll[i] !== troopsPosition
         ) {
           hexAll[i].possibleMove = new PossibleMove(UUID, hexAll[i]);
         }
       }
     };
-
-
 
     this.showSoldierHex = () => {
       this.id.childNodes.forEach((el) => {
@@ -496,8 +493,6 @@ class Troops {
         }
       }
     };
-
-
 
     this.calcSize = function () {
       const fightSoldier = this.soldiers.filter((el) => el.type !== `merchant`);

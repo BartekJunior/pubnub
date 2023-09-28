@@ -160,30 +160,47 @@ hexAll.forEach((el) => {
         selectedSoldiers = [];
         groupHud = [];
       } else {
-
-        el.troops.soldiers.push(...selectedSoldiers);
-        el.troops.soldiers.map((item) => (item.id = el));
+        el.troops.soldiers.push(...selectedSoldiers); // move each soldier
+        el.troops.soldiers.map((item) => (item.id = el)); //update id of moved Soldiers
         troopsPosition.troops.soldiers = troopsPosition.troops.soldiers.filter(
           (soldier) => !selectedSoldiers.includes(soldier)
         );
 
+        el.troops.calcSize();
+        troopsPosition.troops.calcSize();
+    
+
+        // Draw soldiers on Map //
+
+        if (troopsPosition.troops.soldiers.length === 0) {
+          //move whole group
+          troopsPosition.troops.deleteTroops();
+        }
+
         if (!el.town) {
+          //when go into not Town
           el.troops.showSoldierHex();
-        } else if (el.town) { //when go into Town
-          el.childNodes[8].style.backgroundColor = `black`;
+        } else if (el.town) {
+          //when go into Town
+          el.childNodes[8].classList.add(`bg-black`);
         }
 
         if (!troopsPosition.town) {
+          //when go not from Town
           troopsPosition.troops.showSoldierHex();
+        } else if (troopsPosition.town && !troopsPosition.troops) {
+          troopsPosition.childNodes[8].classList.remove(`bg-black`)
         }
-        el.troops.calcSize();
-        troopsPosition.troops.calcSize();
+
+     
+
+
         PossibleMove.prototype.deletePossibleMove();
         troopsPosition = undefined;
         selectedSoldiers = [];
         groupHud = [];
-      }
 
+      }
     }
   });
 });
