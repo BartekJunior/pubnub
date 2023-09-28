@@ -525,8 +525,7 @@ class Cavalry {
       delete this.id.cavalry;
     };
 
-    // this.showCavalry();
-    this.id.troops.calcSize();
+    // this.id.troops.calcSize();
   }
 }
 
@@ -547,8 +546,7 @@ class Infantry {
       delete this.id.infantry;
     };
 
-    // this.showInfantry();
-    this.id.troops.calcSize();
+    // this.id.troops.calcSize();
   }
 }
 
@@ -569,8 +567,7 @@ class Elephant {
       delete this.id.elephant;
     };
 
-    // this.showElephant();
-    this.id.troops.calcSize();
+    // this.id.troops.calcSize();
   }
 }
 
