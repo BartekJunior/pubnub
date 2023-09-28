@@ -166,17 +166,9 @@ hexAll.forEach((el) => {
           (soldier) => !selectedSoldiers.includes(soldier)
         );
 
-        el.troops.calcSize();
-        troopsPosition.troops.calcSize();
     
 
         // Draw soldiers on Map //
-
-        if (troopsPosition.troops.soldiers.length === 0) {
-          //move whole group
-          troopsPosition.troops.deleteTroops();
-        }
-
         if (!el.town) {
           //when go into not Town
           el.troops.showSoldierHex();
@@ -188,14 +180,26 @@ hexAll.forEach((el) => {
         if (!troopsPosition.town) {
           //when go not from Town
           troopsPosition.troops.showSoldierHex();
-        } else if (troopsPosition.town && !troopsPosition.troops) {
+        }
+        
+      
+
+     
+        el.troops.calcSize();
+        troopsPosition.troops.calcSize();
+
+        PossibleMove.prototype.deletePossibleMove();
+ 
+
+        if (troopsPosition.troops.soldiers.length === 0) {
+          //move whole group, delete troops
+          troopsPosition.troops.deleteTroops();
+        }
+        if (troopsPosition.town && !troopsPosition.troops) {
+          //move whole group from Town, remove soldier on Map Town
           troopsPosition.childNodes[8].classList.remove(`bg-black`)
         }
 
-     
-
-
-        PossibleMove.prototype.deletePossibleMove();
         troopsPosition = undefined;
         selectedSoldiers = [];
         groupHud = [];
