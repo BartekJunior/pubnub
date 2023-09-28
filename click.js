@@ -160,7 +160,7 @@ hexAll.forEach((el) => {
         selectedSoldiers = [];
         groupHud = [];
       } else {
-        // when you move Troops to notTown
+
         el.troops.soldiers.push(...selectedSoldiers);
         el.troops.soldiers.map((item) => (item.id = el));
         troopsPosition.troops.soldiers = troopsPosition.troops.soldiers.filter(
@@ -169,11 +169,14 @@ hexAll.forEach((el) => {
 
         if (!el.town) {
           el.troops.showSoldierHex();
-        } else if (el.town) {
+        } else if (el.town) { //when go into Town
           el.childNodes[8].style.backgroundColor = `black`;
         }
+
+        if (!troopsPosition.town) {
+          troopsPosition.troops.showSoldierHex();
+        }
         el.troops.calcSize();
-        troopsPosition.troops.showSoldierHex();
         troopsPosition.troops.calcSize();
         PossibleMove.prototype.deletePossibleMove();
         troopsPosition = undefined;
