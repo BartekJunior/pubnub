@@ -2,6 +2,7 @@
 
 // GLOBAL VARIABLES //
 let setNum = 1; // ID of each soldier
+let test;
 
 // CLASS PLAYER //
 class Player {

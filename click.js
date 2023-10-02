@@ -595,10 +595,10 @@ startGame.addEventListener(`click`, () => {
 endTurn.addEventListener(`click`, () => {
   readHex();
   readTown();
-  readMerchant();
+  // readMerchant();
   publishMessage(hexesOnMap);
   publishMessage(townsOnMap);
-  publishMessage(merchantsOnMap);
+  // publishMessage(merchantsOnMap);
 
   hexesOnMapArr = [];
   townsOnMapArr = [];
@@ -609,5 +609,7 @@ endTurn.addEventListener(`click`, () => {
   merchantsOnMap = undefined;
 
   publishMessage(window[`player` + UUID]);
+  console.log(`player sent`);
+  
   endTurn.style.display = `none`;
 });

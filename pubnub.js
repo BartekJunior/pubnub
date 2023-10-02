@@ -58,25 +58,22 @@ for (i = 1; i < 4; i++) {
 }
 // Dynamic variables
 
-let same = {
-  player: UUID,
-  wood: 12,
-  stone: 40,
-};
-
 sendPlayer.addEventListener(`click`, function () {
   publishMessage(window["player" + UUID]);
   player.start = undefined; // disable player.start to not sending the position of first merchant anymore
 });
 
+// const testListener = (msg) => {
+//   test = msg;
+// }
 
 const playerListener = (msg) => {
+  console.log(`this is player BEFORE IF msg`, msg);
+
   if (msg.name !== window[`player` + UUID].name)
     window[`player` + msg.name] = msg;
 
-  //send merchant to another users
-  console.log(`CREATE START MERCHANTS`);
-
+  console.log(`this is player msg`, msg);
 
   if (msg.nr === 1 && msg.start === 0)
     hexAll[msg.start].merchant = new Merchant(
@@ -96,6 +93,8 @@ const playerListener = (msg) => {
       hexAll[msg.start],
       msg.color
     );
+  //send merchant to another users
+  console.log(`START MERCHANTS CREATED`);
 };
 
 const resourceListener = (msg) => {
@@ -128,10 +127,10 @@ const townListener = (msg) => {
   paintTown();
 };
 
-const merchantListener = (msg) => {
-  merchantsOnMap = msg;
-  paintMerchant();
-};
+// const merchantListener = (msg) => {
+//   merchantsOnMap = msg;
+//   paintMerchant();
+// };
 
 ///// PUBNUB /////
 const buttonClick = () => {
@@ -167,7 +166,10 @@ const setupPubNub = () => {
       }
     },
 
+    
     message: (messageEvent) => {
+
+      // testListener(messageEvent.message.description);
       if (
         messageEvent.publisher !== UUID &&
         messageEvent.message.description.type === `player`
@@ -195,11 +197,13 @@ const setupPubNub = () => {
       )
         turnListener(messageEvent.message.description);
 
+
       // MAP Listener condition
       if (
         messageEvent.publisher !== UUID &&
         messageEvent.message.description.type === `hex`
       ) {
+        console.log(messageEvent.message.description);
         console.log(`this was hex`);
         mapListener(messageEvent.message.description);
       }
@@ -208,17 +212,18 @@ const setupPubNub = () => {
         messageEvent.publisher !== UUID &&
         messageEvent.message.description.type === `town`
       ) {
+        console.log(messageEvent.message.description);
         console.log(`this was town`);
         townListener(messageEvent.message.description);
       }
 
-      if (
-        messageEvent.publisher !== UUID &&
-        messageEvent.message.description.type === `merchant`
-      ) {
-        console.log(`this was merchant`);
-        merchantListener(messageEvent.message.description);
-      }
+      // if (
+      //   messageEvent.publisher !== UUID &&
+      //   messageEvent.message.description.type === `merchant`
+      // ) {
+      //   console.log(`this was merchant`);
+      //   merchantListener(messageEvent.message.description);
+      // }
     },
 
     presence: (event) => {
