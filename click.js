@@ -130,7 +130,14 @@ confirmGroupBtn.addEventListener("click", () => {
   Troops.prototype.whereToGo();
 });
 
-confirmMoveBtn.addEventListener("click", function () {});
+confirmMoveBtn.addEventListener("click", function () {
+  startMoveBtn.disabled = false;
+  confirmGroupBtn.disabled = false;
+  confirmMoveBtn.disabled = false;
+  cancelMoveBtn.disabled = false;
+  moveCounter = 0;
+  player.action--;
+});
 
 cancelMoveBtn.addEventListener("click", function () {
   groupHud.map((el) => el.classList.remove(`soldier-selected`));
@@ -140,6 +147,7 @@ cancelMoveBtn.addEventListener("click", function () {
   console.log("Move canceled");
 });
 
+let moveCounter = 0;
 // Click PossibleMove to move Troops
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
@@ -166,8 +174,6 @@ hexAll.forEach((el) => {
           (soldier) => !selectedSoldiers.includes(soldier)
         );
 
-    
-
         // Draw soldiers on Map //
         if (!el.town) {
           //when go into not Town
@@ -181,15 +187,10 @@ hexAll.forEach((el) => {
           //when go not from Town
           troopsPosition.troops.showSoldierHex();
         }
-        
-      
 
-     
         el.troops.calcSize();
         troopsPosition.troops.calcSize();
-
         PossibleMove.prototype.deletePossibleMove();
- 
 
         if (troopsPosition.troops.soldiers.length === 0) {
           //move whole group, delete troops
@@ -197,13 +198,30 @@ hexAll.forEach((el) => {
         }
         if (troopsPosition.town && !troopsPosition.troops) {
           //move whole group from Town, remove soldier on Map Town
-          troopsPosition.childNodes[8].classList.remove(`bg-black`)
+          troopsPosition.childNodes[8].classList.remove(`bg-black`);
         }
 
         troopsPosition = undefined;
         selectedSoldiers = [];
         groupHud = [];
 
+        moveCounter++;
+        if (moveCounter === 1)
+          alert(
+            `Poruszyłeś pierwszą grupę, w tej Akcji Ruchu możesz poruszyć jeszcze dwie. Jeśli chcesz zakończyć Akcję Ruchu, kliknij "Zakończ Akcję Ruchu"`
+          );
+        else if (moveCounter === 2)
+          alert(
+            `Poruszyłeś drugą grupę, w tej Akcji Ruchu możesz poruszyć jeszcze jedną. Jeśli chcesz zakończyć Akcję Ruchu, kliknij "Zakończ Akcję Ruchu"`
+          );
+        else if (moveCounter === 3) {
+          alert(
+            `Poruszyłeś trzecia grupę, w tej Akcji Ruchu nie możesz już poruszyć wojsk. Kliknij "Zakończ Akcję Ruchu"`
+          );
+          startMoveBtn.disabled = true;
+          confirmGroupBtn.disabled = true;
+          cancelMoveBtn.disabled = true;
+        }
       }
     }
   });
