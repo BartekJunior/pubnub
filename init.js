@@ -21,25 +21,25 @@ hexAll[1].classList.add(`class-${hexAll[1].hex.land}`);
 hexAll[6].classList.add(`class-${hexAll[6].hex.land}`);
 hexAll[7].classList.add(`class-${hexAll[7].hex.land}`);
 
-hexAll[2].troops = new Troops(UUID, hexAll[2], `green`);
-hexAll[2].troops.soldiers = [
-  new Cavalry(UUID, hexAll[2], `green`),
-  new Infantry(UUID, hexAll[2], `green`),
-  new Merchant(UUID, hexAll[2], `green`),
-  new Merchant(UUID, hexAll[2], `green`),
-];
-hexAll[2].troops.calcSize();
-hexAll[2].troops.showSoldierHex();
+// hexAll[2].troops = new Troops(UUID, hexAll[2], `green`);
+// hexAll[2].troops.soldiers = [
+//   new Cavalry(UUID, hexAll[2], `green`),
+//   new Infantry(UUID, hexAll[2], `green`),
+//   new Merchant(UUID, hexAll[2], `green`),
+//   new Merchant(UUID, hexAll[2], `green`),
+// ];
+// hexAll[2].troops.calcSize();
+// hexAll[2].troops.showSoldierHex();
 
-hexAll[4].troops = new Troops(UUID, hexAll[4], `green`);
-hexAll[4].troops.soldiers = [
-  new Elephant(UUID, hexAll[4], `green`),
-  new Elephant(UUID, hexAll[4], `green`),
-  new Cavalry(UUID, hexAll[4], `green`),
-  new Cavalry(UUID, hexAll[4], `green`),
-];
-hexAll[4].troops.calcSize();
-hexAll[4].troops.showSoldierHex();
+// hexAll[4].troops = new Troops(UUID, hexAll[4], `green`);
+// hexAll[4].troops.soldiers = [
+//   new Elephant(UUID, hexAll[4], `green`),
+//   new Elephant(UUID, hexAll[4], `green`),
+//   new Cavalry(UUID, hexAll[4], `green`),
+//   new Cavalry(UUID, hexAll[4], `green`),
+// ];
+// hexAll[4].troops.calcSize();
+// hexAll[4].troops.showSoldierHex();
 
 // Array of 4 land piece. One big array of 12 cafelkas. Each one has 4 Hexes of land//
 const hexArea = [];
@@ -97,9 +97,13 @@ setPlayer.addEventListener(`click`, function () {
     hexAll[35].troops.soldiers.push(
       new Merchant(UUID, hexAll[35], player.color)
     );
+    hexAll[35].troops.calcSize();
+    hexAll[35].troops.showSoldierHex();
   } else if (player.nr == 3) {
     hexAll[5].troops = new Troops(UUID, hexAll[5], player.color);
     hexAll[5].troops.soldiers.push(new Merchant(UUID, hexAll[5], player.color));
+    hexAll[5].troops.calcSize();
+    hexAll[5].troops.showSoldierHex();
   }
 
   // show start resource

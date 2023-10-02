@@ -109,11 +109,11 @@ class Hex {
 // CLASS TOWN //
 let town;
 class Town {
-  constructor(player, id) {
+  constructor(player, id, color) {
     this.type = `town`;
     this.player = player;
     this.id = id;
-    this.color = window[`player` + UUID].color;
+    this.color = color;
     this.size = 1;
 
     this.structure = {
@@ -322,7 +322,7 @@ class Merchant {
     };
 
     this.settle = () => {
-      this.id.town = new Town(UUID, this.id);
+      this.id.town = new Town(UUID, this.id, window[`player` + UUID].color);
       console.log(`town created at hex nr`, this.id);
       this.deleteMerchant();
 

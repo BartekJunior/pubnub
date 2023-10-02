@@ -423,10 +423,12 @@ const checkAction = function () {
     player.turnActive = false;
     player.actionDone = true;
 
-    alert(`Twoja tura sie zakonczyla, click end turn`);
-    endTurn.style.display = `block`;
     clearInterval(turnInterval);
-    town.hideHudTown();
+    alert(`Twoja tura sie zakonczyla, click end turn`);
+    if (town) {
+      town.hideHudTown();
+    }
+    endTurn.style.display = `block`;
   }
 };
 
