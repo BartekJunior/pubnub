@@ -152,6 +152,11 @@ let moveCounter = 0;
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     if (el.possibleMove) {
+      if (!el.hex.vis) {
+        // simple map exploration
+        el.hex.getLand();
+      }
+
       if (!el.troops) {
         el.troops = new Troops(UUID, el, window[`player` + UUID].color);
         console.log(`troops made`);
@@ -218,6 +223,7 @@ hexAll.forEach((el) => {
           alert(
             `Poruszyłeś trzecia grupę, w tej Akcji Ruchu nie możesz już poruszyć wojsk. Kliknij "Zakończ Akcję Ruchu"`
           );
+
           startMoveBtn.disabled = true;
           confirmGroupBtn.disabled = true;
           cancelMoveBtn.disabled = true;
@@ -227,14 +233,6 @@ hexAll.forEach((el) => {
   });
 });
 
-// Edit this function. getType fires when new troops hex is creating in Hex!!! //
-// hexAll.forEach((el) => {
-//   el.addEventListener(`click`, function () {
-//     if (!el.hex.vis && el.possibleMove) {
-//       el.hex.getLand();
-//     }
-//   });
-// });
 
 // ----- show/hide hudTown  ----- //
 hexAll.forEach((el) => {
@@ -610,6 +608,6 @@ endTurn.addEventListener(`click`, () => {
 
   publishMessage(window[`player` + UUID]);
   console.log(`player sent`);
-  
+
   endTurn.style.display = `none`;
 });
