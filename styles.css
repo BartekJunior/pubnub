@@ -78,6 +78,58 @@ h2 {
   clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
 }
 
+.hex-rotate {
+  display: inline-grid;
+  grid-template-columns: repeat(3, 40px);
+  grid-template-rows: repeat(3, 40px);
+  align-items: center;
+  align-content: center;
+  justify-items: center;
+  justify-content: center;
+  margin-left: -14px;
+  background-color: rgb(190, 192, 192);
+  /* z-index: -99; */
+
+  -webkit-clip-path: polygon(
+    50% 0%,
+    95% 25%,
+    95% 75%,
+    50% 100%,
+    5% 75%,
+    5% 25%
+  );
+  clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+}
+
+.hud-rotate-container {
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+  margin-top: 70px;
+}
+
+.hud-rotate-container > .hex-row {
+  margin-top: -34px;
+}
+
+.hud-rotate-container > .hex-row > .hex-rotate {
+  pointer-events: disable;
+  background-color: #2984b9;
+}
+
+.rotate-btn {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 50px;
+  font-size: 30px;
+  
+}
+
+
+
+
+
+
 .hex:hover {
   opacity: 0.3;
 }
@@ -439,11 +491,6 @@ h2 {
 .bg-black {
   background-color: black;
 }
-
-
-
-
-
 
 /* ------------ TEST  ----------------- */
 .divGrid {

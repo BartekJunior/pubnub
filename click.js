@@ -233,6 +233,8 @@ hexAll.forEach((el) => {
   });
 });
 
+hexAll.forEach(el => el.addEventListener(`click`, el.hex.getLand))
+
 
 // ----- show/hide hudTown  ----- //
 hexAll.forEach((el) => {

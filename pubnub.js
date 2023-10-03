@@ -1,7 +1,7 @@
 "use strict";
 
-const UUID = prompt(`Jak masz na imie?`);
-// const UUID = `bart`
+// const UUID = prompt(`Jak masz na imie?`);
+const UUID = `bart`;
 
 let player;
 
