@@ -233,7 +233,38 @@ hexAll.forEach((el) => {
   });
 });
 
-hexAll.forEach(el => el.addEventListener(`click`, el.hex.getLand))
+
+
+
+// hexAll.forEach(el => el.addEventListener(`click`, el.hex.getLand))
+
+
+
+const hexRotate = Array.from(document.querySelectorAll(`.hex-rotate`));
+
+hexAll.forEach((el) =>
+  el.addEventListener(`click`, function () {
+    el.hex.getLand();
+
+    hexArea.forEach((area, index) => {
+      if (area.includes(el)) {
+        const clickedArea = hexArea[index];
+        console.log(clickedArea);
+        for (let i = 0; i < clickedArea.length; i++) {
+          hexRotate[i].hex = clickedArea[i].hex;
+          hexRotate[i].classList.add(`class-${hexRotate[i].hex.land}`);
+        }
+        
+      }
+    });
+
+  })
+);
+
+
+
+
+
 
 
 // ----- show/hide hudTown  ----- //

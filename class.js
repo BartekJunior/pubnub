@@ -103,6 +103,20 @@ class Hex {
       });
     };
 
+    // this.testLand = (param) => {
+    //   param.forEach((el) => {
+    //     if (el.includes(this.id)) {
+    //       el.forEach((el) => {
+    //         el.hex.land = this.chooseLand();
+    //         el.hex.vis = true;
+    //         el.classList.add(`class-${el.hex.land}`);
+    //         el.hex.checkResource();
+    //         el.hex.checkCollectible();
+    //       });
+    //     }
+    //   });
+    // };
+
     this.createSmall(); //Fires after hex begin. Create 9 small divs inside big Hex.
   }
 }

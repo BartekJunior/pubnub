@@ -114,7 +114,7 @@ h2 {
 
 .hud-rotate-container > .hex-row > .hex-rotate {
   pointer-events: disable;
-  background-color: #2984b9;
+  /* background-color: #2984b9; */
 }
 
 .rotate-btn {
@@ -124,9 +124,6 @@ h2 {
   font-size: 30px;
   
 }
-
-
-
 
 
 
