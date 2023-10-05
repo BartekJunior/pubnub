@@ -74,7 +74,12 @@ const cancelMoveBtn = document.getElementById(`cancelMoveBtn`);
 confirmGroupBtn.disabled = true;
 confirmMoveBtn.disabled = true;
 
+
+// Map buttons
 const rotateBtn = document.getElementById(`rotateBtn`);
+const exploreBtn = document.getElementById(`exploreBtn`);
+
+
 
 // OOOOOOOOOOOOOOOMMMMMMMMMMMMMMMMMGGGGGGGGGGGGGGGGGGGGGG //
 
@@ -120,9 +125,6 @@ hexAll.forEach((el) =>
 
 // MMMMMMOOOOOOOOOOOOVVVVVVVVVVVEEEEEEEEEEEEEEEEEE //
 // MMMMMMOOOOOOOOOOOOVVVVVVVVVVVEEEEEEEEEEEEEEEEEE //
-// MMMMMMOOOOOOOOOOOOVVVVVVVVVVVEEEEEEEEEEEEEEEEEE //
-// MMMMMMOOOOOOOOOOOOVVVVVVVVVVVEEEEEEEEEEEEEEEEEE //
-
 startMoveBtn.addEventListener(`click`, function () {
   Troops.prototype.startMoveBtn();
   Troops.prototype.soldiersHud();
@@ -235,13 +237,12 @@ hexAll.forEach((el) => {
   });
 });
 
-// hexAll.forEach(el => el.addEventListener(`click`, el.hex.getLand))
+// MMMMMMOOOOOOOOOOOOVVVVVVVVVVVEEEEEEEEEEEEEEEEEE //
+// EEEEEEEEEEEEEEEENNNNNNNNNNNNNDDDDDDDDDDDDDDDDDD //
+
 
 const hexRotate = Array.from(document.querySelectorAll(`.hex-rotate`));
-
-let newHexRotate;
 let clickedArea;
-
 let drawedLandArr = [];
 
 hexAll.forEach((el) =>
@@ -260,38 +261,44 @@ hexAll.forEach((el) =>
   })
 );
 
-
-
-
-
 const rotateArea = function () {
-  rotateLandArr = [
+  drawedLandArr = [
     drawedLandArr[3],
     drawedLandArr[2],
     drawedLandArr[1],
     drawedLandArr[0],
   ];
-
-  console.log(rotateLandArr);
+  console.log(drawedLandArr);
 
   hexRotate.forEach((el) => {
     while (el.classList.length > 1) {
       el.classList.remove(el.classList.item(1)); // Remove the class at index 1 (second class)
     }
   });
-
   for (let i = 0; i < hexRotate.length; i++) {
-    hexRotate[i].classList.add(`class-` + rotateLandArr[i]);
+    hexRotate[i].classList.add(`class-` + drawedLandArr[i]);
   }
-
-  rotateLandArr = [];
-
-
 };
 
 
-
 rotateBtn.addEventListener(`click`, rotateArea);
+
+exploreBtn.addEventListener(`click`, function() {
+  for (let i = 0; i < clickedArea.length; i++) {
+    
+
+  }
+});
+
+
+
+// hexAll.forEach(el => el.addEventListener(`click`, el.hex.getLand))
+
+
+
+
+
+
 
 // hexAll.forEach((el) =>
 //   el.addEventListener(`click`, function () {

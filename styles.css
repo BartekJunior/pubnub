@@ -117,14 +117,24 @@ h2 {
   /* background-color: #2984b9; */
 }
 
+.hex-btn-container {
+  display: flex;
+  vertical-align: top;
+  justify-content: space-around;
+  padding-top: 25px;
+}
+
 .rotate-btn {
   width: 60px;
   height: 60px;
-  margin-bottom: 50px;
   font-size: 30px;
-  
 }
 
+.explore-btn {
+  width: 150px;
+  height: 60px;
+  font-size: 20px
+}
 
 
 .hex:hover {
