@@ -1,6 +1,9 @@
 `use strict`;
 
 // HUD Player
+const hudGlobal = document.querySelector(`.hud-global`);
+hudGlobal.hud = new Hud();
+
 const p1Global = document.getElementById(`p1Global`);
 const p2Global = document.getElementById(`p2Global`);
 const p3Global = document.getElementById(`p3Global`);
@@ -74,12 +77,10 @@ const cancelMoveBtn = document.getElementById(`cancelMoveBtn`);
 confirmGroupBtn.disabled = true;
 confirmMoveBtn.disabled = true;
 
-
-// Map buttons
+// Hud Map
+const rotateHud = document.querySelector(`.hud-rotate-container`);
 const rotateBtn = document.getElementById(`rotateBtn`);
 const exploreBtn = document.getElementById(`exploreBtn`);
-
-
 
 // OOOOOOOOOOOOOOOMMMMMMMMMMMMMMMMMGGGGGGGGGGGGGGGGGGGGGG //
 
@@ -236,16 +237,19 @@ hexAll.forEach((el) => {
     }
   });
 });
-
 // MMMMMMOOOOOOOOOOOOVVVVVVVVVVVEEEEEEEEEEEEEEEEEE //
 // EEEEEEEEEEEEEEEENNNNNNNNNNNNNDDDDDDDDDDDDDDDDDD //
 
+
+
+// Rotate discovered Area //
 const hexRotate = Array.from(document.querySelectorAll(`.hex-rotate`));
 let exploredArea;
 let drawedLandArr = [];
 
 hexAll.forEach((el) =>
   el.addEventListener(`click`, function () {
+    Hud.prototype.showRotateHud();
     hexArea.forEach((area, index) => {
       if (area.includes(el)) {
         exploredArea = hexArea[index];
@@ -258,8 +262,13 @@ hexAll.forEach((el) =>
     }
   })
 );
+
 rotateBtn.addEventListener(`click`, Hex.prototype.rotateArea);
 exploreBtn.addEventListener(`click`, Hex.prototype.getLand);
+//END Rotate discovered Area END //
+
+
+
 
 
 
@@ -301,6 +310,10 @@ hexAll.forEach((el) => {
   });
 });
 
+
+
+
+
 // settle Town and build structures //
 settleBtn.addEventListener(`click`, function () {
   const merchantObj = troopsPosition.troops.soldiers.find(
@@ -308,8 +321,6 @@ settleBtn.addEventListener(`click`, function () {
   );
   console.log(merchantObj);
   merchantObj.settle();
-
-  // Merchant.prototype.settle();
 });
 
 buildStructure.addEventListener(`click`, function () {

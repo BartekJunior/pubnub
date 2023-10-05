@@ -96,18 +96,11 @@ class Hex {
         drawedLandArr[1],
         drawedLandArr[0],
       ];
-      // console.log(drawedLandArr);
-      hexRotate.forEach((el) => {
-        while (el.classList.length > 1) {
-          el.classList.remove(el.classList.item(1)); // Remove the class at index 1 (second class)
-        }
-      });
-
+      Hex.prototype.deleteFirstClass();
       for (let i = 0; i < hexRotate.length; i++) {
         hexRotate[i].classList.add(`class-` + drawedLandArr[i]);
       }
     };
-
 
     Hex.prototype.getLand = () => {
       for (let i = 0; i < exploredArea.length; i++) {
@@ -117,7 +110,17 @@ class Hex {
         exploredArea[i].hex.checkResource();
         exploredArea[i].hex.checkCollectible();
       }
+      Hex.prototype.deleteFirstClass();
+      Hud.prototype.hideRotateHud();
     };
+
+    Hex.prototype.deleteFirstClass = () => {
+      hexRotate.forEach((el) => {
+        while (el.classList.length > 1) {
+          el.classList.remove(el.classList.item(1)); // Remove the class at index 1 (second class)
+        }
+      });
+    }
 
     this.createSmall(); //Fires after hex begin. Create 9 small divs inside big Hex.
   }
@@ -511,6 +514,8 @@ class Troops {
       }
     };
 
+
+
     this.calcSize = function () {
       const fightSoldier = this.soldiers.filter((el) => el.type !== `merchant`);
       this.size = fightSoldier.length;
@@ -677,4 +682,22 @@ class PossibleResource {
 
     this.showPossibleResource(); //fires after create hex
   }
+}
+
+
+///// CLASS POSSIBLERESOURCE /////
+class Hud {
+  constructor() {
+
+    Hud.prototype.showRotateHud = () => rotateHud.style.display = `block`;
+    Hud.prototype.hideRotateHud = () => rotateHud.style.display = `none`;
+
+
+
+
+
+  }
+
+
+
 }
