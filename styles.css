@@ -463,6 +463,10 @@ h2 {
   height: 40px;
 }
 
+.action-container {
+  width: 70px;
+}
+
 .action-img {
   background-color: #2984b9;
   text-align: center;
@@ -470,6 +474,8 @@ h2 {
 
 .action-value {
   background-color: #2984b9;
+  height: 40px;
+  text-align: center;
 }
 
 

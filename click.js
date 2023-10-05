@@ -8,11 +8,18 @@ const p1Global = document.getElementById(`p1Global`);
 const p2Global = document.getElementById(`p2Global`);
 const p3Global = document.getElementById(`p3Global`);
 
-const playerName = document.getElementById(`playerName`);
-
 p1Global.style.display = `none`;
 p2Global.style.display = `none`;
 p3Global.style.display = `none`;
+
+const playerName = document.getElementById(`playerName`);
+
+const p1ActionValue = document.getElementById(`p1ActionValue`);
+const p2ActionValue = document.getElementById(`p2ActionValue`);
+const p3ActionValue = document.getElementById(`p3ActionValue`);
+
+// p1ActionValue.textContent = `hehehe`;
+
 
 const setPlayer = document.getElementById(`setPlayer`);
 const sendPlayer = document.getElementById(`sendPlayer`);
@@ -142,6 +149,7 @@ confirmMoveBtn.addEventListener("click", function () {
   cancelMoveBtn.disabled = false;
   moveCounter = 0;
   player.action--;
+  window[`p` + player.nr + `ActionValue`].textContent = player.action;
 });
 
 cancelMoveBtn.addEventListener("click", function () {
@@ -339,6 +347,7 @@ settleBtn.addEventListener(`click`, function () {
   );
   console.log(merchantObj);
   merchantObj.settle();
+  window[`p` + player.nr + `ActionValue`].textContent = player.action;
 });
 
 buildStructure.addEventListener(`click`, function () {
@@ -434,6 +443,7 @@ confirmCollectBtn.addEventListener(`click`, function () {
   town.updateGlobalResource();
   town.hideConfirmCollectBtn();
   window[`player` + UUID].action--;
+  window[`p` + player.nr + `ActionValue`].textContent = player.action;
 });
 
 // Cancel collect resources
