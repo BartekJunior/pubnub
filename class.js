@@ -80,7 +80,7 @@ class Hex {
     };
 
     // Draw the land
-    this.chooseLand = function () {
+    Hex.prototype.chooseLand = function () {
       const x = Math.ceil(Math.random() * 5);
       if (x === 1) return `water`;
       else if (x === 2) return `grass`;

@@ -237,61 +237,79 @@ hexAll.forEach((el) => {
 
 // hexAll.forEach(el => el.addEventListener(`click`, el.hex.getLand))
 
+const hexRotate = Array.from(document.querySelectorAll(`.hex-rotate`));
+
+let newHexRotate;
 let clickedArea;
 
-const hexRotate = Array.from(document.querySelectorAll(`.hex-rotate`));
+let drawedLandArr = [];
 
 hexAll.forEach((el) =>
   el.addEventListener(`click`, function () {
-    el.hex.getLand();
     hexArea.forEach((area, index) => {
       if (area.includes(el)) {
         clickedArea = hexArea[index];
-        // console.log(clickedArea);
-
-        for (let i = 0; i < clickedArea.length; i++) {
-          hexRotate[i].hex = clickedArea[i].hex;
-          hexRotate[i].classList.add(`class-${hexRotate[i].hex.land}`);
-
-          console.log(hexRotate[i].hex.land);
-        }
+        console.log(clickedArea);
       }
     });
+
+    for (let i = 0; i < hexRotate.length; i++) {
+      drawedLandArr[i] = Hex.prototype.chooseLand();
+      hexRotate[i].classList.add(`class-` + drawedLandArr[i]);
+    }
   })
 );
 
 
-let newHexRotate;
+
+
 
 const rotateArea = function () {
+  rotateLandArr = [
+    drawedLandArr[3],
+    drawedLandArr[2],
+    drawedLandArr[1],
+    drawedLandArr[0],
+  ];
 
- newHexRotate = [hexRotate[3], hexRotate[2], hexRotate[1], hexRotate[0]];
+  console.log(rotateLandArr);
 
- hexRotate.forEach((el, index) => console.log(`hexRotate index`, index, el.hex));
- newHexRotate.forEach((el, index) => console.log(`newHexRotate index`, index, el.hex));
+  hexRotate.forEach((el) => {
+    while (el.classList.length > 1) {
+      el.classList.remove(el.classList.item(1)); // Remove the class at index 1 (second class)
+    }
+  });
 
+  for (let i = 0; i < hexRotate.length; i++) {
+    hexRotate[i].classList.add(`class-` + rotateLandArr[i]);
+  }
 
- for (let i = 0; i < hexRotate.length; i++) {
-  delete hexRotate[i].hex;
+  rotateLandArr = [];
 
-  // console.log(`testshit`, hexRotate[i]);
-  // console.log(`testshit`, hexRotate[i].hex);
-
-  console.log(`testshit`, newHexRotate[i]);
-  console.log(`testshitHex`, newHexRotate[i].hex);
-
-
-
-  
-  hexRotate[i].hex = newHexRotate[i].hex;
- }
-
- hexRotate.map((el) => console.log(`hexRotate after`, el.hex));
 
 };
 
 
+
 rotateBtn.addEventListener(`click`, rotateArea);
+
+// hexAll.forEach((el) =>
+//   el.addEventListener(`click`, function () {
+//     el.hex.getLand();
+//     hexArea.forEach((area, index) => {
+//       if (area.includes(el)) {
+//         clickedArea = hexArea[index];
+//         // console.log(clickedArea);
+
+//         for (let i = 0; i < clickedArea.length; i++) {
+//           hexRotate[i].hex = clickedArea[i].hex;
+//           hexRotate[i].classList.add(`class-${hexRotate[i].hex.land}`);
+//           console.log(hexRotate[i].hex.land);
+//         }
+//       }
+//     });
+//   })
+// );
 
 // ----- show/hide hudTown  ----- //
 hexAll.forEach((el) => {
