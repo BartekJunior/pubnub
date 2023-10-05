@@ -74,6 +74,8 @@ const cancelMoveBtn = document.getElementById(`cancelMoveBtn`);
 confirmGroupBtn.disabled = true;
 confirmMoveBtn.disabled = true;
 
+const rotateBtn = document.getElementById(`rotateBtn`);
+
 // OOOOOOOOOOOOOOOMMMMMMMMMMMMMMMMMGGGGGGGGGGGGGGGGGGGGGG //
 
 //resource variables
@@ -233,39 +235,63 @@ hexAll.forEach((el) => {
   });
 });
 
-
-
-
 // hexAll.forEach(el => el.addEventListener(`click`, el.hex.getLand))
 
-
+let clickedArea;
 
 const hexRotate = Array.from(document.querySelectorAll(`.hex-rotate`));
 
 hexAll.forEach((el) =>
   el.addEventListener(`click`, function () {
     el.hex.getLand();
-
     hexArea.forEach((area, index) => {
       if (area.includes(el)) {
-        const clickedArea = hexArea[index];
-        console.log(clickedArea);
+        clickedArea = hexArea[index];
+        // console.log(clickedArea);
+
         for (let i = 0; i < clickedArea.length; i++) {
           hexRotate[i].hex = clickedArea[i].hex;
           hexRotate[i].classList.add(`class-${hexRotate[i].hex.land}`);
+
+          console.log(hexRotate[i].hex.land);
         }
-        
       }
     });
-
   })
 );
 
 
+let newHexRotate;
+
+const rotateArea = function () {
+
+ newHexRotate = [hexRotate[3], hexRotate[2], hexRotate[1], hexRotate[0]];
+
+ hexRotate.forEach((el, index) => console.log(`hexRotate index`, index, el.hex));
+ newHexRotate.forEach((el, index) => console.log(`newHexRotate index`, index, el.hex));
+
+
+ for (let i = 0; i < hexRotate.length; i++) {
+  delete hexRotate[i].hex;
+
+  // console.log(`testshit`, hexRotate[i]);
+  // console.log(`testshit`, hexRotate[i].hex);
+
+  console.log(`testshit`, newHexRotate[i]);
+  console.log(`testshitHex`, newHexRotate[i].hex);
 
 
 
+  
+  hexRotate[i].hex = newHexRotate[i].hex;
+ }
 
+ hexRotate.map((el) => console.log(`hexRotate after`, el.hex));
+
+};
+
+
+rotateBtn.addEventListener(`click`, rotateArea);
 
 // ----- show/hide hudTown  ----- //
 hexAll.forEach((el) => {
