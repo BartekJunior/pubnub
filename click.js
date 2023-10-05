@@ -18,9 +18,6 @@ const p1ActionValue = document.getElementById(`p1ActionValue`);
 const p2ActionValue = document.getElementById(`p2ActionValue`);
 const p3ActionValue = document.getElementById(`p3ActionValue`);
 
-// p1ActionValue.textContent = `hehehe`;
-
-
 const setPlayer = document.getElementById(`setPlayer`);
 const sendPlayer = document.getElementById(`sendPlayer`);
 const endTurn = document.getElementById(`endTurn`);
