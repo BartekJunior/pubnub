@@ -67,7 +67,7 @@ const cavalryRecruited = document.getElementById(`cavalryRecruited`);
 const elephantRecruited = document.getElementById(`elephantRecruited`);
 
 // move buttons
-const containerMoveBtn = document.getElementById(`containerMoveBtn`);
+const moveBtnContainer = document.getElementById(`moveBtnContainer`);
 
 const startMoveBtn = document.getElementById(`startMoveBtn`);
 const confirmGroupBtn = document.getElementById(`confirmGroupBtn`);
@@ -152,14 +152,34 @@ cancelMoveBtn.addEventListener("click", function () {
   console.log("Move canceled");
 });
 
+
+const hexRotate = Array.from(document.querySelectorAll(`.hex-rotate`));
+let exploredArea;
+let drawedLandArr = [];
+
+rotateBtn.addEventListener(`click`, Hex.prototype.rotateArea);
+exploreBtn.addEventListener(`click`, Hex.prototype.getLand);
+
+
+// Click PossibleMove to move Troops, includes Groups, explore the map
 let moveCounter = 0;
-// Click PossibleMove to move Troops
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
+
     if (el.possibleMove) {
+
       if (!el.hex.vis) {
-        // simple map exploration
-        el.hex.getLand();
+        Hud.prototype.showRotateHud();
+        hexArea.forEach((area, index) => {
+          if (area.includes(el)) {
+            exploredArea = hexArea[index];
+            console.log(exploredArea);
+          }
+        });
+        for (let i = 0; i < hexRotate.length; i++) {
+          drawedLandArr[i] = Hex.prototype.chooseLand();
+          hexRotate[i].classList.add(`class-` + drawedLandArr[i]);
+        }
       }
 
       if (!el.troops) {
@@ -240,36 +260,31 @@ hexAll.forEach((el) => {
 // MMMMMMOOOOOOOOOOOOVVVVVVVVVVVEEEEEEEEEEEEEEEEEE //
 // EEEEEEEEEEEEEEEENNNNNNNNNNNNNDDDDDDDDDDDDDDDDDD //
 
-
-
 // Rotate discovered Area //
-const hexRotate = Array.from(document.querySelectorAll(`.hex-rotate`));
-let exploredArea;
-let drawedLandArr = [];
 
-hexAll.forEach((el) =>
-  el.addEventListener(`click`, function () {
-    Hud.prototype.showRotateHud();
-    hexArea.forEach((area, index) => {
-      if (area.includes(el)) {
-        exploredArea = hexArea[index];
-        console.log(exploredArea);
-      }
-    });
-    for (let i = 0; i < hexRotate.length; i++) {
-      drawedLandArr[i] = Hex.prototype.chooseLand();
-      hexRotate[i].classList.add(`class-` + drawedLandArr[i]);
-    }
-  })
-);
+// const hexRotate = Array.from(document.querySelectorAll(`.hex-rotate`));
+// let exploredArea;
+// let drawedLandArr = [];
 
-rotateBtn.addEventListener(`click`, Hex.prototype.rotateArea);
-exploreBtn.addEventListener(`click`, Hex.prototype.getLand);
+// hexAll.forEach((el) =>
+//   el.addEventListener(`click`, function () {
+//     Hud.prototype.showRotateHud();
+//     hexArea.forEach((area, index) => {
+//       if (area.includes(el)) {
+//         exploredArea = hexArea[index];
+//         console.log(exploredArea);
+//       }
+//     });
+//     for (let i = 0; i < hexRotate.length; i++) {
+//       drawedLandArr[i] = Hex.prototype.chooseLand();
+//       hexRotate[i].classList.add(`class-` + drawedLandArr[i]);
+//     }
+//   })
+// );
+
+// rotateBtn.addEventListener(`click`, Hex.prototype.rotateArea);
+// exploreBtn.addEventListener(`click`, Hex.prototype.getLand);
 //END Rotate discovered Area END //
-
-
-
-
 
 
 // ----- show/hide hudTown  ----- //
@@ -304,12 +319,15 @@ hexAll.forEach((el) => {
       Troops.prototype.hideHudTroops();
       el.troops.showHudTroops();
       troopsPosition = el;
+      Hud.prototype.showMoveBtnContainer();
     } else if (selectedSoldiers.length > 0 && !el.possibleMove) {
       alert(`Dokończ ruch jednostek albo Anuluj ruch`);
-    } else Troops.prototype.hideHudTroops();
+    } else {
+      Troops.prototype.hideHudTroops();
+      Hud.prototype.hideMoveBtnContainer();
+    }
   });
 });
-
 
 
 
@@ -394,6 +412,8 @@ cavalryBtn.addEventListener(`click`, function () {
 elephantBtn.addEventListener(`click`, function () {
   town.recruitTempSoldier(`elephant`);
 });
+
+
 
 //----------- COLLECTING RESOURCE -----------//
 //click Collect resource. Start collecting //

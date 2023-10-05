@@ -102,6 +102,7 @@ h2 {
 }
 
 .hud-rotate-container {
+  display: none;
   width: 300px;
   height: 300px;
   margin: 0 auto;
@@ -429,8 +430,8 @@ h2 {
   background-color: rgb(200, 212, 212);
 }
 
-#containerMoveBtn {
-  display: inline-flex;
+#moveBtnContainer {
+  display: none;
   /* flex-direction: column; */
 }
 

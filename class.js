@@ -692,6 +692,10 @@ class Hud {
     Hud.prototype.showRotateHud = () => rotateHud.style.display = `block`;
     Hud.prototype.hideRotateHud = () => rotateHud.style.display = `none`;
 
+    Hud.prototype.showMoveBtnContainer = () => moveBtnContainer.style.display = `inline-flex`;
+    Hud.prototype.hideMoveBtnContainer = () => moveBtnContainer.style.display = `none`;
+
+
 
 
 
