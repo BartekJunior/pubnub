@@ -89,18 +89,34 @@ class Hex {
       else if (x === 5) return `plain`;
     };
 
-    this.getLand = () => {
-      hexArea.forEach((el) => {
-        if (el.includes(this.id)) {
-          el.forEach((el) => {
-            el.hex.land = this.chooseLand();
-            el.hex.vis = true;
-            el.classList.add(`class-${el.hex.land}`);
-            el.hex.checkResource();
-            el.hex.checkCollectible();
-          });
+    Hex.prototype.rotateArea = () => {
+      drawedLandArr = [
+        drawedLandArr[3],
+        drawedLandArr[2],
+        drawedLandArr[1],
+        drawedLandArr[0],
+      ];
+      // console.log(drawedLandArr);
+      hexRotate.forEach((el) => {
+        while (el.classList.length > 1) {
+          el.classList.remove(el.classList.item(1)); // Remove the class at index 1 (second class)
         }
       });
+
+      for (let i = 0; i < hexRotate.length; i++) {
+        hexRotate[i].classList.add(`class-` + drawedLandArr[i]);
+      }
+    };
+
+
+    Hex.prototype.getLand = () => {
+      for (let i = 0; i < exploredArea.length; i++) {
+        exploredArea[i].hex.land = drawedLandArr[i];
+        exploredArea[i].hex.vis = true;
+        exploredArea[i].classList.add(`class-${exploredArea[i].hex.land}`);
+        exploredArea[i].hex.checkResource();
+        exploredArea[i].hex.checkCollectible();
+      }
     };
 
     this.createSmall(); //Fires after hex begin. Create 9 small divs inside big Hex.

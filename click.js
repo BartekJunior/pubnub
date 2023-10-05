@@ -240,83 +240,28 @@ hexAll.forEach((el) => {
 // MMMMMMOOOOOOOOOOOOVVVVVVVVVVVEEEEEEEEEEEEEEEEEE //
 // EEEEEEEEEEEEEEEENNNNNNNNNNNNNDDDDDDDDDDDDDDDDDD //
 
-
 const hexRotate = Array.from(document.querySelectorAll(`.hex-rotate`));
-let clickedArea;
+let exploredArea;
 let drawedLandArr = [];
 
 hexAll.forEach((el) =>
   el.addEventListener(`click`, function () {
     hexArea.forEach((area, index) => {
       if (area.includes(el)) {
-        clickedArea = hexArea[index];
-        console.log(clickedArea);
+        exploredArea = hexArea[index];
+        console.log(exploredArea);
       }
     });
-
     for (let i = 0; i < hexRotate.length; i++) {
       drawedLandArr[i] = Hex.prototype.chooseLand();
       hexRotate[i].classList.add(`class-` + drawedLandArr[i]);
     }
   })
 );
-
-const rotateArea = function () {
-  drawedLandArr = [
-    drawedLandArr[3],
-    drawedLandArr[2],
-    drawedLandArr[1],
-    drawedLandArr[0],
-  ];
-  console.log(drawedLandArr);
-
-  hexRotate.forEach((el) => {
-    while (el.classList.length > 1) {
-      el.classList.remove(el.classList.item(1)); // Remove the class at index 1 (second class)
-    }
-  });
-  for (let i = 0; i < hexRotate.length; i++) {
-    hexRotate[i].classList.add(`class-` + drawedLandArr[i]);
-  }
-};
+rotateBtn.addEventListener(`click`, Hex.prototype.rotateArea);
+exploreBtn.addEventListener(`click`, Hex.prototype.getLand);
 
 
-rotateBtn.addEventListener(`click`, rotateArea);
-
-exploreBtn.addEventListener(`click`, function() {
-  for (let i = 0; i < clickedArea.length; i++) {
-    
-
-  }
-});
-
-
-
-// hexAll.forEach(el => el.addEventListener(`click`, el.hex.getLand))
-
-
-
-
-
-
-
-// hexAll.forEach((el) =>
-//   el.addEventListener(`click`, function () {
-//     el.hex.getLand();
-//     hexArea.forEach((area, index) => {
-//       if (area.includes(el)) {
-//         clickedArea = hexArea[index];
-//         // console.log(clickedArea);
-
-//         for (let i = 0; i < clickedArea.length; i++) {
-//           hexRotate[i].hex = clickedArea[i].hex;
-//           hexRotate[i].classList.add(`class-${hexRotate[i].hex.land}`);
-//           console.log(hexRotate[i].hex.land);
-//         }
-//       }
-//     });
-//   })
-// );
 
 // ----- show/hide hudTown  ----- //
 hexAll.forEach((el) => {
