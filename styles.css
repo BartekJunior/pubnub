@@ -2,15 +2,6 @@ body {
   background-color: aquamarine;
 }
 
-#firstDiv {
-  background-color: azure;
-  width: 300px;
-  height: 90px;
-
-  display: inline-block;
-}
-
-
 body {
   background-color: azure;
   padding-top: 50px;
@@ -29,7 +20,6 @@ body {
   /* Non-prefixed version, currently
       supported by Chrome and Opera */
 }
-
 
 #endTurn {
   display: none;
@@ -134,9 +124,8 @@ h2 {
 .explore-btn {
   width: 150px;
   height: 60px;
-  font-size: 20px
+  font-size: 20px;
 }
-
 
 .hex:hover {
   opacity: 0.3;
@@ -287,16 +276,11 @@ h2 {
   background-image: url(./img/merchantblue.png);
 }
 
-
-
-
-
-
 /* ------------ Structure Images ----------------- */
 .fortress {
   background-image: url(./img/fortress.png);
   background-repeat: no-repeat;
-  background-position:center;
+  background-position: center;
   background-size: 100%;
   /* position: relative; */
 }
@@ -304,7 +288,7 @@ h2 {
 .academy {
   background-image: url(./img/academy.png);
   background-repeat: no-repeat;
-  background-position:center;
+  background-position: center;
   background-size: 100%;
   /* position: relative; */
 }
@@ -312,7 +296,7 @@ h2 {
 .port {
   background-image: url(./img/port.png);
   background-repeat: no-repeat;
-  background-position:center;
+  background-position: center;
   background-size: 100%;
   /* position: relative; */
 }
@@ -320,7 +304,7 @@ h2 {
 .market {
   background-image: url(./img/market.png);
   background-repeat: no-repeat;
-  background-position:center;
+  background-position: center;
   background-size: 100%;
   /* position: relative; */
 }
@@ -328,7 +312,7 @@ h2 {
 .obelisk {
   background-image: url(./img/obelisk.png);
   background-repeat: no-repeat;
-  background-position:center;
+  background-position: center;
   background-size: 100%;
   /* position: relative; */
 }
@@ -336,7 +320,7 @@ h2 {
 .temple {
   background-image: url(./img/temple.png);
   background-repeat: no-repeat;
-  background-position:center;
+  background-position: center;
   background-size: 100%;
   /* position: relative; */
 }
@@ -344,11 +328,10 @@ h2 {
 .observatory {
   background-image: url(./img/observatory.png);
   background-repeat: no-repeat;
-  background-position:center;
+  background-position: center;
   background-size: 100%;
   /* position: relative; */
 }
-
 
 /* ------------ HUD Town ----------------- */
 .game-container {
@@ -381,11 +364,13 @@ h2 {
   display: flex;
 }
 
-#confirmCollectBtn, #cancelCollectBtn {
+#confirmCollectBtn,
+#cancelCollectBtn {
   display: none;
 }
 
-#confirmRecruitBtn, #cancelRecruitBtn {
+#confirmRecruitBtn,
+#cancelRecruitBtn {
   display: block;
 }
 
@@ -458,7 +443,9 @@ h2 {
   text-align: center;
 }
 
-.p1-resource-value, .p2-resource-value, .p3-resource-value {
+.p1-resource-value,
+.p2-resource-value,
+.p3-resource-value {
   width: 80px;
   height: 40px;
 }
@@ -477,7 +464,6 @@ h2 {
   height: 40px;
   text-align: center;
 }
-
 
 /* ------------ MAP GAMEPLAY  ----------------- */
 .soldierHex {
@@ -506,12 +492,31 @@ h2 {
   background-color: black;
 }
 
-
 /* ------------ TECHNOLOGY TREE  ----------------- */
+
+#firstDiv {
+  display: inline-block;
+  width: 300px;
+  height: 90px;
+
+  background: linear-gradient(rgba(124, 17, 17, 0.7), rgba(99, 63, 63, 0.3)),
+    url(./img/oldPaper90.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+}
+
+
+
 .tech-global {
   max-width: 90%;
   padding: 20px;
-  border: 3px solid rgb(97, 25, 25);
+  /* border: 3px solid rgb(97, 25, 25); */
+  background-image: url(./img/oldPaper90.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
 }
 
 .tech-tree-title {
@@ -519,11 +524,15 @@ h2 {
 }
 
 .res {
+  width: 12%;
+  height: 110px;
+  border-right: 3px black solid;
   font-size: 45px;
   font-weight: 700;
-  color: rgb(100, 87, 82);
+  color: rgb(199, 199, 199);
   text-align: center;
 }
+
 
 .event-global {
   display: flex;
@@ -538,7 +547,7 @@ h2 {
   width: 30px;
   height: 30px;
   background-color: #2984b9;
-  transform:rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .event-item-left {
@@ -554,8 +563,11 @@ h2 {
 .tech-resource {
   display: flex;
   justify-content: center;
-  background-color: rgba(86, 33, 25, 0.93);
-background-image: linear-gradient(177deg, rgba(86, 33, 25, 0.93) 0%, rgba(35, 21, 13, 0.97) 51%, rgba(105, 32, 27, 0.92) 100%);
+  background: linear-gradient(
+    17deg,
+    rgba(128, 110, 110, 0.7),
+    rgba(0, 0, 0, 0.568)
+  );
 }
 
 .row {
@@ -587,11 +599,7 @@ background-image: linear-gradient(177deg, rgba(86, 33, 25, 0.93) 0%, rgba(35, 21
   font-size: 14px;
 }
 
-.res {
-  width: 12%;
-  height: 110px;
-  border: 5px black solid;
-}
+
 
 .tech-btn {
   width: 40px;
@@ -599,10 +607,6 @@ background-image: linear-gradient(177deg, rgba(86, 33, 25, 0.93) 0%, rgba(35, 21
   margin-top: 30px;
   background-color: #9edb9e;
 }
-
-
-
-
 
 /* ------------ TEST  ----------------- */
 .divGrid {
