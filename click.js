@@ -119,6 +119,52 @@ hexAll.forEach((el, index) =>
   })
 );
 
+// ----- show/hide HUDTOWN  ----- //
+hexAll.forEach((el) => {
+  el.addEventListener(`click`, function () {
+    if (el.town && el.town.player === UUID) {
+      // if (town) town.id.hex.collectible = false;
+      town = el.town;
+      town.showHudTown();
+      town.checkBuildedStructure();
+    } else if (town && !el.possibleResource && clickedRes.length) {
+      alert(`Dokończ zbieranie surowców`);
+    } else if (town && !el.possibleResource && !clickedRes.length) {
+      hexAll.forEach((el) => {
+        if (el.possibleResource) el.possibleResource.deletePossibleResource();
+        town.id.hex.collectible = false;
+      });
+      town.hideHudTown();
+      town.hideContainerStructure();
+      town.hideContainerRecruit();
+      town.hideConfirmCollectBtn();
+      town.hideCancelCollectBtn();
+      town = undefined;
+    }
+  });
+});
+
+// ----- show TROOPS and MERCHANT HUD  ----- //
+hexAll.forEach((el) => {
+  el.addEventListener(`click`, function () {
+    if (el.troops) {
+      Troops.prototype.hideHudTroops();
+      el.troops.showHudTroops();
+      troopsPosition = el;
+    } else if (selectedSoldiers.length > 0 && !el.possibleMove) {
+      alert(`Dokończ ruch jednostek albo Anuluj ruch`);
+    } else {
+      Troops.prototype.hideHudTroops();
+    }
+
+    if (el.troops && el.troops.soldiers.some((el) => el.type === `merchant`)) {
+      Hud.prototype.showHudMerchant();
+    } else {
+      Hud.prototype.hideHudMerchant();
+    }
+  });
+});
+
 // MMMMMMOOOOOOOOOOOOVVVVVVVVVVVEEEEEEEEEEEEEEEEEE //
 // MMMMMMOOOOOOOOOOOOVVVVVVVVVVVEEEEEEEEEEEEEEEEEE //
 startMoveBtn.addEventListener(`click`, function () {
@@ -166,6 +212,8 @@ hexAll.forEach((el) => {
     if (el.possibleMove) {
       if (!el.hex.vis) {
         Hud.prototype.showRotateHud();
+        Troops.prototype.hideHudTroops();
+
 
         hexArea.forEach((area, index) => {
           if (area.includes(el)) {
@@ -183,6 +231,7 @@ hexAll.forEach((el) => {
         el.troops = new Troops(UUID, el, window[`player` + UUID].color);
         console.log(`troops made`);
       }
+
       if (
         selectedSoldiers.filter((el) => el.type !== `merchant`).length +
           el.troops.size >
@@ -238,17 +287,17 @@ hexAll.forEach((el) => {
             `Poruszyłeś pierwszą grupę, w tej Akcji Ruchu możesz poruszyć jeszcze dwie. Jeśli chcesz zakończyć Akcję Ruchu, kliknij "Zakończ Akcję Ruchu"`
           );
 
-         if (moveCounter === 2) 
+        if (moveCounter === 2)
           alert(
             `Poruszyłeś drugą grupę, w tej Akcji Ruchu możesz poruszyć jeszcze jedną. Jeśli chcesz zakończyć Akcję Ruchu, kliknij "Zakończ Akcję Ruchu"`
           );
 
-          if (moveCounter === 1 || moveCounter === 2) {
-            confirmGroupBtn.disabled = true;
-            startMoveBtn.textContent = `Kontynuuj akcje ruchu`;
-          }
+        if (moveCounter === 1 || moveCounter === 2) {
+          confirmGroupBtn.disabled = true;
+          startMoveBtn.textContent = `Kontynuuj akcje ruchu`;
+        }
 
-         if (moveCounter === 3) {
+        if (moveCounter === 3) {
           alert(
             `Poruszyłeś trzecia grupę, w tej Akcji Ruchu nie możesz już poruszyć wojsk. Kliknij "Zakończ Akcję Ruchu"`
           );
@@ -256,58 +305,13 @@ hexAll.forEach((el) => {
           confirmGroupBtn.disabled = true;
           cancelMoveBtn.disabled = true;
         }
+
       }
     }
   });
 });
 // MMMMMMOOOOOOOOOOOOVVVVVVVVVVVEEEEEEEEEEEEEEEEEE //
 // EEEEEEEEEEEEEEEENNNNNNNNNNNNNDDDDDDDDDDDDDDDDDD //
-
-// ----- show/hide HUDTOWN  ----- //
-hexAll.forEach((el) => {
-  el.addEventListener(`click`, function () {
-    if (el.town && el.town.player === UUID) {
-      // if (town) town.id.hex.collectible = false;
-      town = el.town;
-      town.showHudTown();
-      town.checkBuildedStructure();
-    } else if (town && !el.possibleResource && clickedRes.length) {
-      alert(`Dokończ zbieranie surowców`);
-    } else if (town && !el.possibleResource && !clickedRes.length) {
-      hexAll.forEach((el) => {
-        if (el.possibleResource) el.possibleResource.deletePossibleResource();
-        town.id.hex.collectible = false;
-      });
-      town.hideHudTown();
-      town.hideContainerStructure();
-      town.hideContainerRecruit();
-      town.hideConfirmCollectBtn();
-      town.hideCancelCollectBtn();
-      town = undefined;
-    }
-  });
-});
-
-// ----- show TROOPS and MERCHANT HUD  ----- //
-hexAll.forEach((el) => {
-  el.addEventListener(`click`, function () {
-    if (el.troops) {
-      Troops.prototype.hideHudTroops();
-      el.troops.showHudTroops();
-      troopsPosition = el;
-    } else if (selectedSoldiers.length > 0 && !el.possibleMove) {
-      alert(`Dokończ ruch jednostek albo Anuluj ruch`);
-    } else {
-      Troops.prototype.hideHudTroops();
-    }
-
-    if (el.troops && el.troops.soldiers.some((el) => el.type === `merchant`)) {
-      Hud.prototype.showHudMerchant();
-    } else {
-      Hud.prototype.hideHudMerchant();
-    }
-  });
-});
 
 // settle Town and build structures //
 settleBtn.addEventListener(`click`, function () {
