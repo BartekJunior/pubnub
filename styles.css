@@ -507,11 +507,10 @@ h2 {
   color: white;
 }
 
-
-
 .tech-global {
+  display: none;
   max-width: 90%;
-  padding: 20px;
+  padding: 30px;
   /* border: 3px solid rgb(97, 25, 25); */
   background-image: url(./img/paperNew90.jpg);
   background-repeat: no-repeat;
@@ -532,7 +531,6 @@ h2 {
   color: rgb(199, 199, 199);
   text-align: center;
 }
-
 
 .event-global {
   display: flex;
@@ -570,7 +568,7 @@ h2 {
   );
 }
 
-.row {
+.tech-row {
   margin: 0;
 }
 
@@ -580,7 +578,7 @@ h2 {
 
 .tech-card {
   padding: 0 5px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 .tech-title {
@@ -598,8 +596,6 @@ h2 {
 .tech-info > p {
   font-size: 14px;
 }
-
-
 
 .tech-btn {
   width: 40px;
