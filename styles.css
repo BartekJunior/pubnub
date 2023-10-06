@@ -509,30 +509,69 @@ h2 {
 
 /* ------------ TECHNOLOGY TREE  ----------------- */
 .tech-global {
-  max-width: 85%;
+  max-width: 90%;
+  padding: 20px;
+  border: 3px solid rgb(97, 25, 25);
+}
+
+.tech-tree-title {
+  text-align: center;
 }
 
 .res {
   font-size: 45px;
   font-weight: 700;
+  color: rgb(100, 87, 82);
   text-align: center;
 }
 
 .event-global {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
   width: 10%;
-  background-color: aqua;
+  /* background-color: aqua; */
+}
+
+.event-item {
+  width: 30px;
+  height: 30px;
+  background-color: #2984b9;
+  transform:rotate(45deg);
+}
+
+.event-item-left {
+  margin-left: 20%;
+  margin-right: auto;
+}
+
+.event-item-right {
+  margin-right: 30%;
+  margin-left: auto;
 }
 
 .tech-resource {
   display: flex;
   justify-content: center;
+  background-color: rgba(86, 33, 25, 0.93);
+background-image: linear-gradient(177deg, rgba(86, 33, 25, 0.93) 0%, rgba(35, 21, 13, 0.97) 51%, rgba(105, 32, 27, 0.92) 100%);
+}
+
+.row {
+  margin: 0;
 }
 
 .tech-container {
   display: flex;
 }
 
-.tech-name {
+.tech-card {
+  padding: 0 5px;
+  border: 3px solid black;
+}
+
+.tech-title {
   margin: 0;
   text-align: center;
 }
@@ -550,8 +589,7 @@ h2 {
 
 .res {
   width: 12%;
-  height: 80px;
-  background-color: #5a4545;
+  height: 110px;
   border: 5px black solid;
 }
 
