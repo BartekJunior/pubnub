@@ -119,15 +119,6 @@ hexAll.forEach((el, index) =>
   })
 );
 
-// Show HudMerchant
-hexAll.forEach((el) =>
-  el.addEventListener(`click`, function (e) {
-    if (el.troops && el.troops.soldiers.some((el) => el.type === `merchant`))
-      Hud.prototype.showHudMerchant();
-    else Hud.prototype.hideHudMerchant();
-  })
-);
-
 // MMMMMMOOOOOOOOOOOOVVVVVVVVVVVEEEEEEEEEEEEEEEEEE //
 // MMMMMMOOOOOOOOOOOOVVVVVVVVVVVEEEEEEEEEEEEEEEEEE //
 startMoveBtn.addEventListener(`click`, function () {
@@ -141,9 +132,10 @@ confirmGroupBtn.addEventListener("click", () => {
 
 confirmMoveBtn.addEventListener("click", function () {
   startMoveBtn.disabled = false;
-  confirmGroupBtn.disabled = false;
-  confirmMoveBtn.disabled = false;
+  confirmGroupBtn.disabled = true;
+  confirmMoveBtn.disabled = true;
   cancelMoveBtn.disabled = false;
+  Troops.prototype.hideHudTroops();
   moveCounter = 0;
   player.action--;
   window[`p` + player.nr + `ActionValue`].textContent = player.action;
@@ -157,7 +149,6 @@ cancelMoveBtn.addEventListener("click", function () {
   console.log("Move canceled");
 });
 
-
 const hexRotate = Array.from(document.querySelectorAll(`.hex-rotate`));
 let exploredArea;
 let drawedLandArr = [];
@@ -165,16 +156,14 @@ let drawedLandArr = [];
 rotateBtn.addEventListener(`click`, Hex.prototype.rotateArea);
 exploreBtn.addEventListener(`click`, Hex.prototype.getLand);
 
-
 // Click PossibleMove to move Troops, includes Groups, explore the map
 let moveCounter = 0;
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
-
     if (el.possibleMove) {
-
       if (!el.hex.vis) {
         Hud.prototype.showRotateHud();
+
         hexArea.forEach((area, index) => {
           if (area.includes(el)) {
             exploredArea = hexArea[index];
@@ -292,7 +281,7 @@ hexAll.forEach((el) => {
 //END Rotate discovered Area END //
 
 
-// ----- show/hide hudTown  ----- //
+// ----- show/hide HUDTOWN  ----- //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     if (el.town && el.town.player === UUID) {
@@ -317,25 +306,38 @@ hexAll.forEach((el) => {
   });
 });
 
-// ----- show Troops  ----- //
+// ----- show TROOPS and MERCHANT HUD  ----- //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     if (el.troops) {
       Troops.prototype.hideHudTroops();
       el.troops.showHudTroops();
       troopsPosition = el;
-      Hud.prototype.showMoveBtnContainer();
+
     } else if (selectedSoldiers.length > 0 && !el.possibleMove) {
       alert(`Dokończ ruch jednostek albo Anuluj ruch`);
     } else {
       Troops.prototype.hideHudTroops();
-      Hud.prototype.hideMoveBtnContainer();
     }
+
+    if (el.troops && el.troops.soldiers.some((el) => el.type === `merchant`)) {
+      Hud.prototype.showHudMerchant();
+    } else {
+      Hud.prototype.hideHudMerchant();
+    }
+
   });
 });
 
 
-
+// Show HudMerchant
+// hexAll.forEach((el) =>
+//   el.addEventListener(`click`, function (e) {
+//     if (el.troops && el.troops.soldiers.some((el) => el.type === `merchant`))
+//       Hud.prototype.showHudMerchant();
+//     else Hud.prototype.hideHudMerchant();
+//   })
+// );
 
 // settle Town and build structures //
 settleBtn.addEventListener(`click`, function () {
@@ -418,8 +420,6 @@ cavalryBtn.addEventListener(`click`, function () {
 elephantBtn.addEventListener(`click`, function () {
   town.recruitTempSoldier(`elephant`);
 });
-
-
 
 //----------- COLLECTING RESOURCE -----------//
 //click Collect resource. Start collecting //
@@ -651,24 +651,6 @@ const paintTown = () => {
     }
   });
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 startGame.addEventListener(`click`, () => {
   startGame.style.display = `none`;

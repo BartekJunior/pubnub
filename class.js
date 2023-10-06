@@ -389,6 +389,7 @@ class Troops {
           el.remove();
         });
       });
+      Hud.prototype.hideMoveBtnContainer();
     };
 
     this.showHudTroops = () => {
@@ -422,6 +423,8 @@ class Troops {
           merchantRecruited.appendChild(newMerchant);
         }
       }
+      Hud.prototype.showMoveBtnContainer();
+
     };
 
     this.deleteTroops = () => {
