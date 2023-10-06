@@ -513,10 +513,10 @@ h2 {
   max-width: 90%;
   padding: 20px;
   /* border: 3px solid rgb(97, 25, 25); */
-  background-image: url(./img/oldPaper90.jpg);
+  background-image: url(./img/paperNew90.jpg);
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 100%;
+  background-size: 100% 100%;
 }
 
 .tech-tree-title {
@@ -580,7 +580,7 @@ h2 {
 
 .tech-card {
   padding: 0 5px;
-  border: 3px solid black;
+  border: 1px solid black;
 }
 
 .tech-title {
