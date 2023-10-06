@@ -120,7 +120,7 @@ class Hex {
           el.classList.remove(el.classList.item(1)); // Remove the class at index 1 (second class)
         }
       });
-    }
+    };
 
     this.createSmall(); //Fires after hex begin. Create 9 small divs inside big Hex.
   }
@@ -251,6 +251,7 @@ class Town {
         // this.id.troops.showSoldierHex();
         Troops.prototype.hideHudTroops();
         this.id.troops.showHudTroops();
+        Hud.prototype.showMoveBtnContainer();
         this.updateRecruitNr();
       } else
         alert(
@@ -323,11 +324,6 @@ class Merchant {
 
     const merchantClass = `merchant${this.color}`;
 
-    Merchant.prototype.showHudMerchant = () =>
-      (hudMerchant.style.display = `block`);
-    Merchant.prototype.hideHudMerchant = () =>
-      (hudMerchant.style.display = `none`);
-
     this.deleteMerchant = () => {
       if (
         this.id.troops.soldiers &&
@@ -360,10 +356,12 @@ class Merchant {
       this.id.childNodes[4].classList.add(`town${this.color}`);
       // this.id.hex.collectible = false;
 
-      this.hideHudMerchant();
+      Hud.prototype.hideHudMerchant();
+      Hud.prototype.hideMoveBtnContainer();
       Troops.prototype.hideHudTroops();
-
       window[`player` + UUID].action--;
+
+      if (!this.id.troops.soldiers.length) this.id.troops.deleteTroops();
     };
   }
 }
@@ -513,8 +511,6 @@ class Troops {
         }
       }
     };
-
-
 
     this.calcSize = function () {
       const fightSoldier = this.soldiers.filter((el) => el.type !== `merchant`);
@@ -684,24 +680,18 @@ class PossibleResource {
   }
 }
 
-
 ///// CLASS POSSIBLERESOURCE /////
 class Hud {
   constructor() {
+    Hud.prototype.showHudMerchant = () => (hudMerchant.style.display = `block`);
+    Hud.prototype.hideHudMerchant = () => (hudMerchant.style.display = `none`);
 
-    Hud.prototype.showRotateHud = () => rotateHud.style.display = `block`;
-    Hud.prototype.hideRotateHud = () => rotateHud.style.display = `none`;
+    Hud.prototype.showRotateHud = () => (rotateHud.style.display = `block`);
+    Hud.prototype.hideRotateHud = () => (rotateHud.style.display = `none`);
 
-    Hud.prototype.showMoveBtnContainer = () => moveBtnContainer.style.display = `inline-flex`;
-    Hud.prototype.hideMoveBtnContainer = () => moveBtnContainer.style.display = `none`;
-
-
-
-
-
-
+    Hud.prototype.showMoveBtnContainer = () =>
+      (moveBtnContainer.style.display = `inline-flex`);
+    Hud.prototype.hideMoveBtnContainer = () =>
+      (moveBtnContainer.style.display = `none`);
   }
-
-
-
 }

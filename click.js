@@ -123,8 +123,8 @@ hexAll.forEach((el, index) =>
 hexAll.forEach((el) =>
   el.addEventListener(`click`, function (e) {
     if (el.troops && el.troops.soldiers.some((el) => el.type === `merchant`))
-      Merchant.prototype.showHudMerchant();
-    else Merchant.prototype.hideHudMerchant();
+      Hud.prototype.showHudMerchant();
+    else Hud.prototype.hideHudMerchant();
   })
 );
 
@@ -651,6 +651,24 @@ const paintTown = () => {
     }
   });
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 startGame.addEventListener(`click`, () => {
   startGame.style.display = `none`;
