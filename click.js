@@ -130,24 +130,37 @@ hexAll.forEach((el) => {
     if (el.town && el.town.player === UUID) {
       // if (town) town.id.hex.collectible = false;
       town = el.town;
+      town.checkBuildedStructure();
       Hud.prototype.showHudTown();
       Hud.prototype.townBtnEnable();
-      town.checkBuildedStructure();
-    } else if (town && !el.possibleResource && clickedRes.length) {
-      alert(`Dokończ zbieranie surowców`);
-    } else if (town && !el.possibleResource && !clickedRes.length) {
-      hexAll.forEach((el) => {
-        if (el.possibleResource) el.possibleResource.deletePossibleResource();
-        town.id.hex.collectible = false;
-      });
+
+
+    } else if (town && !el.possibleResource && containerTempCollect.style.display === `flex`) {
+      alert(`Dokończ zbieranie surowców, albo Anuluj Zbiór`);
+    } 
+    
+    // else if (town && !el.possibleResource && !clickedRes.length) {
+    //   hexAll.forEach((el) => {
+    //     if (el.possibleResource) el.possibleResource.deletePossibleResource();
+    //     town.id.hex.collectible = false;
+    //   });
+    //   Hud.prototype.hideHudTown();
+    //   Hud.prototype.hideContainerStructure();
+    //   Hud.prototype.hideContainerRecruit();
+    //   Hud.prototype.hideContainerTempCollect();
+    //   Hud.prototype.hideConfirmCollectBtn();
+    //   Hud.prototype.hideCancelCollectBtn();
+    //   town = undefined;
+    // }
+
+      else if (!el.town && !el.possibleResource) {
       Hud.prototype.hideHudTown();
       Hud.prototype.hideContainerStructure();
       Hud.prototype.hideContainerRecruit();
-      Hud.prototype.hideContainerTempCollect();
-      Hud.prototype.hideConfirmCollectBtn();
-      Hud.prototype.hideCancelCollectBtn();
       town = undefined;
     }
+
+
   });
 });
 
