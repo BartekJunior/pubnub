@@ -361,6 +361,10 @@ h2 {
 }
 
 .container-temp-collect {
+  display: none;
+}
+
+.container-confirm {
   display: flex;
 }
 

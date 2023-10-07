@@ -146,8 +146,8 @@ class Town {
       observatory: false,
     };
 
-    this.showHudTown = () => (hudTown.style.display = `block`);
-    this.hideHudTown = () => (hudTown.style.display = `none`);
+    // this.showHudTown = () => (hudTown.style.display = `block`);
+    // this.hideHudTown = () => (hudTown.style.display = `none`);
 
     this.hideConfirmCollectBtn = () =>
       (confirmCollectBtn.style.display = `none`);
@@ -424,7 +424,6 @@ class Troops {
         }
       }
       Hud.prototype.showMoveBtnContainer();
-
     };
 
     this.deleteTroops = () => {
@@ -626,14 +625,16 @@ class PossibleResource {
       delete this.id.possibleResource;
     };
 
-    this.showConfirmCollectBtn = () =>
-      (confirmCollectBtn.style.display = `block`);
-    this.hideConfirmCollectBtn = () =>
-      (confirmCollectBtn.style.display = `none`);
+    // this.showConfirmCollectBtn = () =>
+    //   (confirmCollectBtn.style.display = `block`);
+    // this.hideConfirmCollectBtn = () =>
+    //   (confirmCollectBtn.style.display = `none`);
 
-    this.showCancelCollectBtn = () =>
-      (cancelCollectBtn.style.display = `block`);
-    this.hideCancelCollectBtn = () => (cancelCollectBtn.style.display = `none`);
+    // this.showCancelCollectBtn = () =>
+    //   (cancelCollectBtn.style.display = `block`);
+    // this.hideCancelCollectBtn = () => (cancelCollectBtn.style.display = `none`);
+
+
 
     this.showTempResource = () => {
       if (clickedRes[clickedRes.length - 1] === `food`) tempResource.food++;
@@ -657,8 +658,8 @@ class PossibleResource {
       if (this.id.possibleResource && clickedRes.length < town.size) {
         if (this.id.hex.collectible && !this.collected) {
           clickedRes.push(this.id.possibleResource.resource);
-          this.id.possibleResource.showConfirmCollectBtn();
-          this.id.possibleResource.showCancelCollectBtn();
+          Hud.prototype.showConfirmCollectBtn();
+          Hud.prototype.showCancelCollectBtn();
           this.id.possibleResource.showTempResource();
           console.log(clickedRes);
           this.collected = true;
@@ -683,18 +684,42 @@ class PossibleResource {
   }
 }
 
-///// CLASS POSSIBLERESOURCE /////
+///// CLASS HUD /////
 class Hud {
   constructor() {
+    // Merchant
     Hud.prototype.showHudMerchant = () => (hudMerchant.style.display = `block`);
     Hud.prototype.hideHudMerchant = () => (hudMerchant.style.display = `none`);
 
+    // Town
+    Hud.prototype.showHudTown = () => (hudTown.style.display = `block`);
+    Hud.prototype.hideHudTown = () => (hudTown.style.display = `none`);
+
+    // Rotate Area
     Hud.prototype.showRotateHud = () => (rotateHud.style.display = `block`);
     Hud.prototype.hideRotateHud = () => (rotateHud.style.display = `none`);
 
+    // Move Btn container
     Hud.prototype.showMoveBtnContainer = () =>
       (moveBtnContainer.style.display = `inline-flex`);
     Hud.prototype.hideMoveBtnContainer = () =>
       (moveBtnContainer.style.display = `none`);
+
+    // COLLECT //
+    // ContainerTempCollect
+    Hud.prototype.showContainerTempCollect = () =>
+      (containerTempCollect.style.display = `flex`);
+    Hud.prototype.hideContainerTempCollect = () =>
+      (containerTempCollect.style.display = `none`);
+
+    // Confirm and Cancel Collect
+    Hud.prototype.showConfirmCollectBtn = () =>
+      (confirmCollectBtn.style.display = `block`);
+    Hud.prototype.hideConfirmCollectBtn = () =>
+      (confirmCollectBtn.style.display = `none`);
+    Hud.prototype.showCancelCollectBtn = () =>
+      (cancelCollectBtn.style.display = `block`);
+    Hud.prototype.hideCancelCollectBtn = () =>
+      (cancelCollectBtn.style.display = `none`);
   }
 }

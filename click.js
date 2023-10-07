@@ -35,9 +35,12 @@ const containerStructure = document.getElementById(`containerStructure`);
 const containerRecruit = document.getElementById(`containerRecruit`);
 
 const buildStructure = document.getElementById(`buildStructure`);
+
 const collectResourceBtn = document.getElementById(`collectResourceBtn`);
 const recruitBtn = document.getElementById(`recruitBtn`);
 
+
+const containerTempCollect = document.querySelector(`.container-temp-collect`)
 const confirmCollectBtn = document.getElementById(`confirmCollectBtn`);
 const cancelCollectBtn = document.getElementById(`cancelCollectBtn`);
 
@@ -125,7 +128,7 @@ hexAll.forEach((el) => {
     if (el.town && el.town.player === UUID) {
       // if (town) town.id.hex.collectible = false;
       town = el.town;
-      town.showHudTown();
+      Hud.prototype.showHudTown();
       town.checkBuildedStructure();
     } else if (town && !el.possibleResource && clickedRes.length) {
       alert(`Dokończ zbieranie surowców`);
@@ -134,11 +137,12 @@ hexAll.forEach((el) => {
         if (el.possibleResource) el.possibleResource.deletePossibleResource();
         town.id.hex.collectible = false;
       });
-      town.hideHudTown();
+      Hud.prototype.hideHudTown();
       town.hideContainerStructure();
       town.hideContainerRecruit();
-      town.hideConfirmCollectBtn();
-      town.hideCancelCollectBtn();
+      Hud.prototype.hideContainerTempCollect();
+      Hud.prototype.hideConfirmCollectBtn();
+      Hud.prototype.hideCancelCollectBtn();
       town = undefined;
     }
   });
@@ -213,7 +217,6 @@ hexAll.forEach((el) => {
       if (!el.hex.vis) {
         Hud.prototype.showRotateHud();
         Troops.prototype.hideHudTroops();
-
 
         hexArea.forEach((area, index) => {
           if (area.includes(el)) {
@@ -400,6 +403,9 @@ elephantBtn.addEventListener(`click`, function () {
 collectResourceBtn.addEventListener(`click`, function () {
   town.hideContainerStructure();
   town.possibleResource();
+  Hud.prototype.showContainerTempCollect();
+  Hud.prototype.showCancelCollectBtn();
+
 });
 
 let clickedRes = [];
@@ -412,7 +418,9 @@ hexAll.forEach((el) => {
 // Update GlobalResource. Last stage of collect
 confirmCollectBtn.addEventListener(`click`, function () {
   town.updateGlobalResource();
-  town.hideConfirmCollectBtn();
+  Hud.prototype.hideContainerTempCollect();
+  Hud.prototype.hideConfirmCollectBtn();
+  Hud.prototype.hideCancelCollectBtn();
   window[`player` + UUID].action--;
   window[`p` + player.nr + `ActionValue`].textContent = player.action;
 });
@@ -426,8 +434,10 @@ cancelCollectBtn.addEventListener(`click`, function () {
       el.possibleResource.deletePossibleResource();
     }
   });
-  town.hideConfirmCollectBtn();
-  town.hideCancelCollectBtn();
+
+  Hud.prototype.hideContainerTempCollect();  
+  Hud.prototype.hideConfirmCollectBtn();
+  Hud.prototype.hideCancelCollectBtn();
 });
 
 // --------------- DISABLE CLICKS ---------------- //
@@ -465,7 +475,7 @@ const checkAction = function () {
     clearInterval(turnInterval);
     alert(`Twoja tura sie zakonczyla, click end turn`);
     if (town) {
-      town.hideHudTown();
+      Hud.prototype.hideHudTown();
     }
     endTurn.style.display = `block`;
   }
