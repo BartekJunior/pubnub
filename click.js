@@ -34,10 +34,10 @@ const hudTown = document.querySelector(`.hud-town`);
 const containerStructure = document.getElementById(`containerStructure`);
 const containerRecruit = document.getElementById(`containerRecruit`);
 
-const buildStructure = document.getElementById(`buildStructure`);
-
 const collectResourceBtn = document.getElementById(`collectResourceBtn`);
+const buildStructureBtn = document.getElementById(`buildStructureBtn`);
 const recruitBtn = document.getElementById(`recruitBtn`);
+const burnTownBtn = document.getElementById(`burnTownBtn`);
 
 
 const containerTempCollect = document.querySelector(`.container-temp-collect`)
@@ -131,6 +131,7 @@ hexAll.forEach((el) => {
       // if (town) town.id.hex.collectible = false;
       town = el.town;
       Hud.prototype.showHudTown();
+      Hud.prototype.townBtnEnable();
       town.checkBuildedStructure();
     } else if (town && !el.possibleResource && clickedRes.length) {
       alert(`Dokończ zbieranie surowców`);
@@ -176,7 +177,8 @@ hexAll.forEach((el) => {
 startMoveBtn.addEventListener(`click`, function () {
   Troops.prototype.startMoveBtn();
   Troops.prototype.soldiersHud();
-  Hud.prototype.hideHudMerchant();
+  settleBtn.disabled = true;
+  Hud.prototype.townBtnDisable();
 });
 
 confirmGroupBtn.addEventListener("click", () => {
@@ -188,9 +190,11 @@ confirmMoveBtn.addEventListener("click", function () {
   confirmGroupBtn.disabled = true;
   confirmMoveBtn.disabled = true;
   cancelMoveBtn.disabled = false;
+  settleBtn.disabled = false;
   startMoveBtn.textContent = `Rozpocznij Akcję Ruchu`;
   Troops.prototype.hideHudTroops();
   Hud.prototype.hideHudMerchant();
+  Hud.prototype.townBtnEnable();
   moveCounter = 0;
   player.action--;
   window[`p` + player.nr + `ActionValue`].textContent = player.action;
@@ -273,6 +277,8 @@ hexAll.forEach((el) => {
         troopsPosition.troops.calcSize();
         PossibleMove.prototype.deletePossibleMove();
 
+        // Hud.prototype.hideHudTown();
+
         if (troopsPosition.troops.soldiers.length === 0) {
           //move whole group, delete troops
           troopsPosition.troops.deleteTroops();
@@ -311,6 +317,10 @@ hexAll.forEach((el) => {
           cancelMoveBtn.disabled = true;
         }
 
+        if (!moveCounter) {
+
+        }
+
       }
     }
   });
@@ -328,7 +338,7 @@ settleBtn.addEventListener(`click`, function () {
   window[`p` + player.nr + `ActionValue`].textContent = player.action;
 });
 
-buildStructure.addEventListener(`click`, function () {
+buildStructureBtn.addEventListener(`click`, function () {
   Hud.prototype.showContainerStructure();
 });
 
@@ -405,9 +415,9 @@ elephantBtn.addEventListener(`click`, function () {
 collectResourceBtn.addEventListener(`click`, function () {
   // Hud.prototype.hideContainerStructure();
   town.possibleResource();
+  Hud.prototype.townBtnDisable();
   Hud.prototype.showContainerTempCollect();
   Hud.prototype.showCancelCollectBtn();
-
 });
 
 let clickedRes = [];
@@ -423,6 +433,7 @@ confirmCollectBtn.addEventListener(`click`, function () {
   Hud.prototype.hideContainerTempCollect();
   Hud.prototype.hideConfirmCollectBtn();
   Hud.prototype.hideCancelCollectBtn();
+  Hud.prototype.townBtnEnable();
   window[`player` + UUID].action--;
   window[`p` + player.nr + `ActionValue`].textContent = player.action;
 });
@@ -437,6 +448,7 @@ cancelCollectBtn.addEventListener(`click`, function () {
     }
   });
 
+  Hud.prototype.townBtnEnable();
   Hud.prototype.hideContainerTempCollect();  
   Hud.prototype.hideConfirmCollectBtn();
   Hud.prototype.hideCancelCollectBtn();

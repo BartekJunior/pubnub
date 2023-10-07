@@ -664,6 +664,19 @@ class Hud {
     Hud.prototype.showHudTown = () => (hudTown.style.display = `block`);
     Hud.prototype.hideHudTown = () => (hudTown.style.display = `none`);
 
+    Hud.prototype.townBtnDisable = () => {
+      collectResourceBtn.disabled = true;
+      buildStructureBtn.disabled = true;
+      recruitBtn.disabled = true;
+      burnTownBtn.disabled = true;
+    }
+    Hud.prototype.townBtnEnable = () => {
+      collectResourceBtn.disabled = false;
+      buildStructureBtn.disabled = false;
+      recruitBtn.disabled = false;
+      burnTownBtn.disabled = false;
+    }
+
     // COLLECT //
     // ContainerTempCollect
     Hud.prototype.showContainerTempCollect = () =>
