@@ -52,6 +52,8 @@ const marketBtn = document.getElementById(`marketBtn`);
 const obeliskBtn = document.getElementById(`obeliskBtn`);
 const templeBtn = document.getElementById(`templeBtn`);
 const observatoryBtn = document.getElementById(`observatoryBtn`);
+const cancelBuild = document.getElementById(`cancelBuild`);
+
 
 // troops buttons
 const merchantBtn = document.getElementById(`merchantBtn`);
@@ -138,8 +140,8 @@ hexAll.forEach((el) => {
         town.id.hex.collectible = false;
       });
       Hud.prototype.hideHudTown();
-      town.hideContainerStructure();
-      town.hideContainerRecruit();
+      Hud.prototype.hideContainerStructure();
+      Hud.prototype.hideContainerRecruit();
       Hud.prototype.hideContainerTempCollect();
       Hud.prototype.hideConfirmCollectBtn();
       Hud.prototype.hideCancelCollectBtn();
@@ -327,7 +329,7 @@ settleBtn.addEventListener(`click`, function () {
 });
 
 buildStructure.addEventListener(`click`, function () {
-  town.showContainerStructure();
+  Hud.prototype.showContainerStructure();
 });
 
 fortressBtn.addEventListener(`click`, function () {
@@ -358,20 +360,27 @@ observatoryBtn.addEventListener(`click`, function () {
   town.buildStructure(`observatory`);
 });
 
+cancelBuild.addEventListener(`click`, function () {
+  Hud.prototype.hideContainerStructure();
+});
+
+
+
 //----------- RECRUITING TROOPS -----------//
 // troops variables
 let tempSoldiers = [];
-// HUD buttons Recruit //
 recruitBtn.addEventListener(`click`, function () {
-  town.showContainerRecruit();
+  Hud.prototype.showContainerRecruit();
 });
 
 confirmRecruitBtn.addEventListener(`click`, function () {
   town.confirmRecruit();
+  Hud.prototype.hideContainerRecruit();
 });
 
 cancelRecruitBtn.addEventListener(`click`, function () {
   town.cancelRecruit();
+  Hud.prototype.hideContainerRecruit();
 });
 
 // Recruiting //
@@ -394,7 +403,7 @@ elephantBtn.addEventListener(`click`, function () {
 //----------- COLLECTING RESOURCE -----------//
 //click Collect resource. Start collecting //
 collectResourceBtn.addEventListener(`click`, function () {
-  town.hideContainerStructure();
+  // Hud.prototype.hideContainerStructure();
   town.possibleResource();
   Hud.prototype.showContainerTempCollect();
   Hud.prototype.showCancelCollectBtn();

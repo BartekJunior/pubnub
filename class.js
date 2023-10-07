@@ -146,16 +146,6 @@ class Town {
       observatory: false,
     };
 
-
-    this.showContainerStructure = () =>
-      (containerStructure.style.display = `block`);
-    this.hideContainerStructure = () =>
-      (containerStructure.style.display = `none`);
-
-    this.showContainerRecruit = () => (containerRecruit.style.display = `flex`);
-    this.hideContainerRecruit = () => (containerRecruit.style.display = `none`);
-
-
     this.checkBuildedStructure = () => {
       for (const key in this.structure) {
         if (this.structure[key] === true) {
@@ -177,10 +167,13 @@ class Town {
 
     this.buildStructure = (building) => {
       if (this.size < 5) {
-        this.id.childNodes[this.structurePlace(building)].classList.add(building);
+        this.id.childNodes[this.structurePlace(building)].classList.add(
+          building
+        );
         this.structure[building] = true;
         this.calcSize();
         Hud.prototype.changeStructureBtn(building, `none`);
+        Hud.prototype.hideContainerStructure();
       } else {
         alert(`W mieście możesz zbudować maksymalnie 4 budynki`);
       }
@@ -247,8 +240,8 @@ class Town {
         this.id.childNodes[8].classList.add(`bg-black`);
         // this.id.troops.showSoldierHex();
         Troops.prototype.hideHudTroops();
-        this.id.troops.showHudTroops();
         Hud.prototype.showMoveBtnContainer();
+        this.id.troops.showHudTroops();
         this.updateRecruitNr();
       } else
         alert(
@@ -319,7 +312,6 @@ class Merchant {
     this.color = color;
     this.num = Troops.prototype.setNumber();
 
-
     this.deleteMerchant = () => {
       if (
         this.id.troops.soldiers &&
@@ -334,30 +326,32 @@ class Merchant {
     };
 
     this.settle = () => {
-      this.id.town = new Town(UUID, this.id, window[`player` + UUID].color);
-      console.log(`town created at hex nr`, this.id);
-      this.deleteMerchant();
+      if (!this.id.town) {
+        this.id.town = new Town(UUID, this.id, window[`player` + UUID].color);
+        console.log(`town created at hex nr`, this.id);
+        this.deleteMerchant();
 
-      // Clear all troopsHex from map when settle Town
-      this.id.childNodes.forEach((el) => {
-        while (el.classList.length > 1) {
-          el.classList.remove(el.classList.item(1)); // Remove the class at index 1 (second class)
-        }
-        if (this.id.troops.soldiers && this.id.troops.soldiers.length > 0) {
-          this.id.childNodes[8].classList.add(`bg-black`);
-        }
-      });
-      console.log(`this.id.troops.soldiers`, this.id.troops.soldiers);
+        // Clear all troopsHex from map when settle Town
+        this.id.childNodes.forEach((el) => {
+          while (el.classList.length > 1) {
+            el.classList.remove(el.classList.item(1)); // Remove the class at index 1 (second class)
+          }
+          if (this.id.troops.soldiers && this.id.troops.soldiers.length > 0) {
+            this.id.childNodes[8].classList.add(`bg-black`);
+          }
+        });
+        console.log(`this.id.troops.soldiers`, this.id.troops.soldiers);
 
-      this.id.childNodes[4].classList.add(`town${this.color}`);
-      // this.id.hex.collectible = false;
+        this.id.childNodes[4].classList.add(`town${this.color}`);
+        // this.id.hex.collectible = false;
 
-      Hud.prototype.hideHudMerchant();
-      Hud.prototype.hideMoveBtnContainer();
-      Troops.prototype.hideHudTroops();
-      window[`player` + UUID].action--;
+        Hud.prototype.hideHudMerchant();
+        Hud.prototype.hideMoveBtnContainer();
+        Troops.prototype.hideHudTroops();
+        window[`player` + UUID].action--;
 
-      if (!this.id.troops.soldiers.length) this.id.troops.deleteTroops();
+        if (!this.id.troops.soldiers.length) this.id.troops.deleteTroops();
+      } else alert(`Państwo w Państwie? Idź się lecz...`);
     };
   }
 }
@@ -540,8 +534,6 @@ class Cavalry {
       id.classList.remove(soldierClass);
       delete this.id.cavalry;
     };
-
-    // this.id.troops.calcSize();
   }
 }
 
@@ -561,8 +553,6 @@ class Infantry {
       id.classList.remove(infantryClass);
       delete this.id.infantry;
     };
-
-    // this.id.troops.calcSize();
   }
 }
 
@@ -582,8 +572,6 @@ class Elephant {
       id.classList.remove(elephantClass);
       delete this.id.elephant;
     };
-
-    // this.id.troops.calcSize();
   }
 }
 
@@ -620,17 +608,6 @@ class PossibleResource {
       id.classList.remove(`possible-collect`);
       delete this.id.possibleResource;
     };
-
-    // this.showConfirmCollectBtn = () =>
-    //   (confirmCollectBtn.style.display = `block`);
-    // this.hideConfirmCollectBtn = () =>
-    //   (confirmCollectBtn.style.display = `none`);
-
-    // this.showCancelCollectBtn = () =>
-    //   (cancelCollectBtn.style.display = `block`);
-    // this.hideCancelCollectBtn = () => (cancelCollectBtn.style.display = `none`);
-
-
 
     this.showTempResource = () => {
       if (clickedRes[clickedRes.length - 1] === `food`) tempResource.food++;
@@ -683,26 +660,9 @@ class PossibleResource {
 ///// CLASS HUD /////
 class Hud {
   constructor() {
-    // Merchant
-    Hud.prototype.showHudMerchant = () => (hudMerchant.style.display = `block`);
-    Hud.prototype.hideHudMerchant = () => (hudMerchant.style.display = `none`);
-
-    // Town
+    // Town fundamental Btns
     Hud.prototype.showHudTown = () => (hudTown.style.display = `block`);
     Hud.prototype.hideHudTown = () => (hudTown.style.display = `none`);
-
-    Hud.prototype.changeStructureBtn = (structure, display) =>
-    (window[structure + `Btn`].style.display = display);
-
-    // Rotate Area
-    Hud.prototype.showRotateHud = () => (rotateHud.style.display = `block`);
-    Hud.prototype.hideRotateHud = () => (rotateHud.style.display = `none`);
-
-    // Move Btn container
-    Hud.prototype.showMoveBtnContainer = () =>
-      (moveBtnContainer.style.display = `inline-flex`);
-    Hud.prototype.hideMoveBtnContainer = () =>
-      (moveBtnContainer.style.display = `none`);
 
     // COLLECT //
     // ContainerTempCollect
@@ -710,7 +670,6 @@ class Hud {
       (containerTempCollect.style.display = `flex`);
     Hud.prototype.hideContainerTempCollect = () =>
       (containerTempCollect.style.display = `none`);
-
     // Confirm and Cancel Collect
     Hud.prototype.showConfirmCollectBtn = () =>
       (confirmCollectBtn.style.display = `block`);
@@ -720,5 +679,32 @@ class Hud {
       (cancelCollectBtn.style.display = `block`);
     Hud.prototype.hideCancelCollectBtn = () =>
       (cancelCollectBtn.style.display = `none`);
+
+    // Build
+    Hud.prototype.showContainerStructure = () =>
+      (containerStructure.style.display = `block`);
+    Hud.prototype.hideContainerStructure = () =>
+      (containerStructure.style.display = `none`);
+    Hud.prototype.changeStructureBtn = (structure, display) =>
+      (window[structure + `Btn`].style.display = display);
+
+    // Recruit and Troops
+    Hud.prototype.showContainerRecruit = () =>
+      (containerRecruit.style.display = `flex`);
+    Hud.prototype.hideContainerRecruit = () =>
+      (containerRecruit.style.display = `none`);
+
+    Hud.prototype.showMoveBtnContainer = () =>
+      (moveBtnContainer.style.display = `inline-flex`);
+    Hud.prototype.hideMoveBtnContainer = () =>
+      (moveBtnContainer.style.display = `none`);
+
+    // Merchant
+    Hud.prototype.showHudMerchant = () => (hudMerchant.style.display = `block`);
+    Hud.prototype.hideHudMerchant = () => (hudMerchant.style.display = `none`);
+
+    // Rotate Area
+    Hud.prototype.showRotateHud = () => (rotateHud.style.display = `block`);
+    Hud.prototype.hideRotateHud = () => (rotateHud.style.display = `none`);
   }
 }
