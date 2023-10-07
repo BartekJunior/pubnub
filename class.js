@@ -146,12 +146,6 @@ class Town {
       observatory: false,
     };
 
-    // this.showHudTown = () => (hudTown.style.display = `block`);
-    // this.hideHudTown = () => (hudTown.style.display = `none`);
-
-    this.hideConfirmCollectBtn = () =>
-      (confirmCollectBtn.style.display = `none`);
-    this.hideCancelCollectBtn = () => (cancelCollectBtn.style.display = `none`);
 
     this.showContainerStructure = () =>
       (containerStructure.style.display = `block`);
@@ -161,15 +155,13 @@ class Town {
     this.showContainerRecruit = () => (containerRecruit.style.display = `flex`);
     this.hideContainerRecruit = () => (containerRecruit.style.display = `none`);
 
-    this.changeStructureBtn = (structure, display) =>
-      (window[structure + `Btn`].style.display = display);
 
     this.checkBuildedStructure = () => {
       for (const key in this.structure) {
         if (this.structure[key] === true) {
-          this.changeStructureBtn(key, `none`);
+          Hud.prototype.changeStructureBtn(key, `none`);
         } else if (this.structure[key] === false)
-          this.changeStructureBtn(key, `inline-block`);
+          Hud.prototype.changeStructureBtn(key, `inline-block`);
       }
     };
 
@@ -184,9 +176,14 @@ class Town {
     };
 
     this.buildStructure = (building) => {
-      this.id.childNodes[this.structurePlace(building)].classList.add(building);
-      this.structure[building] = true;
-      this.calcSize();
+      if (this.size < 5) {
+        this.id.childNodes[this.structurePlace(building)].classList.add(building);
+        this.structure[building] = true;
+        this.calcSize();
+        Hud.prototype.changeStructureBtn(building, `none`);
+      } else {
+        alert(`W mieście możesz zbudować maksymalnie 4 budynki`);
+      }
     };
 
     this.calcSize = () => {
@@ -322,14 +319,13 @@ class Merchant {
     this.color = color;
     this.num = Troops.prototype.setNumber();
 
-    const merchantClass = `merchant${this.color}`;
 
     this.deleteMerchant = () => {
       if (
         this.id.troops.soldiers &&
         this.id.troops.soldiers.map((el) => el.type === `merchant`)
       ) {
-        this.id.childNodes[4].classList.remove(merchantClass);
+        this.id.childNodes[4].classList.remove(`merchant${this.color}`);
         const merchantToRemove = this.id.troops.soldiers.findIndex(
           (soldier) => soldier.type === "merchant"
         );
@@ -694,6 +690,9 @@ class Hud {
     // Town
     Hud.prototype.showHudTown = () => (hudTown.style.display = `block`);
     Hud.prototype.hideHudTown = () => (hudTown.style.display = `none`);
+
+    Hud.prototype.changeStructureBtn = (structure, display) =>
+    (window[structure + `Btn`].style.display = display);
 
     // Rotate Area
     Hud.prototype.showRotateHud = () => (rotateHud.style.display = `block`);
