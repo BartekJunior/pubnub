@@ -127,7 +127,7 @@ hexAll.forEach((el, index) =>
 // ----- show/hide HUDTOWN  ----- //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
-    if (el.town && el.town.player === UUID) {
+    if (el.town && el.town.player === UUID && hudTown.style.display === `none`) {
       // if (town) town.id.hex.collectible = false;
       town = el.town;
       town.checkBuildedStructure();
@@ -135,7 +135,7 @@ hexAll.forEach((el) => {
       // Hud.prototype.townBtnEnable();
 
 
-    } else if (town && !el.possibleResource && containerTempCollect.style.display === `flex`) {
+    } else if (!el.possibleResource && containerTempCollect.style.display === `flex`) {
       alert(`Dokończ zbieranie surowców, albo Anuluj Zbiór`);
     } 
 
@@ -145,7 +145,17 @@ hexAll.forEach((el) => {
       alert (`Dokończ rekrutację lub Anuluj Rekrutację`)
     }
     
-    // else if (town && !el.possibleResource && !clickedRes.length) {
+ 
+
+      else if (!el.town && !el.possibleResource) {
+      Hud.prototype.hideHudTown();
+      Hud.prototype.hideContainerStructure();
+      Hud.prototype.hideContainerRecruit();
+      town = undefined;
+    }
+
+
+       // else if (town && !el.possibleResource && !clickedRes.length) {
     //   hexAll.forEach((el) => {
     //     if (el.possibleResource) el.possibleResource.deletePossibleResource();
     //     town.id.hex.collectible = false;
@@ -158,15 +168,6 @@ hexAll.forEach((el) => {
     //   Hud.prototype.hideCancelCollectBtn();
     //   town = undefined;
     // }
-
-      else if (!el.town && !el.possibleResource) {
-      Hud.prototype.hideHudTown();
-      Hud.prototype.hideContainerStructure();
-      Hud.prototype.hideContainerRecruit();
-      town = undefined;
-    }
-
-    
 
 
   });
