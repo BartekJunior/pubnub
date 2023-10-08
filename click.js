@@ -132,12 +132,18 @@ hexAll.forEach((el) => {
       town = el.town;
       town.checkBuildedStructure();
       Hud.prototype.showHudTown();
-      Hud.prototype.townBtnEnable();
+      // Hud.prototype.townBtnEnable();
 
 
     } else if (town && !el.possibleResource && containerTempCollect.style.display === `flex`) {
       alert(`Dokończ zbieranie surowców, albo Anuluj Zbiór`);
     } 
+
+    else if (town && containerStructure.style.display === `block`) {
+      alert(`Dokończ budowę w mieście lub Anuluj Budowę`);
+    } else if (town && containerRecruit.style.display === `flex`) {
+      alert (`Dokończ rekrutację lub Anuluj Rekrutację`)
+    }
     
     // else if (town && !el.possibleResource && !clickedRes.length) {
     //   hexAll.forEach((el) => {
@@ -159,6 +165,8 @@ hexAll.forEach((el) => {
       Hud.prototype.hideContainerRecruit();
       town = undefined;
     }
+
+    
 
 
   });
@@ -353,6 +361,7 @@ settleBtn.addEventListener(`click`, function () {
 
 buildStructureBtn.addEventListener(`click`, function () {
   Hud.prototype.showContainerStructure();
+  Hud.prototype.townBtnDisable();
 });
 
 fortressBtn.addEventListener(`click`, function () {
@@ -385,6 +394,7 @@ observatoryBtn.addEventListener(`click`, function () {
 
 cancelBuild.addEventListener(`click`, function () {
   Hud.prototype.hideContainerStructure();
+  Hud.prototype.townBtnEnable();
 });
 
 
@@ -394,16 +404,19 @@ cancelBuild.addEventListener(`click`, function () {
 let tempSoldiers = [];
 recruitBtn.addEventListener(`click`, function () {
   Hud.prototype.showContainerRecruit();
+  Hud.prototype.townBtnDisable();
 });
 
 confirmRecruitBtn.addEventListener(`click`, function () {
   town.confirmRecruit();
   Hud.prototype.hideContainerRecruit();
+  Hud.prototype.townBtnEnable();
 });
 
 cancelRecruitBtn.addEventListener(`click`, function () {
   town.cancelRecruit();
   Hud.prototype.hideContainerRecruit();
+  Hud.prototype.townBtnEnable();
 });
 
 // Recruiting //

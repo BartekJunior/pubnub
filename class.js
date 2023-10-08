@@ -174,6 +174,8 @@ class Town {
         this.calcSize();
         Hud.prototype.changeStructureBtn(building, `none`);
         Hud.prototype.hideContainerStructure();
+        Hud.prototype.townBtnEnable();
+
       } else {
         alert(`W mieście możesz zbudować maksymalnie 4 budynki`);
       }
@@ -221,6 +223,7 @@ class Town {
       merchantRecruitNr.textContent = tempSoldiers.filter(
         (item) => item.type === `merchant`
       ).length;
+      if (tempSoldiers) confirmRecruitBtn.disabled = false;
     };
 
     this.confirmRecruit = () => {
@@ -248,6 +251,8 @@ class Town {
           `Na jednym Hexie mogą znajdować sie maksymalnie 4 jednostki wojskowe`
         );
 
+      confirmRecruitBtn.disabled = true;
+
       // Now you have to paint the soldiers on the Town map. Some like this under...
       // this.id.childNodes[8].classList.add(soldier + this.color);
     };
@@ -255,6 +260,7 @@ class Town {
     this.cancelRecruit = () => {
       tempSoldiers = [];
       this.updateRecruitNr();
+      confirmRecruitBtn.disabled = true;
     };
 
     //-------------- Collect Resource in Town --------------//
