@@ -39,8 +39,7 @@ const buildStructureBtn = document.getElementById(`buildStructureBtn`);
 const recruitBtn = document.getElementById(`recruitBtn`);
 const burnTownBtn = document.getElementById(`burnTownBtn`);
 
-
-const containerTempCollect = document.querySelector(`.container-temp-collect`)
+const containerTempCollect = document.querySelector(`.container-temp-collect`);
 const confirmCollectBtn = document.getElementById(`confirmCollectBtn`);
 const cancelCollectBtn = document.getElementById(`cancelCollectBtn`);
 
@@ -53,7 +52,6 @@ const obeliskBtn = document.getElementById(`obeliskBtn`);
 const templeBtn = document.getElementById(`templeBtn`);
 const observatoryBtn = document.getElementById(`observatoryBtn`);
 const cancelBuild = document.getElementById(`cancelBuild`);
-
 
 // troops buttons
 const merchantBtn = document.getElementById(`merchantBtn`);
@@ -83,13 +81,13 @@ const confirmGroupBtn = document.getElementById(`confirmGroupBtn`);
 const confirmMoveBtn = document.getElementById(`confirmMoveBtn`);
 const cancelMoveBtn = document.getElementById(`cancelMoveBtn`);
 
-confirmGroupBtn.disabled = true;
-confirmMoveBtn.disabled = true;
 
 // Hud Map
-const rotateHud = document.querySelector(`.hud-rotate-container`);
+const rotateHud = document.getElementById(`hudRotateContainer`);
 const rotateBtn = document.getElementById(`rotateBtn`);
 const exploreBtn = document.getElementById(`exploreBtn`);
+
+rotateHud.style.display = `none`;
 
 // OOOOOOOOOOOOOOOMMMMMMMMMMMMMMMMMGGGGGGGGGGGGGGGGGGGGGG //
 
@@ -127,35 +125,34 @@ hexAll.forEach((el, index) =>
 // ----- show/hide HUDTOWN  ----- //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
-    if (el.town && el.town.player === UUID && hudTown.style.display === `none`) {
-      // if (town) town.id.hex.collectible = false;
+    if (
+      el.town &&
+      el.town.player === UUID &&
+      hudTown.style.display === `none` &&
+      rotateHud.style.display === `none`
+    ) {
       town = el.town;
       town.checkBuildedStructure();
       Hud.prototype.showHudTown();
-      // Hud.prototype.townBtnEnable();
-
-
-    } else if (!el.possibleResource && containerTempCollect.style.display === `flex`) {
+    } else if (
+      !el.possibleResource &&
+      containerTempCollect.style.display === `flex`
+    ) {
       alert(`Dokończ zbieranie surowców, albo Anuluj Zbiór`);
-    } 
-
-    else if (town && containerStructure.style.display === `block`) {
+    } else if (town && containerStructure.style.display === `block`) {
       alert(`Dokończ budowę w mieście lub Anuluj Budowę`);
     } else if (town && containerRecruit.style.display === `flex`) {
-      alert (`Dokończ rekrutację lub Anuluj Rekrutację`)
-    }
-    
- 
-
-      else if (!el.town && !el.possibleResource) {
+      alert(`Dokończ rekrutację lub Anuluj Rekrutację`);
+    } else if (rotateHud.style.display === `block`) {
+      alert(`Odkryj Mapę!`);
+    } else if (!el.town && !el.possibleResource) {
       Hud.prototype.hideHudTown();
       Hud.prototype.hideContainerStructure();
       Hud.prototype.hideContainerRecruit();
       town = undefined;
     }
 
-
-       // else if (town && !el.possibleResource && !clickedRes.length) {
+    // else if (town && !el.possibleResource && !clickedRes.length) {
     //   hexAll.forEach((el) => {
     //     if (el.possibleResource) el.possibleResource.deletePossibleResource();
     //     town.id.hex.collectible = false;
@@ -168,8 +165,6 @@ hexAll.forEach((el) => {
     //   Hud.prototype.hideCancelCollectBtn();
     //   town = undefined;
     // }
-
-
   });
 });
 
@@ -340,9 +335,7 @@ hexAll.forEach((el) => {
         }
 
         if (!moveCounter) {
-
         }
-
       }
     }
   });
@@ -397,8 +390,6 @@ cancelBuild.addEventListener(`click`, function () {
   Hud.prototype.hideContainerStructure();
   Hud.prototype.townBtnEnable();
 });
-
-
 
 //----------- RECRUITING TROOPS -----------//
 // troops variables
@@ -476,7 +467,7 @@ cancelCollectBtn.addEventListener(`click`, function () {
   });
 
   Hud.prototype.townBtnEnable();
-  Hud.prototype.hideContainerTempCollect();  
+  Hud.prototype.hideContainerTempCollect();
   Hud.prototype.hideConfirmCollectBtn();
   Hud.prototype.hideCancelCollectBtn();
 });
