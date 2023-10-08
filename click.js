@@ -236,7 +236,7 @@ exploreBtn.addEventListener(`click`, Hex.prototype.getLand);
 let moveCounter = 0;
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
-    if (el.possibleMove) {
+    if (el.possibleMove && !(el.hex.land === `water`)) {
       if (!el.hex.vis) {
         Hud.prototype.showRotateHud();
         Troops.prototype.hideHudTroops();
@@ -334,9 +334,11 @@ hexAll.forEach((el) => {
           cancelMoveBtn.disabled = true;
         }
 
-        if (!moveCounter) {
-        }
       }
+    } else if (el.possibleMove && el.hex.land === `water`) {
+      alert(`Nie możesz poruszać jednostek lądowych po wodzie`);
+      Hud.prototype.showMoveBtnContainer();
+
     }
   });
 });
