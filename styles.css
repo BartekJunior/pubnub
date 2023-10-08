@@ -134,8 +134,7 @@ h2 {
 .hex-small {
   width: 38px;
   height: 38px;
-  /* opacity: 0.3; */
-  border: rgb(201, 196, 196) 1px dotted;
+  /* border: rgb(201, 196, 196) 1px dotted; */
   pointer-events: none;
 }
 
@@ -155,22 +154,44 @@ h2 {
 
 .class-mountain {
   background-color: rgb(65, 57, 57);
+  background-image: url(./img/mountain.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto 150%;
 }
 
 .class-forest {
   background-color: rgba(226, 12, 12, 0.555);
+  background-image: url(./img/forest2.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  /* background-size: cover; */
+  background-size: auto 160%;
+
 }
 
 .class-grass {
   background-color: green;
+  background-image: url(./img/grass4.jpg);
+  background-repeat: no-repeat;
+  background-position: -60px;
+  background-size: 150%;
 }
 
 .class-water {
   background-color: blue;
+  background-image: url(./img/water.webp);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
 }
 
 .class-plain {
   background-color: orange;
+  background-image: url(./img/plain3.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto 180%;
 }
 
 .class-idea {
