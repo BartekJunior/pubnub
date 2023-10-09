@@ -81,7 +81,6 @@ const confirmGroupBtn = document.getElementById(`confirmGroupBtn`);
 const confirmMoveBtn = document.getElementById(`confirmMoveBtn`);
 const cancelMoveBtn = document.getElementById(`cancelMoveBtn`);
 
-
 // Hud Map
 const rotateHud = document.getElementById(`hudRotateContainer`);
 const rotateBtn = document.getElementById(`rotateBtn`);
@@ -202,6 +201,12 @@ confirmGroupBtn.addEventListener("click", () => {
   Troops.prototype.whereToGo();
 });
 
+// for (let i = 0; i < hexRotate.length; i++) {
+//   if (hexRotate[i].classList.contains("class-water") && moveDestination === exploredArea[i]) {
+//     alert(`WATEEEER`)
+//   }
+// }
+
 confirmMoveBtn.addEventListener("click", function () {
   startMoveBtn.disabled = false;
   confirmGroupBtn.disabled = true;
@@ -230,13 +235,27 @@ let exploredArea;
 let drawedLandArr = [];
 
 rotateBtn.addEventListener(`click`, Hex.prototype.rotateArea);
-exploreBtn.addEventListener(`click`, Hex.prototype.getLand);
+
+exploreBtn.addEventListener(`click`, () => {
+  for (let i = 0; i < hexRotate.length; i++) {
+    if (
+      hexRotate[i].classList.contains("class-water") &&
+      moveDestination === exploredArea[i]
+    ) {
+      alert(`Nie mozesz poruszać jednostek lądowych po wodzie`);
+      return;
+    }
+  }
+  Hex.prototype.getLand();
+});
 
 // Click PossibleMove to move Troops, includes Groups, explore the map
 let moveCounter = 0;
+let moveDestination;
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     if (el.possibleMove && !(el.hex.land === `water`)) {
+      moveDestination = el;
       if (!el.hex.vis) {
         Hud.prototype.showRotateHud();
         Troops.prototype.hideHudTroops();
@@ -250,14 +269,15 @@ hexAll.forEach((el) => {
         for (let i = 0; i < hexRotate.length; i++) {
           drawedLandArr[i] = Hex.prototype.chooseLand();
           hexRotate[i].classList.add(`class-` + drawedLandArr[i]);
+
+
+          
         }
       }
-
       if (!el.troops) {
         el.troops = new Troops(UUID, el, window[`player` + UUID].color);
         console.log(`troops made`);
       }
-
       if (
         selectedSoldiers.filter((el) => el.type !== `merchant`).length +
           el.troops.size >
@@ -333,12 +353,10 @@ hexAll.forEach((el) => {
           confirmGroupBtn.disabled = true;
           cancelMoveBtn.disabled = true;
         }
-
       }
     } else if (el.possibleMove && el.hex.land === `water`) {
       alert(`Nie możesz poruszać jednostek lądowych po wodzie`);
       Hud.prototype.showMoveBtnContainer();
-
     }
   });
 });
