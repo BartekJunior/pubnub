@@ -256,6 +256,7 @@ hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     if (el.possibleMove && !(el.hex.land === `water`)) {
       moveDestination = el;
+
       if (!el.hex.vis) {
         Hud.prototype.showRotateHud();
         Troops.prototype.hideHudTroops();
@@ -266,14 +267,26 @@ hexAll.forEach((el) => {
             console.log(exploredArea);
           }
         });
-        for (let i = 0; i < hexRotate.length; i++) {
-          drawedLandArr[i] = Hex.prototype.chooseLand();
-          hexRotate[i].classList.add(`class-` + drawedLandArr[i]);
 
+        exploredArea.forEach((el, index) => {
+          drawedLandArr[index] = Hex.prototype.chooseLand();
 
-          
-        }
+          if (moveDestination === el && drawedLandArr[index] === `water`) {
+            console.log(`wszedles na wode!!!!`);
+            let randomNumber;
+            do {
+              randomNumber = Math.floor(Math.random() * 4);
+              console.log(`Random Number: ${randomNumber}`);
+            } while (randomNumber === index);
+            drawedLandArr[randomNumber] = `water`;
+            // console.log(`woda wylosowana na indexie`, randomNumber);
+            drawedLandArr[index] = Hex.prototype.chooseLandDry();
+          }
+
+          hexRotate[index].classList.add(`class-` + drawedLandArr[index]);
+        });
       }
+
       if (!el.troops) {
         el.troops = new Troops(UUID, el, window[`player` + UUID].color);
         console.log(`troops made`);

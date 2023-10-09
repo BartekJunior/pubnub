@@ -81,13 +81,22 @@ class Hex {
 
     // Draw the land
     Hex.prototype.chooseLand = function () {
-      const x = Math.ceil(Math.random() * 19);
-      console.log(x);
-      if (x >= 1 && x <=4) return `water`;
+      const x = Math.ceil(Math.random() * 14);
+      // console.log(x);
+      if (x >= 1 && x <= 18) return `water`;
       else if (x >= 5 && x <= 8) return `grass`;
       else if (x >= 9 && x <= 12) return `forest`;
       else if (x >= 13 && x <= 16) return `mountain`;
       else if (x >= 17 && x <= 19) return `plain`;
+    };
+
+    Hex.prototype.chooseLandDry = function () {
+      const x = Math.ceil(Math.random() * 4);
+      // console.log(x);
+      if (x === 1) return `grass`;
+      else if (x === 2) return `forest`;
+      else if (x === 3) return `mountain`;
+      else if (x === 4) return `plain`;
     };
 
     Hex.prototype.rotateArea = () => {
