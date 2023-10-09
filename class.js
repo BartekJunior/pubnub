@@ -81,9 +81,9 @@ class Hex {
 
     // Draw the land
     Hex.prototype.chooseLand = function () {
-      const x = Math.ceil(Math.random() * 14);
+      const x = Math.ceil(Math.random() * 19);
       // console.log(x);
-      if (x >= 1 && x <= 18) return `water`;
+      if (x >= 1 && x <= 4) return `water`;
       else if (x >= 5 && x <= 8) return `grass`;
       else if (x >= 9 && x <= 12) return `forest`;
       else if (x >= 13 && x <= 16) return `mountain`;
@@ -98,6 +98,25 @@ class Hex {
       else if (x === 3) return `mountain`;
       else if (x === 4) return `plain`;
     };
+
+    Hex.prototype.finalExplore = function () {
+      exploredArea.forEach((el, index) => {
+        drawedLandArr[index] = Hex.prototype.chooseLand();
+        if (moveDestination === el && drawedLandArr[index] === `water`) {
+          console.log(`wszedles na wode!!!!`);
+          let randomNumber;
+          do {
+            randomNumber = Math.floor(Math.random() * 4);
+            console.log(`Random Number: ${randomNumber}`);
+          } while (randomNumber === index);
+          drawedLandArr[randomNumber] = `water`;
+          console.log(`woda zamieniona na index`, randomNumber);
+          drawedLandArr[index] = Hex.prototype.chooseLandDry();
+        }
+
+        hexRotate[index].classList.add(`class-` + drawedLandArr[index]);
+      });
+    }
 
     Hex.prototype.rotateArea = () => {
       drawedLandArr = [

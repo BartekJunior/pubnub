@@ -201,11 +201,6 @@ confirmGroupBtn.addEventListener("click", () => {
   Troops.prototype.whereToGo();
 });
 
-// for (let i = 0; i < hexRotate.length; i++) {
-//   if (hexRotate[i].classList.contains("class-water") && moveDestination === exploredArea[i]) {
-//     alert(`WATEEEER`)
-//   }
-// }
 
 confirmMoveBtn.addEventListener("click", function () {
   startMoveBtn.disabled = false;
@@ -268,23 +263,7 @@ hexAll.forEach((el) => {
           }
         });
 
-        exploredArea.forEach((el, index) => {
-          drawedLandArr[index] = Hex.prototype.chooseLand();
-
-          if (moveDestination === el && drawedLandArr[index] === `water`) {
-            console.log(`wszedles na wode!!!!`);
-            let randomNumber;
-            do {
-              randomNumber = Math.floor(Math.random() * 4);
-              console.log(`Random Number: ${randomNumber}`);
-            } while (randomNumber === index);
-            drawedLandArr[randomNumber] = `water`;
-            // console.log(`woda wylosowana na indexie`, randomNumber);
-            drawedLandArr[index] = Hex.prototype.chooseLandDry();
-          }
-
-          hexRotate[index].classList.add(`class-` + drawedLandArr[index]);
-        });
+        Hex.prototype.finalExplore();
       }
 
       if (!el.troops) {
