@@ -535,8 +535,9 @@ h2 {
   background-color: black;
 }
 
-/* ------------ TECHNOLOGY TREE  ----------------- */
 
+
+/* ------------ TECHNOLOGY TREE  ----------------- */
 #firstDiv {
   display: inline-block;
   width: 300px;
@@ -552,8 +553,7 @@ h2 {
 
 .tech-global {
   display: none;
-  /* position: relative; */
-  max-width: 90%;
+  max-width: 95%;
   padding: 30px;
   /* border: 3px solid rgb(97, 25, 25); */
   background-image: url(./img/paperNew90.jpg);
@@ -572,6 +572,10 @@ h2 {
   text-align: center;
 }
 
+.tech-title > h5 {
+  margin: 7px 0 0 0;
+}
+
 .res {
   width: 12%;
   height: 110px;
@@ -588,7 +592,6 @@ h2 {
   justify-content: center;
   gap: 2px;
   width: 10%;
-  /* background-color: aqua; */
 }
 
 .event-item {
@@ -608,6 +611,7 @@ h2 {
   margin-left: auto;
 }
 
+
 .tech-resource {
   display: flex;
   justify-content: center;
@@ -618,6 +622,8 @@ h2 {
   );
 }
 
+
+/*** SKILLS Tree ***/
 .tech-row {
   margin: 0;
 }
@@ -638,13 +644,19 @@ h2 {
 
 .tech-info {
   width: 80%;
+  height: 105px;
   margin-left: 10px;
 }
 .tech-info > h6 {
   margin: 0;
 }
-.tech-info > p {
-  font-size: 14px;
+.tech-info > p, .tech-info > ul > li > p {
+  font-size: 13px;
+  margin: 0;
+}
+
+.tech-info > ul > li {
+  margin-left: -10px;
 }
 
 .tech-btn {
@@ -658,7 +670,7 @@ h2 {
   display: block;
   position: absolute;
   top: 5px;
-  right: 20px;
+  right: 25px;
 
   width: auto;
   height: auto;
@@ -668,12 +680,65 @@ h2 {
 
 .exit-icon {
   font-size: 45px;
-  color: rgb(163, 9, 9);
+  color: rgb(61, 48, 48);
 }
 
 .block-important {
   display: block !important;
 }
+
+/* Food Wood Stone Icons */
+.tech-info > p > span, .tech-info > ul > li > p > span {
+  display: inline-block;
+  vertical-align: bottom;
+  width: 20px;
+  height: 20px;
+}
+
+.food-icon {
+  background-image: url(./img/resource/food.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.wood-icon {
+  background-image: url(./img/resource/wood.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.stone-icon {
+  background-image: url(./img/resource/stone.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.gold-icon {
+  background-image: url(./img/resource/gold.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.morale-high-icon {
+  background-image: url(./img/resource/moralehigh.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.morale-icon {
+  background-image: url(./img/resource/morale.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+
+
 
 /* ------------ TEST  ----------------- */
 .divGrid {

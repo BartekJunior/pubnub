@@ -72,67 +72,112 @@
     <div class="row tech-row">
       <div class="col-2 tech-card">
         <div class="tech-title">
-          <h5>Agriculture</h5>
+          <h5>Rolnictwo</h5>
         </div>
         <div class="tech-container">
           <div class="tech-btn"></div>
           <div class="tech-info">
-            <h6>Farming</h6>
-            <p>Your Cities may collect food from plain and wood from forest</p>
+            <h6>Uprawy</h6>
+            <p>
+              Twoje miasta mogą zbierać <span class="food-icon"></span> z równin
+              i <span class="wood-icon"></span> z lasów
+            </p>
           </div>
         </div>
         <div class="tech-container">
           <div class="tech-btn"></div>
           <div class="tech-info">
-            <h6>Farming</h6>
-            <p>Your Cities may collect food from plain and wood from forest</p>
+            <h6>Magazynowanie</h6>
+            <p>
+              Twoj limit <span class="food-icon"></span> zostaje zwiększony z 2
+              do 7
+            </p>
           </div>
         </div>
         <div class="tech-container">
           <div class="tech-btn"></div>
           <div class="tech-info">
-            <h6>Farming</h6>
-            <p>Your Cities may collect food from plain and wood from forest</p>
+            <h6>Irygacja</h6>
+            <ul>
+              <li>
+                <p>
+                  Twoje miasta mogą zbierać <span class="food-icon"></span> z
+                  pustkowi
+                </p>
+              </li>
+              <li>
+                <p>Zignoruj wydarzenia "Głód"</p>
+              </li>
+            </ul>
           </div>
         </div>
         <div class="tech-container">
           <div class="tech-btn"></div>
           <div class="tech-info">
-            <h6>Farming</h6>
-            <p>Your Cities may collect food from plain and wood from forest</p>
+            <h6>Hodowla zwierząt</h6>
+            <p>
+              Możesz zebrać z jednego pola lądu (lub z dwóch jeśli masz Drogi)
+              oddalonego o 2 pola od Twojego miasta
+            </p>
           </div>
         </div>
       </div>
       <div class="col-2 tech-card">
         <div class="tech-title">
-          <h5>Agriculture</h5>
+          <h5>Budownictwo</h5>
         </div>
         <div class="tech-container">
           <div class="tech-btn"></div>
           <div class="tech-info">
-            <h6>Farming</h6>
-            <p>Your Cities may collect food from plain and wood from forest</p>
+            <h6>Górnictwo</h6>
+            <p>
+              Twoje miasta mogą zbierać <span class="stone-icon"></span> z gór
+            </p>
           </div>
         </div>
         <div class="tech-container">
           <div class="tech-btn"></div>
           <div class="tech-info">
-            <h6>Farming</h6>
-            <p>Your Cities may collect food from plain and wood from forest</p>
+            <h6>Inżynieria</h6>
+            <ul>
+              <li>
+                <p>Natychmiast dobierz jedną kartę Cudu</p>
+              </li>
+              <li>
+                <p>
+                  Możesz wznosić Cudy w
+                  <span class="morale-high-icon"></span> miastach
+                </p>
+              </li>
+            </ul>
           </div>
         </div>
         <div class="tech-container">
           <div class="tech-btn"></div>
           <div class="tech-info">
-            <h6>Farming</h6>
-            <p>Your Cities may collect food from plain and wood from forest</p>
+            <h6>Higiena</h6>
+            <ul>
+              <li>
+                <p>
+                  Możesz kupić pojedynczego osadnika za 1
+                  <span class="morale-icon"></span>
+                </p>
+              </li>
+              <li>
+                <p>Zignoruj wydarzenia "Zaraza" i "Epidemia"</p>
+              </li>
+            </ul>
           </div>
         </div>
         <div class="tech-container">
           <div class="tech-btn"></div>
           <div class="tech-info">
-            <h6>Farming</h6>
-            <p>Your Cities may collect food from plain and wood from forest</p>
+            <h6>Drogi</h6>
+            <p>
+              Możesz zignorować teren i poruszyć się o 2 pola z/do swojego
+              Miasta (zapłać 1 <span class="food-icon"></span> i 1
+              <span class="stone-icon"></span> za grupę)
+            </p>
           </div>
         </div>
       </div>
@@ -471,8 +516,9 @@
       </div>
     </div>
 
-    <button class="exit-btn" id="exitTech"><i class="bi bi-x-square-fill exit-icon"></i></button>
-
+    <button class="exit-btn" id="exitTech">
+      <i class="bi bi-x-octagon exit-icon"></i>
+    </button>
   </div>
 
   <div class="hud-technology-container container-fluid">
@@ -522,7 +568,6 @@
         <button class="tree-btn cards-container-item">Tech</button>
         <button class="goals-btn cards-container-item">Goals</button>
       </div>
-
     </div>
 
     <div id="p2Global" class="player-global-container">
