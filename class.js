@@ -21,6 +21,7 @@ class Player {
       stone: 0,
       gold: 0,
       idea: 2,
+      culture: 3,
       morale: 2,
     };
 

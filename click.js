@@ -91,13 +91,14 @@ rotateHud.style.display = `none`;
 // OOOOOOOOOOOOOOOMMMMMMMMMMMMMMMMMGGGGGGGGGGGGGGGGGGGGGG //
 
 //resource variables
-const res = [`food`, `wood`, `stone`, `gold`, `idea`, `morale`];
+const res = [`food`, `wood`, `stone`, `gold`, `idea`,`culture`, `morale`];
 let tempResource = {
   food: 0,
   wood: 0,
   stone: 0,
   gold: 0,
   idea: 0,
+  culture: 0,
   morale: 0,
 };
 

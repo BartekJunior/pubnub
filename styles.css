@@ -198,6 +198,10 @@ h2 {
   background-color: #2984b9;
 }
 
+.class-culture {
+  background-color: #6a93aabb;
+}
+
 .class-morale {
   background-color: #04be3c;
 }
@@ -400,7 +404,7 @@ h2 {
 }
 
 .collecting {
-  width: 150px;
+  width: 100px;
   height: 50px;
   font-size: 20px;
   font-weight: bold;
