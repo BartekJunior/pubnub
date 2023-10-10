@@ -164,6 +164,7 @@ class Town {
     this.player = player;
     this.id = id;
     this.color = color;
+    this.happiness = 2;
     this.size = 1;
 
     this.structure = {
@@ -175,6 +176,15 @@ class Town {
       temple: false,
       observatory: false,
     };
+
+    this.raiseHapiness = () => {
+      if (this.happiness < 2) return this.happiness++;
+    };
+
+    this.lowerHapiness = () => {
+      if (this.happiness > 0) return this.happiness--;
+    };
+
 
     this.checkBuildedStructure = () => {
       for (const key in this.structure) {

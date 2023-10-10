@@ -18,11 +18,16 @@ const p1ActionValue = document.getElementById(`p1ActionValue`);
 const p2ActionValue = document.getElementById(`p2ActionValue`);
 const p3ActionValue = document.getElementById(`p3ActionValue`);
 
+const treeBtn = document.querySelector(`.tree-btn`);
+
 const setPlayer = document.getElementById(`setPlayer`);
 const sendPlayer = document.getElementById(`sendPlayer`);
 const endTurn = document.getElementById(`endTurn`);
 const startGame = document.getElementById(`startGame`);
 startGame.style.display = `none`;
+
+const p1TechTree = document.getElementById(`p1TechTree`);
+const exitTech = document.getElementById(`exitTech`);
 
 // HUD Town
 const gameContainer = document.getElementById(`gameContainer`);
@@ -121,6 +126,12 @@ hexAll.forEach((el, index) =>
     console.log(index);
   })
 );
+
+
+// ----- show/hide TECH TREE  ----- //
+treeBtn.addEventListener(`click`, () => p1TechTree.classList.toggle(`block-important`));
+exitTech.addEventListener(`click`, () => p1TechTree.classList.toggle(`block-important`));
+
 
 // ----- show/hide HUDTOWN  ----- //
 hexAll.forEach((el) => {

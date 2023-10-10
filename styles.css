@@ -494,6 +494,20 @@ h2 {
   text-align: center;
 }
 
+.p1-cards-container {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.cards-container-item {
+  width: 33%;
+  height: 70px;
+  border: 3px solid gray;
+  text-align: center;
+  line-height: 60px;
+}
+
 /* ------------ MAP GAMEPLAY  ----------------- */
 .soldierHex {
   display: block;
@@ -538,6 +552,7 @@ h2 {
 
 .tech-global {
   display: none;
+  /* position: relative; */
   max-width: 90%;
   padding: 30px;
   /* border: 3px solid rgb(97, 25, 25); */
@@ -545,6 +560,12 @@ h2 {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;
+
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  top: 20px;
+  z-index: 999;
 }
 
 .tech-tree-title {
@@ -631,6 +652,27 @@ h2 {
   height: 40px;
   margin-top: 30px;
   background-color: #9edb9e;
+}
+
+.exit-btn {
+  display: block;
+  position: absolute;
+  top: 5px;
+  right: 20px;
+
+  width: auto;
+  height: auto;
+  border: none;
+  background: transparent;
+}
+
+.exit-icon {
+  font-size: 45px;
+  color: rgb(163, 9, 9);
+}
+
+.block-important {
+  display: block !important;
 }
 
 /* ------------ TEST  ----------------- */

@@ -48,7 +48,7 @@
     <button id="startGame" class="player-btn">Start Game</button>
   </div>
 
-  <div class="tech-global container-fluid">
+  <div class="tech-global container-fluid" id="p1TechTree">
     <div class="tech-tree-title">
       <h2>Technology Tree Player X</h2>
     </div>
@@ -470,6 +470,9 @@
         </div>
       </div>
     </div>
+
+    <button class="exit-btn" id="exitTech"><i class="bi bi-x-square-fill exit-icon"></i></button>
+
   </div>
 
   <div class="hud-technology-container container-fluid">
@@ -513,6 +516,13 @@
           <div id="p1ActionValue" class="action-value resource-value"></div>
         </div>
       </div>
+
+      <div class="p1-cards-container">
+        <button class="cards-btn cards-container-item">Cards</button>
+        <button class="tree-btn cards-container-item">Tech</button>
+        <button class="goals-btn cards-container-item">Goals</button>
+      </div>
+
     </div>
 
     <div id="p2Global" class="player-global-container">
