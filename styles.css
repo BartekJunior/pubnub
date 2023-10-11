@@ -167,7 +167,6 @@ h2 {
   background-position: center;
   /* background-size: cover; */
   background-size: auto 160%;
-
 }
 
 .class-grass {
@@ -535,9 +534,18 @@ h2 {
   background-color: black;
 }
 
-
-
 /* ------------ TECHNOLOGY TREE  ----------------- */
+
+div.tech-container:nth-child(2) {
+  height: 90px;
+  /* background-color: #2984b9; */
+}
+
+div.tech-container:nth-child(4) {
+  height: 130px;
+  /* background-color: #2984b9; */
+}
+
 #firstDiv {
   display: inline-block;
   width: 300px;
@@ -552,7 +560,7 @@ h2 {
 }
 
 .tech-global {
-  display: none;
+  display: block;
   max-width: 95%;
   padding: 30px;
   /* border: 3px solid rgb(97, 25, 25); */
@@ -611,7 +619,6 @@ h2 {
   margin-left: auto;
 }
 
-
 .tech-resource {
   display: flex;
   justify-content: center;
@@ -621,7 +628,6 @@ h2 {
     rgba(0, 0, 0, 0.568)
   );
 }
-
 
 /*** SKILLS Tree ***/
 .tech-row {
@@ -643,20 +649,21 @@ h2 {
 }
 
 .tech-info {
-  width: 80%;
+  width: 85%;
   height: 105px;
   margin-left: 10px;
 }
 .tech-info > h6 {
   margin: 0;
 }
-.tech-info > p, .tech-info > ul > li > p {
+.tech-info > p,
+.tech-info > ul > li > p {
   font-size: 13px;
   margin: 0;
 }
 
-.tech-info > ul > li {
-  margin-left: -10px;
+.tech-info > ul {
+  padding-left: 12px;
 }
 
 .tech-btn {
@@ -688,7 +695,8 @@ h2 {
 }
 
 /* Food Wood Stone Icons */
-.tech-info > p > span, .tech-info > ul > li > p > span {
+.tech-info > p > span,
+.tech-info > ul > li > p > span {
   display: inline-block;
   vertical-align: bottom;
   width: 20px;
@@ -723,6 +731,20 @@ h2 {
   background-size: cover;
 }
 
+.idea-icon {
+  background-image: url(./img/resource/idea.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.culture-icon {
+  background-image: url(./img/resource/culture.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
 .morale-high-icon {
   background-image: url(./img/resource/moralehigh.jpg);
   background-repeat: no-repeat;
@@ -737,6 +759,12 @@ h2 {
   background-size: cover;
 }
 
+.morale-low-icon {
+  background-image: url(./img/resource/moralelow.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
 
 
 
@@ -758,3 +786,4 @@ h2 {
   height: 30px;
   background-color: aqua;
 }
+
