@@ -13,7 +13,7 @@ firstDiv.style.backgroundColor = `red`;
 // ------------ TURN CHANGE BART is the first player. TURN FUNCTION MADE FOR X PLAYERS!!! ------------- //
 // PlayersNumber tells how many players are in the game! IT MUST BE THE RIGHT VALUE!
 let onlineUsers = new Set();
-const playersNumber = 2;
+const playersNumber = 1;
 let turn = 1;
 
 document.addEventListener(
@@ -72,6 +72,10 @@ const playerListener = (msg) => {
 
   if (msg.name !== window[`player` + UUID].name)
     window[`player` + msg.name] = msg;
+
+    if (msg.nr == 1) player1 = msg;
+    if (msg.nr == 2) player2 = msg;
+    if (msg.nr == 3) player3 = msg;
 
   console.log(`this is player msg`, msg);
 

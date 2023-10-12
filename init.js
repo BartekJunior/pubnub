@@ -11,6 +11,10 @@ hexAll.forEach((el) => {
   el.hex = newHex;
 });
 
+let player1;
+let player2;
+let player3;
+
 // Make start Hexes. It must be conected to set player functiion. Edit this
 hexAll[0].hex = new Hex(hexAll[0], `grass`, true, `food`, true);
 hexAll[1].hex = new Hex(hexAll[1], `forest`, true, `wood`, true);
@@ -88,11 +92,13 @@ setPlayer.addEventListener(`click`, function () {
 
   //add individual merchant for each user (seen only for current user)
   if (player.nr == 1) {
+    player1 = player;
     hexAll[0].troops = new Troops(UUID, hexAll[0], player.color);
     hexAll[0].troops.soldiers.push(new Merchant(UUID, hexAll[0], player.color));
     hexAll[0].troops.calcSize();
     hexAll[0].troops.showSoldierHex();
   } else if (player.nr == 2) {
+    player2 = player;
     hexAll[35].troops = new Troops(UUID, hexAll[35], player.color);
     hexAll[35].troops.soldiers.push(
       new Merchant(UUID, hexAll[35], player.color)
@@ -100,6 +106,7 @@ setPlayer.addEventListener(`click`, function () {
     hexAll[35].troops.calcSize();
     hexAll[35].troops.showSoldierHex();
   } else if (player.nr == 3) {
+    player3 = player;
     hexAll[5].troops = new Troops(UUID, hexAll[5], player.color);
     hexAll[5].troops.soldiers.push(new Merchant(UUID, hexAll[5], player.color));
     hexAll[5].troops.calcSize();
