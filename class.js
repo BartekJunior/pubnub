@@ -35,6 +35,19 @@ class Player {
   }
 }
 
+// CLASS TREE //
+class Tree {
+  constructor() {
+    this.name = player.name;
+    this.nr = player.nr;
+    this.color = player.color;
+  }
+
+}
+
+
+
+
 // CLASS HEX //
 class Hex {
   constructor(id, land, vis, resource, collectible) {

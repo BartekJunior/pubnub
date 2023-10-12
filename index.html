@@ -48,9 +48,14 @@
     <button id="startGame" class="player-btn">Start Game</button>
   </div>
 
+
+  
+  <!------------ TECH TREE PLAYER1 -------------->
+  <!--------------------------------------------->
+  <!------------ TECH TREE PLAYER1 -------------->
   <div class="tech-global container-fluid" id="p1TechTree">
     <div class="tech-tree-title">
-      <h2>Technology Tree Player X</h2>
+      <h2 id="p1TechTreeTitle">Technology Tree Player 1</h2>
     </div>
 
     <div class="tech-resource">
@@ -567,7 +572,1059 @@
     </button>
   </div>
 
-  <div class="hud-technology-container container-fluid">
+
+  <!------------ TECH TREE PLAYER2 -------------->
+  <!--------------------------------------------->
+  <!------------ TECH TREE PLAYER2 -------------->
+  <div class="tech-global container-fluid" id="p2TechTree">
+    <div class="tech-tree-title">
+      <h2 id="p2TechTreeTitle">Technology Tree Player 2</h2>
+    </div>
+
+    <div class="tech-resource">
+      <div class="res res-0">0</div>
+      <div class="res res-1">1</div>
+      <div class="res res-2">2</div>
+      <div class="res res-3">3</div>
+      <div class="res res-4">4</div>
+      <div class="res res-5">5</div>
+      <div class="res res-6">6</div>
+      <div class="res res-7">7</div>
+      <div class="event-global">
+        <div class="event-item event-item-left"></div>
+        <div class="event-item event-item-right"></div>
+        <div class="event-item event-item-left"></div>
+      </div>
+    </div>
+
+    <div class="row tech-row">
+      <div class="col-2 tech-card">
+        <div class="tech-title">
+          <h5>Rolnictwo</h5>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Uprawy</h6>
+            <p>
+              Twoje miasta mogą zbierać <span class="food-icon"></span> z równin
+              i <span class="wood-icon"></span> z lasów
+            </p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Magazynowanie</h6>
+            <p>
+              Twoj limit <span class="food-icon"></span> zostaje zwiększony z 2
+              do 7
+            </p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Irygacja</h6>
+            <ul>
+              <li>
+                <p>
+                  Twoje miasta mogą zbierać <span class="food-icon"></span> z
+                  pustkowi
+                </p>
+              </li>
+              <li>
+                <p>Zignoruj wydarzenia "Głód"</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Hodowla zwierząt</h6>
+            <p>
+              Możesz zebrać z jednego pola lądu (lub z dwóch jeśli masz Drogi)
+              oddalonego o 2 pola od Twojego miasta
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 tech-card">
+        <div class="tech-title">
+          <h5>Budownictwo</h5>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Górnictwo</h6>
+            <p>
+              Twoje miasta mogą zbierać <span class="stone-icon"></span> z gór
+            </p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Inżynieria</h6>
+            <ul>
+              <li>
+                <p>Natychmiast dobierz jedną kartę Cudu</p>
+              </li>
+              <li>
+                <p>
+                  Możesz wznosić Cudy w
+                  <span class="morale-high-icon"></span> miastach
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Higiena</h6>
+            <ul>
+              <li>
+                <p>
+                  Możesz kupić pojedynczego osadnika za 1
+                  <span class="morale-icon"></span>
+                </p>
+              </li>
+              <li>
+                <p>Zignoruj wydarzenia "Zaraza" i "Epidemia"</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Drogi</h6>
+            <p>
+              Możesz zignorować teren i poruszyć się o 2 pola z/do swojego
+              Miasta (zapłać 1 <span class="food-icon"></span> i 1
+              <span class="stone-icon"></span> za grupę)
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 tech-card">
+        <div class="tech-title">
+          <h5>Żegluga</h5>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Rybołóstwo</h6>
+            <p>
+              Twoje Miasta mogą zbierać <span class="food-icon"></span> z pól
+              morza
+            </p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Nawigacja</h6>
+            <p>Statki mogą poruszać się dookoła mapy na inne pola morza</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Okręty Wojenne</h6>
+            <p>
+              Anuluj 1 trafienie w I rundzie bitew morskich, lub jeśli Armie
+              atakują ze statków
+            </p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Kartografia</h6>
+            <p>
+              Po akcji ruchu, w ktorej poruszyłeś min 1 Statek zyskujesz 1
+              <span class="idea-icon"></span> (i 1
+              <span class="culture-icon"></span> jeśli użyłeś Nawigacji)
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 tech-card">
+        <div class="tech-title">
+          <h5>Edukacja</h5>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Pismo</h6>
+            <p>Natychmiast dobierz jedną Kartę Akcji i 1 Kartę Celu</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Powszechna Edukacja</h6>
+            <p>
+              <b>Zbierz:</b> zyskujesz 1 <span class="idea-icon"></span> jeśli
+              Miasto ma Akademię
+            </p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Darmowa Edukacja</h6>
+            <p>
+              Po zakupie rozwieniecia z użyciem min 1
+              <span class="gold-icon"></span> lub 1
+              <span class="idea-icon"></span> Możesz wymienić 1
+              <span class="idea-icon"></span> na 1
+              <span class="morale-icon"></span>
+            </p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Filozofia</h6>
+            <ul>
+              <li>
+                <p>
+                  Natychmiast zyskujesz 1
+                  <span class="idea-icon"></span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Zyskujesz 1 <span class="idea-icon"></span> po zdobyciu
+                  Rozwinięcia Nauki
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 tech-card">
+        <div class="tech-title">
+          <h5>Wojskowość</h5>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Taktyka</h6>
+            <ul>
+              <li>
+                <p>Możesz poruszać Jednostki Wojskowe</p>
+              </li>
+              <li>
+                <p>Możesz używać Taktyk na Kartach Akcji</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Machiny Oblężnicze</h6>
+            <p>
+              Przed Bitwą Lądową aby anulować zdolność Fortecy "+1 kość" zapłać
+              2 <span class="wood-icon"></span> lub/i "Anulowanie trafienia" -
+              2 <span class="stone-icon"></span>
+            </p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Stalowa Broń</h6>
+            <p>
+              Przed Bitwą Lądową zapłać 1 <span class="stone-icon"></span> aby
+              dodać +2(T) w każdej Rundzie lub +1(T) jeśli wróg też ma Stalową Broń
+            </p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Pobór</h6>
+            <p><b>Zwerbuj:</b> Podczas normalnego werbunku możesz dokupić pojedyńczą Jednostkę Piechoty za 1 <span class="morale-icon"></span></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 tech-card">
+        <div class="tech-title">
+          <h5>Duchowość</h5>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Mity</h6>
+            <p>Możesz zapłacić 1 <span class="morale-icon"></span> aby uniknąć obniżenia <span class="morale-icon"></span> Miasta w skutek Wydarzenia</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Rytuały</h6>
+            <p><b>Zwiększ Szczęśliwość:</b><br>Surowce mogą być użyte jako <span class="morale-icon"></span></p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Kapłaństwo</h6>
+            <p>Rozwinięcia Nauki mogą być kupione bez ponoszenia kosztu <span class="food-icon"></span></p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Religia Państwowa</h6>
+            <p><b>Wznieś:</b> Świątynię bez ponoszenia kosztu <span class="food-icon"></span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row tech-row">
+      <div class="col-2 tech-card">
+        <div class="tech-title">
+          <h5>Agriculture</h5>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 tech-card">
+        <div class="tech-title">
+          <h5>Agriculture</h5>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 tech-card">
+        <div class="tech-title">
+          <h5>Agriculture</h5>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 tech-card">
+        <div class="tech-title">
+          <h5>Agriculture</h5>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 tech-card">
+        <div class="tech-title">
+          <h5>Agriculture</h5>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 tech-card">
+        <div class="tech-title">
+          <h5>Agriculture</h5>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="exit-btn" id="exitTech">
+      <i class="bi bi-x-octagon exit-icon"></i>
+    </button>
+  </div>
+
+  <!------------ TECH TREE PLAYER2 -------------->
+  <!--------------------------------------------->
+  <!------------ TECH TREE PLAYER2 -------------->
+  <div class="tech-global container-fluid" id="p3TechTree">
+    <div class="tech-tree-title">
+      <h2 id="p3TechTreeTitle">Technology Tree Player 3</h2>
+    </div>
+
+    <div class="tech-resource">
+      <div class="res res-0">0</div>
+      <div class="res res-1">1</div>
+      <div class="res res-2">2</div>
+      <div class="res res-3">3</div>
+      <div class="res res-4">4</div>
+      <div class="res res-5">5</div>
+      <div class="res res-6">6</div>
+      <div class="res res-7">7</div>
+      <div class="event-global">
+        <div class="event-item event-item-left"></div>
+        <div class="event-item event-item-right"></div>
+        <div class="event-item event-item-left"></div>
+      </div>
+    </div>
+
+    <div class="row tech-row">
+      <div class="col-2 tech-card">
+        <div class="tech-title">
+          <h5>Rolnictwo</h5>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Uprawy</h6>
+            <p>
+              Twoje miasta mogą zbierać <span class="food-icon"></span> z równin
+              i <span class="wood-icon"></span> z lasów
+            </p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Magazynowanie</h6>
+            <p>
+              Twoj limit <span class="food-icon"></span> zostaje zwiększony z 2
+              do 7
+            </p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Irygacja</h6>
+            <ul>
+              <li>
+                <p>
+                  Twoje miasta mogą zbierać <span class="food-icon"></span> z
+                  pustkowi
+                </p>
+              </li>
+              <li>
+                <p>Zignoruj wydarzenia "Głód"</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Hodowla zwierząt</h6>
+            <p>
+              Możesz zebrać z jednego pola lądu (lub z dwóch jeśli masz Drogi)
+              oddalonego o 2 pola od Twojego miasta
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 tech-card">
+        <div class="tech-title">
+          <h5>Budownictwo</h5>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Górnictwo</h6>
+            <p>
+              Twoje miasta mogą zbierać <span class="stone-icon"></span> z gór
+            </p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Inżynieria</h6>
+            <ul>
+              <li>
+                <p>Natychmiast dobierz jedną kartę Cudu</p>
+              </li>
+              <li>
+                <p>
+                  Możesz wznosić Cudy w
+                  <span class="morale-high-icon"></span> miastach
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Higiena</h6>
+            <ul>
+              <li>
+                <p>
+                  Możesz kupić pojedynczego osadnika za 1
+                  <span class="morale-icon"></span>
+                </p>
+              </li>
+              <li>
+                <p>Zignoruj wydarzenia "Zaraza" i "Epidemia"</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Drogi</h6>
+            <p>
+              Możesz zignorować teren i poruszyć się o 2 pola z/do swojego
+              Miasta (zapłać 1 <span class="food-icon"></span> i 1
+              <span class="stone-icon"></span> za grupę)
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 tech-card">
+        <div class="tech-title">
+          <h5>Żegluga</h5>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Rybołóstwo</h6>
+            <p>
+              Twoje Miasta mogą zbierać <span class="food-icon"></span> z pól
+              morza
+            </p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Nawigacja</h6>
+            <p>Statki mogą poruszać się dookoła mapy na inne pola morza</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Okręty Wojenne</h6>
+            <p>
+              Anuluj 1 trafienie w I rundzie bitew morskich, lub jeśli Armie
+              atakują ze statków
+            </p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Kartografia</h6>
+            <p>
+              Po akcji ruchu, w ktorej poruszyłeś min 1 Statek zyskujesz 1
+              <span class="idea-icon"></span> (i 1
+              <span class="culture-icon"></span> jeśli użyłeś Nawigacji)
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 tech-card">
+        <div class="tech-title">
+          <h5>Edukacja</h5>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Pismo</h6>
+            <p>Natychmiast dobierz jedną Kartę Akcji i 1 Kartę Celu</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Powszechna Edukacja</h6>
+            <p>
+              <b>Zbierz:</b> zyskujesz 1 <span class="idea-icon"></span> jeśli
+              Miasto ma Akademię
+            </p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Darmowa Edukacja</h6>
+            <p>
+              Po zakupie rozwieniecia z użyciem min 1
+              <span class="gold-icon"></span> lub 1
+              <span class="idea-icon"></span> Możesz wymienić 1
+              <span class="idea-icon"></span> na 1
+              <span class="morale-icon"></span>
+            </p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Filozofia</h6>
+            <ul>
+              <li>
+                <p>
+                  Natychmiast zyskujesz 1
+                  <span class="idea-icon"></span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Zyskujesz 1 <span class="idea-icon"></span> po zdobyciu
+                  Rozwinięcia Nauki
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 tech-card">
+        <div class="tech-title">
+          <h5>Wojskowość</h5>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Taktyka</h6>
+            <ul>
+              <li>
+                <p>Możesz poruszać Jednostki Wojskowe</p>
+              </li>
+              <li>
+                <p>Możesz używać Taktyk na Kartach Akcji</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Machiny Oblężnicze</h6>
+            <p>
+              Przed Bitwą Lądową aby anulować zdolność Fortecy "+1 kość" zapłać
+              2 <span class="wood-icon"></span> lub/i "Anulowanie trafienia" -
+              2 <span class="stone-icon"></span>
+            </p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Stalowa Broń</h6>
+            <p>
+              Przed Bitwą Lądową zapłać 1 <span class="stone-icon"></span> aby
+              dodać +2(T) w każdej Rundzie lub +1(T) jeśli wróg też ma Stalową Broń
+            </p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Pobór</h6>
+            <p><b>Zwerbuj:</b> Podczas normalnego werbunku możesz dokupić pojedyńczą Jednostkę Piechoty za 1 <span class="morale-icon"></span></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 tech-card">
+        <div class="tech-title">
+          <h5>Duchowość</h5>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Mity</h6>
+            <p>Możesz zapłacić 1 <span class="morale-icon"></span> aby uniknąć obniżenia <span class="morale-icon"></span> Miasta w skutek Wydarzenia</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Rytuały</h6>
+            <p><b>Zwiększ Szczęśliwość:</b><br>Surowce mogą być użyte jako <span class="morale-icon"></span></p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Kapłaństwo</h6>
+            <p>Rozwinięcia Nauki mogą być kupione bez ponoszenia kosztu <span class="food-icon"></span></p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Religia Państwowa</h6>
+            <p><b>Wznieś:</b> Świątynię bez ponoszenia kosztu <span class="food-icon"></span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row tech-row">
+      <div class="col-2 tech-card">
+        <div class="tech-title">
+          <h5>Agriculture</h5>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 tech-card">
+        <div class="tech-title">
+          <h5>Agriculture</h5>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 tech-card">
+        <div class="tech-title">
+          <h5>Agriculture</h5>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 tech-card">
+        <div class="tech-title">
+          <h5>Agriculture</h5>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 tech-card">
+        <div class="tech-title">
+          <h5>Agriculture</h5>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 tech-card">
+        <div class="tech-title">
+          <h5>Agriculture</h5>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+        <div class="tech-container">
+          <div class="tech-btn"></div>
+          <div class="tech-info">
+            <h6>Farming</h6>
+            <p>Your Cities may collect food from plain and wood from forest</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="exit-btn" id="exitTech">
+      <i class="bi bi-x-octagon exit-icon"></i>
+    </button>
+  </div>
+
+  <!------------ TECH END PLAYER2 --------------->
+  <!--------------------------------------------->
+  <!------------ TECH END PLAYER2 --------------->
+
+
+
+
+  <div class="hud-player-container container-fluid">
     <div id="p1Global" class="player-global-container">
       <div id="playerName" class="player-name">Player Name</div>
       <div class="p1-resource-container">
@@ -609,9 +1666,9 @@
         </div>
       </div>
 
-      <div class="p1-cards-container">
+      <div class="p1-cards-container cards-container">
         <button class="cards-btn cards-container-item">Cards</button>
-        <button class="tree-btn cards-container-item">Tech</button>
+        <button class="tree-btn cards-container-item" id="p1TreeBtn">Tech</button>
         <button class="goals-btn cards-container-item">Goals</button>
       </div>
     </div>
@@ -639,6 +1696,10 @@
           <div class="idea-img">Idea</div>
           <div class="p2-resource-value"></div>
         </div>
+        <div class="culture-container resource-container">
+          <div class="culture-img">Culture</div>
+          <div class="p2-resource-value"></div>
+        </div>
         <div class="morale-container resource-container">
           <div class="morale-img">Morale</div>
           <div class="p2-resource-value"></div>
@@ -648,6 +1709,13 @@
           <div id="p2ActionValue" class="action-value resource-value"></div>
         </div>
       </div>
+
+      <div class="p2-cards-container cards-container">
+        <button class="cards-btn cards-container-item">Cards</button>
+        <button class="tree-btn cards-container-item" id="p2TreeBtn">Tech</button>
+        <button class="goals-btn cards-container-item">Goals</button>
+      </div>
+
     </div>
 
     <div id="p3Global" class="player-global-container">
@@ -673,6 +1741,10 @@
           <div class="idea-img">Idea</div>
           <div class="p3-resource-value"></div>
         </div>
+        <div class="culture-container resource-container">
+          <div class="culture-img">Culture</div>
+          <div class="p3-resource-value"></div>
+        </div>
         <div class="morale-container resource-container">
           <div class="morale-img">Morale</div>
           <div class="p3-resource-value"></div>
@@ -682,6 +1754,13 @@
           <div id="p3ActionValue" class="action-value resource-value"></div>
         </div>
       </div>
+
+      <div class="p3-cards-container cards-container">
+        <button class="cards-btn cards-container-item">Cards</button>
+        <button class="tree-btn cards-container-item" id="p3TreeBtn">Tech</button>
+        <button class="goals-btn cards-container-item">Goals</button>
+      </div>
+
     </div>
   </div>
 

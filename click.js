@@ -18,7 +18,10 @@ const p1ActionValue = document.getElementById(`p1ActionValue`);
 const p2ActionValue = document.getElementById(`p2ActionValue`);
 const p3ActionValue = document.getElementById(`p3ActionValue`);
 
-const treeBtn = document.querySelector(`.tree-btn`);
+const p1TreeBtn = document.getElementById(`p1TreeBtn`);
+const p2TreeBtn = document.getElementById(`p2TreeBtn`);
+const p3TreeBtn = document.getElementById(`p3TreeBtn`);
+
 
 const setPlayer = document.getElementById(`setPlayer`);
 const sendPlayer = document.getElementById(`sendPlayer`);
@@ -27,6 +30,13 @@ const startGame = document.getElementById(`startGame`);
 startGame.style.display = `none`;
 
 const p1TechTree = document.getElementById(`p1TechTree`);
+const p2TechTree = document.getElementById(`p2TechTree`);
+const p3TechTree = document.getElementById(`p3TechTree`);
+
+const p1TechTreeTitle = document.getElementById(`p1TechTreeTitle`);
+const p2TechTreeTitle = document.getElementById(`p2TechTreeTitle`);
+const p3TechTreeTitle = document.getElementById(`p3TechTreeTitle`);
+
 const exitTech = document.getElementById(`exitTech`);
 
 // HUD Town
@@ -96,7 +106,7 @@ rotateHud.style.display = `none`;
 // OOOOOOOOOOOOOOOMMMMMMMMMMMMMMMMMGGGGGGGGGGGGGGGGGGGGGG //
 
 //resource variables
-const res = [`food`, `wood`, `stone`, `gold`, `idea`,`culture`, `morale`];
+const res = [`food`, `wood`, `stone`, `gold`, `idea`, `culture`, `morale`];
 let tempResource = {
   food: 0,
   wood: 0,
@@ -127,11 +137,20 @@ hexAll.forEach((el, index) =>
   })
 );
 
-
 // ----- show/hide TECH TREE  ----- //
-treeBtn.addEventListener(`click`, () => p1TechTree.classList.toggle(`block-important`));
-exitTech.addEventListener(`click`, () => p1TechTree.classList.toggle(`block-important`));
 
+p1TreeBtn.addEventListener(`click`, () => {
+  p1TechTree.classList.toggle(`block-important`);
+  p1TechTreeTitle.textContent = window["player" + player.nr].name;
+
+  // window["player" + UUID]
+});
+
+
+
+exitTech.addEventListener(`click`, () =>
+  p1TechTree.classList.toggle(`block-important`)
+);
 
 // ----- show/hide HUDTOWN  ----- //
 hexAll.forEach((el) => {
@@ -212,7 +231,6 @@ startMoveBtn.addEventListener(`click`, function () {
 confirmGroupBtn.addEventListener("click", () => {
   Troops.prototype.whereToGo();
 });
-
 
 confirmMoveBtn.addEventListener("click", function () {
   startMoveBtn.disabled = false;

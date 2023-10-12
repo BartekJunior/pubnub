@@ -449,7 +449,7 @@ h2 {
 }
 
 /* ------------ HUD Player ----------------- */
-.hud-technology-container {
+.hud-player-container {
   display: flex;
   justify-content: space-around;
   justify-items: center;
@@ -493,10 +493,14 @@ h2 {
   text-align: center;
 }
 
-.p1-cards-container {
+.cards-container {
   display: flex;
   justify-content: space-around;
   width: 100%;
+}
+
+.p1-cards-container {
+  
 }
 
 .cards-container-item {
@@ -535,15 +539,16 @@ h2 {
 }
 
 /* ------------ TECHNOLOGY TREE  ----------------- */
+/* #p1TechTree > *:nth-child(1) {
+  background-color: #04be3c;
+} */
 
-div.tech-container:nth-child(2) {
+.tech-container:nth-child(2) {
   height: 90px;
-  /* background-color: #2984b9; */
 }
 
-div.tech-container:nth-child(4) {
+.tech-container:nth-child(4) {
   height: 130px;
-  /* background-color: #2984b9; */
 }
 
 #firstDiv {
@@ -560,7 +565,7 @@ div.tech-container:nth-child(4) {
 }
 
 .tech-global {
-  display: block;
+  display: none;
   max-width: 95%;
   padding: 30px;
   /* border: 3px solid rgb(97, 25, 25); */
@@ -786,4 +791,17 @@ div.tech-container:nth-child(4) {
   height: 30px;
   background-color: aqua;
 }
+
+.gridItem:nth-child(2) {
+  background-color: black;
+}
+
+.divGrid > *:nth-child(5) {
+  background-color: #04be3c;
+}
+
+
+
+
+
 
