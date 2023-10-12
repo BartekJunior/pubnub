@@ -82,6 +82,8 @@ setPlayer.addEventListener(`click`, function () {
   //set individual player for each user
   window["player" + UUID] = new Player(UUID, num, color, false, 0);
   player = window[`player` + UUID];
+  window.tree = new Tree();
+
 
   //set active turn to first player
   if (player.nr === 1) {

@@ -37,7 +37,10 @@ const p1TechTreeTitle = document.getElementById(`p1TechTreeTitle`);
 const p2TechTreeTitle = document.getElementById(`p2TechTreeTitle`);
 const p3TechTreeTitle = document.getElementById(`p3TechTreeTitle`);
 
-const exitTech = document.getElementById(`exitTech`);
+const p1ExitTech = document.getElementById(`p1ExitTech`);
+const p2ExitTech = document.getElementById(`p2ExitTech`);
+const p3ExitTech = document.getElementById(`p3ExitTech`);
+
 
 // HUD Town
 const gameContainer = document.getElementById(`gameContainer`);
@@ -137,20 +140,6 @@ hexAll.forEach((el, index) =>
   })
 );
 
-// ----- show/hide TECH TREE  ----- //
-
-p1TreeBtn.addEventListener(`click`, () => {
-  p1TechTree.classList.toggle(`block-important`);
-  p1TechTreeTitle.textContent = window["player" + player.nr].name;
-
-  // window["player" + UUID]
-});
-
-
-
-exitTech.addEventListener(`click`, () =>
-  p1TechTree.classList.toggle(`block-important`)
-);
 
 // ----- show/hide HUDTOWN  ----- //
 hexAll.forEach((el) => {

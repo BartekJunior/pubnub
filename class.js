@@ -41,12 +41,38 @@ class Tree {
     this.name = player.name;
     this.nr = player.nr;
     this.color = player.color;
+
+    Tree.prototype.showTechTree = function (player) {
+      window[`p` + player.nr + `TechTree`].classList.toggle(`block-important`);
+      window[
+        `p` + player.nr + `TechTreeTitle`
+      ].textContent = `Technology Tree ${player.name}`;
+    };
+
+    // ----- show/hide TECH TREE  ----- //
+    p1TreeBtn.addEventListener(`click`, () =>
+      Tree.prototype.showTechTree(player1)
+    );
+    p2TreeBtn.addEventListener(`click`, () =>
+      Tree.prototype.showTechTree(player2)
+    );
+    p3TreeBtn.addEventListener(`click`, () =>
+      Tree.prototype.showTechTree(player3)
+    );
+
+    p1ExitTech.addEventListener(`click`, () =>
+      p1TechTree.classList.toggle(`block-important`)
+    );
+
+    p2ExitTech.addEventListener(`click`, () =>
+      p2TechTree.classList.toggle(`block-important`)
+    );
+
+    p3ExitTech.addEventListener(`click`, () =>
+      p3TechTree.classList.toggle(`block-important`)
+    );
   }
-
 }
-
-
-
 
 // CLASS HEX //
 class Hex {
@@ -130,7 +156,7 @@ class Hex {
 
         hexRotate[index].classList.add(`class-` + drawedLandArr[index]);
       });
-    }
+    };
 
     Hex.prototype.rotateArea = () => {
       drawedLandArr = [
@@ -198,7 +224,6 @@ class Town {
       if (this.happiness > 0) return this.happiness--;
     };
 
-
     this.checkBuildedStructure = () => {
       for (const key in this.structure) {
         if (this.structure[key] === true) {
@@ -228,7 +253,6 @@ class Town {
         Hud.prototype.changeStructureBtn(building, `none`);
         Hud.prototype.hideContainerStructure();
         Hud.prototype.townBtnEnable();
-
       } else {
         alert(`W mieście możesz zbudować maksymalnie 4 budynki`);
       }
@@ -244,6 +268,7 @@ class Town {
         Number(this.structure.temple),
         Number(this.structure.observatory),
       ];
+
       this.size = buildings.reduce((partialSum, a) => partialSum + a, 0) + 1;
     };
 
@@ -728,13 +753,13 @@ class Hud {
       buildStructureBtn.disabled = true;
       recruitBtn.disabled = true;
       burnTownBtn.disabled = true;
-    }
+    };
     Hud.prototype.townBtnEnable = () => {
       collectResourceBtn.disabled = false;
       buildStructureBtn.disabled = false;
       recruitBtn.disabled = false;
       burnTownBtn.disabled = false;
-    }
+    };
 
     // COLLECT //
     // ContainerTempCollect
