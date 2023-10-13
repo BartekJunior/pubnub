@@ -1,7 +1,7 @@
 "use strict";
 
-// const UUID = prompt(`Jak masz na imie?`);
-const UUID = `bart`;
+const UUID = prompt(`Jak masz na imie?`);
+// const UUID = `bart`;
 
 
 const firstDiv = document.getElementById(`firstDiv`);
@@ -12,7 +12,7 @@ firstDiv.style.backgroundColor = `red`;
 // ------------ TURN CHANGE BART is the first player. TURN FUNCTION MADE FOR X PLAYERS!!! ------------- //
 // PlayersNumber tells how many players are in the game! IT MUST BE THE RIGHT VALUE!
 let onlineUsers = new Set();
-const playersNumber = 1;
+const playersNumber = 2;
 let turn = 1;
 
 document.addEventListener(
@@ -58,7 +58,7 @@ for (i = 1; i < 4; i++) {
 // Dynamic variables
 
 sendPlayer.addEventListener(`click`, function () {
-  publishMessage(window["player" + UUID]);
+  publishMessage(player);
   player.start = undefined; // disable player.start to not sending the position of first merchant anymore
 });
 
@@ -69,7 +69,7 @@ sendPlayer.addEventListener(`click`, function () {
 const playerListener = (msg) => {
   console.log(`this is player BEFORE IF msg`, msg);
 
-  if (msg.name !== window[`player` + UUID].name)
+  if (msg.name !== player.name)
     window[`player` + msg.name] = msg;
 
     if (msg.nr == 1) player1 = msg;
@@ -78,26 +78,23 @@ const playerListener = (msg) => {
 
   console.log(`this is player msg`, msg);
 
-  if (msg.nr === 1 && msg.start === 0)
-    hexAll[msg.start].merchant = new Merchant(
-      msg.name,
-      hexAll[msg.start],
-      msg.color
-    );
-  else if (msg.nr === 2 && msg.start)
-    hexAll[msg.start].merchant = new Merchant(
-      msg.name,
-      hexAll[msg.start],
-      msg.color
-    );
-  else if (msg.nr === 3 && msg.start)
-    hexAll[msg.start].merchant = new Merchant(
-      msg.name,
-      hexAll[msg.start],
-      msg.color
-    );
+  // if (msg.nr === 1 && msg.start === 0)
+  //   hexAll[msg.start].merchant = new Merchant(
+  //     hexAll[msg.start],
+  //     msg.color
+  //   );
+  // else if (msg.nr === 2 && msg.start)
+  //   hexAll[msg.start].merchant = new Merchant(
+  //     hexAll[msg.start],
+  //     msg.color
+  //   );
+  // else if (msg.nr === 3 && msg.start)
+  //   hexAll[msg.start].merchant = new Merchant(
+  //     hexAll[msg.start],
+  //     msg.color
+  //   );
+
   //send merchant to another users
-  console.log(`START MERCHANTS CREATED`);
 };
 
 const resourceListener = (msg) => {
@@ -130,10 +127,17 @@ const townListener = (msg) => {
   paintTown();
 };
 
-// const merchantListener = (msg) => {
-//   merchantsOnMap = msg;
-//   paintMerchant();
+
+
+
+
+// const testListener = (msg) => {
+//   console.log(`msg before`, msg);
+//   player = msg;
+//   console.log(`player = msg`, player);
 // };
+
+
 
 ///// PUBNUB /////
 const buttonClick = () => {
@@ -169,16 +173,17 @@ const setupPubNub = () => {
       }
     },
 
-
     message: (messageEvent) => {
 
       // testListener(messageEvent.message.description);
+
       if (
         messageEvent.publisher !== UUID &&
         messageEvent.message.description.type === `player`
       ) {
         showMessage(messageEvent.message.description);
         checkUser(messageEvent.message.description);
+
         playerListener(messageEvent.message.description);
         resourceListener(messageEvent.message.description);
 

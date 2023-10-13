@@ -486,7 +486,6 @@ confirmCollectBtn.addEventListener(`click`, function () {
   Hud.prototype.hideConfirmCollectBtn();
   Hud.prototype.hideCancelCollectBtn();
   Hud.prototype.townBtnEnable();
-  // window[`player` + UUID].action--;
   window[`p` + player.nr + `ActionValue`].textContent = player.action;
 });
 
@@ -730,8 +729,8 @@ endTurn.addEventListener(`click`, () => {
   townsOnMap = undefined;
   merchantsOnMap = undefined;
 
-  publishMessage(window[`player` + UUID]);
-  console.log(`player sent`);
+  publishMessage(player);
+  console.log(`player sent`, player);
 
   endTurn.style.display = `none`;
 });
