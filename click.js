@@ -22,7 +22,6 @@ const p1TreeBtn = document.getElementById(`p1TreeBtn`);
 const p2TreeBtn = document.getElementById(`p2TreeBtn`);
 const p3TreeBtn = document.getElementById(`p3TreeBtn`);
 
-
 const setPlayer = document.getElementById(`setPlayer`);
 const sendPlayer = document.getElementById(`sendPlayer`);
 const endTurn = document.getElementById(`endTurn`);
@@ -40,7 +39,6 @@ const p3TechTreeTitle = document.getElementById(`p3TechTreeTitle`);
 const p1ExitTech = document.getElementById(`p1ExitTech`);
 const p2ExitTech = document.getElementById(`p2ExitTech`);
 const p3ExitTech = document.getElementById(`p3ExitTech`);
-
 
 // HUD Town
 const gameContainer = document.getElementById(`gameContainer`);
@@ -140,7 +138,6 @@ hexAll.forEach((el, index) =>
   })
 );
 
-
 // ----- show/hide HUDTOWN  ----- //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
@@ -190,6 +187,7 @@ hexAll.forEach((el) => {
 // ----- show TROOPS and MERCHANT HUD  ----- //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
+    // Must be !el.possibleMove because the move Troops is not working!//
     if (el.troops && !el.possibleMove) {
       Troops.prototype.hideHudTroops();
       el.troops.showHudTroops();
@@ -268,8 +266,6 @@ let moveCounter = 0;
 let moveDestination;
 let shit = [];
 
-
-
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     if (el.possibleMove && !(el.hex.land === `water`)) {
@@ -296,7 +292,9 @@ hexAll.forEach((el) => {
 
       if (
         selectedSoldiers.filter((el) => el.type !== `merchant`).length +
-          el.troops.size > 4) {
+          el.troops.size >
+        4
+      ) {
         // when you reached limit 4 soldiers
         alert(`Na jednym polu mogą znajdować się tylko 4 jednostki wojskowe`);
         PossibleMove.prototype.deletePossibleMove();
@@ -304,11 +302,12 @@ hexAll.forEach((el) => {
         selectedSoldiers = [];
         groupHud = [];
       } else {
-        el.troops.soldiers.push(...selectedSoldiers); // move each soldier      
+        el.troops.soldiers.push(...selectedSoldiers); // move each soldier
         el.troops.soldiers.map((item) => (item.id = el)); //update id of moved Soldiers
         // delete soldiers from moved position //
         troopsPosition.troops.soldiers = troopsPosition.troops.soldiers.filter(
-          (soldier) => !selectedSoldiers.includes(soldier));
+          (soldier) => !selectedSoldiers.includes(soldier)
+        );
 
         // Draw soldiers on Map //
         if (!el.town) {
@@ -509,9 +508,6 @@ cancelCollectBtn.addEventListener(`click`, () => {
   Town.prototype.cancelCollect();
 });
 
-
-
-
 // --------------- DISABLE CLICKS ---------------- //
 // Disable click when you click on enemy
 // gameContainer.addEventListener("click", handler, true);
@@ -658,6 +654,7 @@ const readTown = () => {
         player: el.town.player,
         id: index,
         color: el.town.color,
+        happiness: el.town.happiness,
         size: el.town.size,
         port: el.town.structure.port,
         academy: el.town.structure.academy,
@@ -680,29 +677,20 @@ const paintTown = () => {
   hexAll.forEach((el, index) => {
     for (let i = 0; i < townsOnMap.value.length; i++) {
       if (index === townsOnMap.value[i].id) {
-        el.town = new Town(
-          // townsOnMap.value[i].type,
-          // townsOnMap.value[i].player,
-          el,
-          townsOnMap.value[i].color,
-          townsOnMap.value[i].size,
-          townsOnMap.value[i].port,
-          townsOnMap.value[i].academy,
-          townsOnMap.value[i].fortress,
-          townsOnMap.value[i].market,
-          townsOnMap.value[i].obelisk,
-          townsOnMap.value[i].temple,
-          townsOnMap.value[i].observatory
-        );
+        el.town = new Town(el, townsOnMap.value[i].color);
+
+        el.town.player = townsOnMap.value[i].player;
+        el.town.happiness = townsOnMap.value[i].happiness;
+
         el.childNodes[4].classList.add(`town${el.town.color}`);
 
-        if (el.town.structure.port) el.town.buildStructure(`port`);
-        if (el.town.structure.academy) el.town.buildStructure(`academy`);
-        if (el.town.structure.fortress) el.town.buildStructure(`fortress`);
-        if (el.town.structure.market) el.town.buildStructure(`market`);
-        if (el.town.structure.obelisk) el.town.buildStructure(`obelisk`);
-        if (el.town.structure.temple) el.town.buildStructure(`temple`);
-        if (el.town.structure.observatory)
+        if (townsOnMap.value[i].port) el.town.buildStructure(`port`);
+        if (townsOnMap.value[i].academy) el.town.buildStructure(`academy`);
+        if (townsOnMap.value[i].fortress) el.town.buildStructure(`fortress`);
+        if (townsOnMap.value[i].market) el.town.buildStructure(`market`);
+        if (townsOnMap.value[i].obelisk) el.town.buildStructure(`obelisk`);
+        if (townsOnMap.value[i].temple) el.town.buildStructure(`temple`);
+        if (townsOnMap.value[i].observatory)
           el.town.buildStructure(`observatory`);
       }
     }
@@ -717,10 +705,8 @@ startGame.addEventListener(`click`, () => {
 endTurn.addEventListener(`click`, () => {
   readHex();
   readTown();
-  // readMerchant();
   publishMessage(hexesOnMap);
   publishMessage(townsOnMap);
-  // publishMessage(merchantsOnMap);
 
   hexesOnMapArr = [];
   townsOnMapArr = [];
@@ -736,15 +722,16 @@ endTurn.addEventListener(`click`, () => {
   endTurn.style.display = `none`;
 });
 
-
-
-const p1TechBtns = Array.from(document.querySelectorAll(`#p1TechTree .tech-btn`));
-const p2TechBtns = Array.from(document.querySelectorAll(`#p2TechTree .tech-btn`));
-const p3TechBtns = Array.from(document.querySelectorAll(`#p3TechTree .tech-btn`));
+const p1TechBtns = Array.from(
+  document.querySelectorAll(`#p1TechTree .tech-btn`)
+);
+const p2TechBtns = Array.from(
+  document.querySelectorAll(`#p2TechTree .tech-btn`)
+);
+const p3TechBtns = Array.from(
+  document.querySelectorAll(`#p3TechTree .tech-btn`)
+);
 
 console.log(p1TechBtns);
 console.log(p2TechBtns);
 console.log(p3TechBtns);
-
-
- 
