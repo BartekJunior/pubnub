@@ -190,7 +190,7 @@ hexAll.forEach((el) => {
 // ----- show TROOPS and MERCHANT HUD  ----- //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
-    if (el.troops) {
+    if (el.troops && !el.possibleMove) {
       Troops.prototype.hideHudTroops();
       el.troops.showHudTroops();
       troopsPosition = el;
@@ -266,6 +266,10 @@ exploreBtn.addEventListener(`click`, () => {
 // Click PossibleMove to move Troops, includes Groups, explore the map
 let moveCounter = 0;
 let moveDestination;
+let shit = [];
+
+
+
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     if (el.possibleMove && !(el.hex.land === `water`)) {
@@ -289,11 +293,10 @@ hexAll.forEach((el) => {
         el.troops = new Troops(el, player.color);
         console.log(`troops made`);
       }
+
       if (
         selectedSoldiers.filter((el) => el.type !== `merchant`).length +
-          el.troops.size >
-        4
-      ) {
+          el.troops.size > 4) {
         // when you reached limit 4 soldiers
         alert(`Na jednym polu mogą znajdować się tylko 4 jednostki wojskowe`);
         PossibleMove.prototype.deletePossibleMove();
@@ -301,11 +304,11 @@ hexAll.forEach((el) => {
         selectedSoldiers = [];
         groupHud = [];
       } else {
-        el.troops.soldiers.push(...selectedSoldiers); // move each soldier
+        el.troops.soldiers.push(...selectedSoldiers); // move each soldier      
         el.troops.soldiers.map((item) => (item.id = el)); //update id of moved Soldiers
+        // delete soldiers from moved position //
         troopsPosition.troops.soldiers = troopsPosition.troops.soldiers.filter(
-          (soldier) => !selectedSoldiers.includes(soldier)
-        );
+          (soldier) => !selectedSoldiers.includes(soldier));
 
         // Draw soldiers on Map //
         if (!el.town) {
@@ -512,13 +515,13 @@ cancelCollectBtn.addEventListener(`click`, () => {
 
 // --------------- DISABLE CLICKS ---------------- //
 // Disable click when you click on enemy
-gameContainer.addEventListener("click", handler, true);
-function handler(e) {
-  if (e.target.merchant && e.target.merchant.player !== UUID) {
-    e.stopPropagation();
-    e.preventDefault();
-  }
-}
+// gameContainer.addEventListener("click", handler, true);
+// function handler(e) {
+//   if (e.target.merchant && e.target.merchant.player !== UUID) {
+//     e.stopPropagation();
+//     e.preventDefault();
+//   }
+// }
 
 // ---------------  TURN MECHANICS ---------------- //
 // Disable click when its not your turn

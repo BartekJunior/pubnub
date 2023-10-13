@@ -370,7 +370,6 @@ class Town {
 
     this.updateGlobalResource = () => {
       for (let i = 0; i < p1GlobalResourceDiv.length; i++) {
-        // const player = window[`player` + UUID];
 
         if (player.resource[res[i]] + tempResource[res[i]] > 2) {
           alert(`Przekroczyłeś limit surowców. Zbiór anulowano. Nie straciłeś Akcji.`);
@@ -589,9 +588,7 @@ class Troops {
     };
 
     this.showSoldierHex = () => {
-
-      console.log(this.id);
-      
+      console.log(this.id); 
       this.id.childNodes.forEach((el) => {
         while (el.classList.length > 1 && !this.id.town) {
           el.classList.remove(el.classList.item(1)); // Remove the class at index 1 (second class)
