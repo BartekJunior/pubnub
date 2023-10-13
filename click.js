@@ -483,25 +483,32 @@ confirmCollectBtn.addEventListener(`click`, function () {
   Hud.prototype.hideConfirmCollectBtn();
   Hud.prototype.hideCancelCollectBtn();
   Hud.prototype.townBtnEnable();
-  window[`player` + UUID].action--;
+  // window[`player` + UUID].action--;
   window[`p` + player.nr + `ActionValue`].textContent = player.action;
 });
 
 // Cancel collect resources
-cancelCollectBtn.addEventListener(`click`, function () {
-  hexAll.forEach((el) => {
-    if (el.possibleResource) {
-      el.possibleResource.deleteTempResource();
-      clickedRes = [];
-      el.possibleResource.deletePossibleResource();
-    }
-  });
+// cancelCollectBtn.addEventListener(`click`, function () {
+//   hexAll.forEach((el) => {
+//     if (el.possibleResource) {
+//       el.possibleResource.deleteTempResource();
+//       clickedRes = [];
+//       el.possibleResource.deletePossibleResource();
+//     }
+//   });
 
-  Hud.prototype.townBtnEnable();
-  Hud.prototype.hideContainerTempCollect();
-  Hud.prototype.hideConfirmCollectBtn();
-  Hud.prototype.hideCancelCollectBtn();
+//   Hud.prototype.townBtnEnable();
+//   Hud.prototype.hideContainerTempCollect();
+//   Hud.prototype.hideConfirmCollectBtn();
+//   Hud.prototype.hideCancelCollectBtn();
+// });
+
+cancelCollectBtn.addEventListener(`click`, () => {
+  Town.prototype.cancelCollect();
 });
+
+
+
 
 // --------------- DISABLE CLICKS ---------------- //
 // Disable click when you click on enemy
@@ -725,3 +732,16 @@ endTurn.addEventListener(`click`, () => {
 
   endTurn.style.display = `none`;
 });
+
+
+
+const p1TechBtns = Array.from(document.querySelectorAll(`#p1TechTree .tech-btn`));
+const p2TechBtns = Array.from(document.querySelectorAll(`#p2TechTree .tech-btn`));
+const p3TechBtns = Array.from(document.querySelectorAll(`#p3TechTree .tech-btn`));
+
+console.log(p1TechBtns);
+console.log(p2TechBtns);
+console.log(p3TechBtns);
+
+
+ 

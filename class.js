@@ -21,7 +21,7 @@ class Player {
       stone: 0,
       gold: 0,
       idea: 2,
-      culture: 3,
+      culture: 1,
       morale: 2,
     };
 
@@ -371,6 +371,14 @@ class Town {
     this.updateGlobalResource = () => {
       for (let i = 0; i < p1GlobalResourceDiv.length; i++) {
         const player = window[`player` + UUID];
+
+        if (player.resource[res[i]] + tempResource[res[i]] > 2) {
+          alert(`Przekroczyłeś limit surowców`);
+          console.log(`wieksze od 2 jest`, res[i]);
+          Town.prototype.cancelCollect();
+          return
+        }
+
         player.resource[res[i]] =
           player.resource[res[i]] + tempResource[res[i]];
         window[`p` + player.nr + `GlobalResourceDiv`][i].innerHTML =
@@ -382,7 +390,26 @@ class Town {
         if (el.possibleResource) el.possibleResource.deletePossibleResource();
       });
       clickedRes = [];
+      player.action--; // TU JEST CHUUUUUUJ
     };
+
+
+    Town.prototype.cancelCollect = () => {
+      hexAll.forEach((el) => {
+        if (el.possibleResource) {
+          el.possibleResource.deleteTempResource();
+          clickedRes = [];
+          el.possibleResource.deletePossibleResource();
+        }
+      });
+    
+      Hud.prototype.townBtnEnable();
+      Hud.prototype.hideContainerTempCollect();
+      Hud.prototype.hideConfirmCollectBtn();
+      Hud.prototype.hideCancelCollectBtn();
+    };
+
+
   }
 }
 
