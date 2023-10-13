@@ -681,7 +681,8 @@ const paintTown = () => {
     for (let i = 0; i < townsOnMap.value.length; i++) {
       if (index === townsOnMap.value[i].id) {
         el.town = new Town(
-          townsOnMap.value[i].player,
+          // townsOnMap.value[i].type,
+          // townsOnMap.value[i].player,
           el,
           townsOnMap.value[i].color,
           townsOnMap.value[i].size,
