@@ -146,7 +146,7 @@ hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     if (
       el.town &&
-      el.town.player === UUID &&
+      el.town.player === player &&
       hudTown.style.display === `none` &&
       rotateHud.style.display === `none`
     ) {
@@ -286,7 +286,7 @@ hexAll.forEach((el) => {
       }
 
       if (!el.troops) {
-        el.troops = new Troops(UUID, el, window[`player` + UUID].color);
+        el.troops = new Troops(el, player.color);
         console.log(`troops made`);
       }
       if (
@@ -650,7 +650,7 @@ const paintHex = () => {
 
 const readTown = () => {
   hexAll.forEach((el, index) => {
-    if (el.town && el.town.player === UUID) {
+    if (el.town && el.town.player === player) {
       let townOnMap = {
         type: el.town.type,
         player: el.town.player,

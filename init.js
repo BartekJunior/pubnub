@@ -11,6 +11,7 @@ hexAll.forEach((el) => {
   el.hex = newHex;
 });
 
+let player;
 let player1;
 let player2;
 let player3;
@@ -25,22 +26,22 @@ hexAll[1].classList.add(`class-${hexAll[1].hex.land}`);
 hexAll[6].classList.add(`class-${hexAll[6].hex.land}`);
 hexAll[7].classList.add(`class-${hexAll[7].hex.land}`);
 
-// hexAll[2].troops = new Troops(UUID, hexAll[2], `green`);
+// hexAll[2].troops = new Troops(hexAll[2], `green`);
 // hexAll[2].troops.soldiers = [
-//   new Cavalry(UUID, hexAll[2], `green`),
-//   new Infantry(UUID, hexAll[2], `green`),
-//   new Merchant(UUID, hexAll[2], `green`),
-//   new Merchant(UUID, hexAll[2], `green`),
+//   new Cavalry(hexAll[2], `green`),
+//   new Infantry(hexAll[2], `green`),
+//   new Merchant(hexAll[2], `green`),
+//   new Merchant(hexAll[2], `green`),
 // ];
 // hexAll[2].troops.calcSize();
 // hexAll[2].troops.showSoldierHex();
 
-// hexAll[4].troops = new Troops(UUID, hexAll[4], `green`);
+// hexAll[4].troops = new Troops(hexAll[4], `green`);
 // hexAll[4].troops.soldiers = [
-//   new Elephant(UUID, hexAll[4], `green`),
-//   new Elephant(UUID, hexAll[4], `green`),
-//   new Cavalry(UUID, hexAll[4], `green`),
-//   new Cavalry(UUID, hexAll[4], `green`),
+//   new Elephant(hexAll[4], `green`),
+//   new Elephant(hexAll[4], `green`),
+//   new Cavalry(hexAll[4], `green`),
+//   new Cavalry(hexAll[4], `green`),
 // ];
 // hexAll[4].troops.calcSize();
 // hexAll[4].troops.showSoldierHex();
@@ -80,9 +81,9 @@ setPlayer.addEventListener(`click`, function () {
   else alert(`Liczba graczy musi wynosic 1-3`);
 
   //set individual player for each user
-  window["player" + UUID] = new Player(UUID, num, color, false, 0);
-  player = window[`player` + UUID];
+  player = new Player(UUID, num, color, false, 0);
   window.tree = new Tree();
+  // player = window[`player` + UUID];
 
 
   //set active turn to first player
@@ -95,22 +96,22 @@ setPlayer.addEventListener(`click`, function () {
   //add individual merchant for each user (seen only for current user)
   if (player.nr == 1) {
     player1 = player;
-    hexAll[0].troops = new Troops(UUID, hexAll[0], player.color);
-    hexAll[0].troops.soldiers.push(new Merchant(UUID, hexAll[0], player.color));
+    hexAll[0].troops = new Troops( hexAll[0], player.color);
+    hexAll[0].troops.soldiers.push(new Merchant( hexAll[0], player.color));
     hexAll[0].troops.calcSize();
     hexAll[0].troops.showSoldierHex();
   } else if (player.nr == 2) {
     player2 = player;
-    hexAll[35].troops = new Troops(UUID, hexAll[35], player.color);
+    hexAll[35].troops = new Troops( hexAll[35], player.color);
     hexAll[35].troops.soldiers.push(
-      new Merchant(UUID, hexAll[35], player.color)
+      new Merchant( hexAll[35], player.color)
     );
     hexAll[35].troops.calcSize();
     hexAll[35].troops.showSoldierHex();
   } else if (player.nr == 3) {
     player3 = player;
-    hexAll[5].troops = new Troops(UUID, hexAll[5], player.color);
-    hexAll[5].troops.soldiers.push(new Merchant(UUID, hexAll[5], player.color));
+    hexAll[5].troops = new Troops( hexAll[5], player.color);
+    hexAll[5].troops.soldiers.push(new Merchant( hexAll[5], player.color));
     hexAll[5].troops.calcSize();
     hexAll[5].troops.showSoldierHex();
   }

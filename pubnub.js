@@ -3,7 +3,6 @@
 // const UUID = prompt(`Jak masz na imie?`);
 const UUID = `bart`;
 
-let player;
 
 const firstDiv = document.getElementById(`firstDiv`);
 const lastDiv = document.getElementById(`lastDiv`);

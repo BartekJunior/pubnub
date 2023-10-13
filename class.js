@@ -38,6 +38,7 @@ class Player {
 // CLASS TREE //
 class Tree {
   constructor() {
+    this.player = player;
     this.name = player.name;
     this.nr = player.nr;
     this.color = player.color;
@@ -198,7 +199,7 @@ class Hex {
 // CLASS TOWN //
 let town;
 class Town {
-  constructor(player, id, color) {
+  constructor(id, color) {
     this.type = `town`;
     this.player = player;
     this.id = id;
@@ -278,13 +279,13 @@ class Town {
         (item) => item.type === `merchant`
       ).length;
       if (soldier === `infantry` && tempSoldiers.length - merchantLength < 4)
-        tempSoldiers.push(new Infantry(this.player, this.id, this.color));
+        tempSoldiers.push(new Infantry(this.id, this.color));
       if (soldier === `cavalry` && tempSoldiers.length - merchantLength < 4)
-        tempSoldiers.push(new Cavalry(this.player, this.id, this.color));
+        tempSoldiers.push(new Cavalry(this.id, this.color));
       if (soldier === `elephant` && tempSoldiers.length - merchantLength < 4)
-        tempSoldiers.push(new Elephant(this.player, this.id, this.color));
+        tempSoldiers.push(new Elephant(this.id, this.color));
       if (soldier === `merchant`)
-        tempSoldiers.push(new Merchant(this.player, this.id, this.color));
+        tempSoldiers.push(new Merchant(this.id, this.color));
       this.updateRecruitNr();
     };
 
@@ -306,7 +307,7 @@ class Town {
 
     this.confirmRecruit = () => {
       if (!this.id.troops) {
-        this.id.troops = new Troops(this.player, this.id, this.color);
+        this.id.troops = new Troops(this.id, this.color);
       }
       if (
         this.id.troops &&
@@ -357,7 +358,6 @@ class Town {
           // hexAll[i].hex.collectible
         ) {
           const possibleResource = new PossibleResource(
-            UUID,
             hexAll[i],
             hexAll[i].hex.resource,
             false
@@ -370,13 +370,13 @@ class Town {
 
     this.updateGlobalResource = () => {
       for (let i = 0; i < p1GlobalResourceDiv.length; i++) {
-        const player = window[`player` + UUID];
+        // const player = window[`player` + UUID];
 
         if (player.resource[res[i]] + tempResource[res[i]] > 2) {
-          alert(`Przekroczyłeś limit surowców`);
+          alert(`Przekroczyłeś limit surowców. Zbiór anulowano. Nie straciłeś Akcji.`);
           console.log(`wieksze od 2 jest`, res[i]);
           Town.prototype.cancelCollect();
-          return
+          return;
         }
 
         player.resource[res[i]] =
@@ -393,7 +393,6 @@ class Town {
       player.action--; // TU JEST CHUUUUUUJ
     };
 
-
     Town.prototype.cancelCollect = () => {
       hexAll.forEach((el) => {
         if (el.possibleResource) {
@@ -402,21 +401,19 @@ class Town {
           el.possibleResource.deletePossibleResource();
         }
       });
-    
+
       Hud.prototype.townBtnEnable();
       Hud.prototype.hideContainerTempCollect();
       Hud.prototype.hideConfirmCollectBtn();
       Hud.prototype.hideCancelCollectBtn();
     };
-
-
   }
 }
 
 ///// CLASS MERCHANT /////
 // let merchantPosition;
 class Merchant {
-  constructor(player, id, color) {
+  constructor(id, color) {
     this.type = `merchant`;
     this.player = player;
     this.id = id;
@@ -438,7 +435,7 @@ class Merchant {
 
     this.settle = () => {
       if (!this.id.town) {
-        this.id.town = new Town(UUID, this.id, window[`player` + UUID].color);
+        this.id.town = new Town(this.id, player.color);
         console.log(`town created at hex nr`, this.id);
         this.deleteMerchant();
 
@@ -459,7 +456,7 @@ class Merchant {
         Hud.prototype.hideHudMerchant();
         Hud.prototype.hideMoveBtnContainer();
         Troops.prototype.hideHudTroops();
-        window[`player` + UUID].action--;
+        player.action--;
 
         if (!this.id.troops.soldiers.length) this.id.troops.deleteTroops();
       } else alert(`Państwo w Państwie? Idź się lecz...`);
@@ -473,7 +470,7 @@ let groupHud = []; // Store selected soldiers in HUD
 let selectedSoldiers = []; // Store selected soldiers for moving
 
 class Troops {
-  constructor(player, id, color) {
+  constructor(id, color) {
     this.type = `troops`;
     this.player = player;
     this.id = id;
@@ -586,12 +583,15 @@ class Troops {
           offsetAll[i][1] > troopsPosition.offsetTop - 130 &&
           hexAll[i] !== troopsPosition
         ) {
-          hexAll[i].possibleMove = new PossibleMove(UUID, hexAll[i]);
+          hexAll[i].possibleMove = new PossibleMove(hexAll[i]);
         }
       }
     };
 
     this.showSoldierHex = () => {
+
+      console.log(this.id);
+      
       this.id.childNodes.forEach((el) => {
         while (el.classList.length > 1 && !this.id.town) {
           el.classList.remove(el.classList.item(1)); // Remove the class at index 1 (second class)
@@ -630,7 +630,7 @@ class Troops {
 
 ///// CLASS SOLDIERS /////
 class Cavalry {
-  constructor(player, id, color) {
+  constructor(id, color) {
     this.type = `cavalry`;
     this.player = player;
     this.id = id;
@@ -649,7 +649,7 @@ class Cavalry {
 }
 
 class Infantry {
-  constructor(player, id, color) {
+  constructor(id, color) {
     this.type = `infantry`;
     this.player = player;
     this.id = id;
@@ -668,7 +668,7 @@ class Infantry {
 }
 
 class Elephant {
-  constructor(player, id, color) {
+  constructor(id, color) {
     this.type = `elephant`;
     this.player = player;
     this.id = id;
@@ -688,7 +688,7 @@ class Elephant {
 
 ///// CLASS POSSIBLEMOVE /////
 class PossibleMove {
-  constructor(player, id) {
+  constructor(id) {
     this.player = player;
     this.id = id;
     this.showPossibleMove = () => this.id.classList.add(`possible-move`);
@@ -708,7 +708,7 @@ class PossibleMove {
 
 ///// CLASS POSSIBLERESOURCE /////
 class PossibleResource {
-  constructor(player, id, resource, collected) {
+  constructor(id, resource, collected) {
     this.player = player;
     this.id = id;
     this.resource = resource;
