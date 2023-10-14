@@ -109,10 +109,6 @@ class Tree {
       p3TechTree.classList.toggle(`block-important`)
     );
 
-
-    window.addEventListener(`click`, () => console.log(`shit`));
-
-
     // Make an Advance //
     this.player.skills.forEach((el, index) => {
       el.id.addEventListener(`click`, () => {
@@ -122,7 +118,6 @@ class Tree {
       });
     });
  
-
     Tree.prototype.showConfirmAdvance = (skill) =>
       (skillConfirmContainer.style.display = `block`);
     Tree.prototype.hideConfirmAdvance = () =>
@@ -133,6 +128,7 @@ class Tree {
       clickedSkill.id.style.backgroundColor = player.color;
       Tree.prototype.hideConfirmAdvance();
       clickedSkill = undefined;
+      clickedSkillIndex = undefined;
       player.action--;
       window[`p` + player.nr + `ActionValue`].textContent = player.action;
     });
@@ -141,5 +137,7 @@ class Tree {
       Tree.prototype.hideConfirmAdvance();
       clickedSkill = undefined;
     });
+
+
   }
 }
