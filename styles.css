@@ -670,8 +670,23 @@ h2 {
   margin-left: 10px;
 }
 .tech-info > h6 {
+  display: inline-block;
   margin: 0;
+  margin-right: 10px;
+  font-size: 1rem;
 }
+.tech-info > h5 {
+  display: inline-block;
+  margin: 0;
+  padding: 1px 5px;
+  font-size: 0.9rem;
+
+  background-color: #999387;
+  border-radius: 5px;
+}
+
+
+
 .tech-info > p,
 .tech-info > ul > li > p {
   font-size: 13px;

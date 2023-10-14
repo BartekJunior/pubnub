@@ -25,6 +25,16 @@ const p3Skills = p3TechBtns.map((el) => ({
 }));
 
 
+// Create small groups of 4 skills in each group //
+const newSkills = [];
+for (let i = 0; i < p1Skills.length; i += 4) {
+  newSkills.push(p1Skills.slice(i, i + 4));
+}
+console.log(newSkills);
+
+
+
+
 let clickedSkill;
 let clickedSkillIndex;
 
