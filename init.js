@@ -82,6 +82,7 @@ setPlayer.addEventListener(`click`, function () {
 
   //set individual player for each user
   player = new Player(UUID, num, color, false, 0);
+  // player.setSkills();
   window.tree = new Tree();
 
 

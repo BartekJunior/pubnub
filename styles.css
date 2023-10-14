@@ -500,7 +500,6 @@ h2 {
 }
 
 .p1-cards-container {
-  
 }
 
 .cards-container-item {
@@ -549,6 +548,17 @@ h2 {
 
 .tech-container:nth-child(4) {
   height: 130px;
+}
+
+.skill-confirm-container {
+  display: none;
+  padding: 30px 50px;
+  background-color: #2984b9;
+  position: absolute;
+  top: 30vh;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 10px;
 }
 
 #firstDiv {
@@ -675,7 +685,7 @@ h2 {
   width: 40px;
   height: 40px;
   margin-top: 30px;
-  background-color: #FFF;
+  background-color: #fff;
 }
 
 .exit-btn {
@@ -771,8 +781,6 @@ h2 {
   background-size: cover;
 }
 
-
-
 /* ------------ TEST  ----------------- */
 .divGrid {
   width: 150px;
@@ -799,9 +807,3 @@ h2 {
 .divGrid > *:nth-child(5) {
   background-color: #04be3c;
 }
-
-
-
-
-
-

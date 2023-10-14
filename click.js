@@ -722,16 +722,4 @@ endTurn.addEventListener(`click`, () => {
   endTurn.style.display = `none`;
 });
 
-const p1TechBtns = Array.from(
-  document.querySelectorAll(`#p1TechTree .tech-btn`)
-);
-const p2TechBtns = Array.from(
-  document.querySelectorAll(`#p2TechTree .tech-btn`)
-);
-const p3TechBtns = Array.from(
-  document.querySelectorAll(`#p3TechTree .tech-btn`)
-);
 
-console.log(p1TechBtns);
-console.log(p2TechBtns);
-console.log(p3TechBtns);

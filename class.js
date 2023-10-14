@@ -4,76 +4,6 @@
 let setNum = 1; // ID of each soldier
 let test;
 
-// CLASS PLAYER //
-class Player {
-  constructor(name, nr, color, turnActive, action) {
-    this.type = `player`;
-    this.actionDone = false;
-    this.name = name;
-    this.nr = nr;
-    this.color = color;
-    this.turnActive = turnActive;
-    this.action = action;
-
-    this.resource = {
-      food: 2,
-      wood: 1,
-      stone: 0,
-      gold: 0,
-      idea: 2,
-      culture: 1,
-      morale: 2,
-    };
-
-    this.checkStart = () => {
-      if (this.nr == 1) return 0;
-      else if (this.nr == 2) return 35;
-      else if (this.nr == 3) return 5;
-    };
-
-    this.start = this.checkStart();
-  }
-}
-
-// CLASS TREE //
-class Tree {
-  constructor() {
-    this.player = player;
-    this.name = player.name;
-    this.nr = player.nr;
-    this.color = player.color;
-
-    Tree.prototype.showTechTree = function (player) {
-      window[`p` + player.nr + `TechTree`].classList.toggle(`block-important`);
-      window[
-        `p` + player.nr + `TechTreeTitle`
-      ].textContent = `Technology Tree ${player.name}`;
-    };
-
-    // ----- show/hide TECH TREE  ----- //
-    p1TreeBtn.addEventListener(`click`, () =>
-      Tree.prototype.showTechTree(player1)
-    );
-    p2TreeBtn.addEventListener(`click`, () =>
-      Tree.prototype.showTechTree(player2)
-    );
-    p3TreeBtn.addEventListener(`click`, () =>
-      Tree.prototype.showTechTree(player3)
-    );
-
-    p1ExitTech.addEventListener(`click`, () =>
-      p1TechTree.classList.toggle(`block-important`)
-    );
-
-    p2ExitTech.addEventListener(`click`, () =>
-      p2TechTree.classList.toggle(`block-important`)
-    );
-
-    p3ExitTech.addEventListener(`click`, () =>
-      p3TechTree.classList.toggle(`block-important`)
-    );
-  }
-}
 
 // CLASS HEX //
 class Hex {
@@ -588,7 +518,7 @@ class Troops {
     };
 
     this.showSoldierHex = () => {
-      console.log(this.id); 
+      // console.log(this.id); 
       this.id.childNodes.forEach((el) => {
         while (el.classList.length > 1 && !this.id.town) {
           el.classList.remove(el.classList.item(1)); // Remove the class at index 1 (second class)
@@ -829,3 +759,4 @@ class Hud {
     Hud.prototype.hideRotateHud = () => (rotateHud.style.display = `none`);
   }
 }
+
