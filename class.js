@@ -299,11 +299,20 @@ class Town {
     };
 
     this.updateGlobalResource = () => {
-      for (let i = 0; i < p1GlobalResourceDiv.length; i++) {
+      for (let i = 0; i < p1GlobalResourceDiv.length - 2; i++) {
 
-        if (player.resource[res[i]] + tempResource[res[i]] > 2) {
-          alert(`Przekroczyłeś limit surowców. Zbiór anulowano. Nie straciłeś Akcji.`);
-          console.log(`wieksze od 2 jest`, res[i]);
+        // food reached 2 without Storage //
+        if (!this.player.skills[1].purchased && player.resource[res[0]] + tempResource[res[0]] > 2) {
+          alert(`Przekroczyłeś limit 2 jedzenia. Zbiór anulowano. Nie straciłeś Akcji.`);
+          console.log(`wieksze od 2 jest`, res[0]);
+          Town.prototype.cancelCollect();
+          return;
+        }
+
+        // each resource reached 7 //
+        if (player.resource[res[i]] + tempResource[res[i]] > 7) {
+          alert(`Przekroczyłeś limit 7 surowców. Zbiór anulowano. Nie straciłeś Akcji.`);
+          console.log(`wieksze od 7 jest`, res[i]);
           Town.prototype.cancelCollect();
           return;
         }
@@ -319,7 +328,7 @@ class Town {
         if (el.possibleResource) el.possibleResource.deletePossibleResource();
       });
       clickedRes = [];
-      player.action--; // TU JEST CHUUUUUUJ
+      player.action--; 
     };
 
     Town.prototype.cancelCollect = () => {
