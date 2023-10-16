@@ -538,17 +538,25 @@ h2 {
 }
 
 /* ------------ TECHNOLOGY TREE  ----------------- */
-/* #p1TechTree > *:nth-child(1) {
-  background-color: #04be3c;
-} */
 
-.tech-container:nth-child(2) {
-  height: 90px;
+.tech-row-1 > .tech-card > .tech-container:nth-child(2) {
+  height: 95px;
+}
+.tech-row-1 > .tech-card > .tech-container:nth-child(3) {
+  height: 95px;
+}
+.tech-row-1 > .tech-card > .tech-container:nth-child(4) {
+  height: 110px;
 }
 
-.tech-container:nth-child(4) {
-  height: 130px;
+.tech-row-2 > .tech-card > .tech-container:nth-child(2) {
+  height: 95px;
 }
+.tech-row-2 > .tech-card > .tech-container:nth-child(4) {
+  height: 105px;
+}
+
+
 
 .skill-confirm-container {
   display: none;
@@ -579,7 +587,7 @@ h2 {
   display: block;
   max-width: 95%;
   padding: 30px;
-  /* border: 3px solid rgb(97, 25, 25); */
+  padding-bottom: 60px;
   background-image: url(./img/paperNew90.jpg);
   background-repeat: no-repeat;
   background-position: center;
@@ -602,10 +610,11 @@ h2 {
   padding: 0 25px;
   border: 2px solid #b99442;
   border-radius: 10px;
-  background-color: rgba(190, 150, 62, 0.5);  /* opacity: 0.5; */
+  background-color: rgba(190, 150, 62, 0.5); /* opacity: 0.5; */
 }
 
 .res {
+  position: relative;
   width: 12%;
   height: 110px;
   border-right: 3px black solid;
@@ -613,6 +622,40 @@ h2 {
   font-weight: 700;
   color: rgb(199, 199, 199);
   text-align: center;
+}
+
+.res-bg {
+  width: 28px;
+  height: 28px;
+  background-color: #66ff66;
+  border-radius: 50%;
+}
+
+.res > .food-icon {
+  position: absolute;
+  left: 20px;
+  top: 15px;
+}
+.res > .wood-icon {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+}
+.res > .stone-icon {
+  position: absolute;
+  left: 30px;
+  top: 50px;
+}
+.res > .gold-icon {
+  position: absolute;
+  right: 31px;
+  top: 50px;
+}
+.res > .idea-icon {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 12px;
 }
 
 .event-global {
@@ -661,7 +704,6 @@ h2 {
 
 .tech-card {
   padding: 0 5px;
-  /* border: 1px solid black; */
 }
 
 .tech-title {
@@ -670,10 +712,16 @@ h2 {
 }
 
 .tech-info {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; */
+
   width: 85%;
   height: 105px;
   margin-left: 10px;
 }
+
 .tech-info > h6 {
   display: inline-block;
   margin: 0;
@@ -690,8 +738,6 @@ h2 {
   border-radius: 5px;
 }
 
-
-
 .tech-info > p,
 .tech-info > ul > li > p {
   font-size: 13px;
@@ -703,9 +749,9 @@ h2 {
 }
 
 .tech-btn {
-  width: 40px;
-  height: 40px;
-  margin-top: 30px;
+  width: 35px;
+  height: 35px;
+  margin-top: 22px;
   background-color: #fff;
 }
 
@@ -734,9 +780,10 @@ h2 {
 .tech-info > p > span,
 .tech-info > ul > li > p > span {
   display: inline-block;
-  vertical-align: bottom;
   width: 20px;
   height: 20px;
+  border-radius: 50%;
+  vertical-align: bottom;
 }
 
 .food-icon {
@@ -809,8 +856,7 @@ h2 {
   background-size: cover;
 }
 
-
-#sword-icon  {
+#sword-icon {
   height: 15px;
   width: 15px;
   background-image: url(./img/resource/sword.png);
