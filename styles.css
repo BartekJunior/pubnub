@@ -584,7 +584,7 @@ h2 {
 }
 
 .tech-global {
-  display: block;
+  display: none;
   max-width: 95%;
   padding: 30px;
   padding-bottom: 60px;

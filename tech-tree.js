@@ -10,27 +10,42 @@ const cancelAdvance = document.getElementById(`cancelAdvance`);
 
 const p1Skills = p1TechBtns.map((el) => ({
   id: el,
+  unlocked: false,
   purchased: false,
   used: false,
 }));
 const p2Skills = p2TechBtns.map((el) => ({
   id: el,
+  unlocked: false,
   purchased: false,
   used: false,
 }));
 const p3Skills = p3TechBtns.map((el) => ({
   id: el,
+  unlocked: false,
   purchased: false,
   used: false,
 }));
 
+const skillsTop = [];
 
+
+
+// let p1Skills = [];
+// let p2Skills = [];
+// let p3Skills = [];
 // Create small groups of 4 skills in each group //
-const newSkills = [];
-for (let i = 0; i < p1Skills.length; i += 4) {
-  newSkills.push(p1Skills.slice(i, i + 4));
-}
-console.log(newSkills);
+// for (let i = 0; i < p1SkillsObj.length; i += 4) {
+//   p1Skills.push(p1SkillsObj.slice(i, i + 4));
+// }
+// for (let i = 0; i < p2SkillsObj.length; i += 4) {
+//   p2Skills.push(p2SkillsObj.slice(i, i + 4));
+// }
+// for (let i = 0; i < p3SkillsObj.length; i += 4) {
+//   p3Skills.push(p3SkillsObj.slice(i, i + 4));
+// }
+
+
 
 
 
@@ -59,8 +74,6 @@ class Player {
       morale: 2,
     };
 
-    // this.skills = undefined;
-
     this.setSkills = () => {
       if (this.nr === 1) return p1Skills;
       if (this.nr === 2) return p2Skills;
@@ -74,6 +87,25 @@ class Player {
     };
 
     this.skills = this.setSkills();
+
+    this.skills[0].purchased = true;
+    this.skills[4].purchased = true;
+    this.skills[0].id.style.backgroundColor = this.color;
+    this.skills[4].id.style.backgroundColor = this.color;
+    this.skills[0].id.disabled = true;
+    this.skills[4].id.disabled = true;
+
+
+    
+
+    for (let i = 8; i < this.skills.length; i = i + 4) {
+      this.skills[i].unlocked = true;
+      skillsTop.push(this.skills[i]);
+    }
+
+    for (let i = 0; i < 4; i = i++) {
+      this.skills[i].unlocked = true;
+    }
 
     this.start = this.checkStart();
   }
@@ -121,12 +153,27 @@ class Tree {
 
     // Make an Advance //
     this.player.skills.forEach((el, index) => {
-      el.id.addEventListener(`click`, () => {
-        clickedSkill = el;
-        clickedSkillIndex = index;
-        Tree.prototype.showConfirmAdvance();
+        el.id.addEventListener(`click`, () => {
+          if (el.unlocked) {
+            clickedSkill = el;
+            clickedSkillIndex = index;
+            Tree.prototype.showConfirmAdvance();
+            el.id.disabled = true;
+          } else alert(`LOCKED`)
       });
     });
+
+    // Unlock the Advance //
+    this.player.skills.forEach((el, index) => {
+      el.id.addEventListener(`click`, () => {
+        if (skillsTop.includes(el)) {
+          // Make sure to check if there's a next skill in the array.
+          this.player.skills[index + 1].unlocked = true;
+          this.player.skills[index + 2].unlocked = true;
+          this.player.skills[index + 3].unlocked = true;
+        }
+    });
+  });
  
     Tree.prototype.showConfirmAdvance = (skill) =>
       (skillConfirmContainer.style.display = `block`);
