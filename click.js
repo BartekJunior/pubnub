@@ -518,14 +518,23 @@ cancelCollectBtn.addEventListener(`click`, () => {
 //   }
 // }
 
+const disableClick = (element) => {
+  element.addEventListener("click", (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+    return false;
+  });
+};
 // ---------------  TURN MECHANICS ---------------- //
 // Disable click when its not your turn
 const checkActionFirst = function () {
   if (player.action === 3) {
     hexAll.forEach((el) => el.classList.remove(`delete-click`));
+    player.skills.forEach((el) => el.id.classList.remove(`delete-click`));
     player.turnActive = true;
   } else if (player.action <= 0) {
     hexAll.forEach((el) => el.classList.add(`delete-click`));
+    player.skills.forEach((el) => el.id.classList.add(`delete-click`));
     player.turnActive = false;
   }
 };
@@ -534,9 +543,12 @@ const checkActionFirst = function () {
 const checkAction = function () {
   if (player.action > 0) {
     hexAll.forEach((el) => el.classList.remove(`delete-click`));
+    player.skills.forEach((el) => el.id.classList.remove(`delete-click`));
     player.turnActive = true;
+
   } else if (player.action <= 0) {
     hexAll.forEach((el) => el.classList.add(`delete-click`));
+    player.skills.forEach((el) => el.id.classList.add(`delete-click`));
     player.turnActive = false;
     player.actionDone = true;
 
@@ -721,5 +733,3 @@ endTurn.addEventListener(`click`, () => {
 
   endTurn.style.display = `none`;
 });
-
-
