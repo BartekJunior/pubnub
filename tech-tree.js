@@ -29,8 +29,6 @@ const p3Skills = p3TechBtns.map((el) => ({
 
 const skillsTop = [];
 
-
-
 // let p1Skills = [];
 // let p2Skills = [];
 // let p3Skills = [];
@@ -44,11 +42,6 @@ const skillsTop = [];
 // for (let i = 0; i < p3SkillsObj.length; i += 4) {
 //   p3Skills.push(p3SkillsObj.slice(i, i + 4));
 // }
-
-
-
-
-
 
 let clickedSkill;
 let clickedSkillIndex;
@@ -78,7 +71,7 @@ class Player {
       if (this.nr === 1) return p1Skills;
       if (this.nr === 2) return p2Skills;
       if (this.nr === 3) return p3Skills;
-    }
+    };
 
     this.checkStart = () => {
       if (this.nr == 1) return 0;
@@ -88,6 +81,7 @@ class Player {
 
     this.skills = this.setSkills();
 
+    // Set first 2 skills //
     this.skills[0].purchased = true;
     this.skills[4].purchased = true;
     this.skills[0].id.style.backgroundColor = this.color;
@@ -95,15 +89,16 @@ class Player {
     this.skills[0].id.disabled = true;
     this.skills[4].id.disabled = true;
 
-
-    
-
+    // Set skillsTop to unclocked //
     for (let i = 8; i < this.skills.length; i = i + 4) {
-      this.skills[i].unlocked = true;
+      if (i < 36) {
+        this.skills[i].unlocked = true;
+      }
       skillsTop.push(this.skills[i]);
     }
 
-    for (let i = 0; i < 4; i = i++) {
+    // Set first 8 skills to unclocked //
+    for (let i = 0; i < 8; i++) {
       this.skills[i].unlocked = true;
     }
 
@@ -153,28 +148,20 @@ class Tree {
 
     // Make an Advance //
     this.player.skills.forEach((el, index) => {
-        el.id.addEventListener(`click`, () => {
-          if (el.unlocked) {
-            clickedSkill = el;
-            clickedSkillIndex = index;
-            Tree.prototype.showConfirmAdvance();
-            el.id.disabled = true;
-          } else alert(`LOCKED`)
+      el.id.addEventListener(`click`, () => {
+        if (el.unlocked) {
+          clickedSkill = el;
+          clickedSkillIndex = index;
+          Tree.prototype.showConfirmAdvance();
+        } else alert(`LOCKED`);
       });
     });
 
     // Unlock the Advance //
     this.player.skills.forEach((el, index) => {
-      el.id.addEventListener(`click`, () => {
-        if (skillsTop.includes(el)) {
-          // Make sure to check if there's a next skill in the array.
-          this.player.skills[index + 1].unlocked = true;
-          this.player.skills[index + 2].unlocked = true;
-          this.player.skills[index + 3].unlocked = true;
-        }
+      el.id.addEventListener(`click`, () => {});
     });
-  });
- 
+
     Tree.prototype.showConfirmAdvance = (skill) =>
       (skillConfirmContainer.style.display = `block`);
     Tree.prototype.hideConfirmAdvance = () =>
@@ -183,6 +170,22 @@ class Tree {
     confirmAdvance.addEventListener(`click`, () => {
       clickedSkill.purchased = true;
       clickedSkill.id.style.backgroundColor = player.color;
+      clickedSkill.id.disabled = true;
+
+      if (skillsTop.includes(clickedSkill)) {
+        // Make sure to check if there's a next skill in the array.
+        this.player.skills[clickedSkillIndex + 1].unlocked = true;
+        this.player.skills[clickedSkillIndex + 2].unlocked = true;
+        this.player.skills[clickedSkillIndex + 3].unlocked = true;
+      }
+
+      if (
+        clickedSkillIndex === 15 ||
+        clickedSkillIndex === 19 ||
+        clickedSkillIndex === 23
+      )
+        this.player.skills[clickedSkillIndex + 21].unlocked = true;
+
       Tree.prototype.hideConfirmAdvance();
       clickedSkill = undefined;
       clickedSkillIndex = undefined;
@@ -194,7 +197,5 @@ class Tree {
       Tree.prototype.hideConfirmAdvance();
       clickedSkill = undefined;
     });
-
-
   }
 }

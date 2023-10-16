@@ -530,7 +530,7 @@ const checkActionFirst = function () {
   }
 };
 
-// Turn mechanics.. Dont ask me.. But it works.. Please God let it work..
+// Turn mechanics.. Disable Clicks if its not your Turn. Dont ask me.. But it works.. Please God let it work..
 const checkAction = function () {
   if (player.action > 0) {
     hexAll.forEach((el) => el.classList.remove(`delete-click`));
