@@ -197,6 +197,8 @@ class Tree {
 
     // Advance affects game IMMIDETALLY //
     Tree.prototype.skillAffect = (clickedSkillIndex) => {
+
+      // Irigation //
       if (clickedSkillIndex === 2) {
         hexAll.forEach((el) => {
           if (el.hex.vis) el.hex.checkCollectible();
