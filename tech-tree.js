@@ -29,24 +29,11 @@ const p3Skills = p3TechBtns.map((el) => ({
 
 const skillsTop = [];
 
-// let p1Skills = [];
-// let p2Skills = [];
-// let p3Skills = [];
-// Create small groups of 4 skills in each group //
-// for (let i = 0; i < p1SkillsObj.length; i += 4) {
-//   p1Skills.push(p1SkillsObj.slice(i, i + 4));
-// }
-// for (let i = 0; i < p2SkillsObj.length; i += 4) {
-//   p2Skills.push(p2SkillsObj.slice(i, i + 4));
-// }
-// for (let i = 0; i < p3SkillsObj.length; i += 4) {
-//   p3Skills.push(p3SkillsObj.slice(i, i + 4));
-// }
-
 let clickedSkill;
 let clickedSkillIndex;
 
 // CLASS PLAYER //
+// creates ONCE in SetPlayer //
 class Player {
   constructor(name, nr, color, turnActive, action) {
     this.type = `player`;
@@ -107,6 +94,7 @@ class Player {
 }
 
 // CLASS TREE //
+// creates ONCE in SetPlayer //
 class Tree {
   constructor() {
     this.player = player;
@@ -122,6 +110,11 @@ class Tree {
         `p` + player.nr + `TechTreeTitle`
       ].textContent = `Technology Tree ${player.name}`;
     };
+
+    Tree.prototype.showConfirmAdvance = (skill) =>
+      (skillConfirmContainer.style.display = `block`);
+    Tree.prototype.hideConfirmAdvance = () =>
+      (skillConfirmContainer.style.display = `none`);
 
     // ----- show/hide TECH TREE  ----- //
     p1TreeBtn.addEventListener(`click`, () =>
@@ -157,21 +150,17 @@ class Tree {
       });
     });
 
+
     // Unlock the Advance //
-    this.player.skills.forEach((el, index) => {
-      el.id.addEventListener(`click`, () => {});
-    });
 
-    Tree.prototype.showConfirmAdvance = (skill) =>
-      (skillConfirmContainer.style.display = `block`);
-    Tree.prototype.hideConfirmAdvance = () =>
-      (skillConfirmContainer.style.display = `none`);
-
+    // Click OK and make Advance //
     confirmAdvance.addEventListener(`click`, () => {
       clickedSkill.purchased = true;
       clickedSkill.id.style.backgroundColor = player.color;
       clickedSkill.id.disabled = true;
+      Tree.prototype.skillAffect(clickedSkillIndex);
 
+      // Unlock 3 more skills above //
       if (skillsTop.includes(clickedSkill)) {
         // Make sure to check if there's a next skill in the array.
         this.player.skills[clickedSkillIndex + 1].unlocked = true;
@@ -179,6 +168,7 @@ class Tree {
         this.player.skills[clickedSkillIndex + 3].unlocked = true;
       }
 
+      // Unlock each Democracy, Autocracy, Teocracy //
       if (
         clickedSkillIndex === 15 ||
         clickedSkillIndex === 19 ||
@@ -197,5 +187,16 @@ class Tree {
       Tree.prototype.hideConfirmAdvance();
       clickedSkill = undefined;
     });
+
+    // Advance affects game IMMIDETALLY //
+    Tree.prototype.skillAffect = (clickedSkillIndex) => {
+      if (clickedSkillIndex === 2) {
+        hexAll.forEach((el) => {
+          if (el.hex.vis) el.hex.checkCollectible();
+        });
+      }
+    };
+
+    // end Tree constructor //
   }
 }

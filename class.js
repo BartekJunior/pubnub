@@ -4,7 +4,6 @@
 let setNum = 1; // ID of each soldier
 let test;
 
-
 // CLASS HEX //
 class Hex {
   constructor(id, land, vis, resource, collectible) {
@@ -24,9 +23,13 @@ class Hex {
     };
 
     this.checkCollectible = () => {
-      if (this.land === `water` || this.land === `plain`)
+      if (this.land === `plain` && player.skills[2].purchased === false)
         return (this.collectible = false);
-      else if (
+      else if (this.land === `plain` && player.skills[2].purchased === true)
+        return (this.collectible = true);
+
+      if (this.land === `water`) return (this.collectible = false);
+      if (
         this.land === `grass` ||
         this.land === `forest` ||
         this.land === `mountain`
@@ -300,10 +303,14 @@ class Town {
 
     this.updateGlobalResource = () => {
       for (let i = 0; i < p1GlobalResourceDiv.length - 2; i++) {
-
         // food reached 2 without Storage //
-        if (!this.player.skills[1].purchased && player.resource[res[0]] + tempResource[res[0]] > 2) {
-          alert(`Przekroczyłeś limit 2 jedzenia. Zbiór anulowano. Nie straciłeś Akcji.`);
+        if (
+          !this.player.skills[1].purchased &&
+          player.resource[res[0]] + tempResource[res[0]] > 2
+        ) {
+          alert(
+            `Przekroczyłeś limit 2 jedzenia. Zbiór anulowano. Nie straciłeś Akcji.`
+          );
           console.log(`wieksze od 2 jest`, res[0]);
           Town.prototype.cancelCollect();
           return;
@@ -311,7 +318,9 @@ class Town {
 
         // each resource reached 7 //
         if (player.resource[res[i]] + tempResource[res[i]] > 7) {
-          alert(`Przekroczyłeś limit 7 surowców. Zbiór anulowano. Nie straciłeś Akcji.`);
+          alert(
+            `Przekroczyłeś limit 7 surowców. Zbiór anulowano. Nie straciłeś Akcji.`
+          );
           console.log(`wieksze od 7 jest`, res[i]);
           Town.prototype.cancelCollect();
           return;
@@ -328,7 +337,7 @@ class Town {
         if (el.possibleResource) el.possibleResource.deletePossibleResource();
       });
       clickedRes = [];
-      player.action--; 
+      player.action--;
     };
 
     Town.prototype.cancelCollect = () => {
@@ -527,7 +536,7 @@ class Troops {
     };
 
     this.showSoldierHex = () => {
-      // console.log(this.id); 
+      // console.log(this.id);
       this.id.childNodes.forEach((el) => {
         while (el.classList.length > 1 && !this.id.town) {
           el.classList.remove(el.classList.item(1)); // Remove the class at index 1 (second class)
@@ -768,4 +777,3 @@ class Hud {
     Hud.prototype.hideRotateHud = () => (rotateHud.style.display = `none`);
   }
 }
-
