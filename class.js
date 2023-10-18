@@ -275,33 +275,34 @@ class Town {
       confirmRecruitBtn.disabled = true;
     };
 
-
-
     //-------------- Collect Resource in Town --------------//
     this.possibleResource = () => {
+      let collectDistance;
+      let collectDistanceBetha;
 
       if (this.player.skills[3].purchased) {
-        collectDistanceX = 225;
-        collectDistanceY = 230;
-
+        collectDistance = 220;
+        collectDistanceBetha = 240;
       } else if (!this.player.skills[3].purchased) {
-        collectDistanceX = 130;
-        collectDistanceY = 130;
+        collectDistance = 130;
       }
-
 
       let offsetAll = [];
       for (let i = 0; i < hexAll.length; i++) {
         offsetAll[i] = [hexAll[i].offsetLeft, hexAll[i].offsetTop];
       }
 
-
       for (let i = 0; i < hexAll.length; i++) {
         if (
-          offsetAll[i][0] > this.id.offsetLeft - collectDistanceX &&
-          offsetAll[i][0] < this.id.offsetLeft + collectDistanceX &&
-          offsetAll[i][1] < this.id.offsetTop + collectDistanceY &&
-          offsetAll[i][1] > this.id.offsetTop - collectDistanceY
+          (offsetAll[i][0] > this.id.offsetLeft - collectDistance &&
+            offsetAll[i][0] < this.id.offsetLeft + collectDistance &&
+            offsetAll[i][1] < this.id.offsetTop + collectDistance &&
+            offsetAll[i][1] > this.id.offsetTop - collectDistance) ||
+          (offsetAll[i][0] > this.id.offsetLeft - collectDistanceBetha &&
+            offsetAll[i][0] < this.id.offsetLeft + collectDistanceBetha &&
+            offsetAll[i][1] < this.id.offsetTop + 1 &&
+            offsetAll[i][1] > this.id.offsetTop - 1)
+
           // hexAll[i].hex.collectible
         ) {
           const possibleResource = new PossibleResource(

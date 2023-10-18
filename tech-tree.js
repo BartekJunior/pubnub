@@ -210,6 +210,5 @@ class Tree {
   }
 }
 
-let collectDistanceX;
-let collectDistanceY;
+
 
