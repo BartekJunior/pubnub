@@ -209,3 +209,7 @@ class Tree {
     // end Tree constructor //
   }
 }
+
+let collectDistanceX;
+let collectDistanceY;
+

@@ -275,19 +275,33 @@ class Town {
       confirmRecruitBtn.disabled = true;
     };
 
+
+
     //-------------- Collect Resource in Town --------------//
     this.possibleResource = () => {
+
+      if (this.player.skills[3].purchased) {
+        collectDistanceX = 225;
+        collectDistanceY = 230;
+
+      } else if (!this.player.skills[3].purchased) {
+        collectDistanceX = 130;
+        collectDistanceY = 130;
+      }
+
+
       let offsetAll = [];
       for (let i = 0; i < hexAll.length; i++) {
         offsetAll[i] = [hexAll[i].offsetLeft, hexAll[i].offsetTop];
       }
 
+
       for (let i = 0; i < hexAll.length; i++) {
         if (
-          offsetAll[i][0] > this.id.offsetLeft - 130 &&
-          offsetAll[i][0] < this.id.offsetLeft + 130 &&
-          offsetAll[i][1] < this.id.offsetTop + 130 &&
-          offsetAll[i][1] > this.id.offsetTop - 130
+          offsetAll[i][0] > this.id.offsetLeft - collectDistanceX &&
+          offsetAll[i][0] < this.id.offsetLeft + collectDistanceX &&
+          offsetAll[i][1] < this.id.offsetTop + collectDistanceY &&
+          offsetAll[i][1] > this.id.offsetTop - collectDistanceY
           // hexAll[i].hex.collectible
         ) {
           const possibleResource = new PossibleResource(
@@ -298,6 +312,7 @@ class Town {
           hexAll[i].possibleResource = possibleResource;
         }
       }
+
       town.id.hex.collectible = true;
     };
 
