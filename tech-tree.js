@@ -4,23 +4,29 @@ let p1TechBtns = Array.from(document.querySelectorAll(`#p1TechTree .tech-btn`));
 let p2TechBtns = Array.from(document.querySelectorAll(`#p2TechTree .tech-btn`));
 let p3TechBtns = Array.from(document.querySelectorAll(`#p3TechTree .tech-btn`));
 
+let skillsType = Array.from(document.querySelectorAll(`#p1TechTree .tech-info > h6`));
+skillsType = skillsType.map(el => el.textContent);
+
 const skillConfirmContainer = document.getElementById(`skillConfirmContainer`);
 const confirmAdvance = document.getElementById(`confirmAdvance`);
 const cancelAdvance = document.getElementById(`cancelAdvance`);
 
-const p1Skills = p1TechBtns.map((el) => ({
+const p1Skills = p1TechBtns.map((el, index) => ({
+  type: skillsType[index],
   id: el,
   unlocked: false,
   purchased: false,
   used: false,
 }));
-const p2Skills = p2TechBtns.map((el) => ({
+const p2Skills = p2TechBtns.map((el, index) => ({
+  type: skillsType[index],
   id: el,
   unlocked: false,
   purchased: false,
   used: false,
 }));
-const p3Skills = p3TechBtns.map((el) => ({
+const p3Skills = p3TechBtns.map((el, index) => ({
+  type: skillsType[index],
   id: el,
   unlocked: false,
   purchased: false,
@@ -111,8 +117,11 @@ class Tree {
       ].textContent = `Technology Tree ${player.name}`;
     };
 
-    Tree.prototype.showConfirmAdvance = (skill) =>
-      (skillConfirmContainer.style.display = `block`);
+    Tree.prototype.showConfirmAdvance = (clickedSkill) => {
+      skillConfirmContainer.style.display = `block`;
+      skillConfirmContainer.children[0].innerHTML = `Czy chcesz rozwinąć "${clickedSkill.type}"`;
+    }
+
     Tree.prototype.hideConfirmAdvance = () =>
       (skillConfirmContainer.style.display = `none`);
 
@@ -145,13 +154,11 @@ class Tree {
         if (el.unlocked) {
           clickedSkill = el;
           clickedSkillIndex = index;
-          Tree.prototype.showConfirmAdvance();
+          Tree.prototype.showConfirmAdvance(clickedSkill);
         } else alert(`LOCKED`);
       });
     });
 
-
-    // Unlock the Advance //
 
     // Click OK and make Advance //
     confirmAdvance.addEventListener(`click`, () => {
