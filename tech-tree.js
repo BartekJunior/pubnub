@@ -1,11 +1,31 @@
 "use strict";
 
+const res = [`food`, `wood`, `stone`, `gold`, `idea`, `culture`, `morale`];
+
+let childs;
+let foundRes;
+
 let p1TechBtns = Array.from(document.querySelectorAll(`#p1TechTree .tech-btn`));
 let p2TechBtns = Array.from(document.querySelectorAll(`#p2TechTree .tech-btn`));
 let p3TechBtns = Array.from(document.querySelectorAll(`#p3TechTree .tech-btn`));
 
-let skillsType = Array.from(document.querySelectorAll(`#p1TechTree .tech-info > h6`));
-skillsType = skillsType.map(el => el.textContent);
+const p1TechRes = Array.from(
+  document.querySelectorAll(`#p1TechTree > .tech-resource > .res`)
+);
+const p2TechRes = Array.from(
+  document.querySelectorAll(`#p2TechTree > .tech-resource > .res`)
+);
+const p3TechRes = Array.from(
+  document.querySelectorAll(`#p3TechTree > .tech-resource > .res`)
+);
+
+const resBg = Array.from(document.querySelectorAll(`.res-bg`));
+resBg.map((el) => (el.style.display = `none`));
+
+let skillsType = Array.from(
+  document.querySelectorAll(`#p1TechTree .tech-info > h6`)
+);
+skillsType = skillsType.map((el) => el.textContent);
 
 const skillConfirmContainer = document.getElementById(`skillConfirmContainer`);
 const confirmAdvance = document.getElementById(`confirmAdvance`);
@@ -120,7 +140,7 @@ class Tree {
     Tree.prototype.showConfirmAdvance = (clickedSkill) => {
       skillConfirmContainer.style.display = `block`;
       skillConfirmContainer.children[0].innerHTML = `Czy chcesz rozwinąć "${clickedSkill.type}"`;
-    }
+    };
 
     Tree.prototype.hideConfirmAdvance = () =>
       (skillConfirmContainer.style.display = `none`);
@@ -159,7 +179,6 @@ class Tree {
       });
     });
 
-
     // Click OK and make Advance //
     confirmAdvance.addEventListener(`click`, () => {
       clickedSkill.purchased = true;
@@ -197,7 +216,6 @@ class Tree {
 
     // Advance affects game IMMIDETALLY //
     Tree.prototype.skillAffect = (clickedSkillIndex) => {
-
       // Irigation //
       if (clickedSkillIndex === 2) {
         hexAll.forEach((el) => {
@@ -206,9 +224,27 @@ class Tree {
       }
     };
 
+    Tree.prototype.refreshResources = () => {
+      for (let i = 0; i < res.length - 2; i++) {
+
+        const techRes = this.player.resource[res[i]];
+
+        p1TechRes.forEach((el, index) => {
+          childs = Array.from(el.children);
+          console.log(`this is childs`, childs);
+
+          foundRes = childs.find((span) =>
+            span.classList.contains(res[i] + `-icon`)
+          );
+          console.log(`this is foundRed`, foundRes);
+
+          if (index === techRes) foundRes.style.display = `block`;
+        });
+
+        console.log(foundRes);
+      }
+    };
+
     // end Tree constructor //
   }
 }
-
-
-
