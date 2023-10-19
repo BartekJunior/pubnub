@@ -856,6 +856,13 @@ h2 {
   background-size: cover;
 }
 
+.once-icon {
+  background-image: url(./img/resource/once.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
 #sword-icon {
   height: 15px;
   width: 15px;
