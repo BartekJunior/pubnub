@@ -136,6 +136,10 @@ const townListener = (msg) => {
   paintTown();
 };
 
+const troopsListener = (msg) => {
+  troopsOnMap = msg;
+}
+
 // const testListener = (msg) => {
 //   console.log(`msg before`, msg);
 //   player = msg;
@@ -227,6 +231,15 @@ const setupPubNub = () => {
         console.log(messageEvent.message.description);
         console.log(`this was town`);
         townListener(messageEvent.message.description);
+      }
+
+      if (
+        messageEvent.publisher !== UUID &&
+        messageEvent.message.description.type === `troops`
+      ) {
+        console.log(messageEvent.message.description);
+        console.log(`this was troops`);
+        troopsListener(messageEvent.message.description);
       }
 
       // if (

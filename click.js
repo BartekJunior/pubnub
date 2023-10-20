@@ -571,11 +571,13 @@ function startTurnInterval() {
 // --------------- READ MAP FUNCTIONS ---------------- //
 let hexesOnMapArr = [];
 let townsOnMapArr = [];
-let merchantsOnMapArr = [];
+let troopsOnMapArr = [];
+// let merchantsOnMapArr = [];
 
 let hexesOnMap;
 let townsOnMap;
-let merchantsOnMap;
+let troopsOnMap;
+// let merchantsOnMap;
 
 const readMerchant = () => {
   hexAll.forEach((el, index) => {
@@ -657,6 +659,55 @@ const paintHex = () => {
   });
 };
 
+
+
+const readTroops = () => {
+  hexAll.forEach((el, index) => {
+    if (el.troops) {
+      let troopOnMap = {
+        type: el.troops.type,
+        player: el.troops.player.nr,
+        id: index,
+        color: el.troops.color,
+        soldiers: el.troops.soldiers.map(item => {
+          return { ...item, id: index, player: player.nr}
+        })
+      }
+
+      troopsOnMapArr.push(troopOnMap);
+    }
+
+    troopsOnMap = {
+      type: `troops`,
+      value: troopsOnMapArr,
+    }
+  })
+}
+
+
+
+const paintTroops = () => {
+  hexAll.forEach((el, index) => {
+    for (let i = 0; i < troopsOnMap.value.length; i++) {
+      if (index === troopsOnMap.value[i].id) {
+
+        el.troops = new Troops(
+          el,
+          troopsOnMap.value[i].color,
+        );
+        el.troops.player = troopsOnMap.value[i].player;
+        el.troops.soldiers = troopsOnMap.value[i].soldiers;
+        // el.troops.size = undefined;
+      }
+    }
+  });
+
+}
+
+
+
+
+
 const readTown = () => {
   hexAll.forEach((el, index) => {
     if (el.town && el.town.player === player) {
@@ -688,11 +739,10 @@ const paintTown = () => {
   hexAll.forEach((el, index) => {
     for (let i = 0; i < townsOnMap.value.length; i++) {
       if (index === townsOnMap.value[i].id) {
-        el.town = new Town(el, townsOnMap.value[i].color);
 
+        el.town = new Town(el, townsOnMap.value[i].color);
         el.town.player = townsOnMap.value[i].player;
         el.town.happiness = townsOnMap.value[i].happiness;
-
         el.childNodes[4].classList.add(`town${el.town.color}`);
 
         if (townsOnMap.value[i].port) el.town.buildStructure(`port`);
@@ -716,8 +766,27 @@ startGame.addEventListener(`click`, () => {
 endTurn.addEventListener(`click`, () => {
   readHex();
   readTown();
+  readTroops();
+
   publishMessage(hexesOnMap);
+  const hexJSON = JSON.stringify(hexesOnMap);
+  const messageHex = new TextEncoder().encode(hexJSON).length;
+  console.log(messageHex / 1024);
+
+
   publishMessage(townsOnMap);
+  const townJSON = JSON.stringify(townsOnMap);
+  // console.log(JSON.stringify(troopsOnMap).length);
+  const messageTown = new TextEncoder().encode(townJSON).length;
+  console.log(messageTown / 1024);
+
+
+  publishMessage(troopsOnMap);
+
+  const troopsJSON = JSON.stringify(troopsOnMap);
+  const messageTroops = new TextEncoder().encode(troopsJSON).length;
+  console.log(messageTroops / 1024);
+  
 
   hexesOnMapArr = [];
   townsOnMapArr = [];
@@ -732,3 +801,17 @@ endTurn.addEventListener(`click`, () => {
 
   endTurn.style.display = `none`;
 });
+
+
+
+// const chuj = [1, 2, 3, 4, 5];
+
+// const shits = chuj;
+
+// const gowno = shits.map(el => el*2);
+
+// console.log(`chuj`, chuj);
+// console.log(`shits`, shits);
+// console.log(`gowno`, gowno);
+
+
