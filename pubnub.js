@@ -3,7 +3,6 @@
 const UUID = prompt(`Jak masz na imie?`);
 // const UUID = `bart`;
 
-
 const firstDiv = document.getElementById(`firstDiv`);
 const lastDiv = document.getElementById(`lastDiv`);
 
@@ -69,12 +68,11 @@ sendPlayer.addEventListener(`click`, function () {
 const playerListener = (msg) => {
   console.log(`this is player BEFORE IF msg`, msg);
 
-  if (msg.name !== player.name)
-    window[`player` + msg.name] = msg;
+  if (msg.name !== player.name) window[`player` + msg.name] = msg;
 
-    if (msg.nr == 1) player1 = msg;
-    if (msg.nr == 2) player2 = msg;
-    if (msg.nr == 3) player3 = msg;
+  if (msg.nr == 1) player1 = msg;
+  if (msg.nr == 2) player2 = msg;
+  if (msg.nr == 3) player3 = msg;
 
   console.log(`this is player msg`, msg);
 
@@ -109,6 +107,17 @@ const resourceListener = (msg) => {
   window[`p` + msg.nr + `Global`].style.display = `block`;
 };
 
+
+const skillsListener = (msg) => {
+  const pXTechBtns = window[`p` + msg.nr + `TechBtns`];
+  msg.skills.forEach((el, index) => {
+    if (el.purchased && pXTechBtns[index].style.backgroundColor !== msg.color) {
+      pXTechBtns[index].style.backgroundColor = msg.color;
+    }
+  });
+};
+
+
 const turnListener = (msg) => {
   if (msg.turnActive === false) {
     player.turnActive = true;
@@ -126,10 +135,6 @@ const townListener = (msg) => {
   townsOnMap = msg;
   paintTown();
 };
-
-
-
-
 
 // const testListener = (msg) => {
 //   console.log(`msg before`, msg);
@@ -174,7 +179,6 @@ const setupPubNub = () => {
     },
 
     message: (messageEvent) => {
-
       // testListener(messageEvent.message.description);
 
       if (
@@ -186,6 +190,7 @@ const setupPubNub = () => {
 
         playerListener(messageEvent.message.description);
         resourceListener(messageEvent.message.description);
+        skillsListener(messageEvent.message.description);
 
         console.log(messageEvent);
       }
@@ -204,7 +209,6 @@ const setupPubNub = () => {
         messageEvent.message.description.nr === playersNumber
       )
         turnListener(messageEvent.message.description);
-
 
       // MAP Listener condition
       if (
@@ -281,6 +285,3 @@ const publishMessage = async (message) => {
 // window.onbeforeunload = function() {
 //     return `Dude`
 // }
-
-
-
