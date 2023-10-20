@@ -138,6 +138,7 @@ const townListener = (msg) => {
 
 const troopsListener = (msg) => {
   troopsOnMap = msg;
+  paintTroops();
 }
 
 // const testListener = (msg) => {

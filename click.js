@@ -660,10 +660,9 @@ const paintHex = () => {
 };
 
 
-
 const readTroops = () => {
   hexAll.forEach((el, index) => {
-    if (el.troops) {
+    if (el.troops && el.troops.player.nr === player.nr) {
       let troopOnMap = {
         type: el.troops.type,
         player: el.troops.player.nr,
@@ -676,7 +675,6 @@ const readTroops = () => {
 
       troopsOnMapArr.push(troopOnMap);
     }
-
     troopsOnMap = {
       type: `troops`,
       value: troopsOnMapArr,
@@ -690,22 +688,21 @@ const paintTroops = () => {
   hexAll.forEach((el, index) => {
     for (let i = 0; i < troopsOnMap.value.length; i++) {
       if (index === troopsOnMap.value[i].id) {
-
+        console.log(`iterate index PT`, index);
+        
         el.troops = new Troops(
           el,
           troopsOnMap.value[i].color,
         );
+
         el.troops.player = troopsOnMap.value[i].player;
         el.troops.soldiers = troopsOnMap.value[i].soldiers;
-        // el.troops.size = undefined;
+        el.troops.calcSize();
+        el.troops.showSoldierHex();
       }
     }
   });
-
 }
-
-
-
 
 
 const readTown = () => {
@@ -776,13 +773,11 @@ endTurn.addEventListener(`click`, () => {
 
   publishMessage(townsOnMap);
   const townJSON = JSON.stringify(townsOnMap);
-  // console.log(JSON.stringify(troopsOnMap).length);
   const messageTown = new TextEncoder().encode(townJSON).length;
   console.log(messageTown / 1024);
 
 
   publishMessage(troopsOnMap);
-
   const troopsJSON = JSON.stringify(troopsOnMap);
   const messageTroops = new TextEncoder().encode(troopsJSON).length;
   console.log(messageTroops / 1024);
@@ -801,17 +796,4 @@ endTurn.addEventListener(`click`, () => {
 
   endTurn.style.display = `none`;
 });
-
-
-
-// const chuj = [1, 2, 3, 4, 5];
-
-// const shits = chuj;
-
-// const gowno = shits.map(el => el*2);
-
-// console.log(`chuj`, chuj);
-// console.log(`shits`, shits);
-// console.log(`gowno`, gowno);
-
 
