@@ -2,9 +2,6 @@
 
 const res = [`food`, `wood`, `stone`, `gold`, `idea`, `culture`, `morale`];
 
-let childs;
-let foundRes;
-
 let p1TechBtns = Array.from(document.querySelectorAll(`#p1TechTree .tech-btn`));
 let p2TechBtns = Array.from(document.querySelectorAll(`#p2TechTree .tech-btn`));
 let p3TechBtns = Array.from(document.querySelectorAll(`#p3TechTree .tech-btn`));
@@ -53,7 +50,6 @@ const p3Skills = p3TechBtns.map((el, index) => ({
 }));
 
 const skillsTop = [];
-
 let clickedSkill;
 let clickedSkillIndex;
 
@@ -144,13 +140,14 @@ class Tree {
 
       for (let i = 0; i < res.length - 2; i++) {
         const techRes = player.resource[res[i]];
-
+        let childs;
+        let foundRes;
+        
         window[`p` + player.nr + `TechRes`].forEach((el, index) => {
           childs = Array.from(el.children);
           foundRes = childs.find((span) =>
             span.classList.contains(res[i] + `-icon`)
           );
-
           if (index === techRes) return (foundRes.style.display = `block`);
         });
       }
