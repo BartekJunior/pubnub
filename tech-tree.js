@@ -9,18 +9,17 @@ let p1TechBtns = Array.from(document.querySelectorAll(`#p1TechTree .tech-btn`));
 let p2TechBtns = Array.from(document.querySelectorAll(`#p2TechTree .tech-btn`));
 let p3TechBtns = Array.from(document.querySelectorAll(`#p3TechTree .tech-btn`));
 
-const p1TechRes = Array.from(
+window.p1TechRes = Array.from(
   document.querySelectorAll(`#p1TechTree > .tech-resource > .res`)
 );
-const p2TechRes = Array.from(
+window.p2TechRes = Array.from(
   document.querySelectorAll(`#p2TechTree > .tech-resource > .res`)
 );
-const p3TechRes = Array.from(
+window.p3TechRes = Array.from(
   document.querySelectorAll(`#p3TechTree > .tech-resource > .res`)
 );
 
 const resBg = Array.from(document.querySelectorAll(`.res-bg`));
-resBg.map((el) => (el.style.display = `none`));
 
 let skillsType = Array.from(
   document.querySelectorAll(`#p1TechTree .tech-info > h6`)
@@ -135,6 +134,26 @@ class Tree {
       window[
         `p` + player.nr + `TechTreeTitle`
       ].textContent = `Technology Tree ${player.name}`;
+
+      Tree.prototype.showResLine(player);
+    };
+
+    Tree.prototype.showResLine = (player) => {
+      // for all players. CHECKIT
+      resBg.map((el) => (el.style.display = `none`));
+
+      for (let i = 0; i < res.length - 2; i++) {
+        const techRes = player.resource[res[i]];
+
+        window[`p` + player.nr + `TechRes`].forEach((el, index) => {
+          childs = Array.from(el.children);
+          foundRes = childs.find((span) =>
+            span.classList.contains(res[i] + `-icon`)
+          );
+
+          if (index === techRes) return (foundRes.style.display = `block`);
+        });
+      }
     };
 
     Tree.prototype.showConfirmAdvance = (clickedSkill) => {
@@ -221,27 +240,6 @@ class Tree {
         hexAll.forEach((el) => {
           if (el.hex.vis) el.hex.checkCollectible();
         });
-      }
-    };
-
-    Tree.prototype.refreshResources = () => {
-      for (let i = 0; i < res.length - 2; i++) {
-
-        const techRes = this.player.resource[res[i]];
-
-        p1TechRes.forEach((el, index) => {
-          childs = Array.from(el.children);
-          console.log(`this is childs`, childs);
-
-          foundRes = childs.find((span) =>
-            span.classList.contains(res[i] + `-icon`)
-          );
-          console.log(`this is foundRed`, foundRes);
-
-          if (index === techRes) foundRes.style.display = `block`;
-        });
-
-        console.log(foundRes);
       }
     };
 
