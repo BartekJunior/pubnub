@@ -544,7 +544,6 @@ const checkAction = function () {
     hexAll.forEach((el) => el.classList.remove(`delete-click`));
     player.skills.forEach((el) => el.id.classList.remove(`delete-click`));
     player.turnActive = true;
-
   } else if (player.action <= 0) {
     hexAll.forEach((el) => el.classList.add(`delete-click`));
     player.skills.forEach((el) => el.id.classList.add(`delete-click`));
@@ -659,7 +658,6 @@ const paintHex = () => {
   });
 };
 
-
 const readTroops = () => {
   hexAll.forEach((el, index) => {
     if (el.troops && el.troops.player.nr === player.nr) {
@@ -668,49 +666,42 @@ const readTroops = () => {
         player: el.troops.player.nr,
         id: index,
         color: el.troops.color,
-        soldiers: el.troops.soldiers.map(item => {
-          return { ...item, id: index, player: player.nr}
-        })
-      }
+        soldiers: el.troops.soldiers.map((item) => {
+          return { ...item, id: index, player: player.nr };
+        }),
+      };
 
       troopsOnMapArr.push(troopOnMap);
     }
     troopsOnMap = {
       type: `troops`,
       value: troopsOnMapArr,
-    }
-  })
-}
-
-
+    };
+  });
+};
 
 const paintTroops = () => {
   hexAll.forEach((el, index) => {
     for (let i = 0; i < troopsOnMap.value.length; i++) {
       if (index === troopsOnMap.value[i].id) {
-        console.log(`iterate index PT`, index);
-        
-        el.troops = new Troops(
-          el,
-          troopsOnMap.value[i].color,
-        );
 
+        el.troops = new Troops(el, troopsOnMap.value[i].color);
         el.troops.player = troopsOnMap.value[i].player;
         el.troops.soldiers = troopsOnMap.value[i].soldiers;
+        el.troops.soldiers.forEach(item => item.id = el);
         el.troops.calcSize();
         el.troops.showSoldierHex();
       }
     }
   });
-}
-
+};
 
 const readTown = () => {
   hexAll.forEach((el, index) => {
     if (el.town && el.town.player === player) {
       let townOnMap = {
         type: el.town.type,
-        player: el.town.player,
+        player: el.town.player.nr,
         id: index,
         color: el.town.color,
         happiness: el.town.happiness,
@@ -736,7 +727,6 @@ const paintTown = () => {
   hexAll.forEach((el, index) => {
     for (let i = 0; i < townsOnMap.value.length; i++) {
       if (index === townsOnMap.value[i].id) {
-
         el.town = new Town(el, townsOnMap.value[i].color);
         el.town.player = townsOnMap.value[i].player;
         el.town.happiness = townsOnMap.value[i].happiness;
@@ -770,18 +760,15 @@ endTurn.addEventListener(`click`, () => {
   const messageHex = new TextEncoder().encode(hexJSON).length;
   console.log(messageHex / 1024);
 
-
   publishMessage(townsOnMap);
   const townJSON = JSON.stringify(townsOnMap);
   const messageTown = new TextEncoder().encode(townJSON).length;
   console.log(messageTown / 1024);
 
-
   publishMessage(troopsOnMap);
   const troopsJSON = JSON.stringify(troopsOnMap);
   const messageTroops = new TextEncoder().encode(troopsJSON).length;
   console.log(messageTroops / 1024);
-  
 
   hexesOnMapArr = [];
   townsOnMapArr = [];
@@ -796,4 +783,3 @@ endTurn.addEventListener(`click`, () => {
 
   endTurn.style.display = `none`;
 });
-
