@@ -277,8 +277,13 @@ class Town {
 
     //-------------- Collect Resource in Town --------------//
     this.possibleResource = () => {
+      const rectTown = this.id.getBoundingClientRect();
       let collectDistance;
       let collectDistanceBetha;
+      let rectPRArr = [];
+      let distanceFromTown = [];
+      let furtherHex = [];
+      let rectEl = [];
 
       if (this.player.skills[3].purchased) {
         collectDistance = 220;
@@ -310,10 +315,23 @@ class Town {
             hexAll[i].hex.resource,
             false
           );
+
           hexAll[i].possibleResource = possibleResource;
+          rectPRArr.push(hexAll[i].getBoundingClientRect());
+          rectEl.push(hexAll[i]);
         }
       }
 
+      for (let i = 0; i < rectPRArr.length; i++) {
+        distanceFromTown[i] = Math.sqrt(
+          Math.pow(rectPRArr[i].left - rectTown.left, 2) +
+            Math.pow(rectPRArr[i].top - rectTown.top, 2)
+        );
+
+        if (distanceFromTown[i] > 180) furtherHex.push(rectEl[i]);
+      }
+
+      console.log(`this is furtherHex`, furtherHex);
       town.id.hex.collectible = true;
     };
 
