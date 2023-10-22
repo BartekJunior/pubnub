@@ -471,12 +471,24 @@ collectResourceBtn.addEventListener(`click`, function () {
 });
 
 let clickedRes = [];
+let furtherHex = [];
 /// Collect tempResource with global variable arr. Middle collecting ///
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
-    if (el.possibleResource) el.possibleResource.collectTempResource();
+    // if dont have skill Husbandry
+    if (el.possibleResource && !el.possibleResource.further) {
+      el.possibleResource.collectTempResource();
+      el.possibleResource.deletePossibleResource();
+    }
+    // if have skill Husbandry
+    if (el.possibleResource && el.possibleResource.further) {
+      el.possibleResource.collectTempResource();
+      furtherHex.map(item => item.possibleResource.deletePossibleResource());
+      furtherHex = [];
+    }
   });
 });
+
 // Update GlobalResource. Last stage of collect
 confirmCollectBtn.addEventListener(`click`, function () {
   town.updateGlobalResource();
@@ -486,22 +498,6 @@ confirmCollectBtn.addEventListener(`click`, function () {
   Hud.prototype.townBtnEnable();
   window[`p` + player.nr + `ActionValue`].textContent = player.action;
 });
-
-// Cancel collect resources
-// cancelCollectBtn.addEventListener(`click`, function () {
-//   hexAll.forEach((el) => {
-//     if (el.possibleResource) {
-//       el.possibleResource.deleteTempResource();
-//       clickedRes = [];
-//       el.possibleResource.deletePossibleResource();
-//     }
-//   });
-
-//   Hud.prototype.townBtnEnable();
-//   Hud.prototype.hideContainerTempCollect();
-//   Hud.prototype.hideConfirmCollectBtn();
-//   Hud.prototype.hideCancelCollectBtn();
-// });
 
 cancelCollectBtn.addEventListener(`click`, () => {
   Town.prototype.cancelCollect();

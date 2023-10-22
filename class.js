@@ -281,9 +281,8 @@ class Town {
       let collectDistance;
       let collectDistanceBetha;
       let rectPRArr = [];
-      let distanceFromTown = [];
-      let furtherHex = [];
       let rectEl = [];
+      let distanceFromTown = [];
 
       if (this.player.skills[3].purchased) {
         collectDistance = 220;
@@ -331,9 +330,17 @@ class Town {
         if (distanceFromTown[i] > 180) furtherHex.push(rectEl[i]);
       }
 
+      furtherHex.map(el => el.possibleResource.further = true);
       console.log(`this is furtherHex`, furtherHex);
       town.id.hex.collectible = true;
+
+      rectPRArr = [];
+      rectEl = [];
+      distanceFromTown = [];
     };
+
+
+
 
     this.updateGlobalResource = () => {
       for (let i = 0; i < p1GlobalResourceDiv.length - 2; i++) {
@@ -692,6 +699,7 @@ class PossibleResource {
     this.id = id;
     this.resource = resource;
     this.collected = collected;
+    this.further = false;
 
     this.showPossibleResource = () => this.id.classList.add(`possible-collect`);
     this.deletePossibleResource = () => {

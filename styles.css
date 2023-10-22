@@ -752,7 +752,17 @@ h2 {
   width: 35px;
   height: 35px;
   margin-top: 22px;
+  border: 2px solid black;
+  border-radius: 3px;
   background-color: #fff;
+}
+
+.border-culture {
+  border: 3px solid #1d8ecf;
+}
+
+.border-morale {
+  border: 3px solid #f8ea23;
 }
 
 .exit-btn {
