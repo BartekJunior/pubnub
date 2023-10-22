@@ -202,6 +202,12 @@ class Tree {
       clickedSkill.id.disabled = true;
       Tree.prototype.skillAffect(clickedSkillIndex);
 
+      // Get morale or Culture instantly after Advance //
+      if (clickedSkill.id.classList.contains(`border-morale`)) this.player.resource.morale++;
+      if (clickedSkill.id.classList.contains(`border-culture`)) this.player.resource.culture++;
+      Hud.prototype.refreshCultureMorale();
+
+      
       // Unlock 3 more skills above //
       if (skillsTop.includes(clickedSkill)) {
         // Make sure to check if there's a next skill in the array.

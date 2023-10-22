@@ -330,7 +330,7 @@ class Town {
         if (distanceFromTown[i] > 180) furtherHex.push(rectEl[i]);
       }
 
-      furtherHex.map(el => el.possibleResource.further = true);
+      furtherHex.map((el) => (el.possibleResource.further = true));
       console.log(`this is furtherHex`, furtherHex);
       town.id.hex.collectible = true;
 
@@ -338,9 +338,6 @@ class Town {
       rectEl = [];
       distanceFromTown = [];
     };
-
-
-
 
     this.updateGlobalResource = () => {
       for (let i = 0; i < p1GlobalResourceDiv.length - 2; i++) {
@@ -374,6 +371,7 @@ class Town {
         tempResource[res[i]] = 0;
         collecting[i].innerHTML = tempResource[res[i]];
       }
+
       hexAll.forEach((el) => {
         if (el.possibleResource) el.possibleResource.deletePossibleResource();
       });
@@ -817,5 +815,15 @@ class Hud {
     // Rotate Area
     Hud.prototype.showRotateHud = () => (rotateHud.style.display = `block`);
     Hud.prototype.hideRotateHud = () => (rotateHud.style.display = `none`);
+
+    Hud.prototype.refreshCultureMorale = () => {
+      window[`p` + player.nr + `GlobalResourceDiv`][5].innerHTML =
+        player.resource.culture;
+      window[`p` + player.nr + `GlobalResourceDiv`][6].innerHTML =
+        player.resource.morale;
+    };
+
+
+    
   }
 }
