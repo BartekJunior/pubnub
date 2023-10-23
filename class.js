@@ -281,66 +281,119 @@ class Town {
     //-------------- Collect Resource in Town --------------//
     this.possibleResource = () => {
       const rectTown = this.id.getBoundingClientRect();
-      let collectDistance;
-      let collectDistanceBetha;
-      let rectPRArr = [];
-      let rectEl = [];
+      let rectHexArr = [];
       let distanceFromTown = [];
 
-      if (!this.player.skills[7].purchased) roadsCollect = 1
+      let rectEl = [];
+      let rectPRArr = [];
+
+      if (!this.player.skills[7].purchased) roadsCollect = 1;
       else if (this.player.skills[7].purchased) roadsCollect = 2;
 
-      if (this.player.skills[3].purchased) {
-        collectDistance = 220;
-        collectDistanceBetha = 240;
-      } else if (!this.player.skills[3].purchased) {
-        collectDistance = 130;
-      }
-
-      let offsetAll = [];
       for (let i = 0; i < hexAll.length; i++) {
-        offsetAll[i] = [hexAll[i].offsetLeft, hexAll[i].offsetTop];
-      }
+        rectHexArr.push(hexAll[i].getBoundingClientRect());
 
-      for (let i = 0; i < hexAll.length; i++) {
-        if (
-          (offsetAll[i][0] > this.id.offsetLeft - collectDistance &&
-            offsetAll[i][0] < this.id.offsetLeft + collectDistance &&
-            offsetAll[i][1] < this.id.offsetTop + collectDistance &&
-            offsetAll[i][1] > this.id.offsetTop - collectDistance) ||
-          (offsetAll[i][0] > this.id.offsetLeft - collectDistanceBetha &&
-            offsetAll[i][0] < this.id.offsetLeft + collectDistanceBetha &&
-            offsetAll[i][1] < this.id.offsetTop + 1 &&
-            offsetAll[i][1] > this.id.offsetTop - 1)
-        ) {
-          const possibleResource = new PossibleResource(
-            hexAll[i],
-            hexAll[i].hex.resource,
-            false
-          );
+        distanceFromTown[i] = Math.sqrt(
+          Math.pow(rectHexArr[i].left - rectTown.left, 2) +
+            Math.pow(rectHexArr[i].top - rectTown.top, 2)
+        );
 
-          hexAll[i].possibleResource = possibleResource;
-          rectPRArr.push(hexAll[i].getBoundingClientRect());
-          rectEl.push(hexAll[i]);
+        // console.log(`distance:`, distanceFromTown[i], `index:`, i);
+        if (distanceFromTown[i] < 150) closerHex.push(hexAll[i]);
+        if (this.player.skills[3].purchased) {
+          if (distanceFromTown[i] > 150 && distanceFromTown[i] < 225)
+            furtherHex.push(hexAll[i]);
         }
       }
 
-      for (let i = 0; i < rectPRArr.length; i++) {
-        distanceFromTown[i] = Math.sqrt(
-          Math.pow(rectPRArr[i].left - rectTown.left, 2) +
-            Math.pow(rectPRArr[i].top - rectTown.top, 2)
-        );
+      console.log(`closer:`, closerHex);
+      console.log(`further:`, furtherHex);
 
-        if (distanceFromTown[i] > 180) furtherHex.push(rectEl[i]);
+      for (let i = 0; i < closerHex.length; i++) {
+        const possibleResource = new PossibleResource(
+          closerHex[i],
+          closerHex[i].hex.resource,
+          false
+        );
+        closerHex[i].possibleResource = possibleResource;
       }
 
-      furtherHex.map((el) => (el.possibleResource.further = true));
-      console.log(`this is furtherHex`, furtherHex);
-      town.id.hex.collectible = true;
+      if (this.player.skills[3].purchased) {
+        for (let i = 0; i < furtherHex.length; i++) {
+          const possibleResource = new PossibleResource(
+            furtherHex[i],
+            furtherHex[i].hex.resource,
+            false,
+          );
+          furtherHex[i].possibleResource = possibleResource;
+          furtherHex[i].possibleResource.further = true;
+        }
+      }
 
-      rectPRArr = [];
-      rectEl = [];
       distanceFromTown = [];
+
+
+
+      // const possibleResource = new PossibleResource(
+      //   hexAll[i],
+      //   hexAll[i].hex.resource,
+      //   false
+      // );
+
+      // hexAll[i].possibleResource = possibleResource;
+
+      // rectPRArr.push(hexAll[i].getBoundingClientRect());
+      // rectEl.push(hexAll[i]);
+
+      // if (this.player.skills[3].purchased) {
+      //   collectDistance = 220;
+      //   collectDistanceBetha = 240;
+      // } else if (!this.player.skills[3].purchased) {
+      //   collectDistance = 130;
+      // }
+      // let offsetAll = [];
+      // for (let i = 0; i < hexAll.length; i++) {
+      //   offsetAll[i] = [hexAll[i].offsetLeft, hexAll[i].offsetTop];
+      // }
+      // for (let i = 0; i < hexAll.length; i++) {
+      //   if (
+      //     (offsetAll[i][0] > this.id.offsetLeft - collectDistance &&
+      //       offsetAll[i][0] < this.id.offsetLeft + collectDistance &&
+      //       offsetAll[i][1] < this.id.offsetTop + collectDistance &&
+      //       offsetAll[i][1] > this.id.offsetTop - collectDistance) ||
+      //     (offsetAll[i][0] > this.id.offsetLeft - collectDistanceBetha &&
+      //       offsetAll[i][0] < this.id.offsetLeft + collectDistanceBetha &&
+      //       offsetAll[i][1] < this.id.offsetTop + 1 &&
+      //       offsetAll[i][1] > this.id.offsetTop - 1)
+      //   ) {
+      //     const possibleResource = new PossibleResource(
+      //       hexAll[i],
+      //       hexAll[i].hex.resource,
+      //       false
+      //     );
+
+      //     hexAll[i].possibleResource = possibleResource;
+      //     rectPRArr.push(hexAll[i].getBoundingClientRect());
+      //     rectEl.push(hexAll[i]);
+      //   }
+      // }
+
+      // for (let i = 0; i < rectPRArr.length; i++) {
+      //   distanceFromTown[i] = Math.sqrt(
+      //     Math.pow(rectPRArr[i].left - rectTown.left, 2) +
+      //       Math.pow(rectPRArr[i].top - rectTown.top, 2)
+      //   );
+
+      //   if (distanceFromTown[i] > 180) furtherHex.push(rectEl[i]);
+      // }
+
+      // furtherHex.map((el) => (el.possibleResource.further = true));
+      // console.log(`this is furtherHex`, furtherHex);
+      // town.id.hex.collectible = true;
+
+      // rectPRArr = [];
+      // rectEl = [];
+      // distanceFromTown = [];
     };
 
     this.updateGlobalResource = () => {
@@ -388,11 +441,12 @@ class Town {
         if (el.possibleResource) {
           el.possibleResource.deleteTempResource();
           clickedRes = [];
-          furtherHex = [];
           el.possibleResource.deletePossibleResource();
         }
       });
 
+      closerHex = [];
+      furtherHex = [];
       Hud.prototype.townBtnEnable();
       Hud.prototype.hideContainerTempCollect();
       Hud.prototype.hideConfirmCollectBtn();

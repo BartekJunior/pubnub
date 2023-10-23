@@ -471,6 +471,7 @@ collectResourceBtn.addEventListener(`click`, function () {
 });
 
 let clickedRes = [];
+let closerHex = [];
 let furtherHex = [];
 let roadsCollect;
 /// Collect tempResource with global variable arr. Middle collecting ///
@@ -491,7 +492,6 @@ hexAll.forEach((el) => {
         furtherHex.map(item => item.possibleResource.deletePossibleResource());
         furtherHex = [];
       }
-      
     }
   });
 });
