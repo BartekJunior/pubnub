@@ -284,9 +284,6 @@ class Town {
       let rectHexArr = [];
       let distanceFromTown = [];
 
-      let rectEl = [];
-      let rectPRArr = [];
-
       if (!this.player.skills[7].purchased) roadsCollect = 1;
       else if (this.player.skills[7].purchased) roadsCollect = 2;
 
@@ -331,70 +328,9 @@ class Town {
       }
 
       distanceFromTown = [];
-
-
-
-      // const possibleResource = new PossibleResource(
-      //   hexAll[i],
-      //   hexAll[i].hex.resource,
-      //   false
-      // );
-
-      // hexAll[i].possibleResource = possibleResource;
-
-      // rectPRArr.push(hexAll[i].getBoundingClientRect());
-      // rectEl.push(hexAll[i]);
-
-      // if (this.player.skills[3].purchased) {
-      //   collectDistance = 220;
-      //   collectDistanceBetha = 240;
-      // } else if (!this.player.skills[3].purchased) {
-      //   collectDistance = 130;
-      // }
-      // let offsetAll = [];
-      // for (let i = 0; i < hexAll.length; i++) {
-      //   offsetAll[i] = [hexAll[i].offsetLeft, hexAll[i].offsetTop];
-      // }
-      // for (let i = 0; i < hexAll.length; i++) {
-      //   if (
-      //     (offsetAll[i][0] > this.id.offsetLeft - collectDistance &&
-      //       offsetAll[i][0] < this.id.offsetLeft + collectDistance &&
-      //       offsetAll[i][1] < this.id.offsetTop + collectDistance &&
-      //       offsetAll[i][1] > this.id.offsetTop - collectDistance) ||
-      //     (offsetAll[i][0] > this.id.offsetLeft - collectDistanceBetha &&
-      //       offsetAll[i][0] < this.id.offsetLeft + collectDistanceBetha &&
-      //       offsetAll[i][1] < this.id.offsetTop + 1 &&
-      //       offsetAll[i][1] > this.id.offsetTop - 1)
-      //   ) {
-      //     const possibleResource = new PossibleResource(
-      //       hexAll[i],
-      //       hexAll[i].hex.resource,
-      //       false
-      //     );
-
-      //     hexAll[i].possibleResource = possibleResource;
-      //     rectPRArr.push(hexAll[i].getBoundingClientRect());
-      //     rectEl.push(hexAll[i]);
-      //   }
-      // }
-
-      // for (let i = 0; i < rectPRArr.length; i++) {
-      //   distanceFromTown[i] = Math.sqrt(
-      //     Math.pow(rectPRArr[i].left - rectTown.left, 2) +
-      //       Math.pow(rectPRArr[i].top - rectTown.top, 2)
-      //   );
-
-      //   if (distanceFromTown[i] > 180) furtherHex.push(rectEl[i]);
-      // }
-
-      // furtherHex.map((el) => (el.possibleResource.further = true));
-      // console.log(`this is furtherHex`, furtherHex);
-      // town.id.hex.collectible = true;
-
-      // rectPRArr = [];
-      // rectEl = [];
-      // distanceFromTown = [];
     };
+
+
 
     this.updateGlobalResource = () => {
       for (let i = 0; i < p1GlobalResourceDiv.length - 2; i++) {
@@ -432,7 +368,10 @@ class Town {
       hexAll.forEach((el) => {
         if (el.possibleResource) el.possibleResource.deletePossibleResource();
       });
+
       clickedRes = [];
+      closerHex = [];
+      furtherHex = [];
       player.action--;
     };
 
