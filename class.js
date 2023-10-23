@@ -569,22 +569,21 @@ class Troops {
       //   }
       // --------------------------------------- //
 
-      const rectTown = this.id.getBoundingClientRect();
+      const rectTown = troopsPosition.getBoundingClientRect();
       let rectHexArr = [];
       let distanceFromTown = [];
 
       for (let i = 0; i < hexAll.length; i++) {
         rectHexArr.push(hexAll[i].getBoundingClientRect());
-
         distanceFromTown[i] = Math.sqrt(
           Math.pow(rectHexArr[i].left - rectTown.left, 2) +
             Math.pow(rectHexArr[i].top - rectTown.top, 2)
         );
 
         // console.log(`distance:`, distanceFromTown[i], `index:`, i);
-        if (distanceFromTown[i] < 150) closerHex.push(hexAll[i]);
+        if (distanceFromTown[i] < 150 && hexAll[i] !== troopsPosition) closerHex.push(hexAll[i]);
         if (this.player.skills[7].purchased) {
-          if (distanceFromTown[i] > 150 && distanceFromTown[i] < 225)
+          if (distanceFromTown[i] > 150 && distanceFromTown[i] < 225 && hexAll[i] !== troopsPosition && troopsPosition.town)
             furtherHex.push(hexAll[i]);
         }
       }

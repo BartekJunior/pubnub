@@ -166,20 +166,6 @@ hexAll.forEach((el) => {
       Hud.prototype.hideContainerRecruit();
       town = undefined;
     }
-
-    // else if (town && !el.possibleResource && !clickedRes.length) {
-    //   hexAll.forEach((el) => {
-    //     if (el.possibleResource) el.possibleResource.deletePossibleResource();
-    //     town.id.hex.collectible = false;
-    //   });
-    //   Hud.prototype.hideHudTown();
-    //   Hud.prototype.hideContainerStructure();
-    //   Hud.prototype.hideContainerRecruit();
-    //   Hud.prototype.hideContainerTempCollect();
-    //   Hud.prototype.hideConfirmCollectBtn();
-    //   Hud.prototype.hideCancelCollectBtn();
-    //   town = undefined;
-    // }
   });
 });
 
@@ -195,6 +181,7 @@ hexAll.forEach((el) => {
       alert(`Dokończ ruch jednostek albo Anuluj ruch`);
     } else {
       Troops.prototype.hideHudTroops();
+      // troopsPosition = undefined;
     }
 
     if (el.troops && el.troops.soldiers.some((el) => el.type === `merchant`)) {
@@ -263,7 +250,6 @@ exploreBtn.addEventListener(`click`, () => {
 // Click PossibleMove to move Troops, includes Groups, explore the map
 let moveCounter = 0;
 let moveDestination;
-let shit = [];
 
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
@@ -340,6 +326,9 @@ hexAll.forEach((el) => {
         troopsPosition = undefined;
         selectedSoldiers = [];
         groupHud = [];
+
+        closerHex = [];
+        furtherHex = [];
 
         moveCounter++;
         if (moveCounter === 1)
@@ -433,6 +422,7 @@ recruitBtn.addEventListener(`click`, function () {
 
 confirmRecruitBtn.addEventListener(`click`, function () {
   town.confirmRecruit();
+  troopsPosition = town.id;
   Hud.prototype.hideContainerRecruit();
   Hud.prototype.townBtnEnable();
 });
@@ -489,7 +479,9 @@ hexAll.forEach((el) => {
         el.possibleResource.collectTempResource();
       } else if (roadsCollect === 0) {
         el.possibleResource.collectTempResource();
-        furtherHex.map(item => item.possibleResource.deletePossibleResource());
+        furtherHex.map((item) =>
+          item.possibleResource.deletePossibleResource()
+        );
         furtherHex = [];
       }
     }
@@ -687,11 +679,10 @@ const paintTroops = () => {
   hexAll.forEach((el, index) => {
     for (let i = 0; i < troopsOnMap.value.length; i++) {
       if (index === troopsOnMap.value[i].id) {
-
         el.troops = new Troops(el, troopsOnMap.value[i].color);
         el.troops.player = troopsOnMap.value[i].player;
         el.troops.soldiers = troopsOnMap.value[i].soldiers;
-        el.troops.soldiers.forEach(item => item.id = el);
+        el.troops.soldiers.forEach((item) => (item.id = el));
         el.troops.calcSize();
         el.troops.showSoldierHex();
       }
@@ -786,3 +777,25 @@ endTurn.addEventListener(`click`, () => {
 
   endTurn.style.display = `none`;
 });
+
+
+
+
+
+
+// -------------- Animations --------------------- //
+
+hudGlobal.addEventListener("click", function () {
+  // Toggle the animation classes when the element is clicked
+  this.classList.toggle("animate__animated");
+  this.classList.toggle("animate__fadeIn");
+});
+
+hexAll.forEach((el) => {
+  el.addEventListener("click", function () {
+    // Toggle the animation classes when the element is clicked
+    this.classList.toggle("animate__animated");
+    this.classList.toggle("animate__fadeIn");
+  });
+});
+

@@ -129,3 +129,11 @@ setPlayer.addEventListener(`click`, function () {
   window[`p` + player.nr + `ActionValue`].textContent = player.action;
   window[`p` + player.nr + `Global`].style.display = `block`;
 });
+
+
+// ------------------------------------------------------------------------ //
+
+
+
+
+
