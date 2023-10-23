@@ -251,6 +251,11 @@ h2 {
   /* position: relative; */
 }
 
+.town-selected {
+  filter: saturate(2) brightness(0.7) contrast(2);
+}
+
+
 /* ------------ Soldier Colors ----------------- */
 .cavalryred {
   background-image: url(./img/cavalryred.png);
@@ -555,8 +560,6 @@ h2 {
 .tech-row-2 > .tech-card > .tech-container:nth-child(4) {
   height: 105px;
 }
-
-
 
 .skill-confirm-container {
   display: none;

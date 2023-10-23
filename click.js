@@ -137,16 +137,25 @@ hexAll.forEach((el, index) =>
   })
 );
 
-// ----- show/hide HUDTOWN  ----- //
+// ----- show/hide HUD TOWN  ----- //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
+    if (town) {
+      town.id.classList.remove(`town-selected`);
+      town = undefined;
+    }
+    if (el.town && el.town.player === player) {
+      town = undefined;
+      town = el.town;
+      town.id.classList.add(`town-selected`);
+    }
+
     if (
       el.town &&
       el.town.player === player &&
       hudTown.style.display === `none` &&
       rotateHud.style.display === `none`
     ) {
-      town = el.town;
       town.checkBuildedStructure();
       Hud.prototype.showHudTown();
     } else if (
@@ -164,7 +173,10 @@ hexAll.forEach((el) => {
       Hud.prototype.hideHudTown();
       Hud.prototype.hideContainerStructure();
       Hud.prototype.hideContainerRecruit();
-      town = undefined;
+      if (town) {
+        town.id.classList.remove(`town-selected`);
+        town = undefined;
+      }
     }
   });
 });
@@ -785,11 +797,11 @@ endTurn.addEventListener(`click`, () => {
 
 // -------------- Animations --------------------- //
 
-hudGlobal.addEventListener("click", function () {
-  // Toggle the animation classes when the element is clicked
-  this.classList.toggle("animate__animated");
-  this.classList.toggle("animate__fadeIn");
-});
+// hudGlobal.addEventListener("click", function () {
+//   // Toggle the animation classes when the element is clicked
+//   this.classList.toggle("animate__animated");
+//   this.classList.toggle("animate__fadeIn");
+// });
 
 hexAll.forEach((el) => {
   el.addEventListener("click", function () {
