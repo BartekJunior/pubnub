@@ -2,7 +2,6 @@
 
 // GLOBAL VARIABLES //
 let setNum = 1; // ID of each soldier
-let test;
 
 // CLASS HEX //
 class Hex {
@@ -19,16 +18,20 @@ class Hex {
       else if (this.land === `forest`) return (this.resource = `wood`);
       else if (this.land === `mountain`) return (this.resource = `stone`);
       else if (this.land === `plain`) return (this.resource = `food`);
-      else if (this.land === `water`) return (this.resource = `gold`);
+      else if (this.land === `water`) return (this.resource = `food`);
     };
 
     this.checkCollectible = () => {
-      if (this.land === `plain` && player.skills[2].purchased === false)
+      if (this.land === `plain` && !player.skills[2].purchased)
         return (this.collectible = false);
-      else if (this.land === `plain` && player.skills[2].purchased === true)
+      else if (this.land === `plain` && player.skills[2].purchased)
         return (this.collectible = true);
 
-      if (this.land === `water`) return (this.collectible = false);
+      if (this.land === `water` && !player.skills[8].purchased)
+        return (this.collectible = false);
+      else if (this.land === `water` && player.skills[8].purchased)
+        return (this.collectible = true);
+
       if (
         this.land === `grass` ||
         this.land === `forest` ||
@@ -284,6 +287,9 @@ class Town {
       let rectEl = [];
       let distanceFromTown = [];
 
+      if (!this.player.skills[7].purchased) roadsCollect = 1
+      else if (this.player.skills[7].purchased) roadsCollect = 2;
+
       if (this.player.skills[3].purchased) {
         collectDistance = 220;
         collectDistanceBetha = 240;
@@ -306,8 +312,6 @@ class Town {
             offsetAll[i][0] < this.id.offsetLeft + collectDistanceBetha &&
             offsetAll[i][1] < this.id.offsetTop + 1 &&
             offsetAll[i][1] > this.id.offsetTop - 1)
-
-          // hexAll[i].hex.collectible
         ) {
           const possibleResource = new PossibleResource(
             hexAll[i],
@@ -384,6 +388,7 @@ class Town {
         if (el.possibleResource) {
           el.possibleResource.deleteTempResource();
           clickedRes = [];
+          furtherHex = [];
           el.possibleResource.deletePossibleResource();
         }
       });
@@ -822,8 +827,5 @@ class Hud {
       window[`p` + player.nr + `GlobalResourceDiv`][6].innerHTML =
         player.resource.morale;
     };
-
-
-    
   }
 }

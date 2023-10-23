@@ -2,9 +2,15 @@
 
 const res = [`food`, `wood`, `stone`, `gold`, `idea`, `culture`, `morale`];
 
-window.p1TechBtns = Array.from(document.querySelectorAll(`#p1TechTree .tech-btn`));
-window.p2TechBtns = Array.from(document.querySelectorAll(`#p2TechTree .tech-btn`));
-window.p3TechBtns = Array.from(document.querySelectorAll(`#p3TechTree .tech-btn`));
+window.p1TechBtns = Array.from(
+  document.querySelectorAll(`#p1TechTree .tech-btn`)
+);
+window.p2TechBtns = Array.from(
+  document.querySelectorAll(`#p2TechTree .tech-btn`)
+);
+window.p3TechBtns = Array.from(
+  document.querySelectorAll(`#p3TechTree .tech-btn`)
+);
 
 window.p1TechRes = Array.from(
   document.querySelectorAll(`#p1TechTree > .tech-resource > .res`)
@@ -135,7 +141,6 @@ class Tree {
     };
 
     Tree.prototype.showResLine = (player) => {
-      // for all players. CHECKIT
       resBg.map((el) => (el.style.display = `none`));
 
       for (let i = 0; i < res.length - 2; i++) {
@@ -195,6 +200,8 @@ class Tree {
       });
     });
 
+ 
+
     // Click OK and make Advance //
     confirmAdvance.addEventListener(`click`, () => {
       clickedSkill.purchased = true;
@@ -203,11 +210,12 @@ class Tree {
       Tree.prototype.skillAffect(clickedSkillIndex);
 
       // Get morale or Culture instantly after Advance //
-      if (clickedSkill.id.classList.contains(`border-morale`)) this.player.resource.morale++;
-      if (clickedSkill.id.classList.contains(`border-culture`)) this.player.resource.culture++;
+      if (clickedSkill.id.classList.contains(`border-morale`))
+        this.player.resource.morale++;
+      if (clickedSkill.id.classList.contains(`border-culture`))
+        this.player.resource.culture++;
       Hud.prototype.refreshCultureMorale();
 
-      
       // Unlock 3 more skills above //
       if (skillsTop.includes(clickedSkill)) {
         // Make sure to check if there's a next skill in the array.
@@ -240,6 +248,13 @@ class Tree {
     Tree.prototype.skillAffect = (clickedSkillIndex) => {
       // Irigation //
       if (clickedSkillIndex === 2) {
+        hexAll.forEach((el) => {
+          if (el.hex.vis) el.hex.checkCollectible();
+        });
+      }
+
+      // Fishing //
+      if (clickedSkillIndex === 8) {
         hexAll.forEach((el) => {
           if (el.hex.vis) el.hex.checkCollectible();
         });

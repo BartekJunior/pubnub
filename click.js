@@ -472,19 +472,26 @@ collectResourceBtn.addEventListener(`click`, function () {
 
 let clickedRes = [];
 let furtherHex = [];
+let roadsCollect;
 /// Collect tempResource with global variable arr. Middle collecting ///
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
-    // if dont have skill Husbandry
+    // if dont use skill Husbandry
     if (el.possibleResource && !el.possibleResource.further) {
       el.possibleResource.collectTempResource();
       el.possibleResource.deletePossibleResource();
     }
-    // if have skill Husbandry
-    if (el.possibleResource && el.possibleResource.further) {
-      el.possibleResource.collectTempResource();
-      furtherHex.map(item => item.possibleResource.deletePossibleResource());
-      furtherHex = [];
+    // if use skill Husbandry
+    if (el.possibleResource && el.possibleResource.further && el.hex.vis) {
+      roadsCollect--;
+      if (roadsCollect > 0) {
+        el.possibleResource.collectTempResource();
+      } else if (roadsCollect === 0) {
+        el.possibleResource.collectTempResource();
+        furtherHex.map(item => item.possibleResource.deletePossibleResource());
+        furtherHex = [];
+      }
+      
     }
   });
 });
