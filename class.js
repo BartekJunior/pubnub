@@ -379,11 +379,11 @@ class Town {
       hexAll.forEach((el) => {
         if (el.possibleResource) {
           el.possibleResource.deleteTempResource();
-          clickedRes = [];
           el.possibleResource.deletePossibleResource();
         }
       });
-
+      
+      clickedRes = [];
       closerHex = [];
       furtherHex = [];
       Hud.prototype.townBtnEnable();
