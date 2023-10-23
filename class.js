@@ -320,7 +320,7 @@ class Town {
           const possibleResource = new PossibleResource(
             furtherHex[i],
             furtherHex[i].hex.resource,
-            false,
+            false
           );
           furtherHex[i].possibleResource = possibleResource;
           furtherHex[i].possibleResource.further = true;
@@ -329,8 +329,6 @@ class Town {
 
       distanceFromTown = [];
     };
-
-
 
     this.updateGlobalResource = () => {
       for (let i = 0; i < p1GlobalResourceDiv.length - 2; i++) {
@@ -382,7 +380,7 @@ class Town {
           el.possibleResource.deletePossibleResource();
         }
       });
-      
+
       clickedRes = [];
       closerHex = [];
       furtherHex = [];
@@ -555,22 +553,66 @@ class Troops {
     };
 
     Troops.prototype.whereToGo = () => {
-      let offsetAll = [];
+      // let offsetAll = [];
+      // for (let i = 0; i < hexAll.length; i++) {
+      //   offsetAll[i] = [hexAll[i].offsetLeft, hexAll[i].offsetTop];
+      // }
+      // for (let i = 0; i < hexAll.length; i++) {
+      //   if (
+      //     offsetAll[i][0] > troopsPosition.offsetLeft - 130 &&
+      //     offsetAll[i][0] < troopsPosition.offsetLeft + 130 &&
+      //     offsetAll[i][1] < troopsPosition.offsetTop + 130 &&
+      //     offsetAll[i][1] > troopsPosition.offsetTop - 130 &&
+      //     hexAll[i] !== troopsPosition
+      //   ) {
+      //     hexAll[i].possibleMove = new PossibleMove(hexAll[i]);
+      //   }
+      // --------------------------------------- //
+
+      const rectTown = this.id.getBoundingClientRect();
+      let rectHexArr = [];
+      let distanceFromTown = [];
+
       for (let i = 0; i < hexAll.length; i++) {
-        offsetAll[i] = [hexAll[i].offsetLeft, hexAll[i].offsetTop];
-      }
-      for (let i = 0; i < hexAll.length; i++) {
-        if (
-          offsetAll[i][0] > troopsPosition.offsetLeft - 130 &&
-          offsetAll[i][0] < troopsPosition.offsetLeft + 130 &&
-          offsetAll[i][1] < troopsPosition.offsetTop + 130 &&
-          offsetAll[i][1] > troopsPosition.offsetTop - 130 &&
-          hexAll[i] !== troopsPosition
-        ) {
-          hexAll[i].possibleMove = new PossibleMove(hexAll[i]);
+        rectHexArr.push(hexAll[i].getBoundingClientRect());
+
+        distanceFromTown[i] = Math.sqrt(
+          Math.pow(rectHexArr[i].left - rectTown.left, 2) +
+            Math.pow(rectHexArr[i].top - rectTown.top, 2)
+        );
+
+        // console.log(`distance:`, distanceFromTown[i], `index:`, i);
+        if (distanceFromTown[i] < 150) closerHex.push(hexAll[i]);
+        if (this.player.skills[7].purchased) {
+          if (distanceFromTown[i] > 150 && distanceFromTown[i] < 225)
+            furtherHex.push(hexAll[i]);
         }
       }
+
+      console.log(`closer:`, closerHex);
+      console.log(`further:`, furtherHex);
+
+      for (let i = 0; i < closerHex.length; i++) {
+        const possibleMove = new PossibleMove(
+          closerHex[i],
+        );
+        closerHex[i].possibleMove = possibleMove;
+      }
+
+      if (this.player.skills[7].purchased) {
+        for (let i = 0; i < furtherHex.length; i++) {
+          const possibleMove = new PossibleMove(
+            furtherHex[i],
+          );
+          furtherHex[i].possibleMove = possibleMove;
+          furtherHex[i].possibleMove.further = true;
+        }
+      }
+
+      distanceFromTown = [];
     };
+
+
 
     this.showSoldierHex = () => {
       // console.log(this.id);
