@@ -140,7 +140,7 @@ hexAll.forEach((el, index) =>
 // ----- show/hide HUD TOWN  ----- //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
-    if (town) {
+    if (town && !el.possibleResource) {
       town.id.classList.remove(`town-selected`);
       town = undefined;
     }
