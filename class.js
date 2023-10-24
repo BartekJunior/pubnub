@@ -170,19 +170,16 @@ class Town {
       }
     };
 
-    this.structurePlace = (building) => {
-      if (building === `fortress`) return 1;
-      else if (building === `obelisk`) return 0;
-      else if (building === `temple`) return 2;
-      else if (building === `observatory`) return 6;
-      else if (building === `market`) return 3;
-      else if (building === `academy`) return 5;
-      else if (building === `port`) return 7;
+    this.structurePlace = (size) => {
+      if (size === 1) return 1;
+      else if (size === 2) return 3;
+      else if (size === 3) return 5;
+      else if (size === 4) return 7;
     };
 
     this.buildStructure = (building) => {
       if (this.size < 5) {
-        this.id.childNodes[this.structurePlace(building)].classList.add(
+        this.id.childNodes[this.structurePlace(this.size)].classList.add(
           building
         );
         this.structure[building] = true;
