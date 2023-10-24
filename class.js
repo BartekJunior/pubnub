@@ -580,29 +580,35 @@ class Troops {
             Math.pow(rectHexArr[i].top - rectTown.top, 2)
         );
 
-        // console.log(`distance:`, distanceFromTown[i], `index:`, i);
-        if (distanceFromTown[i] < 150 && hexAll[i] !== troopsPosition) closerHex.push(hexAll[i]);
+        if (distanceFromTown[i] < 150 && hexAll[i] !== troopsPosition)
+          closerHex.push(hexAll[i]);
         if (this.player.skills[7].purchased) {
-          if (distanceFromTown[i] > 150 && distanceFromTown[i] < 225 && hexAll[i] !== troopsPosition && troopsPosition.town)
-            furtherHex.push(hexAll[i]);
+          if (
+            distanceFromTown[i] > 150 &&
+            distanceFromTown[i] < 225 &&
+            hexAll[i] !== troopsPosition
+          )
+            roadsHex.push(hexAll[i]);
         }
       }
 
+      roadsHex.map((el) => {
+        if (troopsPosition.town) furtherHex.push(el);
+        if (el.town) furtherHex.push(el);
+      });
+
       console.log(`closer:`, closerHex);
       console.log(`further:`, furtherHex);
+      console.log(`roads:`, roadsHex);
 
       for (let i = 0; i < closerHex.length; i++) {
-        const possibleMove = new PossibleMove(
-          closerHex[i],
-        );
+        const possibleMove = new PossibleMove(closerHex[i]);
         closerHex[i].possibleMove = possibleMove;
       }
 
       if (this.player.skills[7].purchased) {
         for (let i = 0; i < furtherHex.length; i++) {
-          const possibleMove = new PossibleMove(
-            furtherHex[i],
-          );
+          const possibleMove = new PossibleMove(furtherHex[i]);
           furtherHex[i].possibleMove = possibleMove;
           furtherHex[i].possibleMove.further = true;
         }
@@ -610,8 +616,6 @@ class Troops {
 
       distanceFromTown = [];
     };
-
-
 
     this.showSoldierHex = () => {
       // console.log(this.id);

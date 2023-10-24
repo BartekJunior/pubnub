@@ -237,6 +237,9 @@ cancelMoveBtn.addEventListener("click", function () {
   groupHud = [];
   selectedSoldiers = [];
   PossibleMove.prototype.deletePossibleMove();
+  closerHex = [];
+  furtherHex = [];
+  roadsHex = [];
   console.log("Move canceled");
 });
 
@@ -341,6 +344,7 @@ hexAll.forEach((el) => {
 
         closerHex = [];
         furtherHex = [];
+        roadsHex = [];
 
         moveCounter++;
         if (moveCounter === 1)
@@ -472,11 +476,14 @@ collectResourceBtn.addEventListener(`click`, function () {
   Hud.prototype.showCancelCollectBtn();
 });
 
+
+/// Collect tempResource with global variables. Middle collecting ///
 let clickedRes = [];
 let closerHex = [];
 let furtherHex = [];
+let roadsHex = [];
 let roadsCollect;
-/// Collect tempResource with global variable arr. Middle collecting ///
+
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     // if dont use skill Husbandry
@@ -495,6 +502,7 @@ hexAll.forEach((el) => {
           item.possibleResource.deletePossibleResource()
         );
         furtherHex = [];
+        roadsHex = [];
       }
     }
   });
@@ -803,11 +811,11 @@ endTurn.addEventListener(`click`, () => {
 //   this.classList.toggle("animate__fadeIn");
 // });
 
-hexAll.forEach((el) => {
-  el.addEventListener("click", function () {
-    // Toggle the animation classes when the element is clicked
-    this.classList.toggle("animate__animated");
-    this.classList.toggle("animate__fadeIn");
-  });
-});
+// hexAll.forEach((el) => {
+//   el.addEventListener("click", function () {
+//     // Toggle the animation classes when the element is clicked
+//     this.classList.toggle("animate__animated");
+//     this.classList.toggle("animate__fadeIn");
+//   });
+// });
 
