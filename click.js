@@ -315,7 +315,8 @@ hexAll.forEach((el) => {
           el.troops.showSoldierHex();
         } else if (el.town) {
           //when go into Town
-          el.childNodes[8].classList.add(`bg-black`);
+          el.troops.showSoldierHex();
+          // el.childNodes[8].classList.add(`bg-black`);
         }
 
         if (!troopsPosition.town) {
@@ -336,6 +337,8 @@ hexAll.forEach((el) => {
         if (troopsPosition.town && !troopsPosition.troops) {
           //move whole group from Town, remove soldier on Map Town
           troopsPosition.childNodes[8].classList.remove(`bg-black`);
+          // troopsPosition.troops.showSoldierHex();
+
         }
 
         troopsPosition = undefined;

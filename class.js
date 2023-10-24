@@ -252,8 +252,12 @@ class Town {
         this.id.troops.soldiers.push(...tempSoldiers);
         tempSoldiers = [];
         this.id.troops.calcSize();
-        this.id.childNodes[8].classList.add(`bg-black`);
-        // this.id.troops.showSoldierHex();
+
+
+        // this.id.childNodes[8].classList.add(`bg-black`);
+        this.id.troops.showSoldierHex();
+
+
         Troops.prototype.hideHudTroops();
         Hud.prototype.showMoveBtnContainer();
         this.id.troops.showHudTroops();
@@ -615,29 +619,47 @@ class Troops {
     };
 
     this.showSoldierHex = () => {
-      // console.log(this.id);
-      this.id.childNodes.forEach((el) => {
-        while (el.classList.length > 1 && !this.id.town) {
-          el.classList.remove(el.classList.item(1)); // Remove the class at index 1 (second class)
+      const smallHexSoldier = [0, 2, 6, 8];
+
+      if (!this.id.town) {
+        // console.log(this.id);
+        this.id.childNodes.forEach((el) => {
+          while (el.classList.length > 1) {
+            el.classList.remove(el.classList.item(1)); // Remove the class at index 1 (second class)
+          }
+        });
+      }
+        
+      if (this.id.town) {
+      this.id.childNodes.forEach((el, index) => {
+        if (index === 0 || index === 2 || index === 6 || index ===8) {
+          while (el.classList.length > 1) {
+            el.classList.remove(el.classList.item(1)); // Remove the class at index 1 (second class)
+          }
         }
       });
-
-      for (let i = 0, j = 1; i < this.soldiers.length; i++, j = j + 2) {
+    }
+        
+      for (let i = 0, j = 0; i < this.soldiers.length; i++, j++) {
         // console.log(this.id.childNodes[j]);
         if (this.soldiers[i].type === `merchant`) {
           this.id.childNodes[4].classList.add(
             `merchant` + this.color,
             `soldierHex`
           );
-          j = j - 2;
+          j = j - 1;
         } else if (this.soldiers[i].type !== `merchant`) {
-          this.id.childNodes[j].classList.add(
+          this.id.childNodes[smallHexSoldier[j]].classList.add(
             this.soldiers[i].type + this.soldiers[i].color,
             `soldierHex`
           );
         }
       }
+
+
     };
+
+
 
     this.calcSize = function () {
       const fightSoldier = this.soldiers.filter((el) => el.type !== `merchant`);
