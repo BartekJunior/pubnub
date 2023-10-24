@@ -281,7 +281,6 @@ hexAll.forEach((el) => {
             console.log(exploredArea);
           }
         });
-
         Hex.prototype.finalExplore();
       }
 
@@ -309,36 +308,16 @@ hexAll.forEach((el) => {
           (soldier) => !selectedSoldiers.includes(soldier)
         );
 
-        // Draw soldiers on Map //
-        if (!el.town) {
-          //when go into not Town
-          el.troops.showSoldierHex();
-        } else if (el.town) {
-          //when go into Town
-          el.troops.showSoldierHex();
-          // el.childNodes[8].classList.add(`bg-black`);
-        }
-
-        if (!troopsPosition.town) {
-          //when go not from Town
-          troopsPosition.troops.showSoldierHex();
-        }
+        troopsPosition.troops.showSoldierHex();
+        moveDestination.troops.showSoldierHex();
 
         el.troops.calcSize();
         troopsPosition.troops.calcSize();
         PossibleMove.prototype.deletePossibleMove();
 
-        // Hud.prototype.hideHudTown();
-
         if (troopsPosition.troops.soldiers.length === 0) {
           //move whole group, delete troops
           troopsPosition.troops.deleteTroops();
-        }
-        if (troopsPosition.town && !troopsPosition.troops) {
-          //move whole group from Town, remove soldier on Map Town
-          troopsPosition.childNodes[8].classList.remove(`bg-black`);
-          // troopsPosition.troops.showSoldierHex();
-
         }
 
         troopsPosition = undefined;

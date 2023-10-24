@@ -428,7 +428,8 @@ class Merchant {
             el.classList.remove(el.classList.item(1)); // Remove the class at index 1 (second class)
           }
           if (this.id.troops.soldiers && this.id.troops.soldiers.length > 0) {
-            this.id.childNodes[8].classList.add(`bg-black`);
+            this.id.troops.showSoldierHex();
+            // this.id.childNodes[8].classList.add(`bg-black`);
           }
         });
         console.log(`this.id.troops.soldiers`, this.id.troops.soldiers);
@@ -642,7 +643,7 @@ class Troops {
         
       for (let i = 0, j = 0; i < this.soldiers.length; i++, j++) {
         // console.log(this.id.childNodes[j]);
-        if (this.soldiers[i].type === `merchant`) {
+        if (this.soldiers[i].type === `merchant` && !this.id.town) {
           this.id.childNodes[4].classList.add(
             `merchant` + this.color,
             `soldierHex`
@@ -656,10 +657,7 @@ class Troops {
         }
       }
 
-
     };
-
-
 
     this.calcSize = function () {
       const fightSoldier = this.soldiers.filter((el) => el.type !== `merchant`);
