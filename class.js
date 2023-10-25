@@ -253,10 +253,8 @@ class Town {
         tempSoldiers = [];
         this.id.troops.calcSize();
 
-
         // this.id.childNodes[8].classList.add(`bg-black`);
         this.id.troops.showSoldierHex();
-
 
         Troops.prototype.hideHudTroops();
         Hud.prototype.showMoveBtnContainer();
@@ -630,17 +628,16 @@ class Troops {
           }
         });
       }
-        
       if (this.id.town) {
-      this.id.childNodes.forEach((el, index) => {
-        if (index === 0 || index === 2 || index === 6 || index ===8) {
-          while (el.classList.length > 1) {
-            el.classList.remove(el.classList.item(1)); // Remove the class at index 1 (second class)
+        this.id.childNodes.forEach((el, index) => {
+          if (index === 0 || index === 2 || index === 6 || index === 8) {
+            while (el.classList.length > 1) {
+              el.classList.remove(el.classList.item(1)); // Remove the class at index 1 (second class)
+            }
           }
-        }
-      });
-    }
-        
+        });
+      }
+
       for (let i = 0, j = 0; i < this.soldiers.length; i++, j++) {
         // console.log(this.id.childNodes[j]);
         if (this.soldiers[i].type === `merchant` && !this.id.town) {
@@ -656,7 +653,6 @@ class Troops {
           );
         }
       }
-
     };
 
     this.calcSize = function () {
