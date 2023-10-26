@@ -1,10 +1,7 @@
-body {
-  background-color: aquamarine;
-}
 
 body {
   background-color: azure;
-  padding-top: 50px;
+  padding: 50px 0;
 
   -webkit-touch-callout: none;
   /* iOS Safari */
@@ -50,6 +47,8 @@ h2 {
 } */
 
 .hex {
+  width: 120px;
+  height: 138px;
   display: inline-grid;
   grid-template-columns: repeat(3, 40px);
   /* grid-template-columns: 43px 34px 43px; */
@@ -59,23 +58,24 @@ h2 {
   justify-items: center;
   justify-content: center;
   /* margin-left: -14px; */
-  /* border: 4px black solid; */
-
+  
   background-image: url(./img/hiddenMap2.webp);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 172%;
 
-  -webkit-clip-path: polygon(
+  /* -webkit-clip-path: polygon(
     50% 0%,
     95% 25%,
     95% 75%,
     50% 100%,
     5% 75%,
     5% 25%
-  );
-  clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+  ); */
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
 }
+
+
 
 .hex-small {
   width: 100%;
@@ -177,11 +177,11 @@ h2 {
 }
 
 .hex-row {
-  margin-top: -27px;
+  margin-top: -33px;
 }
 
 .hex-row.even {
-  margin-left: -54px;
+  margin-left: -62px;
 }
 
 /* ------------------------- */
