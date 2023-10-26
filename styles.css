@@ -45,17 +45,26 @@ h2 {
   margin: 0 auto;
 }
 
+/* .hex > .hex-small:nth-child(2), .hex-small:nth-child(5), .hex-small:nth-child(8) {
+  width: 30px;
+} */
+
 .hex {
   display: inline-grid;
   grid-template-columns: repeat(3, 40px);
+  /* grid-template-columns: 43px 34px 43px; */
   grid-template-rows: repeat(3, 40px);
   align-items: center;
   align-content: center;
   justify-items: center;
   justify-content: center;
-  margin-left: -14px;
-  background-color: rgb(190, 192, 192);
-  /* z-index: -99; */
+  /* margin-left: -14px; */
+  /* border: 4px black solid; */
+
+  background-image: url(./img/hiddenMap2.webp);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 172%;
 
   -webkit-clip-path: polygon(
     50% 0%,
@@ -67,6 +76,38 @@ h2 {
   );
   clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
 }
+
+.hex-small {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.hex > .hex-small:nth-child(1) {
+  background-color: yellow;
+}
+
+.hex > .hex-small:nth-child(2) {
+  background-color: rgb(70, 133, 57);
+}
+.hex > .hex-small:nth-child(3) {
+  background-color: rgb(58, 57, 133);
+}
+.hex > .hex-small:nth-child(4) {
+  background-color: rgb(124, 57, 133);
+}
+
+.hex > .hex-small:nth-child(5) {
+  background-color: rgb(36, 201, 192);
+}
+
+.hex > .hex-small:nth-child(9) {
+  background-color: rgb(160, 25, 66);
+}
+
+
+
+
 
 .hex-rotate {
   display: inline-grid;
@@ -131,13 +172,6 @@ h2 {
   opacity: 0.3;
 }
 
-.hex-small {
-  width: 38px;
-  height: 38px;
-  /* border: rgb(201, 196, 196) 1px dotted; */
-  pointer-events: none;
-}
-
 .delete-click {
   pointer-events: none;
 }
@@ -154,43 +188,42 @@ h2 {
 
 .class-mountain {
   background-color: rgb(65, 57, 57);
-  background-image: url(./img/mountain.jpg);
+  background-image: url(./img/hex/mountain.png);
   background-repeat: no-repeat;
-  background-position: center;
-  background-size: auto 150%;
+  background-position: center center;
+  background-size: 120%;
 }
 
 .class-forest {
   background-color: rgba(226, 12, 12, 0.555);
-  background-image: url(./img/forest2.jpg);
+  background-image: url(./img/hex/forest.png);
   background-repeat: no-repeat;
-  background-position: center;
-  /* background-size: cover; */
-  background-size: auto 160%;
+  background-position: center center;
+  background-size: 120%;
 }
 
 .class-grass {
   background-color: green;
-  background-image: url(./img/grass4.jpg);
+  background-image: url(./img/hex/grass.png);
   background-repeat: no-repeat;
-  background-position: -60px;
-  background-size: 150%;
+  background-position: center center;
+  background-size: 120%;
 }
 
 .class-water {
   background-color: blue;
-  background-image: url(./img/water.webp);
+  background-image: url(./img/hex/water.png);
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 100% 100%;
+  background-size: 120%;
 }
 
 .class-plain {
-  background-color: orange;
-  background-image: url(./img/plain3.jpg);
+  background-color: rgb(132, 197, 126);
+  background-image: url(./img/hex/plain.png);
   background-repeat: no-repeat;
-  background-position: center;
-  background-size: auto 180%;
+  background-position: center center;
+  background-size: 100%;
 }
 
 .class-idea {
@@ -254,7 +287,6 @@ h2 {
 .town-selected {
   filter: saturate(2) brightness(0.7) contrast(2);
 }
-
 
 /* ------------ Soldier Colors ----------------- */
 .cavalryred {
