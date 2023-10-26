@@ -42,10 +42,6 @@ h2 {
   margin: 0 auto;
 }
 
-/* .hex > .hex-small:nth-child(2), .hex-small:nth-child(5), .hex-small:nth-child(8) {
-  width: 30px;
-} */
-
 .hex {
   width: 120px;
   height: 138px;
@@ -85,24 +81,43 @@ h2 {
 
 
 
-/* .hex > .hex-small:nth-child(1) {
-  background-color: yellow;
+.hex > .hex-small:nth-child(1) {
+  /* background-color: yellow; */
+  background-position: right bottom;
 }
 .hex > .hex-small:nth-child(2) {
-  background-color: rgb(70, 133, 57);
+  /* background-color: rgb(70, 133, 57); */
+  background-position: center bottom;
 }
 .hex > .hex-small:nth-child(3) {
-  background-color: rgb(58, 57, 133);
+  /* background-color: rgb(58, 57, 133); */
+  background-position: left bottom;
 }
 .hex > .hex-small:nth-child(4) {
-  background-color: rgb(124, 57, 133);
+  /* background-color: rgb(124, 57, 133); */
+  background-position: right center;
 }
 .hex > .hex-small:nth-child(5) {
-  background-color: rgb(36, 201, 192);
+  /* background-color: rgb(36, 201, 192); */
+  background-position: center center;
+}
+
+.hex > .hex-small:nth-child(6) {
+  /* background-color: rgb(160, 25, 66); */
+  background-position: left bottom;
+}
+.hex > .hex-small:nth-child(7) {
+  /* background-color: rgb(160, 25, 66); */
+  background-position: right top;
+}
+.hex > .hex-small:nth-child(8) {
+  /* background-color: rgb(160, 25, 66); */
+  background-position: center top;
 }
 .hex > .hex-small:nth-child(9) {
-  background-color: rgb(160, 25, 66);
-} */
+  /* background-color: rgb(160, 25, 66); */
+  background-position: left top;
+}
 
 
 
@@ -185,7 +200,7 @@ h2 {
 /* ------------------------- */
 
 .class-mountain {
-  background-color: rgb(65, 57, 57);
+  background-color: rgb(126, 187, 118);
   background-image: url(./img/hex/mountain.png);
   background-repeat: no-repeat;
   background-position: center center;
@@ -201,7 +216,7 @@ h2 {
 }
 
 .class-grass {
-  background-color: green;
+  background-color: rgb(126, 187, 118);
   background-image: url(./img/hex/grass.png);
   background-repeat: no-repeat;
   background-position: center center;
@@ -259,26 +274,26 @@ h2 {
 }
 
 .townred {
-  background-image: url(./img/townred.png);
+  background-image: url(./img/buildings/townred.png);
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 110%;
+  background-size: 105%;
   /* position: relative; */
 }
 
 .towngreen {
-  background-image: url(./img/towngreen.png);
+  background-image: url(./img/buildings/towngreen.png);
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 110%;
+  background-size: 105%;
   /* position: relative; */
 }
 
 .townblue {
-  background-image: url(./img/townblue.png);
+  background-image: url(./img/buildings/townblue.png);
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 110%;
+  background-size: 105%;
   /* position: relative; */
 }
 
@@ -339,57 +354,43 @@ h2 {
 .fortress {
   background-image: url(./img/fortress.png);
   background-repeat: no-repeat;
-  background-position: center;
   background-size: 100%;
-  /* position: relative; */
 }
 
 .academy {
   background-image: url(./img/academy.png);
   background-repeat: no-repeat;
-  background-position: center;
   background-size: 100%;
-  /* position: relative; */
 }
 
 .port {
   background-image: url(./img/port.png);
   background-repeat: no-repeat;
-  background-position: center;
   background-size: 100%;
-  /* position: relative; */
 }
 
 .market {
   background-image: url(./img/market.png);
   background-repeat: no-repeat;
-  background-position: center;
   background-size: 100%;
-  /* position: relative; */
 }
 
 .obelisk {
   background-image: url(./img/obelisk.png);
   background-repeat: no-repeat;
-  background-position: center;
   background-size: 100%;
-  /* position: relative; */
 }
 
 .temple {
   background-image: url(./img/temple.png);
   background-repeat: no-repeat;
-  background-position: center;
   background-size: 100%;
-  /* position: relative; */
 }
 
 .observatory {
   background-image: url(./img/observatory.png);
   background-repeat: no-repeat;
-  background-position: center;
   background-size: 100%;
-  /* position: relative; */
 }
 
 /* ------------ HUD Town ----------------- */
@@ -549,10 +550,7 @@ h2 {
 .soldierHex {
   display: block;
   background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100%;
-  width: 40px;
-  height: 40px;
+  background-size: 75%;
 }
 .possible-move {
   opacity: 0.4;
