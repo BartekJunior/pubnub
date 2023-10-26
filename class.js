@@ -639,14 +639,17 @@ class Troops {
       }
 
       for (let i = 0, j = 0; i < this.soldiers.length; i++, j++) {
-        // console.log(this.id.childNodes[j]);
-        if (this.soldiers[i].type === `merchant` && !this.id.town) {
-          this.id.childNodes[4].classList.add(
-            `merchant` + this.color,
-            `soldierHex`
-          );
-          j = j - 1;
+        if (this.soldiers[i].type === `merchant`) {
+          if (!this.id.town) {
+            // console.log(`itaretate in merchant at index`, i, `this is J:`, j);
+            this.id.childNodes[4].classList.add(
+              `merchant` + this.color,
+              `soldierHex`
+            );
+            j = j - 1;
+          } else if (this.id.town) j--;
         } else if (this.soldiers[i].type !== `merchant`) {
+          // console.log(`itaretate in soldier at index`, i, `this is J:`, j);
           this.id.childNodes[smallHexSoldier[j]].classList.add(
             this.soldiers[i].type + this.soldiers[i].color,
             `soldierHex`
