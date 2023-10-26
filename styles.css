@@ -49,7 +49,7 @@ h2 {
 .hex {
   width: 120px;
   height: 138px;
-  display: inline-grid;
+  display: grid;
   grid-template-columns: repeat(3, 40px);
   /* grid-template-columns: 43px 34px 43px; */
   grid-template-rows: repeat(3, 40px);
@@ -57,25 +57,23 @@ h2 {
   align-content: center;
   justify-items: center;
   justify-content: center;
-  /* margin-left: -14px; */
+  margin-left: 2px;
   
   background-image: url(./img/hiddenMap2.webp);
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 172%;
+  background-size: 195%;
 
-  /* -webkit-clip-path: polygon(
+  -webkit-clip-path: polygon(
     50% 0%,
     95% 25%,
     95% 75%,
     50% 100%,
     5% 75%,
     5% 25%
-  ); */
+  );
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
 }
-
-
 
 .hex-small {
   width: 100%;
@@ -83,7 +81,10 @@ h2 {
   pointer-events: none;
 }
 
-.hex > .hex-small:nth-child(1) {
+
+
+
+/* .hex > .hex-small:nth-child(1) {
   background-color: yellow;
 }
 
@@ -103,9 +104,7 @@ h2 {
 
 .hex > .hex-small:nth-child(9) {
   background-color: rgb(160, 25, 66);
-}
-
-
+} */
 
 
 
@@ -177,6 +176,7 @@ h2 {
 }
 
 .hex-row {
+  display: flex;
   margin-top: -33px;
 }
 
@@ -191,7 +191,7 @@ h2 {
   background-image: url(./img/hex/mountain.png);
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: 120%;
+  background-size: 130%;
 }
 
 .class-forest {
@@ -199,7 +199,7 @@ h2 {
   background-image: url(./img/hex/forest.png);
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: 120%;
+  background-size: 130%;
 }
 
 .class-grass {
@@ -207,7 +207,7 @@ h2 {
   background-image: url(./img/hex/grass.png);
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: 120%;
+  background-size: 130%;
 }
 
 .class-water {
@@ -215,7 +215,7 @@ h2 {
   background-image: url(./img/hex/water.png);
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 120%;
+  background-size: 130%;
 }
 
 .class-plain {
@@ -223,7 +223,7 @@ h2 {
   background-image: url(./img/hex/plain.png);
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: 100%;
+  background-size: 115%;
 }
 
 .class-idea {
