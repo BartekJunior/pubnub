@@ -50,9 +50,11 @@ h2 {
   width: 120px;
   height: 138px;
   display: grid;
-  grid-template-columns: repeat(3, 40px);
-  /* grid-template-columns: 43px 34px 43px; */
-  grid-template-rows: repeat(3, 40px);
+  /* grid-template-columns: repeat(3, 40px); */
+  /* grid-template-rows: repeat(3, 46px); */
+  grid-template-columns: 42px 36px 42px;
+  grid-template-rows: 50px 38px 50px;
+
   align-items: center;
   align-content: center;
   justify-items: center;
@@ -83,11 +85,9 @@ h2 {
 
 
 
-
 /* .hex > .hex-small:nth-child(1) {
   background-color: yellow;
 }
-
 .hex > .hex-small:nth-child(2) {
   background-color: rgb(70, 133, 57);
 }
@@ -97,11 +97,9 @@ h2 {
 .hex > .hex-small:nth-child(4) {
   background-color: rgb(124, 57, 133);
 }
-
 .hex > .hex-small:nth-child(5) {
   background-color: rgb(36, 201, 192);
 }
-
 .hex > .hex-small:nth-child(9) {
   background-color: rgb(160, 25, 66);
 } */
@@ -195,7 +193,7 @@ h2 {
 }
 
 .class-forest {
-  background-color: rgba(226, 12, 12, 0.555);
+  background-color: rgba(48, 117, 42, 0.555);
   background-image: url(./img/hex/forest.png);
   background-repeat: no-repeat;
   background-position: center center;

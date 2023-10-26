@@ -297,7 +297,7 @@ class Town {
         // console.log(`distance:`, distanceFromTown[i], `index:`, i);
         if (distanceFromTown[i] < 150) closerHex.push(hexAll[i]);
         if (this.player.skills[3].purchased) {
-          if (distanceFromTown[i] > 150 && distanceFromTown[i] < 225)
+          if (distanceFromTown[i] > 150 && distanceFromTown[i] < 245)
             furtherHex.push(hexAll[i]);
         }
       }
@@ -585,7 +585,7 @@ class Troops {
         if (this.player.skills[7].purchased) {
           if (
             distanceFromTown[i] > 150 &&
-            distanceFromTown[i] < 225 &&
+            distanceFromTown[i] < 245 &&
             hexAll[i] !== troopsPosition
           )
             roadsHex.push(hexAll[i]);
