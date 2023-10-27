@@ -352,43 +352,17 @@ h2 {
 }
 
 /* ------------ Structure Images ----------------- */
-.fortress {
-  background-image: url(./img/fortress.png);
-  background-repeat: no-repeat;
-  background-size: 100%;
-}
-
-.academy {
-  background-image: url(./img/academy.png);
-  background-repeat: no-repeat;
-  background-size: 100%;
-}
-
-/* .port {
-  background-image: url(./img/buildings/test.png);
+/* .market {
+  background-image: url(./img/buildings/market.png);
   background-repeat: no-repeat;
   background-size: 100%;
 } */
 
-.port::before {
-  /* content: "";
-  background-image: url(./img/buildings/test.png);
-  background-repeat: no-repeat;
-  background-size: 100% auto; 
-  width: 100px; 
-  height: 100%; 
-  display: block;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -20px;
-  z-index: -1;  */
-
-
+.market::before {
   content: "";
-  background-image: url(./img/buildings/test.png);
+  background-image: url(./img/buildings/market.png);
   background-repeat: no-repeat;
-  background-size: 100% 110%;
+  background-size: 100% 100%;
   width: 45px;
   height: 45px;
   display: block;
@@ -396,34 +370,105 @@ h2 {
   left: 50%;
   transform: translateX(-50%);
   bottom: -7px;
-  z-index: -1; /* Place it behind the content */
-
-  
+  z-index: -1;
 }
 
-.market {
-  background-image: url(./img/market.png);
+
+.fortress::before {
+  content: "";
+  background-image: url(./img/buildings/fortress.png);
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: 100% 100%;
+  width: 45px;
+  height: 45px;
+  display: block;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -7px;
+  z-index: -1;
+
+  /* transform: rotate(-90deg); */
 }
 
-.obelisk {
-  background-image: url(./img/obelisk.png);
+
+.academy::before {
+  content: "";
+  background-image: url(./img/buildings/academy.png);
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: 100% 100%;
+  width: 45px;
+  height: 45px;
+  display: block;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -7px;
+  z-index: -1;
 }
 
-.temple {
-  background-image: url(./img/temple.png);
+.obelisk::before {
+  content: "";
+  background-image: url(./img/buildings/obelisk.png);
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: 100% 100%;
+  width: 45px;
+  height: 45px;
+  display: block;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -7px;
+  z-index: -1;
 }
 
-.observatory {
-  background-image: url(./img/observatory.png);
+.port::before {
+  content: "";
+  background-image: url(./img/buildings/port.png);
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: 100% 100%;
+  width: 45px;
+  height: 45px;
+  display: block;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -7px;
+  z-index: -1;
 }
+
+.temple::before {
+  content: "";
+  background-image: url(./img/buildings/temple.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 45px;
+  height: 45px;
+  display: block;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -7px;
+  z-index: -1;
+}
+
+.observatory::before {
+  content: "";
+  background-image: url(./img/buildings/observatory.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 45px;
+  height: 45px;
+  display: block;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -7px;
+  z-index: -1;
+}
+
+
+
 
 /* ------------ HUD Town ----------------- */
 .game-container {

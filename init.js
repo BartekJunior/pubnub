@@ -149,8 +149,27 @@ console.log(hexes);
 
 const bb = () => {
   hexes[0].childNodes[4].classList.add(`towngreen`);
+  hexes[0].childNodes[1].classList.add(`market`);
+  hexes[0].childNodes[3].classList.add(`fortress`);
+  hexes[0].childNodes[5].classList.add(`academy`);
+  hexes[0].childNodes[7].classList.add(`obelisk`);
 
-  hexes[0].childNodes[1].classList.add(`port`);
+  hexes[1].childNodes[4].classList.add(`towngreen`);
+  hexes[1].childNodes[3].classList.add(`market`);
+  hexes[1].childNodes[1].classList.add(`fortress`);
+  hexes[1].childNodes[7].classList.add(`academy`);
+  hexes[1].childNodes[5].classList.add(`obelisk`);
+
+
+  hexes[2].childNodes[4].classList.add(`towngreen`);
+  hexes[2].childNodes[3].classList.add(`observatory`);
+  hexes[2].childNodes[1].classList.add(`port`);
+  hexes[2].childNodes[7].classList.add(`temple`);
+
+
+
+
+
 
 }
 
