@@ -165,13 +165,17 @@ const bb = () => {
   hexes[2].childNodes[3].classList.add(`observatory`);
   hexes[2].childNodes[1].classList.add(`port`);
   hexes[2].childNodes[7].classList.add(`temple`);
+  hexes[2].childNodes[5].classList.add(`port`);
 
 
-
-
-
-
+  hexes[3].childNodes[4].classList.add(`towngreen`);
+  hexes[3].childNodes[1].classList.add(`observatory`);
+  hexes[3].childNodes[5].classList.add(`port`);
+  hexes[3].childNodes[3].classList.add(`temple`);
+  hexes[3].childNodes[7].classList.add(`port`);
 }
+
+// bb();
 
 
 

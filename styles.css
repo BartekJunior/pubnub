@@ -1,4 +1,3 @@
-
 body {
   background-color: azure;
   padding: 50px 0;
@@ -56,7 +55,7 @@ h2 {
   justify-items: center;
   justify-content: center;
   margin-left: 2px;
-  
+
   background-image: url(./img/hiddenMap2.webp);
   background-repeat: no-repeat;
   background-position: center;
@@ -79,48 +78,6 @@ h2 {
   pointer-events: none;
   position: relative;
 }
-
-
-
-.hex > .hex-small:nth-child(1) {
-  /* background-color: yellow; */
-  background-position: right bottom;
-}
-.hex > .hex-small:nth-child(2) {
-  /* background-color: rgb(70, 133, 57); */
-  background-position: center bottom;
-}
-.hex > .hex-small:nth-child(3) {
-  /* background-color: rgb(58, 57, 133); */
-  background-position: left bottom;
-}
-.hex > .hex-small:nth-child(4) {
-  /* background-color: rgb(124, 57, 133); */
-  background-position: right center;
-}
-.hex > .hex-small:nth-child(5) {
-  /* background-color: rgb(36, 201, 192); */
-  background-position: center center;
-}
-
-.hex > .hex-small:nth-child(6) {
-  /* background-color: rgb(160, 25, 66); */
-  background-position: left bottom;
-}
-.hex > .hex-small:nth-child(7) {
-  /* background-color: rgb(160, 25, 66); */
-  background-position: right top;
-}
-.hex > .hex-small:nth-child(8) {
-  /* background-color: rgb(160, 25, 66); */
-  background-position: center top;
-}
-.hex > .hex-small:nth-child(9) {
-  /* background-color: rgb(160, 25, 66); */
-  background-position: left top;
-}
-
-
 
 .hex-rotate {
   display: inline-grid;
@@ -352,123 +309,91 @@ h2 {
 }
 
 /* ------------ Structure Images ----------------- */
-/* .market {
-  background-image: url(./img/buildings/market.png);
+.hex > .hex-small:nth-child(2)::before,
+.hex-small:nth-child(4)::before,
+.hex-small:nth-child(6)::before,
+.hex-small:nth-child(8)::before {
+  content: "";
   background-repeat: no-repeat;
-  background-size: 100%;
-} */
+  background-size: 100% 100%;
+  width: 45px;
+  height: 45px;
+  display: block;
+}
 
 .market::before {
-  content: "";
   background-image: url(./img/buildings/market.png);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  width: 45px;
-  height: 45px;
-  display: block;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -7px;
-  z-index: -1;
 }
-
-
 .fortress::before {
-  content: "";
   background-image: url(./img/buildings/fortress.png);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  width: 45px;
-  height: 45px;
-  display: block;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -7px;
-  z-index: -1;
-
-  /* transform: rotate(-90deg); */
 }
-
-
 .academy::before {
-  content: "";
   background-image: url(./img/buildings/academy.png);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  width: 45px;
-  height: 45px;
-  display: block;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -7px;
-  z-index: -1;
 }
-
 .obelisk::before {
-  content: "";
   background-image: url(./img/buildings/obelisk.png);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  width: 45px;
-  height: 45px;
-  display: block;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -7px;
-  z-index: -1;
 }
-
 .port::before {
-  content: "";
   background-image: url(./img/buildings/port.png);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  width: 45px;
-  height: 45px;
-  display: block;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -7px;
-  z-index: -1;
 }
-
 .temple::before {
-  content: "";
   background-image: url(./img/buildings/temple.png);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  width: 45px;
-  height: 45px;
-  display: block;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -7px;
-  z-index: -1;
 }
-
 .observatory::before {
-  content: "";
   background-image: url(./img/buildings/observatory.png);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  width: 45px;
-  height: 45px;
-  display: block;
+}
+
+
+.hex > .hex-small:nth-child(2)::before {
   position: absolute;
+  bottom: -7px;
   left: 50%;
   transform: translateX(-50%);
-  bottom: -7px;
+  z-index: -1;
+}
+.hex > .hex-small:nth-child(4)::before {
+  position: absolute;
+  top: -5px;
+  left: 5px;
+  transform: rotate(-90deg);
+  z-index: -1;
+}
+.hex > .hex-small:nth-child(5) {
+  /* background-color: rgb(36, 201, 192); */
+  background-position: center center;
+}
+.hex > .hex-small:nth-child(6)::before {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  transform: rotate(90deg);
+  z-index: -1;
+}
+.hex > .hex-small:nth-child(8)::before {
+  position: absolute;
+  top: -7px;
+  left: -3px;
+  transform: rotate(180deg);
   z-index: -1;
 }
 
 
-
+.hex > .hex-small:nth-child(1) {
+  /* background-color: yellow; */
+  background-position: right bottom;
+}
+.hex > .hex-small:nth-child(3) {
+  /* background-color: rgb(58, 57, 133); */
+  background-position: left bottom;
+}
+.hex > .hex-small:nth-child(7) {
+  /* background-color: rgb(160, 25, 66); */
+  background-position: right top;
+}
+.hex > .hex-small:nth-child(9) {
+  /* background-color: rgb(160, 25, 66); */
+  background-position: left top;
+}
 
 /* ------------ HUD Town ----------------- */
 .game-container {
