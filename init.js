@@ -137,14 +137,24 @@ setPlayer.addEventListener(`click`, function () {
 
 
 // Testing soldiers //
-// const hexes = document.querySelectorAll(`.hex`);
-// console.log(hexes);
-// console.log(hexes[0].firstChild);
+const hexes = document.querySelectorAll(`.hex`);
+console.log(hexes);
 
 
 // hexes[0].childNodes[0].classList.add(`soldierHex`, `elephantgreen`);
 // hexes[0].childNodes[2].classList.add(`soldierHex`, `elephantgreen`);
 // hexes[0].childNodes[6].classList.add(`soldierHex`, `elephantgreen`);
 // hexes[0].childNodes[8].classList.add(`soldierHex`, `elephantgreen`);
+
+
+const bb = () => {
+  hexes[0].childNodes[4].classList.add(`towngreen`);
+
+  hexes[0].childNodes[1].classList.add(`port`);
+
+}
+
+
+
 
 
