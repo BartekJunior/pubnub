@@ -573,9 +573,8 @@ class Troops {
       let rectHexArr = [];
       let distanceFromTown = [];
 
-      console.log(`this`, this);
+      // console.log(`this`, this);
       
-
       for (let i = 0; i < hexAll.length; i++) {
         rectHexArr.push(hexAll[i].getBoundingClientRect());
         distanceFromTown[i] = Math.sqrt(
@@ -585,7 +584,7 @@ class Troops {
 
         if (distanceFromTown[i] < 150 && hexAll[i] !== troopsPosition)
           closerHex.push(hexAll[i]);
-        if (this.player.skills[7].purchased) {
+        if (player.skills[7].purchased) {
           if (
             distanceFromTown[i] > 150 &&
             distanceFromTown[i] < 245 &&
@@ -609,7 +608,7 @@ class Troops {
         closerHex[i].possibleMove = possibleMove;
       }
 
-      if (this.player.skills[7].purchased) {
+      if (player.skills[7].purchased) {
         for (let i = 0; i < furtherHex.length; i++) {
           const possibleMove = new PossibleMove(furtherHex[i]);
           furtherHex[i].possibleMove = possibleMove;
