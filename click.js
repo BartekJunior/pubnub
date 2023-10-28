@@ -214,7 +214,7 @@ startMoveBtn.addEventListener(`click`, function () {
 });
 
 confirmGroupBtn.addEventListener("click", () => {
-  Troops.prototype.whereToGo();
+  troopsPosition.troops.whereToGo();
 });
 
 confirmMoveBtn.addEventListener("click", function () {

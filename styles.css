@@ -308,7 +308,7 @@ h2 {
   background-image: url(./img/merchantblue.png);
 }
 
-/* ------------ Structure Images ----------------- */
+/* ------------ Buildings Images ----------------- */
 .hex > .hex-small:nth-child(2)::before,
 .hex-small:nth-child(4)::before,
 .hex-small:nth-child(6)::before,
@@ -321,26 +321,74 @@ h2 {
   display: block;
 }
 
-.market::before {
-  background-image: url(./img/buildings/market.png);
+
+/* green */
+.marketgreen::before {
+  background-image: url(./img/buildings/marketgreen.png);
 }
-.fortress::before {
-  background-image: url(./img/buildings/fortress.png);
+.fortressgreen::before {
+  background-image: url(./img/buildings/fortressgreen.png);
 }
-.academy::before {
-  background-image: url(./img/buildings/academy.png);
+.academygreen::before {
+  background-image: url(./img/buildings/academygreen.png);
 }
-.obelisk::before {
-  background-image: url(./img/buildings/obelisk.png);
+.obeliskgreen::before {
+  background-image: url(./img/buildings/obeliskgreen.png);
 }
-.port::before {
-  background-image: url(./img/buildings/port.png);
+.portgreen::before {
+  background-image: url(./img/buildings/portgreen.png);
 }
-.temple::before {
-  background-image: url(./img/buildings/temple.png);
+.templegreen::before {
+  background-image: url(./img/buildings/templegreen.png);
 }
-.observatory::before {
-  background-image: url(./img/buildings/observatory.png);
+.observatorygreen::before {
+  background-image: url(./img/buildings/observatorygreen.png);
+}
+
+/* red */
+.marketred::before {
+  background-image: url(./img/buildings/marketred.png);
+}
+.fortressred::before {
+  background-image: url(./img/buildings/fortressred.png);
+}
+.academyred::before {
+  background-image: url(./img/buildings/academyred.png);
+}
+.obeliskred::before {
+  background-image: url(./img/buildings/obeliskred.png);
+}
+.portred::before {
+  background-image: url(./img/buildings/portred.png);
+}
+.templered::before {
+  background-image: url(./img/buildings/templered.png);
+}
+.observatoryred::before {
+  background-image: url(./img/buildings/observatoryred.png);
+}
+
+/* blue */
+.marketblue::before {
+  background-image: url(./img/buildings/marketblue.png);
+}
+.fortressblue::before {
+  background-image: url(./img/buildings/fortressblue.png);
+}
+.academyblue::before {
+  background-image: url(./img/buildings/academyblue.png);
+}
+.obeliskblue::before {
+  background-image: url(./img/buildings/obeliskblue.png);
+}
+.portblue::before {
+  background-image: url(./img/buildings/portblue.png);
+}
+.templeblue::before {
+  background-image: url(./img/buildings/templeblue.png);
+}
+.observatoryblue::before {
+  background-image: url(./img/buildings/observatoryblue.png);
 }
 
 

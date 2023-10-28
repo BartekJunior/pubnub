@@ -180,7 +180,7 @@ class Town {
     this.buildStructure = (building) => {
       if (this.size < 5) {
         this.id.childNodes[this.structurePlace(this.size)].classList.add(
-          building
+          building + this.color
         );
         this.structure[building] = true;
         this.calcSize();
@@ -572,6 +572,9 @@ class Troops {
       const rectTown = troopsPosition.getBoundingClientRect();
       let rectHexArr = [];
       let distanceFromTown = [];
+
+      console.log(`this`, this);
+      
 
       for (let i = 0; i < hexAll.length; i++) {
         rectHexArr.push(hexAll[i].getBoundingClientRect());
