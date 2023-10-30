@@ -21,6 +21,10 @@ body {
   display: none;
 }
 
+button {
+  background-repeat: no-repeat;
+}
+
 .player-btn {
   display: inline-block;
   width: 150px;
@@ -36,6 +40,7 @@ h2 {
 
 /* ------------ HEX ----------------- */
 .hex-container {
+  padding-top: 20px;
   height: 500px;
   width: max-content;
   margin: 0 auto;
@@ -447,7 +452,12 @@ h2 {
 }
 
 .hud-global {
-  background-color: rgb(61, 107, 92);
+  margin: 0 auto;
+  background-image: url(./img/hud-background.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  border-radius: 10px;
 }
 
 .hud-merchant {
@@ -460,7 +470,18 @@ h2 {
 
 .hud-town-btn {
   width: 130px;
-  height: 50px;
+  height: 60px;
+  background-color: transparent;
+  border: none;
+  color: aliceblue;
+
+  background-image: url(./img/UI/button.png);
+  background-position: center center;
+  background-size: 100% 100%;
+}
+
+.hud-town-btn:hover {
+  background-image: url(./img/UI/button-hover.png);
 }
 
 .container-structure {
@@ -556,7 +577,7 @@ h2 {
   justify-content: center;
   gap: 5px;
   width: 100%;
-  padding-top: 14px;
+  margin-top: 20px;
 }
 
 .cards-container-item {
@@ -577,7 +598,6 @@ h2 {
   background-image: url(./img/UI/board-gold.png);
   color: #b99442;
 }
-
 .cards-btn,
 .goals-btn {
   background-image: url(./img/UI/board-silver.png);
@@ -586,7 +606,7 @@ h2 {
 .player-name {
   width: 30%;
   height: 40px;
-  margin: 0 auto 7px;
+  margin: 0 auto 9px;
   font-size: 18px;
   font-weight: bold;
   text-align: center;
@@ -639,24 +659,17 @@ h2 {
   background-size: 100% 100%;
 }
 
-
-.resource-container > :nth-child(1) {
+.resource-container > :nth-child(1), .action-container > :nth-child(1) {
   height: 30%;
 }
 
-.resource-container > :nth-child(2) {
+.resource-container > :nth-child(2), .action-container > :nth-child(2) {
   height: 70%;
-  padding-top: 7px;
+  font-size: 25px;
+  font-weight: bold;
+  padding-top: 4px;
 }
 
-.action-container > :nth-child(1) {
-  height: 30%;
-}
-
-.action-container > :nth-child(2) {
-  height: 70%;
-  padding-top: 7px;
-}
 
 .action-img {
   text-align: center;
@@ -666,7 +679,6 @@ h2 {
   height: min-content;
   text-align: center;
 }
-
 
 /* ------------ MAP GAMEPLAY  ----------------- */
 .soldierHex {
@@ -693,7 +705,6 @@ h2 {
 }
 
 /* ------------ TECHNOLOGY TREE  ----------------- */
-
 .tech-row-1 > .tech-card > .tech-container:nth-child(2) {
   height: 95px;
 }
@@ -741,7 +752,8 @@ h2 {
   max-width: 95%;
   padding: 30px;
   padding-bottom: 60px;
-  background-image: url(./img/paperNew90.jpg);
+  background-color: transparent;
+  background-image: url(./img/paperNew90.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;
