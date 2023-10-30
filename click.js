@@ -8,7 +8,7 @@ const p1Global = document.getElementById(`p1Global`);
 const p2Global = document.getElementById(`p2Global`);
 const p3Global = document.getElementById(`p3Global`);
 
-p1Global.style.display = `none`;
+// p1Global.style.display = `none`;
 p2Global.style.display = `none`;
 p3Global.style.display = `none`;
 
@@ -787,11 +787,11 @@ endTurn.addEventListener(`click`, () => {
 
 // -------------- Animations --------------------- //
 
-// hudGlobal.addEventListener("click", function () {
-//   // Toggle the animation classes when the element is clicked
-//   this.classList.toggle("animate__animated");
-//   this.classList.toggle("animate__fadeIn");
-// });
+hudGlobal.addEventListener("click", function () {
+  // Toggle the animation classes when the element is clicked
+  this.classList.toggle("animate__animated");
+  this.classList.toggle("animate__fadeIn");
+});
 
 // hexAll.forEach((el) => {
 //   el.addEventListener("click", function () {
@@ -801,3 +801,14 @@ endTurn.addEventListener(`click`, () => {
 //   });
 // });
 
+p1TreeBtn.addEventListener("mouseenter", function () {
+  // Add the animation classes when the mouse enters the element
+  this.classList.add("animate__animated");
+  this.classList.add("animate__fadeIn");
+});
+
+p1TreeBtn.addEventListener("mouseleave", function () {
+  // Remove the animation classes when the mouse leaves the element
+  this.classList.remove("animate__animated");
+  this.classList.remove("animate__fadeIn");
+});

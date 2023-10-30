@@ -321,7 +321,6 @@ h2 {
   display: block;
 }
 
-
 /* green */
 .marketgreen::before {
   background-image: url(./img/buildings/marketgreen.png);
@@ -391,7 +390,6 @@ h2 {
   background-image: url(./img/buildings/observatoryblue.png);
 }
 
-
 .hex > .hex-small:nth-child(2)::before {
   position: absolute;
   bottom: -7px;
@@ -424,7 +422,6 @@ h2 {
   transform: rotate(180deg);
   z-index: -1;
 }
-
 
 .hex > .hex-small:nth-child(1) {
   /* background-color: yellow; */
@@ -542,14 +539,56 @@ h2 {
   margin-top: 50px;
 }
 
+.player-global-container {
+  height: 220px;
+  padding: 15px;
+  background-image: url(./img/UI/board3.png);
+  background-repeat: no-repeat;
+  background-position: left -57px center;
+  background-size: 120% 112%;
+  color: aliceblue;
+  border-radius: 5px;
+}
+
+.cards-container-item {
+  width: 31%;
+  height: 70px;
+  background-color: transparent;
+  color: rgb(193, 197, 201);
+  font-weight: bold;
+  font-size: 20px;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  border: none;
+}
+
+.tree-btn {
+  background-image: url(./img/UI/board-gold.png);
+  color: #b99442;
+}
+
+.cards-btn,
+.goals-btn {
+  background-image: url(./img/UI/board-silver.png);
+}
+
 .player-name {
+  width: 30%;
+  height: 40px;
+  margin: 0 auto;
+  font-size: 18px;
+  font-weight: bold;
   text-align: center;
+  line-height: 40px;
+  border-radius: 5px;
 }
 
 .p1-resource-container {
   display: flex;
   width: auto;
-  background-color: #9edb9e;
+  /* background-color: #9edb9e; */
 }
 
 .resource-container {
@@ -569,31 +608,24 @@ h2 {
 }
 
 .action-img {
-  background-color: #2984b9;
+  /* background-color: #2984b9; */
   text-align: center;
 }
 
 .action-value {
-  background-color: #2984b9;
+  /* background-color: #2984b9; */
   height: 40px;
   text-align: center;
 }
 
 .cards-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 5px;
   width: 100%;
 }
 
 .p1-cards-container {
-}
-
-.cards-container-item {
-  width: 33%;
-  height: 70px;
-  border: 3px solid gray;
-  text-align: center;
-  line-height: 60px;
 }
 
 /* ------------ MAP GAMEPLAY  ----------------- */
