@@ -787,11 +787,11 @@ endTurn.addEventListener(`click`, () => {
 
 // -------------- Animations --------------------- //
 
-hudGlobal.addEventListener("click", function () {
-  // Toggle the animation classes when the element is clicked
-  this.classList.toggle("animate__animated");
-  this.classList.toggle("animate__fadeIn");
-});
+// hudGlobal.addEventListener("click", function () {
+//   // Toggle the animation classes when the element is clicked
+//   this.classList.toggle("animate__animated");
+//   this.classList.toggle("animate__fadeIn");
+// });
 
 // hexAll.forEach((el) => {
 //   el.addEventListener("click", function () {
@@ -801,14 +801,35 @@ hudGlobal.addEventListener("click", function () {
 //   });
 // });
 
-p1TreeBtn.addEventListener("mouseenter", function () {
-  // Add the animation classes when the mouse enters the element
-  this.classList.add("animate__animated");
-  this.classList.add("animate__fadeIn");
-});
 
-p1TreeBtn.addEventListener("mouseleave", function () {
-  // Remove the animation classes when the mouse leaves the element
-  this.classList.remove("animate__animated");
-  this.classList.remove("animate__fadeIn");
-});
+// Cards Goals Technology Buttons //
+const playerBtns = document.querySelectorAll(`.cards-container-item`);
+playerBtns.forEach(el => {
+  el.addEventListener("mouseenter", function () {
+    // Add the animation classes when the mouse enters the element
+    this.classList.add("animate__animated");
+    this.classList.add("animate__zoomIn");
+  });
+})
+
+playerBtns.forEach(el => {
+  p1Global.addEventListener("mouseleave", function () {
+    // Add the animation classes when the mouse enters the element
+    el.classList.remove("animate__animated");
+    el.classList.remove("animate__zoomIn");
+  });
+})
+
+
+
+
+// p1TreeBtn.addEventListener("mouseenter", function () {
+//   // Add the animation classes when the mouse enters the element
+//   this.classList.add("animate__animated");
+//   this.classList.add("animate__zoomIn");
+// });
+
+// p1Global.addEventListener("mouseleave", function () {
+//   p1TreeBtn.classList.remove("animate__animated");
+//   p1TreeBtn.classList.remove("animate__zoomIn");
+// });

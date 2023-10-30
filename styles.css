@@ -544,8 +544,9 @@ h2 {
   padding: 15px;
   background-image: url(./img/UI/board3.png);
   background-repeat: no-repeat;
-  background-position: left -57px center;
-  background-size: 120% 112%;
+  background-position: left -25px center;
+
+  background-size: 110% 112%;
   color: aliceblue;
   border-radius: 5px;
 }
