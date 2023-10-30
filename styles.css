@@ -540,8 +540,8 @@ h2 {
 }
 
 .player-global-container {
-  height: 220px;
-  padding: 15px;
+  height: 260px;
+  padding: 11px !important;
   background-image: url(./img/UI/board3.png);
   background-repeat: no-repeat;
   background-position: left -25px center;
@@ -549,6 +549,14 @@ h2 {
   background-size: 110% 112%;
   color: aliceblue;
   border-radius: 5px;
+}
+
+.cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  width: 100%;
+  padding-top: 14px;
 }
 
 .cards-container-item {
@@ -578,7 +586,7 @@ h2 {
 .player-name {
   width: 30%;
   height: 40px;
-  margin: 0 auto;
+  margin: 0 auto 7px;
   font-size: 18px;
   font-weight: bold;
   text-align: center;
@@ -586,48 +594,79 @@ h2 {
   border-radius: 5px;
 }
 
-.p1-resource-container {
+.resource-collection {
   display: flex;
   width: auto;
-  /* background-color: #9edb9e; */
 }
 
 .resource-container {
-  width: 80px;
+  width: 75px !important;
+  height: 75px !important;
   text-align: center;
+
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
 }
 
-.p1-resource-value,
-.p2-resource-value,
-.p3-resource-value {
-  width: 80px;
-  height: 40px;
+.food-container {
+  background-image: url(./img/UI/squares/square1.png);
 }
-
+.wood-container {
+  background-image: url(./img/UI/squares/square3.png);
+  margin-left: -5px;
+}
+.stone-container {
+  background-image: url(./img/UI/squares/square4.png);
+}
+.gold-container {
+  background-image: url(./img/UI/squares/square6.png);
+}
+.idea-container {
+  background-image: url(./img/UI/squares/square2.png);
+}
+.culture-container {
+  background-image: url(./img/UI/squares/square5.png);
+}
+.morale-container {
+  background-image: url(./img/UI/squares/square4.png);
+}
 .action-container {
-  width: 70px;
+  width: 75px;
+  background-image: url(./img/UI/squares/square7.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
+}
+
+
+.resource-container > :nth-child(1) {
+  height: 30%;
+}
+
+.resource-container > :nth-child(2) {
+  height: 70%;
+  padding-top: 7px;
+}
+
+.action-container > :nth-child(1) {
+  height: 30%;
+}
+
+.action-container > :nth-child(2) {
+  height: 70%;
+  padding-top: 7px;
 }
 
 .action-img {
-  /* background-color: #2984b9; */
   text-align: center;
 }
 
 .action-value {
-  /* background-color: #2984b9; */
-  height: 40px;
+  height: min-content;
   text-align: center;
 }
 
-.cards-container {
-  display: flex;
-  justify-content: center;
-  gap: 5px;
-  width: 100%;
-}
-
-.p1-cards-container {
-}
 
 /* ------------ MAP GAMEPLAY  ----------------- */
 .soldierHex {
