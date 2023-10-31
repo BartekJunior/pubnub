@@ -202,16 +202,32 @@ h2 {
   background-size: 115%;
 }
 
-.class-idea {
-  background-color: #2984b9;
+
+
+.container-temp-collect > .class-plain {
+  background-image: url(./img/resource/gold-bg.jpg);
 }
 
-.class-culture {
+.container-temp-collect > .class-idea {
+  background-image: url(./img/resource/idea-bg.jpg);
+  background-position: center center;
+  background-size: 100%;
+}
+
+.container-temp-collect > .class-culture {
   background-color: #6a93aabb;
+  background-image: url(./img/resource/vase.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: auto 90%;
 }
 
-.class-morale {
-  background-color: #04be3c;
+.container-temp-collect > .class-morale {
+  background-color: #928567;
+  background-image: url(./img/resource/morale.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: auto 80%;
 }
 
 /* ------------ TOWN Images ----------------- */
@@ -480,6 +496,15 @@ h2 {
   background-size: 100% 100%;
 }
 
+.hud-global .hud-town-btn[disabled] {
+  background-image: url(./img/UI/button-disabled.png);
+}
+
+/* button[disabled] {
+  background-color: black;
+} */
+
+
 .hud-town-btn:hover {
   background-image: url(./img/UI/button-hover.png);
 }
@@ -509,7 +534,9 @@ h2 {
 .collecting {
   width: 100px;
   height: 50px;
-  font-size: 20px;
+  line-height: 50px;
+  text-align: center;
+  font-size: 28px;
   font-weight: bold;
   color: bisque;
 }
@@ -740,7 +767,7 @@ h2 {
   height: 90px;
 
   background: linear-gradient(rgba(124, 17, 17, 0.7), rgba(99, 63, 63, 0.3)),
-    url(./img/oldPaper90.jpg);
+    url(./img/paperNew90.png);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1004,7 +1031,7 @@ h2 {
 }
 
 .morale-icon {
-  background-image: url(./img/resource/morale.jpg);
+  background-image: url(./img/resource/morale.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
