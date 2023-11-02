@@ -8,7 +8,7 @@ const p1Global = document.getElementById(`p1Global`);
 const p2Global = document.getElementById(`p2Global`);
 const p3Global = document.getElementById(`p3Global`);
 
-// p1Global.style.display = `none`;
+p1Global.style.display = `none`;
 p2Global.style.display = `none`;
 p3Global.style.display = `none`;
 

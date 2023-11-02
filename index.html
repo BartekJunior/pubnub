@@ -2472,10 +2472,10 @@
 
     <div class="col col-5 hud-global">
       <div class="hud-merchant">
-        <button class="settle-btn" id="settleBtn">Załóż Miasto</button>
+        <button class="hud-town-btn" id="settleBtn">Załóż Miasto</button>
       </div>
       <div class="hud-town">
-        <div class="">
+        <div class="hud-btn-container">
           <button class="hud-town-btn" id="collectResourceBtn">
             Zbierz zasoby
           </button>
@@ -2500,7 +2500,8 @@
             Anuluj Zbiór
           </button>
         </div>
-        <div class="container-structure" id="containerStructure">
+
+        <div class="hud-btn-container container-structure" id="containerStructure">
           <button class="hud-town-btn" id="academyBtn">Akademia</button>
           <button class="hud-town-btn" id="fortressBtn">Forteca</button>
           <button class="hud-town-btn" id="portBtn">Port</button>
@@ -2513,7 +2514,7 @@
           <button class="hud-town-btn" id="cancelBuild">Anuluj Budowę</button>
         </div>
 
-        <div class="container-structure" id="containerRecruit">
+        <div class="hud-btn-container container-structure" id="containerRecruit">
           <div class="soldier-div">
             <button class="hud-town-btn" id="merchantBtn">Merchant</button>
             <div class="soldier-img" id="merchantRecruitNr">Nr</div>
@@ -2533,21 +2534,22 @@
 
           <div class="" id="containerRecruitConfirm">
             <button disabled class="hud-town-btn" id="confirmRecruitBtn">
-              Potwierdź rekrutacje
+              Potwierdź Rekrutacje
             </button>
             <button class="hud-town-btn" id="cancelRecruitBtn">
-              Anuluj rekrutacje
+              Anuluj Rekrutacje
             </button>
           </div>
         </div>
       </div>
 
-      <div class="container-structure" id="hudTroops">
+      <div class="hud-btn-container container-structure" id="hudTroops">
         <div class="recruited-div" id="merchantRecruited"></div>
         <div class="recruited-div" id="infantryRecruited"></div>
         <div class="recruited-div" id="cavalryRecruited"></div>
         <div class="recruited-div" id="elephantRecruited"></div>
-        <div class="move-btn-container" id="moveBtnContainer">
+
+        <div class="hud-btn-container" id="moveBtnContainer">
           <button class="hud-town-btn" id="startMoveBtn">
             Rozpocznij Akcję Ruchu
           </button>
@@ -2559,6 +2561,7 @@
           </button>
           <button class="hud-town-btn" id="cancelMoveBtn">Anuluj ruch</button>
         </div>
+
       </div>
 
       <div class="hud-rotate-container" id="hudRotateContainer">

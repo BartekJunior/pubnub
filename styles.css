@@ -469,11 +469,21 @@ h2 {
 
 .hud-global {
   margin: 0 auto;
+  padding: 30px 20px;
   background-image: url(./img/hud-background.jpg);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
   border-radius: 10px;
+}
+
+.hud-btn-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 15px;
+  width: 100%;
+  padding: 20px 0;
 }
 
 .hud-merchant {
@@ -482,9 +492,11 @@ h2 {
 
 .hud-town {
   display: none;
+  padding: 10px 0;
 }
 
 .hud-town-btn {
+  display: block;
   width: 130px;
   height: 60px;
   background-color: transparent;
@@ -496,17 +508,17 @@ h2 {
   background-size: 100% 100%;
 }
 
-.hud-global .hud-town-btn[disabled] {
+.hud-town-btn[disabled] {
   background-image: url(./img/UI/button-disabled.png);
 }
 
-/* button[disabled] {
-  background-color: black;
-} */
-
-
 .hud-town-btn:hover {
   background-image: url(./img/UI/button-hover.png);
+}
+
+#settleBtn {
+  display: block;
+  margin: 0 auto 20px;
 }
 
 .container-structure {
@@ -515,10 +527,13 @@ h2 {
 
 .container-temp-collect {
   display: none;
+  margin-bottom: 20px;
 }
 
 .container-confirm {
   display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
 #confirmCollectBtn,
@@ -528,7 +543,7 @@ h2 {
 
 #confirmRecruitBtn,
 #cancelRecruitBtn {
-  display: block;
+  display: inline-block;
 }
 
 .collecting {
@@ -538,7 +553,7 @@ h2 {
   text-align: center;
   font-size: 28px;
   font-weight: bold;
-  color: bisque;
+  color: #fff;
 }
 
 /* ------------ HUD Troops ----------------- */
@@ -697,7 +712,6 @@ h2 {
   padding-top: 4px;
 }
 
-
 .action-img {
   text-align: center;
 }
@@ -719,16 +733,6 @@ h2 {
 .possible-collect {
   opacity: 0.9;
   filter: contrast(0.5);
-}
-.settle-btn {
-  width: 100px;
-  border-radius: 5px;
-}
-.settle-btn:hover {
-  background-color: #66ff66;
-}
-.bg-black {
-  background-color: black;
 }
 
 /* ------------ TECHNOLOGY TREE  ----------------- */

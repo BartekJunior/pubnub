@@ -853,7 +853,7 @@ class Hud {
 
     // Build
     Hud.prototype.showContainerStructure = () =>
-      (containerStructure.style.display = `block`);
+      (containerStructure.style.display = `flex`);
     Hud.prototype.hideContainerStructure = () =>
       (containerStructure.style.display = `none`);
     Hud.prototype.changeStructureBtn = (structure, display) =>
