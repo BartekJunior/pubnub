@@ -256,9 +256,9 @@ class Town {
         // this.id.childNodes[8].classList.add(`bg-black`);
         this.id.troops.showSoldierHex();
 
-        Troops.prototype.hideHudTroops();
+        Troops.prototype.removeHudTroops();
         Hud.prototype.showMoveBtnContainer();
-        this.id.troops.showHudTroops();
+        this.id.troops.addHudTroops();
         this.updateRecruitNr();
       } else
         alert(
@@ -437,7 +437,7 @@ class Merchant {
 
         Hud.prototype.hideHudMerchant();
         Hud.prototype.hideMoveBtnContainer();
-        Troops.prototype.hideHudTroops();
+        Troops.prototype.removeHudTroops();
         player.action--;
 
         if (!this.id.troops.soldiers.length) this.id.troops.deleteTroops();
@@ -460,7 +460,7 @@ class Troops {
     this.soldiers = [];
     this.size = undefined;
 
-    Troops.prototype.hideHudTroops = () => {
+    Troops.prototype.removeHudTroops = () => {
       const recruitedDiv = document.querySelectorAll(".recruited-div");
       // Loop through each "recruited-div" element
       recruitedDiv.forEach((div) => {
@@ -469,10 +469,11 @@ class Troops {
           el.remove();
         });
       });
+      Hud.prototype.hideHudTroops();
       Hud.prototype.hideMoveBtnContainer();
     };
 
-    this.showHudTroops = () => {
+    this.addHudTroops = () => {
       for (let i = 0; i < this.soldiers.length; i++) {
         if (this.soldiers[i].type === `cavalry`) {
           const newCavalry = document.createElement(`div`);
@@ -503,6 +504,7 @@ class Troops {
           merchantRecruited.appendChild(newMerchant);
         }
       }
+      Hud.prototype.showHudTroops();
       Hud.prototype.showMoveBtnContainer();
     };
 
@@ -873,6 +875,10 @@ class Hud {
     // Merchant
     Hud.prototype.showHudMerchant = () => (hudMerchant.style.display = `block`);
     Hud.prototype.hideHudMerchant = () => (hudMerchant.style.display = `none`);
+
+    //Troops
+    Hud.prototype.showHudTroops = () => hudTroops.style.display = `block`;
+    Hud.prototype.hideHudTroops = () => hudTroops.style.display = `none`;
 
     // Rotate Area
     Hud.prototype.showRotateHud = () => (rotateHud.style.display = `block`);

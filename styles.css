@@ -574,21 +574,29 @@ h2 {
 }
 
 .soldier-img {
-  display: flex;
-  width: 100px;
-  height: 60px;
-  background-color: #2984b9;
+  display: block;
+  width: 90%;
+  height: 50px;
+  margin: 0 auto;
+  background-color: rgb(146, 146, 146);
+  color: aliceblue;
+  text-align: center;
+  
+  font-size: 25px;
+  font-weight: bold;
+  border-radius: 9px;
 }
 
 .soldier-selected {
-  background-color: rgb(82, 73, 73);
+  background-color: rgb(146, 146, 146);
 }
 
 #hudTroops {
-  display: block;
+  display: none;
   width: 100%;
   height: auto;
-  background-color: rgb(200, 212, 212);
+  background: linear-gradient(rgba(85, 17, 17, 0.7), rgba(39, 30, 30, 0.3));
+  border-radius: 9px;
 }
 
 #moveBtnContainer {
@@ -757,8 +765,14 @@ h2 {
 
 .skill-confirm-container {
   display: none;
-  padding: 30px 50px;
-  background-color: #2984b9;
+  padding: 30px 50px 20px;
+  background-image: url(./img/hud-background.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  color: aliceblue;
+  border-radius: 10px;
+
   position: absolute;
   top: 70vh;
   left: 50%;

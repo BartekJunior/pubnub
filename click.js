@@ -186,13 +186,13 @@ hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     // Must be !el.possibleMove because the move Troops is not working!//
     if (el.troops && !el.possibleMove) {
-      Troops.prototype.hideHudTroops();
-      el.troops.showHudTroops();
+      Troops.prototype.removeHudTroops();
+      el.troops.addHudTroops();
       troopsPosition = el;
     } else if (selectedSoldiers.length > 0 && !el.possibleMove) {
       alert(`Dokończ ruch jednostek albo Anuluj ruch`);
     } else {
-      Troops.prototype.hideHudTroops();
+      Troops.prototype.removeHudTroops();
       // troopsPosition = undefined;
     }
 
@@ -224,7 +224,7 @@ confirmMoveBtn.addEventListener("click", function () {
   cancelMoveBtn.disabled = false;
   settleBtn.disabled = false;
   startMoveBtn.textContent = `Rozpocznij Akcję Ruchu`;
-  Troops.prototype.hideHudTroops();
+  Troops.prototype.removeHudTroops();
   Hud.prototype.hideHudMerchant();
   Hud.prototype.townBtnEnable();
   moveCounter = 0;
@@ -273,7 +273,7 @@ hexAll.forEach((el) => {
 
       if (!el.hex.vis) {
         Hud.prototype.showRotateHud();
-        Troops.prototype.hideHudTroops();
+        Troops.prototype.removeHudTroops();
 
         hexArea.forEach((area, index) => {
           if (area.includes(el)) {
