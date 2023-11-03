@@ -561,6 +561,7 @@ h2 {
 .recruited-div {
   display: flex;
   width: 80%;
+  margin-bottom: 5px;
 }
 
 .soldierHud {
