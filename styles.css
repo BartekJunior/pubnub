@@ -231,7 +231,8 @@ h2 {
 }
 
 /* ------------ TOWN Images ----------------- */
-.merchantred {
+
+/* .merchantred {
   background-image: url(./img/merchantRed.png);
   background-repeat: no-repeat;
   background-position: center;
@@ -250,7 +251,7 @@ h2 {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 50%;
-}
+} */
 
 .townred {
   background-image: url(./img/buildings/townred.png);
@@ -282,51 +283,51 @@ h2 {
 
 /* ------------ Soldier Colors ----------------- */
 .cavalryred {
-  background-image: url(./img/cavalryred.png);
+  background-image: url(./img/soldiers/cavalryred.png);
 }
 
 .cavalrygreen {
-  background-image: url(./img/cavalrygreen.png);
+  background-image: url(./img/soldiers/cavalrygreen.png);
 }
 
 .cavalryblue {
-  background-image: url(./img/cavalryblue.png);
+  background-image: url(./img/soldiers/cavalryblue.png);
 }
 
 .infantryred {
-  background-image: url(./img/infantryred.png);
+  background-image: url(./img/soldiers/infantryred.png);
 }
 
 .infantrygreen {
-  background-image: url(./img/infantrygreen.png);
+  background-image: url(./img/soldiers/infantrygreen.png);
 }
 
 .infantryblue {
-  background-image: url(./img/infantryblue.png);
+  background-image: url(./img/soldiers/infantryblue.png);
 }
 
 .elephantred {
-  background-image: url(./img/elephantred.png);
+  background-image: url(./img/soldiers/elephantred.png);
 }
 
 .elephantgreen {
-  background-image: url(./img/elephantgreen.png);
+  background-image: url(./img/soldiers/elephantgreen.png);
 }
 
 .elephantblue {
-  background-image: url(./img/elephantblue.png);
+  background-image: url(./img/soldiers/elephantblue.png);
 }
 
 .merchantred {
-  background-image: url(./img/merchantred.png);
+  background-image: url(./img/soldiers/merchantred.png);
 }
 
 .merchantgreen {
-  background-image: url(./img/merchantgreen.png);
+  background-image: url(./img/soldiers/merchantgreen.png);
 }
 
 .merchantblue {
-  background-image: url(./img/merchantblue.png);
+  background-image: url(./img/soldiers/merchantblue.png);
 }
 
 /* ------------ Buildings Images ----------------- */
@@ -426,8 +427,8 @@ h2 {
   z-index: -1;
 }
 .hex > .hex-small:nth-child(5) {
-  /* background-color: rgb(36, 201, 192); */
   background-position: center center;
+  background-size: auto 100%;
 }
 .hex > .hex-small:nth-child(6)::before {
   position: absolute;
@@ -512,7 +513,7 @@ h2 {
   background-image: url(./img/UI/button-disabled.png);
 }
 
-.hud-town-btn:hover {
+.hud-town-btn:not([disabled]):hover {
   background-image: url(./img/UI/button-hover.png);
 }
 
@@ -566,7 +567,7 @@ h2 {
   display: block;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 100%;
+  background-size: auto 100%;
   width: 100px;
   height: 100px;
 }
