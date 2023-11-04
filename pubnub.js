@@ -1,6 +1,6 @@
 "use strict";
 
-// const UUID = prompt(`Jak masz na imie?`);
+// const UUID = prompt(`Podaj nazwę Gracza`);
 const UUID = `bart`;
 
 const firstDiv = document.getElementById(`firstDiv`);

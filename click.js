@@ -186,9 +186,16 @@ hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     // Must be !el.possibleMove because the move Troops is not working!//
     if (el.troops && !el.possibleMove) {
-      Troops.prototype.removeHudTroops();
-      el.troops.addHudTroops();
-      troopsPosition = el;
+        Hud.prototype.showMoveBtnContainer();
+        Troops.prototype.removeHudTroops();
+        el.troops.addHudTroops();
+        troopsPosition = el;
+
+        // shows troops of enemy but hide move buttons //
+        if (el.troops.player !== player) {
+          Hud.prototype.hideMoveBtnContainer();
+        }
+
     } else if (selectedSoldiers.length > 0 && !el.possibleMove) {
       alert(`Dokończ ruch jednostek albo Anuluj ruch`);
     } else {
