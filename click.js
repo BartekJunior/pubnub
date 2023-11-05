@@ -129,45 +129,75 @@ window.p3GlobalResourceDiv = Array.from(
 
 const collecting = Array.from(document.querySelectorAll(`.collecting`));
 
-// --------------- CLICK LISTENERS FIRES METHODS --------------------
-// Console deafult index of clicked Hex
+// --------------- CLICK LISTENERS FIRES METHODS -------------------- //
+// settle Town and build structures //
+settleBtn.addEventListener(`click`, function () {
+  const merchantObj = troopsPosition.troops.soldiers.find(
+    (el) => el.type === `merchant`
+  );
+  console.log(merchantObj);
+  merchantObj.settle();
+  window[`p` + player.nr + `ActionValue`].textContent = player.action;
+});
+
+buildStructureBtn.addEventListener(`click`, function () {
+  Hud.prototype.showContainerStructure();
+  Hud.prototype.townBtnDisable();
+});
+
+fortressBtn.addEventListener(`click`, function () {
+  town.buildStructure(`fortress`);
+});
+
+academyBtn.addEventListener(`click`, function () {
+  town.buildStructure(`academy`);
+});
+
+portBtn.addEventListener(`click`, function () {
+  town.buildStructure(`port`);
+});
+
+marketBtn.addEventListener(`click`, function () {
+  town.buildStructure(`market`);
+});
+
+obeliskBtn.addEventListener(`click`, function () {
+  town.buildStructure(`obelisk`);
+});
+
+templeBtn.addEventListener(`click`, function () {
+  town.buildStructure(`temple`);
+});
+
+observatoryBtn.addEventListener(`click`, function () {
+  town.buildStructure(`observatory`);
+});
+
+cancelBuild.addEventListener(`click`, function () {
+  Hud.prototype.hideContainerStructure();
+  Hud.prototype.townBtnEnable();
+});
+
+// Console deafult index of clicked Hex //
 hexAll.forEach((el, index) =>
   el.addEventListener(`click`, function (e) {
     console.log(index);
   })
 );
 
+
+
 // ----- show/hide HUD TOWN  ----- //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
-    if (town && !el.possibleResource) {
-      town.id.classList.remove(`town-selected`);
-      town = undefined;
-    }
-    if (el.town && el.town.player === player) {
-      town = undefined;
-      town = el.town;
-      town.id.classList.add(`town-selected`);
-    }
-
-    if (
-      el.town &&
-      el.town.player === player &&
-      hudTown.style.display === `none` &&
-      rotateHud.style.display === `none`
-    ) {
-      town.checkBuildedStructure();
-      Hud.prototype.showHudTown();
-    } else if (
-      !el.possibleResource &&
-      containerTempCollect.style.display === `flex`
-    ) {
+    // ERRORS when you make action in Hud //
+    if (!el.possibleResource && collectHud) {
       alert(`Dokończ zbieranie surowców, albo Anuluj Zbiór`);
-    } else if (town && containerStructure.style.display === `block`) {
+    } else if (buildHud) {
       alert(`Dokończ budowę w mieście lub Anuluj Budowę`);
-    } else if (town && containerRecruit.style.display === `flex`) {
-      alert(`Dokończ rekrutację lub Anuluj Rekrutację`);
-    } else if (rotateHud.style.display === `block`) {
+    } else if (recruitHud) {
+      alert(`Dokończ Rekrutację lub Anuluj Rekrutację`);
+    } else if (exploreHud) {
       alert(`Odkryj Mapę!`);
     } else if (!el.town && !el.possibleResource) {
       Hud.prototype.hideHudTown();
@@ -178,6 +208,25 @@ hexAll.forEach((el) => {
         town = undefined;
       }
     }
+
+    // when u click on Town (universal) //
+    if (
+      el.town &&
+      el.town.player === player &&
+      !collectHud &&
+      !buildHud &&
+      !recruitHud &&
+      !exploreHud
+    ) {
+      if (town) {
+        town.id.classList.remove(`town-selected`);
+        town = undefined;
+      }
+      town = el.town;
+      town.id.classList.add(`town-selected`);
+      town.checkBuildedStructure();
+      Hud.prototype.showHudTown();
+    }
   });
 });
 
@@ -186,16 +235,15 @@ hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     // Must be !el.possibleMove because the move Troops is not working!//
     if (el.troops && !el.possibleMove) {
-        Hud.prototype.showMoveBtnContainer();
-        Troops.prototype.removeHudTroops();
-        el.troops.addHudTroops();
-        troopsPosition = el;
+      Hud.prototype.showMoveBtnContainer();
+      Troops.prototype.removeHudTroops();
+      el.troops.addHudTroops();
+      troopsPosition = el;
 
-        // shows troops of enemy but hide move buttons //
-        if (el.troops.player !== player) {
-          Hud.prototype.hideMoveBtnContainer();
-        }
-
+      // shows troops of enemy but hide move buttons //
+      if (el.troops.player !== player) {
+        Hud.prototype.hideMoveBtnContainer();
+      }
     } else if (selectedSoldiers.length > 0 && !el.possibleMove) {
       alert(`Dokończ ruch jednostek albo Anuluj ruch`);
     } else {
@@ -369,54 +417,6 @@ hexAll.forEach((el) => {
 // MMMMMMOOOOOOOOOOOOVVVVVVVVVVVEEEEEEEEEEEEEEEEEE //
 // EEEEEEEEEEEEEEEENNNNNNNNNNNNNDDDDDDDDDDDDDDDDDD //
 
-// settle Town and build structures //
-settleBtn.addEventListener(`click`, function () {
-  const merchantObj = troopsPosition.troops.soldiers.find(
-    (el) => el.type === `merchant`
-  );
-  console.log(merchantObj);
-  merchantObj.settle();
-  window[`p` + player.nr + `ActionValue`].textContent = player.action;
-});
-
-buildStructureBtn.addEventListener(`click`, function () {
-  Hud.prototype.showContainerStructure();
-  Hud.prototype.townBtnDisable();
-});
-
-fortressBtn.addEventListener(`click`, function () {
-  town.buildStructure(`fortress`);
-});
-
-academyBtn.addEventListener(`click`, function () {
-  town.buildStructure(`academy`);
-});
-
-portBtn.addEventListener(`click`, function () {
-  town.buildStructure(`port`);
-});
-
-marketBtn.addEventListener(`click`, function () {
-  town.buildStructure(`market`);
-});
-
-obeliskBtn.addEventListener(`click`, function () {
-  town.buildStructure(`obelisk`);
-});
-
-templeBtn.addEventListener(`click`, function () {
-  town.buildStructure(`temple`);
-});
-
-observatoryBtn.addEventListener(`click`, function () {
-  town.buildStructure(`observatory`);
-});
-
-cancelBuild.addEventListener(`click`, function () {
-  Hud.prototype.hideContainerStructure();
-  Hud.prototype.townBtnEnable();
-});
-
 //----------- RECRUITING TROOPS -----------//
 // troops variables
 let tempSoldiers = [];
@@ -464,7 +464,6 @@ collectResourceBtn.addEventListener(`click`, function () {
   Hud.prototype.showContainerTempCollect();
   Hud.prototype.showCancelCollectBtn();
 });
-
 
 /// Collect tempResource with global variables. Middle collecting ///
 let clickedRes = [];
@@ -787,11 +786,6 @@ endTurn.addEventListener(`click`, () => {
   endTurn.style.display = `none`;
 });
 
-
-
-
-
-
 // -------------- Animations --------------------- //
 
 // hudGlobal.addEventListener("click", function () {
@@ -808,27 +802,23 @@ endTurn.addEventListener(`click`, () => {
 //   });
 // });
 
-
 // Cards Goals Technology Buttons //
 const playerBtns = document.querySelectorAll(`.cards-container-item`);
-playerBtns.forEach(el => {
+playerBtns.forEach((el) => {
   el.addEventListener("mouseenter", function () {
     // Add the animation classes when the mouse enters the element
     this.classList.add("animate__animated");
     this.classList.add("animate__zoomIn");
   });
-})
+});
 
-playerBtns.forEach(el => {
+playerBtns.forEach((el) => {
   p1Global.addEventListener("mouseleave", function () {
     // Add the animation classes when the mouse enters the element
     el.classList.remove("animate__animated");
     el.classList.remove("animate__zoomIn");
   });
-})
-
-
-
+});
 
 // p1TreeBtn.addEventListener("mouseenter", function () {
 //   // Add the animation classes when the mouse enters the element

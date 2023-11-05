@@ -576,7 +576,7 @@ class Troops {
       let distanceFromTown = [];
 
       // console.log(`this`, this);
-      
+
       for (let i = 0; i < hexAll.length; i++) {
         rectHexArr.push(hexAll[i].getBoundingClientRect());
         distanceFromTown[i] = Math.sqrt(
@@ -651,8 +651,7 @@ class Troops {
               `merchant` + this.color,
               `soldierHex`
             );
-          } 
-          
+          }
         } else if (this.soldiers[i].type !== `merchant`) {
           // console.log(`itaretate in soldier at index`, i, `this is J:`, j);
           this.id.childNodes[smallHexSoldier[j]].classList.add(
@@ -818,11 +817,23 @@ class PossibleResource {
 }
 
 ///// CLASS HUD /////
+// Hud variables when specific Hud is active => true //
+let collectHud;
+let buildHud;
+let recruitHud;
+let exploreHud;
+
 class Hud {
   constructor() {
     // Town fundamental Btns
-    Hud.prototype.showHudTown = () => (hudTown.style.display = `block`);
-    Hud.prototype.hideHudTown = () => (hudTown.style.display = `none`);
+    Hud.prototype.showHudTown = () => {
+      hudTown.style.display = `block`;
+      town.id.classList.add(`town-selected`);
+    };
+    Hud.prototype.hideHudTown = () => {
+      hudTown.style.display = `none`;
+      town.id.classList.remove(`town-selected`);
+    };
 
     Hud.prototype.townBtnDisable = () => {
       collectResourceBtn.disabled = true;
@@ -839,10 +850,16 @@ class Hud {
 
     // COLLECT //
     // ContainerTempCollect
-    Hud.prototype.showContainerTempCollect = () =>
-      (containerTempCollect.style.display = `flex`);
-    Hud.prototype.hideContainerTempCollect = () =>
-      (containerTempCollect.style.display = `none`);
+    Hud.prototype.showContainerTempCollect = () => {
+      containerTempCollect.style.display = `flex`;
+      collectHud = true;
+    };
+
+    Hud.prototype.hideContainerTempCollect = () => {
+      containerTempCollect.style.display = `none`;
+      collectHud = false;
+    };
+
     // Confirm and Cancel Collect
     Hud.prototype.showConfirmCollectBtn = () =>
       (confirmCollectBtn.style.display = `block`);
@@ -854,18 +871,29 @@ class Hud {
       (cancelCollectBtn.style.display = `none`);
 
     // Build
-    Hud.prototype.showContainerStructure = () =>
+    Hud.prototype.showContainerStructure = () => {
       (containerStructure.style.display = `flex`);
-    Hud.prototype.hideContainerStructure = () =>
+      buildHud = true;
+    }
+
+    Hud.prototype.hideContainerStructure = () => {
       (containerStructure.style.display = `none`);
+      buildHud = false;
+    }
+
     Hud.prototype.changeStructureBtn = (structure, display) =>
       (window[structure + `Btn`].style.display = display);
 
     // Recruit and Troops
-    Hud.prototype.showContainerRecruit = () =>
+    Hud.prototype.showContainerRecruit = () => {
       (containerRecruit.style.display = `flex`);
-    Hud.prototype.hideContainerRecruit = () =>
+      recruitHud = true;
+    }
+
+    Hud.prototype.hideContainerRecruit = () => {
       (containerRecruit.style.display = `none`);
+      recruitHud = false;
+    }
 
     Hud.prototype.showMoveBtnContainer = () =>
       (moveBtnContainer.style.display = `inline-flex`);
@@ -877,12 +905,19 @@ class Hud {
     Hud.prototype.hideHudMerchant = () => (hudMerchant.style.display = `none`);
 
     //Troops
-    Hud.prototype.showHudTroops = () => hudTroops.style.display = `block`;
-    Hud.prototype.hideHudTroops = () => hudTroops.style.display = `none`;
+    Hud.prototype.showHudTroops = () => (hudTroops.style.display = `block`);
+    Hud.prototype.hideHudTroops = () => (hudTroops.style.display = `none`);
 
     // Rotate Area
-    Hud.prototype.showRotateHud = () => (rotateHud.style.display = `block`);
-    Hud.prototype.hideRotateHud = () => (rotateHud.style.display = `none`);
+    Hud.prototype.showRotateHud = () => {
+      (rotateHud.style.display = `block`);
+      exploreHud = true;
+    }
+
+    Hud.prototype.hideRotateHud = () => {
+      (rotateHud.style.display = `none`);
+      exploreHud = false;
+    } 
 
     Hud.prototype.refreshCultureMorale = () => {
       window[`p` + player.nr + `GlobalResourceDiv`][5].innerHTML =
