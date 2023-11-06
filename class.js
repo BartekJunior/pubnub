@@ -154,10 +154,12 @@ class Town {
       observatory: false,
     };
 
-
     Town.prototype.activateTown = () => {
       this.activated++;
       this.checkHappiness();
+    }
+    Town.prototype.resetActivateTown = () => {
+      this.activated = 0;
     }
 
     Town.prototype.raiseHapiness = () => {
@@ -170,9 +172,22 @@ class Town {
 
     Town.prototype.createHappiness = () => {
       const happinessDiv = document.createElement(`div`);
-      happinessDiv.classList.add(`happiness-div`);
-      happinessDiv.classList.add(`morale-high-icon`);
+      const plusDiv = document.createElement(`i`);
+      const minusDiv = document.createElement(`i`);
+
+      happinessDiv.classList.add(`happiness-div`, `morale-high-icon`);
+
       this.id.childNodes[4].appendChild(happinessDiv);
+
+      this.id.childNodes[1].appendChild(plusDiv);
+      this.id.childNodes[7].appendChild(minusDiv);
+
+
+      plusDiv.classList.add(`happiness-div`, `happines-plus`, `bi`, `bi-plus-circle`);
+      minusDiv.classList.add(`happiness-div`, `happines-minus`, `bi`, `bi-dash-circle`);
+
+      
+
     }
 
     Town.prototype.showHappiness = () => {
@@ -187,6 +202,7 @@ class Town {
         this.showHappiness();
       }
     }
+
 
     this.checkBuildedStructure = () => {
       for (const key in this.structure) {
@@ -872,12 +888,14 @@ class Hud {
       collectResourceBtn.disabled = true;
       buildStructureBtn.disabled = true;
       recruitBtn.disabled = true;
+      raiseHappinesBtn.disabled = true;
       burnTownBtn.disabled = true;
     };
     Hud.prototype.townBtnEnable = () => {
       collectResourceBtn.disabled = false;
       buildStructureBtn.disabled = false;
       recruitBtn.disabled = false;
+      raiseHappinesBtn.disabled = false;
       burnTownBtn.disabled = false;
     };
 

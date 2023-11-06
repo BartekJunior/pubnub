@@ -202,7 +202,6 @@ h2 {
   background-size: 115%;
 }
 
-
 .container-temp-collect > .class-plain {
   background-image: url(./img/resource/gold-bg.jpg);
 }
@@ -260,14 +259,26 @@ h2 {
 }
 
 .happiness-div {
+  display: block;
+  margin: 0 auto;
   width: 18px;
   height: 18px;
-
-  /* background-image: url(./img/resource/moralehigh.jpg);
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 100%; */
   z-index: 10;
+}
+
+.happines-plus {
+  width: 28px;
+  font-size: 28px;
+  color: #04be3c;
+  margin-top: 50%;
+  transform: translateY(-50%);
+}
+
+.happines-minus {
+  width: 28px;
+  font-size: 28px;
+  color: red;
+  
 }
 
 /* ------------ Soldier Colors ----------------- */
@@ -417,9 +428,9 @@ h2 {
 }
 .hex > .hex-small:nth-child(5) {
   display: flex;
-  justify-content: center; 
-  align-items: center; 
-  
+  justify-content: center;
+  align-items: center;
+
   background-position: center center;
   background-size: auto 100%;
 }
@@ -574,7 +585,7 @@ h2 {
   background-color: rgb(146, 146, 146);
   color: aliceblue;
   text-align: center;
-  
+
   font-size: 25px;
   font-weight: bold;
   border-radius: 9px;
@@ -704,11 +715,13 @@ h2 {
   background-size: 100% 100%;
 }
 
-.resource-container > :nth-child(1), .action-container > :nth-child(1) {
+.resource-container > :nth-child(1),
+.action-container > :nth-child(1) {
   height: 30%;
 }
 
-.resource-container > :nth-child(2), .action-container > :nth-child(2) {
+.resource-container > :nth-child(2),
+.action-container > :nth-child(2) {
   height: 70%;
   font-size: 25px;
   font-weight: bold;

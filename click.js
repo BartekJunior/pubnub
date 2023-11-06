@@ -53,6 +53,7 @@ const containerRecruit = document.getElementById(`containerRecruit`);
 const collectResourceBtn = document.getElementById(`collectResourceBtn`);
 const buildStructureBtn = document.getElementById(`buildStructureBtn`);
 const recruitBtn = document.getElementById(`recruitBtn`);
+const raiseHappinesBtn = document.getElementById(`raiseHappinesBtn`);
 const burnTownBtn = document.getElementById(`burnTownBtn`);
 
 const containerTempCollect = document.querySelector(`.container-temp-collect`);
@@ -785,6 +786,10 @@ endTurn.addEventListener(`click`, () => {
 
   publishMessage(player);
   console.log(`player sent`, player);
+
+  hexAll.forEach(el => {
+    if (el.town) el.town.resetActivateTown();
+  })
 
   endTurn.style.display = `none`;
 });
