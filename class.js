@@ -154,6 +154,12 @@ class Town {
       observatory: false,
     };
 
+
+    Town.prototype.activateTown = () => {
+      this.activated++;
+      this.checkHappiness();
+    }
+
     Town.prototype.raiseHapiness = () => {
       if (this.happiness < 2) return this.happiness++;
     };
@@ -205,6 +211,7 @@ class Town {
         );
         this.structure[building] = true;
         this.calcSize();
+        this.activateTown();
         Hud.prototype.changeStructureBtn(building, `none`);
         Hud.prototype.hideContainerStructure();
         Hud.prototype.townBtnEnable();
@@ -274,13 +281,13 @@ class Town {
         tempSoldiers = [];
         this.id.troops.calcSize();
 
-        // this.id.childNodes[8].classList.add(`bg-black`);
         this.id.troops.showSoldierHex();
 
         Troops.prototype.removeHudTroops();
         Hud.prototype.showMoveBtnContainer();
         this.id.troops.addHudTroops();
         this.updateRecruitNr();
+        this.activateTown();
       } else
         alert(
           `Na jednym Hexie mogą znajdować sie maksymalnie 4 jednostki wojskowe`
@@ -360,7 +367,7 @@ class Town {
           alert(
             `Przekroczyłeś limit 2 jedzenia. Zbiór anulowano. Nie straciłeś Akcji.`
           );
-          console.log(`wieksze od 2 jest`, res[0]);
+          // console.log(`wieksze od 2 jest`, res[0]);
           Town.prototype.cancelCollect();
           return;
         }
@@ -382,6 +389,7 @@ class Town {
         tempResource[res[i]] = 0;
         collecting[i].innerHTML = tempResource[res[i]];
 
+        this.activateTown();
       }
 
       hexAll.forEach((el) => {
