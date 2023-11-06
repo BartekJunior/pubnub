@@ -200,11 +200,10 @@ hexAll.forEach((el) => {
     } else if (exploreHud) {
       alert(`Odkryj Mapę!`);
     } else if (!el.town && !el.possibleResource) {
-      Hud.prototype.hideHudTown();
-      Hud.prototype.hideContainerStructure();
-      Hud.prototype.hideContainerRecruit();
       if (town) {
-        town.id.classList.remove(`town-selected`);
+        Hud.prototype.hideHudTown();
+        Hud.prototype.hideContainerStructure();
+        Hud.prototype.hideContainerRecruit();
         town = undefined;
       }
     }
@@ -223,12 +222,15 @@ hexAll.forEach((el) => {
         town = undefined;
       }
       town = el.town;
-      town.id.classList.add(`town-selected`);
       town.checkBuildedStructure();
       Hud.prototype.showHudTown();
     }
   });
 });
+
+
+
+
 
 // ----- show TROOPS and MERCHANT HUD  ----- //
 hexAll.forEach((el) => {
