@@ -505,6 +505,9 @@ confirmCollectBtn.addEventListener(`click`, function () {
   Hud.prototype.hideConfirmCollectBtn();
   Hud.prototype.hideCancelCollectBtn();
   Hud.prototype.townBtnEnable();
+  
+  town.activated++;
+  town.checkHappiness();
   window[`p` + player.nr + `ActionValue`].textContent = player.action;
 });
 

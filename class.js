@@ -142,6 +142,7 @@ class Town {
     this.color = color;
     this.happiness = 2;
     this.size = 1;
+    this.activated = 0;
 
     this.structure = {
       port: false,
@@ -153,13 +154,33 @@ class Town {
       observatory: false,
     };
 
-    this.raiseHapiness = () => {
+    Town.prototype.raiseHapiness = () => {
       if (this.happiness < 2) return this.happiness++;
     };
 
-    this.lowerHapiness = () => {
+    Town.prototype.lowerHapiness = () => {
       if (this.happiness > 0) return this.happiness--;
     };
+
+    Town.prototype.createHappiness = () => {
+      const happinessDiv = document.createElement(`div`);
+      happinessDiv.classList.add(`happiness-div`);
+      happinessDiv.classList.add(`morale-high-icon`);
+      this.id.childNodes[4].appendChild(happinessDiv);
+    }
+
+    Town.prototype.showHappiness = () => {
+      if (this.happiness === 2) this.id.childNodes[4].childNodes[0].classList.add(`morale-high-icon`);
+      if (this.happiness === 1) this.id.childNodes[4].childNodes[0].classList.add(`morale-neutral-icon`);
+      if (this.happiness === 0) this.id.childNodes[4].childNodes[0].classList.add(`morale-low-icon`);
+    }
+
+    Town.prototype.checkHappiness = () => {
+      if (this.activated > 1) {
+        this.lowerHapiness();
+        this.showHappiness();
+      }
+    }
 
     this.checkBuildedStructure = () => {
       for (const key in this.structure) {
@@ -360,6 +381,7 @@ class Town {
           player.resource[res[i]];
         tempResource[res[i]] = 0;
         collecting[i].innerHTML = tempResource[res[i]];
+
       }
 
       hexAll.forEach((el) => {
@@ -388,6 +410,7 @@ class Town {
       Hud.prototype.hideConfirmCollectBtn();
       Hud.prototype.hideCancelCollectBtn();
     };
+
   }
 }
 
@@ -434,6 +457,8 @@ class Merchant {
 
         this.id.childNodes[4].classList.add(`town${this.color}`);
         // this.id.hex.collectible = false;
+
+        this.id.town.createHappiness();
 
         Hud.prototype.hideHudMerchant();
         Hud.prototype.hideMoveBtnContainer();
