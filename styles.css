@@ -80,7 +80,7 @@ h2 {
 .hex-small {
   width: 100%;
   height: 100%;
-  pointer-events: none;
+  /* pointer-events: none; */
   position: relative;
 }
 
@@ -147,10 +147,6 @@ h2 {
   opacity: 0.3;
 }
 
-.delete-click {
-  pointer-events: none;
-}
-
 .hex-row {
   display: flex;
   margin-top: -33px;
@@ -158,6 +154,10 @@ h2 {
 
 .hex-row.even {
   margin-left: -62px;
+}
+
+.delete-click {
+  pointer-events: none;
 }
 
 /* ------------------------- */
@@ -267,19 +267,38 @@ h2 {
 }
 
 .happines-plus {
-  width: 28px;
+  display: none;
+  width: 30px;
+  height: 30px;
+  margin-top: 5px;
   font-size: 28px;
+  text-align: center;
   color: #04be3c;
-  margin-top: 50%;
-  transform: translateY(-50%);
+  z-index: 99;
+
+  position: absolute;
+  left: -7px;
+  top: -6px;
+
+
+}
+
+.bi::before {
+  vertical-align: top;
+}
+
+.happines-plus:hover {
+  color: #2984b9;
+  font-size: 35px;
+  color: red;
 }
 
 .happines-minus {
   width: 28px;
   font-size: 28px;
   color: red;
-  
 }
+
 
 /* ------------ Soldier Colors ----------------- */
 .cavalryred {

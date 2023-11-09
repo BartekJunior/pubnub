@@ -49,16 +49,20 @@ const settleBtn = document.getElementById(`settleBtn`);
 const hudTown = document.querySelector(`.hud-town`);
 const containerStructure = document.getElementById(`containerStructure`);
 const containerRecruit = document.getElementById(`containerRecruit`);
+const containerHappiness = document.getElementById(`containerHappiness`)
 
 const collectResourceBtn = document.getElementById(`collectResourceBtn`);
 const buildStructureBtn = document.getElementById(`buildStructureBtn`);
 const recruitBtn = document.getElementById(`recruitBtn`);
-const raiseHappinesBtn = document.getElementById(`raiseHappinesBtn`);
+const raiseHappinessBtn = document.getElementById(`raiseHappinesBtn`);
 const burnTownBtn = document.getElementById(`burnTownBtn`);
 
 const containerTempCollect = document.querySelector(`.container-temp-collect`);
 const confirmCollectBtn = document.getElementById(`confirmCollectBtn`);
 const cancelCollectBtn = document.getElementById(`cancelCollectBtn`);
+
+const confirmHappinessBtn = document.getElementById(`confirmHappinessBtn`);
+const cancelHappinessBtn = document.getElementById(`cancelHappinessBtn`);
 
 // building buttons
 const academyBtn = document.getElementById(`academyBtn`);
@@ -176,6 +180,19 @@ observatoryBtn.addEventListener(`click`, function () {
 
 cancelBuild.addEventListener(`click`, function () {
   Hud.prototype.hideContainerStructure();
+  Hud.prototype.townBtnEnable();
+});
+
+
+
+// Happiness //
+raiseHappinessBtn.addEventListener(`click`, function() {
+  Hud.prototype.showContainerHappiness();
+  Hud.prototype.townBtnDisable();
+});
+
+cancelHappinessBtn.addEventListener(`click`, function() {
+  Hud.prototype.hideContainerHappiness();
   Hud.prototype.townBtnEnable();
 });
 

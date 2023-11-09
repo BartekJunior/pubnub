@@ -134,6 +134,8 @@ class Hex {
 
 // CLASS TOWN //
 let town;
+let happinessPlusArr = [];
+
 class Town {
   constructor(id, color) {
     this.type = `town`;
@@ -154,55 +156,67 @@ class Town {
       observatory: false,
     };
 
-    Town.prototype.activateTown = () => {
+    // !!!WHEN YOU USE Town.prototype... YOU MUST USE REGULAR FUNCTION() BECASE ARROW FUNCTION DOESNT HAVE THIS KEYWORD!!! //
+    Town.prototype.activateTown = function () {
       this.activated++;
       this.checkHappiness();
-    }
-    Town.prototype.resetActivateTown = () => {
-      this.activated = 0;
-    }
+    };
 
-    Town.prototype.raiseHapiness = () => {
+    Town.prototype.resetActivateTown = function () {
+      this.activated = 0;
+    };
+
+    Town.prototype.raiseHapiness = function () {
       if (this.happiness < 2) return this.happiness++;
     };
 
-    Town.prototype.lowerHapiness = () => {
+    Town.prototype.lowerHapiness = function () {
       if (this.happiness > 0) return this.happiness--;
     };
 
-    Town.prototype.createHappiness = () => {
+    Town.prototype.createHappiness = function () {
       const happinessDiv = document.createElement(`div`);
-      const plusDiv = document.createElement(`i`);
-      const minusDiv = document.createElement(`i`);
+      const plusI = document.createElement(`i`);
+      plusI.id = `chujek`;
 
       happinessDiv.classList.add(`happiness-div`, `morale-high-icon`);
 
       this.id.childNodes[4].appendChild(happinessDiv);
+      this.id.childNodes[8].appendChild(plusI);
 
-      this.id.childNodes[1].appendChild(plusDiv);
-      this.id.childNodes[7].appendChild(minusDiv);
+      // hudTown.appendChild(plusI);
 
+      plusI.classList.add(
+        `happiness-div`,
+        `happines-plus`,
+        `bi`,
+        `bi-plus-circle`
+      );
+      plusI.addEventListener(`click`, () => console.log(`hehe`));
 
-      plusDiv.classList.add(`happiness-div`, `happines-plus`, `bi`, `bi-plus-circle`);
-      minusDiv.classList.add(`happiness-div`, `happines-minus`, `bi`, `bi-dash-circle`);
+      happinessPlusArr.push(plusI);
 
-      
+      // const minusDiv = document.createElement(`i`);
+      // minusDiv.classList.add(`happiness-div`, `happines-minus`, `bi`, `bi-dash-circle`);
+    };
 
-    }
+    Town.prototype.showHappiness = function () {
+      if (this.happiness === 2)
+        this.id.childNodes[4].childNodes[0].classList.add(`morale-high-icon`);
+      if (this.happiness === 1)
+        this.id.childNodes[4].childNodes[0].classList.add(
+          `morale-neutral-icon`
+        );
+      if (this.happiness === 0)
+        this.id.childNodes[4].childNodes[0].classList.add(`morale-low-icon`);
+    };
 
-    Town.prototype.showHappiness = () => {
-      if (this.happiness === 2) this.id.childNodes[4].childNodes[0].classList.add(`morale-high-icon`);
-      if (this.happiness === 1) this.id.childNodes[4].childNodes[0].classList.add(`morale-neutral-icon`);
-      if (this.happiness === 0) this.id.childNodes[4].childNodes[0].classList.add(`morale-low-icon`);
-    }
-
-    Town.prototype.checkHappiness = () => {
+    Town.prototype.checkHappiness = function () {
       if (this.activated > 1) {
         this.lowerHapiness();
         this.showHappiness();
       }
-    }
-
+    };
 
     this.checkBuildedStructure = () => {
       for (const key in this.structure) {
@@ -434,7 +448,6 @@ class Town {
       Hud.prototype.hideConfirmCollectBtn();
       Hud.prototype.hideCancelCollectBtn();
     };
-
   }
 }
 
@@ -921,30 +934,40 @@ class Hud {
     Hud.prototype.hideCancelCollectBtn = () =>
       (cancelCollectBtn.style.display = `none`);
 
+    // Happiness //
+    Hud.prototype.showContainerHappiness = () => {
+      (containerHappiness.style.display = `block`);
+      happinessPlusArr.map(el => el.style.display = `block`);
+    }
+    Hud.prototype.hideContainerHappiness = () => {
+      (containerHappiness.style.display = `none`);
+      happinessPlusArr.map(el => el.style.display = `none`);
+    }
+      
     // Build
     Hud.prototype.showContainerStructure = () => {
-      (containerStructure.style.display = `flex`);
+      containerStructure.style.display = `flex`;
       buildHud = true;
-    }
+    };
 
     Hud.prototype.hideContainerStructure = () => {
-      (containerStructure.style.display = `none`);
+      containerStructure.style.display = `none`;
       buildHud = false;
-    }
+    };
 
     Hud.prototype.changeStructureBtn = (structure, display) =>
       (window[structure + `Btn`].style.display = display);
 
     // Recruit and Troops
     Hud.prototype.showContainerRecruit = () => {
-      (containerRecruit.style.display = `flex`);
+      containerRecruit.style.display = `flex`;
       recruitHud = true;
-    }
+    };
 
     Hud.prototype.hideContainerRecruit = () => {
-      (containerRecruit.style.display = `none`);
+      containerRecruit.style.display = `none`;
       recruitHud = false;
-    }
+    };
 
     Hud.prototype.showMoveBtnContainer = () =>
       (moveBtnContainer.style.display = `inline-flex`);
@@ -961,14 +984,14 @@ class Hud {
 
     // Rotate Area
     Hud.prototype.showRotateHud = () => {
-      (rotateHud.style.display = `block`);
+      rotateHud.style.display = `block`;
       exploreHud = true;
-    }
+    };
 
     Hud.prototype.hideRotateHud = () => {
-      (rotateHud.style.display = `none`);
+      rotateHud.style.display = `none`;
       exploreHud = false;
-    } 
+    };
 
     Hud.prototype.refreshCultureMorale = () => {
       window[`p` + player.nr + `GlobalResourceDiv`][5].innerHTML =
