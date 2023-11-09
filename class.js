@@ -135,6 +135,7 @@ class Hex {
 // CLASS TOWN //
 let town;
 let happinessPlusArr = [];
+let happyTowns = [];
 
 class Town {
   constructor(id, color) {
@@ -182,7 +183,6 @@ class Town {
 
 
       happinessDiv.classList.add(`happiness-div`, `morale-high-icon`);
-
       this.id.childNodes[4].appendChild(happinessDiv);
       this.id.childNodes[8].appendChild(plusI);
 
@@ -200,9 +200,9 @@ class Town {
         this.raiseHapiness();
         this.showHappiness();
         console.log(this.happiness);
-        
+        if (!happyTowns.includes(plusI.parentNode.parentNode.town)) happyTowns.push(plusI.parentNode.parentNode.town);
       })
-
+      
       happinessPlusArr.push(plusI);
 
       // const minusDiv = document.createElement(`i`);
@@ -210,13 +210,22 @@ class Town {
     };
 
     Town.prototype.confirmHappiness = function() {
-      delete this.raisedHappines;
+      happyTowns.forEach(el => {
+        // const townSelected = el.parentNode.parentNode.town;
+        el.raisedHappines = 0;
+      })
+      happyTowns = [];
     }
+
     Town.prototype.cancelHappiness = function() {
-      this.happiness = this.happiness - this.raisedHappiness;
-      this.showHappiness();
-      delete this.raisedHappines;
-    }
+      happyTowns.forEach(el => {
+      // const townSelected = el.parentNode.parentNode.town;
+      el.happiness = el.happiness - el.raisedHappiness;
+      el.showHappiness();
+      el.raisedHappines = 0;
+    })
+    happyTowns = [];
+  }
 
     Town.prototype.showHappiness = function () {
       const face = this.id.childNodes[4].childNodes[0];
@@ -225,13 +234,13 @@ class Town {
       }
 
       if (this.happiness === 2)
-        this.id.childNodes[4].childNodes[0].classList.add(`morale-high-icon`);
+        face.classList.add(`morale-high-icon`);
       if (this.happiness === 1)
-        this.id.childNodes[4].childNodes[0].classList.add(
+        face.classList.add(
           `morale-neutral-icon`
         );
       if (this.happiness === 0)
-        this.id.childNodes[4].childNodes[0].classList.add(`morale-low-icon`);
+        face.classList.add(`morale-low-icon`);
     };
 
     Town.prototype.checkHappiness = function () {
@@ -244,7 +253,6 @@ class Town {
 
 
     
-
 
 
 
@@ -932,14 +940,14 @@ class Hud {
       collectResourceBtn.disabled = true;
       buildStructureBtn.disabled = true;
       recruitBtn.disabled = true;
-      raiseHappinesBtn.disabled = true;
+      raiseHappinessBtn.disabled = true;
       burnTownBtn.disabled = true;
     };
     Hud.prototype.townBtnEnable = () => {
       collectResourceBtn.disabled = false;
       buildStructureBtn.disabled = false;
       recruitBtn.disabled = false;
-      raiseHappinesBtn.disabled = false;
+      raiseHappinessBtn.disabled = false;
       burnTownBtn.disabled = false;
     };
 

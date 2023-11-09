@@ -54,7 +54,7 @@ const containerHappiness = document.getElementById(`containerHappiness`)
 const collectResourceBtn = document.getElementById(`collectResourceBtn`);
 const buildStructureBtn = document.getElementById(`buildStructureBtn`);
 const recruitBtn = document.getElementById(`recruitBtn`);
-const raiseHappinessBtn = document.getElementById(`raiseHappinesBtn`);
+const raiseHappinessBtn = document.getElementById(`raiseHappinessBtn`);
 const burnTownBtn = document.getElementById(`burnTownBtn`);
 
 const containerTempCollect = document.querySelector(`.container-temp-collect`);
@@ -192,11 +192,13 @@ raiseHappinessBtn.addEventListener(`click`, function() {
 });
 
 confirmHappinessBtn.addEventListener(`click`, function() {
+  Town.prototype.confirmHappiness();
   Hud.prototype.hideContainerHappiness();
   Hud.prototype.townBtnEnable();
 });
 
 cancelHappinessBtn.addEventListener(`click`, function() {
+  Town.prototype.cancelHappiness();
   Hud.prototype.hideContainerHappiness();
   Hud.prototype.townBtnEnable();
 });
