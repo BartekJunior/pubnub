@@ -191,6 +191,11 @@ raiseHappinessBtn.addEventListener(`click`, function() {
   Hud.prototype.townBtnDisable();
 });
 
+confirmHappinessBtn.addEventListener(`click`, function() {
+  Hud.prototype.hideContainerHappiness();
+  Hud.prototype.townBtnEnable();
+});
+
 cancelHappinessBtn.addEventListener(`click`, function() {
   Hud.prototype.hideContainerHappiness();
   Hud.prototype.townBtnEnable();

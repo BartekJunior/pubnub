@@ -257,6 +257,9 @@ h2 {
 .town-selected {
   filter: saturate(2) brightness(0.7) contrast(2);
 }
+.town-selected:hover {
+  opacity: 1;
+}
 
 .happiness-div {
   display: block;
@@ -279,7 +282,6 @@ h2 {
   position: absolute;
   left: -7px;
   top: -6px;
-
 
 }
 

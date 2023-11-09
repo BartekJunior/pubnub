@@ -175,16 +175,16 @@ class Town {
     };
 
     Town.prototype.createHappiness = function () {
+      this.raisedHappiness = 0;
       const happinessDiv = document.createElement(`div`);
       const plusI = document.createElement(`i`);
       plusI.id = `chujek`;
+
 
       happinessDiv.classList.add(`happiness-div`, `morale-high-icon`);
 
       this.id.childNodes[4].appendChild(happinessDiv);
       this.id.childNodes[8].appendChild(plusI);
-
-      // hudTown.appendChild(plusI);
 
       plusI.classList.add(
         `happiness-div`,
@@ -192,7 +192,16 @@ class Town {
         `bi`,
         `bi-plus-circle`
       );
-      plusI.addEventListener(`click`, () => console.log(`hehe`));
+
+      plusI.addEventListener(`click`, () => {
+        // console.log(plusI.parentNode.parentNode.town);
+        // console.log(this);
+        this.raisedHappiness++;
+        this.raiseHapiness();
+        this.showHappiness();
+        console.log(this.happiness);
+        
+      })
 
       happinessPlusArr.push(plusI);
 
@@ -200,7 +209,21 @@ class Town {
       // minusDiv.classList.add(`happiness-div`, `happines-minus`, `bi`, `bi-dash-circle`);
     };
 
+    Town.prototype.confirmHappiness = function() {
+      delete this.raisedHappines;
+    }
+    Town.prototype.cancelHappiness = function() {
+      this.happiness = this.happiness - this.raisedHappiness;
+      this.showHappiness();
+      delete this.raisedHappines;
+    }
+
     Town.prototype.showHappiness = function () {
+      const face = this.id.childNodes[4].childNodes[0];
+      while (face.classList.length > 1) {
+        face.classList.remove(face.classList.item(1)); // Remove the class at index 1 (second class)
+      }
+
       if (this.happiness === 2)
         this.id.childNodes[4].childNodes[0].classList.add(`morale-high-icon`);
       if (this.happiness === 1)
@@ -217,6 +240,16 @@ class Town {
         this.showHappiness();
       }
     };
+
+
+
+    
+
+
+
+
+
+    
 
     this.checkBuildedStructure = () => {
       for (const key in this.structure) {
@@ -487,14 +520,12 @@ class Merchant {
           }
           if (this.id.troops.soldiers && this.id.troops.soldiers.length > 0) {
             this.id.troops.showSoldierHex();
-            // this.id.childNodes[8].classList.add(`bg-black`);
           }
         });
         console.log(`this.id.troops.soldiers`, this.id.troops.soldiers);
 
         this.id.childNodes[4].classList.add(`town${this.color}`);
         // this.id.hex.collectible = false;
-
         this.id.town.createHappiness();
 
         Hud.prototype.hideHudMerchant();
