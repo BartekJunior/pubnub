@@ -61,6 +61,8 @@ const containerTempCollect = document.querySelector(`.container-temp-collect`);
 const confirmCollectBtn = document.getElementById(`confirmCollectBtn`);
 const cancelCollectBtn = document.getElementById(`cancelCollectBtn`);
 
+
+const costHappiness = document.getElementById(`costHappiness`);
 const confirmHappinessBtn = document.getElementById(`confirmHappinessBtn`);
 const cancelHappinessBtn = document.getElementById(`cancelHappinessBtn`);
 
