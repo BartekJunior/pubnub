@@ -84,6 +84,7 @@ setPlayer.addEventListener(`click`, function () {
   player = new Player(UUID, num, color, false, 0);
   // player.setSkills();
   window.tree = new Tree();
+  window.cost = new Cost();
 
 
   //set active turn to first player

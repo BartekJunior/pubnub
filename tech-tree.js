@@ -81,6 +81,28 @@ class Player {
       morale: 2,
     };
 
+
+    Player.prototype.bearTheCost = function (costs) {  
+      // console.log(infantry);
+      // console.log(`hmmmmm`, infantry);
+          
+      this.resource.food += costs.food || 0;
+      this.resource.wood += costs.wood || 0;
+      this.resource.stone += costs.stone || 0;
+      this.resource.gold += costs.gold || 0;
+      this.resource.idea += costs.idea || 0;
+      this.resource.culture += costs.culture || 0;
+      this.resource.morale += costs.morale || 0;
+
+      this.showPlayerResource();
+    };
+
+    Player.prototype.showPlayerResource = function () {
+      for (let i = 0; i < res.length; i++) {
+        window[`p` + this.nr + `GlobalResourceDiv`][i].innerHTML = this.resource[res[i]];
+      }
+    };
+
     this.setSkills = () => {
       if (this.nr === 1) return p1Skills;
       if (this.nr === 2) return p2Skills;

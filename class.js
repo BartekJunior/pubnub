@@ -904,6 +904,42 @@ class PossibleResource {
   }
 }
 
+
+
+///// CLASS COST /////
+class Cost {
+  constructor() {
+
+    Cost.prototype.merchant = {
+      food: 2,
+    }
+    Cost.prototype.infantry = {
+      food: 1,
+      stone: 1,
+    }
+    Cost.prototype.cavalry = {
+      food: 1,
+      wood: 1,
+    }
+    Cost.prototype.elephant = {
+      food: 2,
+    }
+    Cost.prototype.leader = {
+      culture: 1,
+      morale: 1,
+    }
+    Cost.prototype.building = {
+      food: 1,
+      wood: 1,
+      stone: 1,
+    }
+
+  }
+}
+
+
+
+
 ///// CLASS HUD /////
 // Hud variables when specific Hud is active => true //
 let collectHud;
@@ -1025,5 +1061,7 @@ class Hud {
       window[`p` + player.nr + `GlobalResourceDiv`][6].innerHTML =
         player.resource.morale;
     };
+
+
   }
 }
