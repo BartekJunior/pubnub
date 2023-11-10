@@ -35,7 +35,6 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
-
   </head>
 
   <div id="firstDiv">
@@ -2318,7 +2317,7 @@
 
       <div class="p1-cards-container cards-container">
         <button class="cards-btn cards-container-item">Cards</button>
-        <button  id="p1TreeBtn" class="tree-btn cards-container-item">
+        <button id="p1TreeBtn" class="tree-btn cards-container-item">
           Technology
         </button>
         <button class="goals-btn cards-container-item">Goals</button>
@@ -2483,7 +2482,9 @@
           </button>
           <button class="hud-town-btn" id="buildStructureBtn">Buduj</button>
           <button class="hud-town-btn" id="recruitBtn">Rekrutuj</button>
-          <button class="hud-town-btn" id="raiseHappinessBtn">Zwiększ Szczęśliwość</button>
+          <button class="hud-town-btn" id="raiseHappinessBtn">
+            Zwiększ Szczęśliwość
+          </button>
           <button class="hud-town-btn" id="burnTownBtn">Spal miasto</button>
         </div>
         <div class="container-temp-collect">
@@ -2504,7 +2505,10 @@
           </button>
         </div>
 
-        <div class="hud-btn-container container-structure" id="containerStructure">
+        <div
+          class="hud-btn-container container-structure"
+          id="containerStructure"
+        >
           <button class="hud-town-btn" id="academyBtn">Akademia</button>
           <button class="hud-town-btn" id="fortressBtn">Forteca</button>
           <button class="hud-town-btn" id="portBtn">Port</button>
@@ -2517,7 +2521,10 @@
           <button class="hud-town-btn" id="cancelBuild">Anuluj Budowę</button>
         </div>
 
-        <div class="hud-btn-container container-structure" id="containerRecruit">
+        <div
+          class="hud-btn-container container-structure"
+          id="containerRecruit"
+        >
           <div class="soldier-div">
             <button class="hud-town-btn" id="merchantBtn">Merchant</button>
             <div class="soldier-img" id="merchantRecruitNr">0</div>
@@ -2568,6 +2575,12 @@
 
       <div class="container-structure" id="containerHappiness">
         <div class="hud-btn-container">
+          <div class="info-happiness">
+              Uwaga! Jeśli klikniesz na PLUS obok swojego Miasta - rozpoczniesz
+              Akcję Zwiększenia Szczęśliwości i nie będzie można już jej cofnąć.
+              Możesz Anulować tą Akcję tylko, jeżeli nie kliknąłeś na żaden
+              PLUS.
+          </div>
           <button class="hud-town-btn" id="confirmHappinessBtn">
             Potwierdź Szczęśliwość
           </button>
@@ -2575,7 +2588,6 @@
             Anuluj Szczęśliwość
           </button>
         </div>
-
       </div>
 
       <div class="hud-rotate-container" id="hudRotateContainer">
@@ -2597,8 +2609,6 @@
       </div>
     </div>
   </div>
-
-
 
   <!-- <div class="container">
     <div class="divGrid">
@@ -2635,9 +2645,6 @@
       <div class="gridItem"></div>
     </div>
   </div> -->
-
-
-
 
   <body>
     <script src="./pubnub.js"></script>

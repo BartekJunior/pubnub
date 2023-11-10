@@ -282,7 +282,6 @@ h2 {
   position: absolute;
   left: -7px;
   top: -6px;
-
 }
 
 .bi::before {
@@ -299,6 +298,12 @@ h2 {
   width: 28px;
   font-size: 28px;
   color: red;
+}
+
+.info-happiness {
+  width: 100%;
+  text-align: center;
+  color: aliceblue;
 }
 
 

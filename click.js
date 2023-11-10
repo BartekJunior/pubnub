@@ -142,7 +142,8 @@ settleBtn.addEventListener(`click`, function () {
   );
   console.log(merchantObj);
   merchantObj.settle();
-  window[`p` + player.nr + `ActionValue`].textContent = player.action;
+  player.makeAction();
+  // window[`p` + player.nr + `ActionValue`].textContent = player.action;
 });
 
 buildStructureBtn.addEventListener(`click`, function () {
@@ -195,6 +196,7 @@ confirmHappinessBtn.addEventListener(`click`, function() {
   Town.prototype.confirmHappiness();
   Hud.prototype.hideContainerHappiness();
   Hud.prototype.townBtnEnable();
+  player.makeAction();
 });
 
 cancelHappinessBtn.addEventListener(`click`, function() {
@@ -310,8 +312,9 @@ confirmMoveBtn.addEventListener("click", function () {
   Hud.prototype.hideHudMerchant();
   Hud.prototype.townBtnEnable();
   moveCounter = 0;
-  player.action--;
-  window[`p` + player.nr + `ActionValue`].textContent = player.action;
+  player.makeAction();
+  // player.action--;
+  // window[`p` + player.nr + `ActionValue`].textContent = player.action;
 });
 
 cancelMoveBtn.addEventListener("click", function () {
@@ -457,6 +460,7 @@ confirmRecruitBtn.addEventListener(`click`, function () {
   troopsPosition = town.id;
   Hud.prototype.hideContainerRecruit();
   Hud.prototype.townBtnEnable();
+  player.makeAction();
 });
 
 cancelRecruitBtn.addEventListener(`click`, function () {
@@ -530,8 +534,9 @@ confirmCollectBtn.addEventListener(`click`, function () {
   Hud.prototype.hideConfirmCollectBtn();
   Hud.prototype.hideCancelCollectBtn();
   Hud.prototype.townBtnEnable();
+  player.makeAction();
 
-  window[`p` + player.nr + `ActionValue`].textContent = player.action;
+  // window[`p` + player.nr + `ActionValue`].textContent = player.action;
 });
 
 cancelCollectBtn.addEventListener(`click`, () => {

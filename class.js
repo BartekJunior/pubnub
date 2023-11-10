@@ -176,11 +176,10 @@ class Town {
     };
 
     Town.prototype.createHappiness = function () {
-      this.raisedHappiness = 0;
+      // this.raisedHappiness = 0;
       const happinessDiv = document.createElement(`div`);
       const plusI = document.createElement(`i`);
-      plusI.id = `chujek`;
-
+      // plusI.id = `plusBtn`;
 
       happinessDiv.classList.add(`happiness-div`, `morale-high-icon`);
       this.id.childNodes[4].appendChild(happinessDiv);
@@ -195,37 +194,38 @@ class Town {
 
       plusI.addEventListener(`click`, () => {
         // console.log(plusI.parentNode.parentNode.town);
-        // console.log(this);
-        this.raisedHappiness++;
+        // this.raisedHappiness++;
         this.raiseHapiness();
         this.showHappiness();
+        cancelHappinessBtn.disabled = true;
         console.log(this.happiness);
-        if (!happyTowns.includes(plusI.parentNode.parentNode.town)) happyTowns.push(plusI.parentNode.parentNode.town);
-      })
-      
-      happinessPlusArr.push(plusI);
+        if (!happyTowns.includes(plusI.parentNode.parentNode.town))
+          happyTowns.push(plusI.parentNode.parentNode.town);
+      });
 
-      // const minusDiv = document.createElement(`i`);
-      // minusDiv.classList.add(`happiness-div`, `happines-minus`, `bi`, `bi-dash-circle`);
+      happinessPlusArr.push(plusI);
     };
 
-    Town.prototype.confirmHappiness = function() {
-      happyTowns.forEach(el => {
-        // const townSelected = el.parentNode.parentNode.town;
-        el.raisedHappines = 0;
-      })
-      happyTowns = [];
-    }
 
-    Town.prototype.cancelHappiness = function() {
-      happyTowns.forEach(el => {
-      // const townSelected = el.parentNode.parentNode.town;
-      el.happiness = el.happiness - el.raisedHappiness;
-      el.showHappiness();
-      el.raisedHappines = 0;
-    })
-    happyTowns = [];
-  }
+
+
+    Town.prototype.confirmHappiness = function () {
+      cancelHappinessBtn.disabled = false;
+      happyTowns = [];
+      // player.action--;
+    };
+
+    Town.prototype.cancelHappiness = function () {
+      cancelHappinessBtn.disabled = false;
+      happyTowns = [];
+
+      //   happyTowns.forEach(el => {
+      //   el.happiness = el.happiness - el.raisedHappiness;
+      //   el.showHappiness();
+      //   el.raisedHappines = 0;
+      // })
+      // happyTowns = [];
+    };
 
     Town.prototype.showHappiness = function () {
       const face = this.id.childNodes[4].childNodes[0];
@@ -233,14 +233,9 @@ class Town {
         face.classList.remove(face.classList.item(1)); // Remove the class at index 1 (second class)
       }
 
-      if (this.happiness === 2)
-        face.classList.add(`morale-high-icon`);
-      if (this.happiness === 1)
-        face.classList.add(
-          `morale-neutral-icon`
-        );
-      if (this.happiness === 0)
-        face.classList.add(`morale-low-icon`);
+      if (this.happiness === 2) face.classList.add(`morale-high-icon`);
+      if (this.happiness === 1) face.classList.add(`morale-neutral-icon`);
+      if (this.happiness === 0) face.classList.add(`morale-low-icon`);
     };
 
     Town.prototype.checkHappiness = function () {
@@ -249,15 +244,6 @@ class Town {
         this.showHappiness();
       }
     };
-
-
-
-    
-
-
-
-
-    
 
     this.checkBuildedStructure = () => {
       for (const key in this.structure) {
@@ -470,7 +456,7 @@ class Town {
       clickedRes = [];
       closerHex = [];
       furtherHex = [];
-      player.action--;
+      // player.action--;
     };
 
     Town.prototype.cancelCollect = () => {
@@ -539,7 +525,7 @@ class Merchant {
         Hud.prototype.hideHudMerchant();
         Hud.prototype.hideMoveBtnContainer();
         Troops.prototype.removeHudTroops();
-        player.action--;
+        // player.action--;
 
         if (!this.id.troops.soldiers.length) this.id.troops.deleteTroops();
       } else alert(`Państwo w Państwie? Idź się lecz...`);
@@ -975,14 +961,14 @@ class Hud {
 
     // Happiness //
     Hud.prototype.showContainerHappiness = () => {
-      (containerHappiness.style.display = `block`);
-      happinessPlusArr.map(el => el.style.display = `block`);
-    }
+      containerHappiness.style.display = `block`;
+      happinessPlusArr.map((el) => (el.style.display = `block`));
+    };
     Hud.prototype.hideContainerHappiness = () => {
-      (containerHappiness.style.display = `none`);
-      happinessPlusArr.map(el => el.style.display = `none`);
-    }
-      
+      containerHappiness.style.display = `none`;
+      happinessPlusArr.map((el) => (el.style.display = `none`));
+    };
+
     // Build
     Hud.prototype.showContainerStructure = () => {
       containerStructure.style.display = `flex`;

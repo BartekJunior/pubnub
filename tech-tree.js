@@ -117,6 +117,12 @@ class Player {
     }
 
     this.start = this.checkStart();
+
+    Player.prototype.makeAction = function() {
+      this.action--;
+      window[`p` + this.nr + `ActionValue`].textContent = this.action;
+    }
+
   }
 }
 
