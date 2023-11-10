@@ -118,11 +118,11 @@ class Player {
 
     this.start = this.checkStart();
 
-    Player.prototype.makeAction = function() {
+    Player.prototype.makeAction = function () {
       this.action--;
       window[`p` + this.nr + `ActionValue`].textContent = this.action;
-    }
-
+      console.log(`PLAYER MADE ACTION`);
+    };
   }
 }
 
@@ -205,8 +205,6 @@ class Tree {
         } else alert(`LOCKED`);
       });
     });
-
- 
 
     // Click OK and make Advance //
     confirmAdvance.addEventListener(`click`, () => {

@@ -463,7 +463,7 @@ confirmRecruitBtn.addEventListener(`click`, function () {
   troopsPosition = town.id;
   Hud.prototype.hideContainerRecruit();
   Hud.prototype.townBtnEnable();
-  player.makeAction();
+  // player.makeAction();
 });
 
 cancelRecruitBtn.addEventListener(`click`, function () {
@@ -537,7 +537,7 @@ confirmCollectBtn.addEventListener(`click`, function () {
   Hud.prototype.hideConfirmCollectBtn();
   Hud.prototype.hideCancelCollectBtn();
   Hud.prototype.townBtnEnable();
-  player.makeAction();
+  // player.makeAction();
 
   // window[`p` + player.nr + `ActionValue`].textContent = player.action;
 });

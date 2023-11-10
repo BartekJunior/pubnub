@@ -138,7 +138,6 @@ let happinessPlusArr = [];
 let happyTowns = [];
 let moraleCost = 0;
 
-
 class Town {
   constructor(id, color) {
     this.type = `town`;
@@ -163,6 +162,8 @@ class Town {
     Town.prototype.activateTown = function () {
       this.activated++;
       this.checkHappiness();
+      player.makeAction();
+      console.log(`TOWN ACTIVATED`);
     };
 
     Town.prototype.resetActivateTown = function () {
@@ -212,7 +213,6 @@ class Town {
 
       happinessPlusArr.push(plusI);
     };
-
 
     Town.prototype.confirmHappiness = function () {
       cancelHappinessBtn.disabled = false;
