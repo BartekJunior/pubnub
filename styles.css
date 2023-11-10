@@ -301,11 +301,24 @@ h2 {
 }
 
 .info-happiness {
-  width: 100%;
+  display: inline-block;
+  width: 70%;
   text-align: center;
   color: aliceblue;
 }
 
+.cost-happiness-global {
+  display: inline-block;
+  width: 20%;
+  color: aliceblue;
+
+}
+
+.cost-happiness-img {
+  width: 30px !important;
+  height: 30px !important;
+  background-color: black !important;
+}
 
 /* ------------ Soldier Colors ----------------- */
 .cavalryred {
