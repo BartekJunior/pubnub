@@ -311,13 +311,24 @@ h2 {
   display: inline-block;
   width: 20%;
   color: aliceblue;
+}
 
+.cost-happiness-info {
+  text-align: center;
 }
 
 .cost-happiness-img {
-  width: 30px !important;
-  height: 30px !important;
-  background-color: black !important;
+  margin: 0 auto;
+  width: 30px;
+  height: 30px;
+}
+
+.cost-happiness {
+  padding-top: 7px;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+
 }
 
 /* ------------ Soldier Colors ----------------- */

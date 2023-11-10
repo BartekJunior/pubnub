@@ -176,7 +176,6 @@ class Town {
     };
 
     Town.prototype.createHappiness = function () {
-      // this.raisedHappiness = 0;
       const happinessDiv = document.createElement(`div`);
       const plusI = document.createElement(`i`);
       // plusI.id = `plusBtn`;
@@ -194,32 +193,26 @@ class Town {
 
       plusI.addEventListener(`click`, () => {
         // console.log(plusI.parentNode.parentNode.town);
-        // this.raisedHappiness++;
         if (this.happiness < 2) {
-
           this.raiseHapiness();
           this.showHappiness();
           cancelHappinessBtn.disabled = true;
           confirmHappinessBtn.disabled = false;
           console.log(this.happiness);
           if (!happyTowns.includes(plusI.parentNode.parentNode.town))
-          happyTowns.push(plusI.parentNode.parentNode.town);
+            happyTowns.push(plusI.parentNode.parentNode.town);
 
           console.log(`RAISED UP`);
-          
-      }
-        
+        }
       });
 
       happinessPlusArr.push(plusI);
     };
 
 
-
-
     Town.prototype.confirmHappiness = function () {
       cancelHappinessBtn.disabled = false;
-      happyTowns.map(el => el.resetActivateTown());
+      happyTowns.map((el) => el.resetActivateTown());
       happyTowns = [];
       // player.action--;
     };
@@ -227,7 +220,6 @@ class Town {
     Town.prototype.cancelHappiness = function () {
       cancelHappinessBtn.disabled = false;
       happyTowns = [];
-
     };
 
     Town.prototype.showHappiness = function () {
@@ -247,11 +239,6 @@ class Town {
         this.showHappiness();
       }
     };
-
-
-
-
-
 
     this.checkBuildedStructure = () => {
       for (const key in this.structure) {
@@ -422,7 +409,7 @@ class Town {
       distanceFromTown = [];
     };
 
-    Town.prototype.updateGlobalResource = function() {
+    Town.prototype.updateGlobalResource = function () {
       for (let i = 0; i < p1GlobalResourceDiv.length - 2; i++) {
         // food reached 2 without Storage //
         if (
