@@ -196,6 +196,7 @@ confirmHappinessBtn.addEventListener(`click`, function() {
   Town.prototype.confirmHappiness();
   Hud.prototype.hideContainerHappiness();
   Hud.prototype.townBtnEnable();
+  confirmHappinessBtn.disabled = true;
   player.makeAction();
 });
 

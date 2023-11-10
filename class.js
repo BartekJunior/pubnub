@@ -195,12 +195,20 @@ class Town {
       plusI.addEventListener(`click`, () => {
         // console.log(plusI.parentNode.parentNode.town);
         // this.raisedHappiness++;
-        this.raiseHapiness();
-        this.showHappiness();
-        cancelHappinessBtn.disabled = true;
-        console.log(this.happiness);
-        if (!happyTowns.includes(plusI.parentNode.parentNode.town))
+        if (this.happiness < 2) {
+
+          this.raiseHapiness();
+          this.showHappiness();
+          cancelHappinessBtn.disabled = true;
+          confirmHappinessBtn.disabled = false;
+          console.log(this.happiness);
+          if (!happyTowns.includes(plusI.parentNode.parentNode.town))
           happyTowns.push(plusI.parentNode.parentNode.town);
+
+          console.log(`RAISED UP`);
+          
+      }
+        
       });
 
       happinessPlusArr.push(plusI);
@@ -211,6 +219,7 @@ class Town {
 
     Town.prototype.confirmHappiness = function () {
       cancelHappinessBtn.disabled = false;
+      happyTowns.map(el => el.resetActivateTown());
       happyTowns = [];
       // player.action--;
     };
@@ -219,12 +228,6 @@ class Town {
       cancelHappinessBtn.disabled = false;
       happyTowns = [];
 
-      //   happyTowns.forEach(el => {
-      //   el.happiness = el.happiness - el.raisedHappiness;
-      //   el.showHappiness();
-      //   el.raisedHappines = 0;
-      // })
-      // happyTowns = [];
     };
 
     Town.prototype.showHappiness = function () {
@@ -244,6 +247,11 @@ class Town {
         this.showHappiness();
       }
     };
+
+
+
+
+
 
     this.checkBuildedStructure = () => {
       for (const key in this.structure) {
@@ -414,7 +422,7 @@ class Town {
       distanceFromTown = [];
     };
 
-    this.updateGlobalResource = () => {
+    Town.prototype.updateGlobalResource = function() {
       for (let i = 0; i < p1GlobalResourceDiv.length - 2; i++) {
         // food reached 2 without Storage //
         if (
@@ -445,14 +453,13 @@ class Town {
           player.resource[res[i]];
         tempResource[res[i]] = 0;
         collecting[i].innerHTML = tempResource[res[i]];
-
-        this.activateTown();
       }
 
       hexAll.forEach((el) => {
         if (el.possibleResource) el.possibleResource.deletePossibleResource();
       });
 
+      this.activateTown();
       clickedRes = [];
       closerHex = [];
       furtherHex = [];
