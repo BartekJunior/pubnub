@@ -910,6 +910,7 @@ class PossibleResource {
 class Cost {
   constructor() {
 
+
     Cost.prototype.merchant = {
       food: 2,
     }

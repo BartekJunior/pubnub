@@ -82,24 +82,51 @@ class Player {
     };
 
 
-    Player.prototype.bearTheCost = function (costs) {  
-      // console.log(infantry);
-      // console.log(`hmmmmm`, infantry);
-          
-      this.resource.food += costs.food || 0;
-      this.resource.wood += costs.wood || 0;
-      this.resource.stone += costs.stone || 0;
-      this.resource.gold += costs.gold || 0;
-      this.resource.idea += costs.idea || 0;
-      this.resource.culture += costs.culture || 0;
-      this.resource.morale += costs.morale || 0;
+
+    Player.prototype.canAfford = function (cost) {
+      // Check if deducting costs will result in negative resources
+      if (
+        this.resource.food - (cost.food || 0) < 0 ||
+        this.resource.wood - (cost.wood || 0) < 0 ||
+        this.resource.stone - (cost.stone || 0) < 0 ||
+        this.resource.gold - (cost.gold || 0) < 0 ||
+        this.resource.idea - (cost.idea || 0) < 0 ||
+        this.resource.culture - (cost.culture || 0) < 0 ||
+        this.resource.morale - (cost.morale || 0) < 0
+      ) {
+        // Insufficient resources, halt the method
+        alert(`Masz za mało surowców!`)
+        return true;
+      }
+    };
+
+    Player.prototype.bearTheCost = function (cost) {
+
+      if (this.canAfford(cost)) return
+      else 
+
+
+      this.resource.food -= cost.food || 0;
+      this.resource.wood -= cost.wood || 0;
+      this.resource.stone -= cost.stone || 0;
+      this.resource.gold -= cost.gold || 0;
+      this.resource.idea -= cost.idea || 0;
+      this.resource.culture -= cost.culture || 0;
+      this.resource.morale -= cost.morale || 0;
+
+
+      // if (this.resource.stone < 0) {
+      //   console.log(`bearTheCost returned`);
+      //   return
+      // }
 
       this.showPlayerResource();
     };
 
     Player.prototype.showPlayerResource = function () {
       for (let i = 0; i < res.length; i++) {
-        window[`p` + this.nr + `GlobalResourceDiv`][i].innerHTML = this.resource[res[i]];
+        window[`p` + this.nr + `GlobalResourceDiv`][i].innerHTML =
+          this.resource[res[i]];
       }
     };
 
