@@ -264,6 +264,9 @@ class Town {
     };
 
     this.buildStructure = (building) => {
+
+      if (player.bearTheCost(cost.building))
+
       if (this.size < 5) {
         this.id.childNodes[this.structurePlace(this.size)].classList.add(
           building + this.color
@@ -910,7 +913,6 @@ class PossibleResource {
 class Cost {
   constructor() {
 
-
     Cost.prototype.merchant = {
       food: 2,
     }
@@ -937,7 +939,6 @@ class Cost {
 
   }
 }
-
 
 
 

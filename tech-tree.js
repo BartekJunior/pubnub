@@ -81,9 +81,8 @@ class Player {
       morale: 2,
     };
 
-
-
     Player.prototype.canAfford = function (cost) {
+      if (true)
       // Check if deducting costs will result in negative resources
       if (
         this.resource.food - (cost.food || 0) < 0 ||
@@ -96,16 +95,13 @@ class Player {
       ) {
         // Insufficient resources, halt the method
         alert(`Masz za mało surowców!`)
-        return true;
-      }
+        return false;
+      } else return true
     };
 
     Player.prototype.bearTheCost = function (cost) {
-
-      if (this.canAfford(cost)) return
+      if (!this.canAfford(cost)) return
       else 
-
-
       this.resource.food -= cost.food || 0;
       this.resource.wood -= cost.wood || 0;
       this.resource.stone -= cost.stone || 0;
@@ -113,14 +109,8 @@ class Player {
       this.resource.idea -= cost.idea || 0;
       this.resource.culture -= cost.culture || 0;
       this.resource.morale -= cost.morale || 0;
-
-
-      // if (this.resource.stone < 0) {
-      //   console.log(`bearTheCost returned`);
-      //   return
-      // }
-
       this.showPlayerResource();
+      return true;
     };
 
     Player.prototype.showPlayerResource = function () {
