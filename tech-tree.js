@@ -97,6 +97,8 @@ class Player {
         alert(`Masz za mało surowców!`)
         return false;
       } else return true
+
+      // return true
     };
 
     Player.prototype.bearTheCost = function (cost) {

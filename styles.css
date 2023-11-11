@@ -538,7 +538,7 @@ h2 {
   justify-content: space-around;
   gap: 15px;
   width: 100%;
-  padding: 20px 0;
+  padding: 10px 0 15px;
 }
 
 .hud-merchant {
@@ -643,6 +643,18 @@ h2 {
 
 .soldier-selected {
   background-color: rgb(146, 146, 146);
+}
+
+.soldier-cost-global {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 7px;
+}
+
+.cost-div {
+  width: 30px;
+  height: 30px;
 }
 
 #hudTroops {

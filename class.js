@@ -264,22 +264,20 @@ class Town {
     };
 
     this.buildStructure = (building) => {
-
       if (player.bearTheCost(cost.building))
-
-      if (this.size < 5) {
-        this.id.childNodes[this.structurePlace(this.size)].classList.add(
-          building + this.color
-        );
-        this.structure[building] = true;
-        this.calcSize();
-        this.activateTown();
-        Hud.prototype.changeStructureBtn(building, `none`);
-        Hud.prototype.hideContainerStructure();
-        Hud.prototype.townBtnEnable();
-      } else {
-        alert(`W mieście możesz zbudować maksymalnie 4 budynki`);
-      }
+        if (this.size < 5) {
+          this.id.childNodes[this.structurePlace(this.size)].classList.add(
+            building + this.color
+          );
+          this.structure[building] = true;
+          this.calcSize();
+          this.activateTown();
+          Hud.prototype.changeStructureBtn(building, `none`);
+          Hud.prototype.hideContainerStructure();
+          Hud.prototype.townBtnEnable();
+        } else {
+          alert(`W mieście możesz zbudować maksymalnie 4 budynki`);
+        }
     };
 
     this.calcSize = () => {
@@ -329,36 +327,70 @@ class Town {
     };
 
     this.confirmRecruit = () => {
-      if (!this.id.troops) {
-        this.id.troops = new Troops(this.id, this.color);
+      let costSum = {
+        food: 0,
+        wood: 0,
+        stone: 0,
+        gold: 0,
+        idea: 0,
+        culture: 0,
+        morale: 0,
+      };
+
+      function updateCost(tempSoldiers, costSum) {
+        tempSoldiers.forEach((soldier) => {
+          // Sprawdzenie typu jednostki i dodanie kosztów do costSum zgodnie z definicją z klasy Cost
+          if (soldier.type === "merchant") {
+            costSum.food += cost.merchant.food;
+          }
+          if (soldier.type === "infantry") {
+            costSum.food += cost.infantry.food;
+            costSum.stone += cost.infantry.stone;
+          }
+          if (soldier.type === "cavalry") {
+            costSum.food += cost.cavalry.food;
+            costSum.wood += cost.cavalry.wood;
+          }
+          if (soldier.type === "elephant") {
+            costSum.food += cost.elephant.food;
+          }
+          if (soldier.type === "leader") {
+            costSum.food += cost.leader.food;
+          }
+        });
+        console.log(`this is costSum`, costSum);
+        return costSum;
       }
-      if (
-        this.id.troops &&
-        this.id.troops.soldiers.filter((item) => item.type !== `merchant`)
-          .length +
-          tempSoldiers.filter((item) => item.type !== `merchant`).length <=
-          4
-      ) {
-        this.id.troops.soldiers.push(...tempSoldiers);
-        tempSoldiers = [];
-        this.id.troops.calcSize();
 
-        this.id.troops.showSoldierHex();
+      if (player.bearTheCost(updateCost(tempSoldiers, costSum))) {
+        if (!this.id.troops) {
+          this.id.troops = new Troops(this.id, this.color);
+        }
+        if (
+          this.id.troops &&
+          this.id.troops.soldiers.filter((item) => item.type !== `merchant`)
+            .length +
+            tempSoldiers.filter((item) => item.type !== `merchant`).length <=
+            4
+        ) {
+          this.id.troops.soldiers.push(...tempSoldiers);
+          tempSoldiers = [];
+          this.id.troops.calcSize();
 
-        Troops.prototype.removeHudTroops();
-        Hud.prototype.showMoveBtnContainer();
-        this.id.troops.addHudTroops();
-        this.updateRecruitNr();
-        this.activateTown();
-      } else
-        alert(
-          `Na jednym Hexie mogą znajdować sie maksymalnie 4 jednostki wojskowe`
-        );
+          this.id.troops.showSoldierHex();
 
-      confirmRecruitBtn.disabled = true;
+          Troops.prototype.removeHudTroops();
+          Hud.prototype.showMoveBtnContainer();
+          this.id.troops.addHudTroops();
+          this.updateRecruitNr();
+          this.activateTown();
+        } else
+          alert(
+            `Na jednym Hexie mogą znajdować sie maksymalnie 4 jednostki wojskowe`
+          );
 
-      // Now you have to paint the soldiers on the Town map. Some like this under...
-      // this.id.childNodes[8].classList.add(soldier + this.color);
+        confirmRecruitBtn.disabled = true;
+      } else this.cancelRecruit();
     };
 
     this.cancelRecruit = () => {
@@ -907,40 +939,34 @@ class PossibleResource {
   }
 }
 
-
-
 ///// CLASS COST /////
 class Cost {
   constructor() {
-
     Cost.prototype.merchant = {
       food: 2,
-    }
+    };
     Cost.prototype.infantry = {
       food: 1,
       stone: 1,
-    }
+    };
     Cost.prototype.cavalry = {
       food: 1,
       wood: 1,
-    }
+    };
     Cost.prototype.elephant = {
       food: 2,
-    }
+    };
     Cost.prototype.leader = {
       culture: 1,
       morale: 1,
-    }
+    };
     Cost.prototype.building = {
       food: 1,
       wood: 1,
       stone: 1,
-    }
-
+    };
   }
 }
-
-
 
 ///// CLASS HUD /////
 // Hud variables when specific Hud is active => true //
@@ -1063,7 +1089,5 @@ class Hud {
       window[`p` + player.nr + `GlobalResourceDiv`][6].innerHTML =
         player.resource.morale;
     };
-
-
   }
 }
