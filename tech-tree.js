@@ -102,18 +102,20 @@ class Player {
       else return true
     };
 
-    Player.prototype.bearTheCost = function (cost) {
+    Player.prototype.bearTheCost = function (cost, action) {
+      console.log(`Wlasnie ponosisz koszt `, action);
       if (!this.canAfford(cost)) return
-      else 
-      this.resource.food -= cost.food || 0;
-      this.resource.wood -= cost.wood || 0;
-      this.resource.stone -= cost.stone || 0;
-      this.resource.gold -= cost.gold || 0;
-      this.resource.idea -= cost.idea || 0;
-      this.resource.culture -= cost.culture || 0;
-      this.resource.morale -= cost.morale || 0;
-      this.showPlayerResource();
-      return true;
+      else {
+        this.resource.food -= cost.food || 0;
+        this.resource.wood -= cost.wood || 0;
+        this.resource.stone -= cost.stone || 0;
+        this.resource.gold -= cost.gold || 0;
+        this.resource.idea -= cost.idea || 0;
+        this.resource.culture -= cost.culture || 0;
+        this.resource.morale -= cost.morale || 0;
+        this.showPlayerResource();
+        return true;
+      }
     };
 
     Player.prototype.showPlayerResource = function () {

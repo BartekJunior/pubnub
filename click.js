@@ -770,14 +770,16 @@ const paintTown = () => {
         el.town.happiness = townsOnMap.value[i].happiness;
         el.childNodes[4].classList.add(`town${el.town.color}`);
 
-        if (townsOnMap.value[i].port) el.town.buildStructure(`port`);
-        if (townsOnMap.value[i].academy) el.town.buildStructure(`academy`);
-        if (townsOnMap.value[i].fortress) el.town.buildStructure(`fortress`);
-        if (townsOnMap.value[i].market) el.town.buildStructure(`market`);
-        if (townsOnMap.value[i].obelisk) el.town.buildStructure(`obelisk`);
-        if (townsOnMap.value[i].temple) el.town.buildStructure(`temple`);
+        el.town.showHappiness();
+
+        if (townsOnMap.value[i].port) el.town.paintStructureForFree(`port`);
+        if (townsOnMap.value[i].academy) el.town.paintStructureForFree(`academy`);
+        if (townsOnMap.value[i].fortress) el.town.paintStructureForFree(`fortress`);
+        if (townsOnMap.value[i].market) el.town.paintStructureForFree(`market`);
+        if (townsOnMap.value[i].obelisk) el.town.paintStructureForFree(`obelisk`);
+        if (townsOnMap.value[i].temple) el.town.paintStructureForFree(`temple`);
         if (townsOnMap.value[i].observatory)
-          el.town.buildStructure(`observatory`);
+          el.town.paintStructureForFree(`observatory`);
       }
     }
   });

@@ -201,7 +201,7 @@ class Town {
         if (this.happiness < 2) {
           moraleCost.culture++;
 
-          if (player.bearTheCost(cost.happiness)) {
+          if (player.bearTheCost(cost.happiness, `happiness`)) {
             this.raiseHapiness();
             this.showHappiness();
             cancelHappinessBtn.disabled = true;
@@ -213,7 +213,6 @@ class Town {
             console.log(`RAISED UP`);
             costHappiness.innerHTML = moraleCost.culture;
           }
-          
         }
       });
 
@@ -237,6 +236,8 @@ class Town {
 
     Town.prototype.showHappiness = function () {
       const face = this.id.childNodes[4].childNodes[0];
+      console.log(`this is face`, face);
+      
       while (face.classList.length > 1) {
         face.classList.remove(face.classList.item(1)); // Remove the class at index 1 (second class)
       }
@@ -270,7 +271,8 @@ class Town {
     };
 
     this.buildStructure = (building) => {
-      if (player.bearTheCost(cost.building))
+      
+      if (player.bearTheCost(cost.building, `budowa`))
         if (this.size < 5) {
           this.id.childNodes[this.structurePlace(this.size)].classList.add(
             building + this.color
@@ -285,6 +287,21 @@ class Town {
           alert(`W mieście możesz zbudować maksymalnie 4 budynki`);
         }
     };
+
+    Town.prototype.paintStructureForFree = function (building) {
+      
+        this.id.childNodes[this.structurePlace(this.size)].classList.add(
+          building + this.color
+        );
+        this.structure[building] = true;
+        this.calcSize();
+        // this.activateTown();
+        // Hud.prototype.changeStructureBtn(building, `none`);
+        // Hud.prototype.hideContainerStructure();
+        // Hud.prototype.townBtnEnable();
+      } 
+   
+      
 
     this.calcSize = () => {
       const buildings = [
@@ -368,7 +385,7 @@ class Town {
         return costSum;
       }
 
-      if (player.bearTheCost(updateCost(tempSoldiers, costSum))) {
+      if (player.bearTheCost(updateCost(tempSoldiers, costSum), `rekrutacja`)) {
         if (!this.id.troops) {
           this.id.troops = new Troops(this.id, this.color);
         }
@@ -517,7 +534,12 @@ class Town {
       Hud.prototype.hideConfirmCollectBtn();
       Hud.prototype.hideCancelCollectBtn();
     };
+
+    this.createHappiness();
+
   }
+
+
 }
 
 ///// CLASS MERCHANT /////
@@ -562,7 +584,7 @@ class Merchant {
 
         this.id.childNodes[4].classList.add(`town${this.color}`);
         // this.id.hex.collectible = false;
-        this.id.town.createHappiness();
+        // this.id.town.createHappiness();
 
         Hud.prototype.hideHudMerchant();
         Hud.prototype.hideMoveBtnContainer();
