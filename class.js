@@ -136,7 +136,9 @@ class Hex {
 let town;
 let happinessPlusArr = [];
 let happyTowns = [];
-let moraleCost = 0;
+let moraleCost = {
+  culture: 0,
+};
 
 class Town {
   constructor(id, color) {
@@ -197,17 +199,21 @@ class Town {
       plusI.addEventListener(`click`, () => {
         // console.log(plusI.parentNode.parentNode.town);
         if (this.happiness < 2) {
-          moraleCost++;
-          this.raiseHapiness();
-          this.showHappiness();
-          cancelHappinessBtn.disabled = true;
-          confirmHappinessBtn.disabled = false;
-          console.log(this.happiness);
-          if (!happyTowns.includes(plusI.parentNode.parentNode.town))
-            happyTowns.push(plusI.parentNode.parentNode.town);
+          moraleCost.culture++;
 
-          console.log(`RAISED UP`);
-          costHappiness.innerHTML = moraleCost;
+          if (player.bearTheCost(cost.happiness)) {
+            this.raiseHapiness();
+            this.showHappiness();
+            cancelHappinessBtn.disabled = true;
+            confirmHappinessBtn.disabled = false;
+            console.log(this.happiness);
+            if (!happyTowns.includes(plusI.parentNode.parentNode.town))
+              happyTowns.push(plusI.parentNode.parentNode.town);
+
+            console.log(`RAISED UP`);
+            costHappiness.innerHTML = moraleCost.culture;
+          }
+          
         }
       });
 
@@ -218,15 +224,15 @@ class Town {
       cancelHappinessBtn.disabled = false;
       happyTowns.map((el) => el.resetActivateTown());
       happyTowns = [];
-      moraleCost = 0;
-      costHappiness.innerHTML = moraleCost;
+      moraleCost.culture = 0;
+      costHappiness.innerHTML = moraleCost.culture;
     };
 
     Town.prototype.cancelHappiness = function () {
       cancelHappinessBtn.disabled = false;
       happyTowns = [];
-      moraleCost = 0;
-      costHappiness.innerHTML = moraleCost;
+      moraleCost.culture = 0;
+      costHappiness.innerHTML = moraleCost.culture;
     };
 
     Town.prototype.showHappiness = function () {
@@ -964,6 +970,9 @@ class Cost {
       food: 1,
       wood: 1,
       stone: 1,
+    };
+    Cost.prototype.happiness = {
+      morale: 1,
     };
   }
 }
