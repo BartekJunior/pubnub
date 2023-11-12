@@ -241,7 +241,7 @@ hexAll.forEach((el) => {
     // when u click on Town (universal) //
     if (
       el.town &&
-      el.town.player === player &&
+      el.town.player === player.nr &&
       !collectHud &&
       !buildHud &&
       !recruitHud &&
@@ -257,8 +257,6 @@ hexAll.forEach((el) => {
     }
   });
 });
-
-
 
 
 
@@ -736,10 +734,10 @@ const paintTroops = () => {
 
 const readTown = () => {
   hexAll.forEach((el, index) => {
-    if (el.town && el.town.player === player) {
+    if (el.town && el.town.player === player.nr) {
       let townOnMap = {
         type: el.town.type,
-        player: el.town.player.nr,
+        player: el.town.player,
         id: index,
         color: el.town.color,
         happiness: el.town.happiness,
@@ -758,14 +756,24 @@ const readTown = () => {
       type: `town`,
       value: townsOnMapArr,
     };
+    
   });
+  console.log(`townsOnMap readed`, townsOnMap);
+  
+
 };
 
 const paintTown = () => {
+  console.log(`townsOnMap painted`, townsOnMap);
+  
   hexAll.forEach((el, index) => {
     for (let i = 0; i < townsOnMap.value.length; i++) {
       if (index === townsOnMap.value[i].id) {
-        el.town = new Town(el, townsOnMap.value[i].color);
+
+        if (!el.town) el.town = new Town(el, townsOnMap.value[i].color);
+        
+
+
         el.town.player = townsOnMap.value[i].player;
         el.town.happiness = townsOnMap.value[i].happiness;
         el.childNodes[4].classList.add(`town${el.town.color}`);

@@ -143,7 +143,7 @@ let moraleCost = {
 class Town {
   constructor(id, color) {
     this.type = `town`;
-    this.player = player;
+    this.player = player.nr;
     this.id = id;
     this.color = color;
     this.happiness = 2;
@@ -428,8 +428,8 @@ class Town {
       let rectHexArr = [];
       let distanceFromTown = [];
 
-      if (!this.player.skills[7].purchased) roadsCollect = 1;
-      else if (this.player.skills[7].purchased) roadsCollect = 2;
+      if (!player.skills[7].purchased) roadsCollect = 1;
+      else if (player.skills[7].purchased) roadsCollect = 2;
 
       for (let i = 0; i < hexAll.length; i++) {
         rectHexArr.push(hexAll[i].getBoundingClientRect());
@@ -441,7 +441,7 @@ class Town {
 
         // console.log(`distance:`, distanceFromTown[i], `index:`, i);
         if (distanceFromTown[i] < 150) closerHex.push(hexAll[i]);
-        if (this.player.skills[3].purchased) {
+        if (player.skills[3].purchased) {
           if (distanceFromTown[i] > 150 && distanceFromTown[i] < 245)
             furtherHex.push(hexAll[i]);
         }
@@ -459,7 +459,7 @@ class Town {
         closerHex[i].possibleResource = possibleResource;
       }
 
-      if (this.player.skills[3].purchased) {
+      if (player.skills[3].purchased) {
         for (let i = 0; i < furtherHex.length; i++) {
           const possibleResource = new PossibleResource(
             furtherHex[i],
@@ -478,7 +478,7 @@ class Town {
       for (let i = 0; i < p1GlobalResourceDiv.length - 2; i++) {
         // food reached 2 without Storage //
         if (
-          !this.player.skills[1].purchased &&
+          !player.skills[1].purchased &&
           player.resource[res[0]] + tempResource[res[0]] > 2
         ) {
           alert(
