@@ -661,6 +661,7 @@ const paintMerchant = () => {
 
 const readHex = () => {
   hexesOnMap = undefined;
+  hexesOnMapArr = [];
   hexAll.forEach((el, index) => {
     if (el.hex.type === `hex` && el.hex.vis === true) {
       let hexOnMap = {
@@ -700,8 +701,10 @@ const paintHex = () => {
 
 const readTroops = () => {
   troopsOnMap = undefined;
+  troopsOnMapArr = [];
+  console.log('%c this is troopsOnMapArr readed START', 'color: blue; font-size: 15px;', troopsOnMapArr);
+
   hexAll.forEach((el, index) => {
-    console.log('%c this is troopsOnMapArr readed START', 'color: blue; font-size: 15px;',troopsOnMapArr);
 
     if (el.troops && el.troops.player.nr === player.nr) {
       let troopOnMap = {
@@ -715,7 +718,7 @@ const readTroops = () => {
       };
 
       troopsOnMapArr.push(troopOnMap);
-      console.log('%c this is troopsOnMapArr readed END', 'color: blue; font-size: 15px;',troopsOnMapArr);
+      // console.log('%c this is troopsOnMapArr readed END', 'color: blue; font-size: 15px;',troopsOnMapArr);
 
     }
     troopsOnMap = {
@@ -746,6 +749,7 @@ const paintTroops = () => {
 
 const readTown = () => {
   townsOnMap = undefined;
+  townsOnMapArr = [];
   hexAll.forEach((el, index) => {
     if (el.town && el.town.player === player.nr) {
       let townOnMap = {
