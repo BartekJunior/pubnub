@@ -57,6 +57,7 @@ for (i = 1; i < 4; i++) {
 // Dynamic variables
 
 sendPlayer.addEventListener(`click`, function () {
+  this.style.display = `none`;
   publishMessage(player);
   player.start = undefined; // disable player.start to not sending the position of first merchant anymore
 });
@@ -66,7 +67,7 @@ sendPlayer.addEventListener(`click`, function () {
 // }
 
 const playerListener = (msg) => {
-  console.log(`this is player BEFORE IF msg`, msg);
+  // console.log(`this is player BEFORE IF msg`, msg);
 
   if (msg.name !== player.name) window[`player` + msg.name] = msg;
 
@@ -74,7 +75,7 @@ const playerListener = (msg) => {
   if (msg.nr == 2) player2 = msg;
   if (msg.nr == 3) player3 = msg;
 
-  console.log(`this is player msg`, msg);
+  // console.log(`this is player msg`, msg);
 
   // if (msg.nr === 1 && msg.start === 0)
   //   hexAll[msg.start].merchant = new Merchant(
@@ -197,7 +198,7 @@ const setupPubNub = () => {
         resourceListener(messageEvent.message.description);
         skillsListener(messageEvent.message.description);
 
-        console.log(messageEvent);
+        // console.log(messageEvent);
       }
 
       // TURN CONDITION FOR TURN LISTENER
@@ -220,8 +221,8 @@ const setupPubNub = () => {
         messageEvent.publisher !== UUID &&
         messageEvent.message.description.type === `hex`
       ) {
-        console.log(messageEvent.message.description);
-        console.log(`this was hex`);
+        // console.log(messageEvent.message.description);
+        // console.log(`this was hex`);
         mapListener(messageEvent.message.description);
       }
 
@@ -229,8 +230,8 @@ const setupPubNub = () => {
         messageEvent.publisher !== UUID &&
         messageEvent.message.description.type === `town`
       ) {
-        console.log(messageEvent.message.description);
-        console.log(`this was town`);
+        // console.log(messageEvent.message.description);
+        // console.log(`this was town`);
         townListener(messageEvent.message.description);
       }
 
@@ -238,8 +239,9 @@ const setupPubNub = () => {
         messageEvent.publisher !== UUID &&
         messageEvent.message.description.type === `troops`
       ) {
-        console.log(messageEvent.message.description);
-        console.log(`this was troops`);
+        // console.log(messageEvent.message.description);
+        // console.log('%c this was troops recived', 'color: blue; font-size: 15px;', messageEvent.message.description);
+
         troopsListener(messageEvent.message.description);
       }
 

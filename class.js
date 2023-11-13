@@ -237,7 +237,7 @@ class Town {
     Town.prototype.showHappiness = function () {
       const face = this.id.childNodes[4].childNodes[0];
       console.log(`this is face`, face);
-      
+
       while (face.classList.length > 1) {
         face.classList.remove(face.classList.item(1)); // Remove the class at index 1 (second class)
       }
@@ -271,7 +271,6 @@ class Town {
     };
 
     this.buildStructure = (building) => {
-      
       if (player.bearTheCost(cost.building, `budowa`))
         if (this.size < 5) {
           this.id.childNodes[this.structurePlace(this.size)].classList.add(
@@ -289,7 +288,8 @@ class Town {
     };
 
     Town.prototype.paintStructureForFree = function (building) {
-      
+
+      if (!this.structure[building]) {
         this.id.childNodes[this.structurePlace(this.size)].classList.add(
           building + this.color
         );
@@ -299,9 +299,10 @@ class Town {
         // Hud.prototype.changeStructureBtn(building, `none`);
         // Hud.prototype.hideContainerStructure();
         // Hud.prototype.townBtnEnable();
-      } 
-   
-      
+      }
+    };
+
+
 
     this.calcSize = () => {
       const buildings = [
@@ -536,10 +537,7 @@ class Town {
     };
 
     this.createHappiness();
-
   }
-
-
 }
 
 ///// CLASS MERCHANT /////
@@ -1011,11 +1009,11 @@ class Hud {
     // Town fundamental Btns
     Hud.prototype.showHudTown = () => {
       hudTown.style.display = `block`;
-      town.id.classList.add(`town-selected`);
+      if (town) town.id.classList.add(`town-selected`);
     };
     Hud.prototype.hideHudTown = () => {
       hudTown.style.display = `none`;
-      town.id.classList.remove(`town-selected`);
+      if (town) town.id.classList.remove(`town-selected`);
     };
 
     Hud.prototype.townBtnDisable = () => {
@@ -1120,5 +1118,18 @@ class Hud {
       window[`p` + player.nr + `GlobalResourceDiv`][6].innerHTML =
         player.resource.morale;
     };
+
+    Hud.prototype.hideHudAll = function () {
+      Hud.prototype.hideHudTown();
+      Hud.prototype.hideHudTroops();
+      Hud.prototype.hideContainerTempCollect();
+      Hud.prototype.hideContainerHappiness();
+      Hud.prototype.hideContainerStructure();
+      Hud.prototype.hideContainerRecruit();
+      Hud.prototype.hideMoveBtnContainer();
+      Hud.prototype.hideHudMerchant();
+      Hud.prototype.hideRotateHud();
+
+    }
   }
 }

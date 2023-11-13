@@ -82,7 +82,7 @@ class Player {
     };
 
     Player.prototype.canAfford = function (cost) {
-      if (true) {
+      if (false) {
         // Check if deducting costs will result in negative resources
         if (
           this.resource.food - (cost.food || 0) < 0 ||

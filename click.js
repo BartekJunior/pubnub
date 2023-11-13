@@ -264,7 +264,7 @@ hexAll.forEach((el) => {
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     // Must be !el.possibleMove because the move Troops is not working!//
-    if (el.troops && !el.possibleMove) {
+    if (el.troops && !el.possibleMove && el.troops.player === player) {
       Hud.prototype.showMoveBtnContainer();
       Troops.prototype.removeHudTroops();
       el.troops.addHudTroops();
@@ -281,7 +281,7 @@ hexAll.forEach((el) => {
       // troopsPosition = undefined;
     }
 
-    if (el.troops && el.troops.soldiers.some((el) => el.type === `merchant`)) {
+    if (el.troops && el.troops.soldiers.some((el) => el.type === `merchant`) && el.troops.player === player) {
       Hud.prototype.showHudMerchant();
     } else {
       Hud.prototype.hideHudMerchant();
@@ -582,6 +582,7 @@ const checkAction = function () {
     player.skills.forEach((el) => el.id.classList.remove(`delete-click`));
     player.turnActive = true;
   } else if (player.action <= 0) {
+    Hud.prototype.hideHudAll();
     hexAll.forEach((el) => el.classList.add(`delete-click`));
     player.skills.forEach((el) => el.id.classList.add(`delete-click`));
     player.turnActive = false;
@@ -659,6 +660,7 @@ const paintMerchant = () => {
 };
 
 const readHex = () => {
+  hexesOnMap = undefined;
   hexAll.forEach((el, index) => {
     if (el.hex.type === `hex` && el.hex.vis === true) {
       let hexOnMap = {
@@ -693,10 +695,14 @@ const paintHex = () => {
       }
     }
   });
+  hexesOnMap = undefined;
 };
 
 const readTroops = () => {
+  troopsOnMap = undefined;
   hexAll.forEach((el, index) => {
+    console.log('%c this is troopsOnMapArr readed START', 'color: blue; font-size: 15px;',troopsOnMapArr);
+
     if (el.troops && el.troops.player.nr === player.nr) {
       let troopOnMap = {
         type: el.troops.type,
@@ -709,15 +715,20 @@ const readTroops = () => {
       };
 
       troopsOnMapArr.push(troopOnMap);
+      console.log('%c this is troopsOnMapArr readed END', 'color: blue; font-size: 15px;',troopsOnMapArr);
+
     }
     troopsOnMap = {
       type: `troops`,
       value: troopsOnMapArr,
     };
+
   });
+  console.log('%c this was troops readed', 'color: blue; font-size: 15px;',troopsOnMap, troopsOnMap.value.length);
 };
 
 const paintTroops = () => {
+  console.log('%c this was troops painted', 'color: orange; font-size: 15px;',troopsOnMap, troopsOnMap.value.length);
   hexAll.forEach((el, index) => {
     for (let i = 0; i < troopsOnMap.value.length; i++) {
       if (index === troopsOnMap.value[i].id) {
@@ -730,9 +741,11 @@ const paintTroops = () => {
       }
     }
   });
+  troopsOnMap = undefined;
 };
 
 const readTown = () => {
+  townsOnMap = undefined;
   hexAll.forEach((el, index) => {
     if (el.town && el.town.player === player.nr) {
       let townOnMap = {
@@ -758,13 +771,11 @@ const readTown = () => {
     };
     
   });
-  console.log(`townsOnMap readed`, townsOnMap);
-  
-
+  console.log('%c this was town readed', 'color: blue; font-size: 15px;', townsOnMap);
 };
 
 const paintTown = () => {
-  console.log(`townsOnMap painted`, townsOnMap);
+  console.log('%c this was towns painted', 'color: orange; font-size: 15px;', townsOnMap);
   
   hexAll.forEach((el, index) => {
     for (let i = 0; i < townsOnMap.value.length; i++) {
@@ -772,12 +783,9 @@ const paintTown = () => {
 
         if (!el.town) el.town = new Town(el, townsOnMap.value[i].color);
         
-
-
         el.town.player = townsOnMap.value[i].player;
         el.town.happiness = townsOnMap.value[i].happiness;
         el.childNodes[4].classList.add(`town${el.town.color}`);
-
         el.town.showHappiness();
 
         if (townsOnMap.value[i].port) el.town.paintStructureForFree(`port`);
@@ -791,6 +799,7 @@ const paintTown = () => {
       }
     }
   });
+  townsOnMap = undefined;
 };
 
 startGame.addEventListener(`click`, () => {
@@ -799,6 +808,7 @@ startGame.addEventListener(`click`, () => {
 });
 
 endTurn.addEventListener(`click`, () => {
+
   readHex();
   readTown();
   readTroops();

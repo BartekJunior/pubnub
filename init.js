@@ -73,6 +73,7 @@ for (let i = (hexAll.length / 6) * 4; i < (hexAll.length / 6) * 5; i = i + 2) {
 
 //SET PLAYER, CREATE FIRST MERCHANT for each user. playersNumber must be SET well!!!
 setPlayer.addEventListener(`click`, function () {
+  this.style.display = `none`;
   const num = Math.ceil(playersNumber / onlineUsers.size);
   let color;
   if (onlineUsers.size === 3) color = `blue`;
