@@ -530,11 +530,11 @@ hexAll.forEach((el) => {
 
 // Update GlobalResource. Last stage of collect
 confirmCollectBtn.addEventListener(`click`, function () {
+  Hud.prototype.townBtnEnable();
   town.updateGlobalResource();
   Hud.prototype.hideContainerTempCollect();
   Hud.prototype.hideConfirmCollectBtn();
   Hud.prototype.hideCancelCollectBtn();
-  Hud.prototype.townBtnEnable();
   // player.makeAction();
 
   // window[`p` + player.nr + `ActionValue`].textContent = player.action;

@@ -148,6 +148,9 @@ class Town {
     this.color = color;
     this.happiness = 2;
     this.size = 1;
+    this.sad = false;
+    this.neutral = false;
+    this.frozen = false;
     this.activated = 0;
 
     this.structure = {
@@ -163,10 +166,24 @@ class Town {
     // !!!WHEN YOU USE Town.prototype... YOU MUST USE REGULAR FUNCTION() BECASE ARROW FUNCTION DOESNT HAVE THIS KEYWORD!!! //
     Town.prototype.activateTown = function () {
       this.activated++;
-      this.checkHappiness();
       player.makeAction();
       console.log(`TOWN ACTIVATED`);
+
+      this.lowerHappinessAfterAction();
+      
+      if (this.sad) this.frozen = true;
+      this.checkSadNeutral();
+
+      this.disableActivation();
     };
+
+    Town.prototype.disableActivation = function () {
+      if (this.frozen) {
+        Hud.prototype.townBtnDisable();
+        raiseHappinessBtn.disabled = false;
+      } else Hud.prototype.townBtnEnable();
+    };
+
 
     Town.prototype.resetActivateTown = function () {
       this.activated = 0;
@@ -236,7 +253,7 @@ class Town {
 
     Town.prototype.showHappiness = function () {
       const face = this.id.childNodes[4].childNodes[0];
-      console.log(`this is face`, face);
+      // console.log(`this is face`, face);
 
       while (face.classList.length > 1) {
         face.classList.remove(face.classList.item(1)); // Remove the class at index 1 (second class)
@@ -247,10 +264,20 @@ class Town {
       if (this.happiness === 0) face.classList.add(`morale-low-icon`);
     };
 
-    Town.prototype.checkHappiness = function () {
+    Town.prototype.lowerHappinessAfterAction = function () {
       if (this.activated > 1) {
         this.lowerHapiness();
         this.showHappiness();
+      }
+    };
+
+    Town.prototype.checkSadNeutral = function () {
+      if (this.happiness === 0) {
+        this.sad = true;
+        this.neutral = false;
+      } else if (this.happiness === 1) {
+        this.sad = false;
+        this.neutral = true;
       }
     };
 
@@ -278,17 +305,16 @@ class Town {
           );
           this.structure[building] = true;
           this.calcSize();
-          this.activateTown();
           Hud.prototype.changeStructureBtn(building, `none`);
           Hud.prototype.hideContainerStructure();
           Hud.prototype.townBtnEnable();
+          this.activateTown();
         } else {
           alert(`W mieście możesz zbudować maksymalnie 4 budynki`);
         }
     };
 
     Town.prototype.paintStructureForFree = function (building) {
-
       if (!this.structure[building]) {
         this.id.childNodes[this.structurePlace(this.size)].classList.add(
           building + this.color
@@ -301,8 +327,6 @@ class Town {
         // Hud.prototype.townBtnEnable();
       }
     };
-
-
 
     this.calcSize = () => {
       const buildings = [
@@ -1129,7 +1153,6 @@ class Hud {
       Hud.prototype.hideMoveBtnContainer();
       Hud.prototype.hideHudMerchant();
       Hud.prototype.hideRotateHud();
-
-    }
+    };
   }
 }
