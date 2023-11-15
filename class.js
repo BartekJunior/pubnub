@@ -170,10 +170,8 @@ class Town {
       console.log(`TOWN ACTIVATED`);
 
       this.lowerHappinessAfterAction();
-      
       if (this.sad) this.frozen = true;
       this.checkSadNeutral();
-
       this.disableActivation();
     };
 
@@ -187,6 +185,7 @@ class Town {
 
     Town.prototype.resetActivateTown = function () {
       this.activated = 0;
+      this.frozen = false;
     };
 
     Town.prototype.raiseHapiness = function () {
@@ -238,10 +237,15 @@ class Town {
 
     Town.prototype.confirmHappiness = function () {
       cancelHappinessBtn.disabled = false;
-      happyTowns.map((el) => el.resetActivateTown());
+      happyTowns.map((el) => {
+        el.resetActivateTown();
+        el.checkSadNeutral();
+      })
+        
       happyTowns = [];
       moraleCost.culture = 0;
       costHappiness.innerHTML = moraleCost.culture;
+      player.makeAction();
     };
 
     Town.prototype.cancelHappiness = function () {
@@ -278,6 +282,9 @@ class Town {
       } else if (this.happiness === 1) {
         this.sad = false;
         this.neutral = true;
+      } else if (this.happiness === 2) {
+        this.sad = false;
+        this.neutral = false;
       }
     };
 

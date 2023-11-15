@@ -197,15 +197,16 @@ raiseHappinessBtn.addEventListener(`click`, function() {
 confirmHappinessBtn.addEventListener(`click`, function() {
   Town.prototype.confirmHappiness();
   Hud.prototype.hideContainerHappiness();
-  Hud.prototype.townBtnEnable();
+  // Hud.prototype.townBtnEnable();
   confirmHappinessBtn.disabled = true;
-  player.makeAction();
 });
 
 cancelHappinessBtn.addEventListener(`click`, function() {
   Town.prototype.cancelHappiness();
   Hud.prototype.hideContainerHappiness();
-  Hud.prototype.townBtnEnable();
+  hexAll.map(el => {
+    if (el.town) el.disableActivation();
+  })
 });
 
 // Console deafult index of clicked Hex //
@@ -217,7 +218,7 @@ hexAll.forEach((el, index) =>
 
 
 
-// ----- show/hide HUD TOWN  ----- //
+// ----- show Hud Town hide Hud Town  ----- //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
     // ERRORS when you make action in Hud //
@@ -253,6 +254,7 @@ hexAll.forEach((el) => {
       }
       town = el.town;
       town.checkBuildedStructure();
+      town.disableActivation();
       Hud.prototype.showHudTown();
     }
   });
@@ -460,7 +462,7 @@ confirmRecruitBtn.addEventListener(`click`, function () {
   town.confirmRecruit();
   troopsPosition = town.id;
   Hud.prototype.hideContainerRecruit();
-  Hud.prototype.townBtnEnable();
+  // Hud.prototype.townBtnEnable();
   // player.makeAction();
 });
 
@@ -530,7 +532,7 @@ hexAll.forEach((el) => {
 
 // Update GlobalResource. Last stage of collect
 confirmCollectBtn.addEventListener(`click`, function () {
-  Hud.prototype.townBtnEnable();
+  // Hud.prototype.townBtnEnable();
   town.updateGlobalResource();
   Hud.prototype.hideContainerTempCollect();
   Hud.prototype.hideConfirmCollectBtn();
