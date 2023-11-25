@@ -49,7 +49,7 @@ const settleBtn = document.getElementById(`settleBtn`);
 const hudTown = document.querySelector(`.hud-town`);
 const containerStructure = document.getElementById(`containerStructure`);
 const containerRecruit = document.getElementById(`containerRecruit`);
-const containerHappiness = document.getElementById(`containerHappiness`)
+const containerHappiness = document.getElementById(`containerHappiness`);
 
 const collectResourceBtn = document.getElementById(`collectResourceBtn`);
 const buildStructureBtn = document.getElementById(`buildStructureBtn`);
@@ -60,7 +60,6 @@ const burnTownBtn = document.getElementById(`burnTownBtn`);
 const containerTempCollect = document.querySelector(`.container-temp-collect`);
 const confirmCollectBtn = document.getElementById(`confirmCollectBtn`);
 const cancelCollectBtn = document.getElementById(`cancelCollectBtn`);
-
 
 const costHappiness = document.getElementById(`costHappiness`);
 const confirmHappinessBtn = document.getElementById(`confirmHappinessBtn`);
@@ -154,30 +153,58 @@ buildStructureBtn.addEventListener(`click`, function () {
 });
 
 fortressBtn.addEventListener(`click`, function () {
+  if (town.happiness === 0) {
+    alert(`Nie możesz wznosić budynków w rozgniewanym mieście`);
+    return;
+  }
   town.buildStructure(`fortress`);
 });
 
 academyBtn.addEventListener(`click`, function () {
+  if (town.happiness === 0) {
+    alert(`Nie możesz wznosić budynków w rozgniewanym mieście`);
+    return;
+  }
   town.buildStructure(`academy`);
 });
 
 portBtn.addEventListener(`click`, function () {
+  if (town.happiness === 0) {
+    alert(`Nie możesz wznosić budynków w rozgniewanym mieście`);
+    return;
+  }
   town.buildStructure(`port`);
 });
 
 marketBtn.addEventListener(`click`, function () {
+  if (town.happiness === 0) {
+    alert(`Nie możesz wznosić budynków w rozgniewanym mieście`);
+    return;
+  }
   town.buildStructure(`market`);
 });
 
 obeliskBtn.addEventListener(`click`, function () {
+  if (town.happiness === 0) {
+    alert(`Nie możesz wznosić budynków w rozgniewanym mieście`);
+    return;
+  }
   town.buildStructure(`obelisk`);
 });
 
 templeBtn.addEventListener(`click`, function () {
+  if (town.happiness === 0) {
+    alert(`Nie możesz wznosić budynków w rozgniewanym mieście`);
+    return;
+  }
   town.buildStructure(`temple`);
 });
 
 observatoryBtn.addEventListener(`click`, function () {
+  if (town.happiness === 0) {
+    alert(`Nie możesz wznosić budynków w rozgniewanym mieście`);
+    return;
+  }
   town.buildStructure(`observatory`);
 });
 
@@ -188,25 +215,26 @@ cancelBuild.addEventListener(`click`, function () {
 
 
 
+
 // Happiness //
-raiseHappinessBtn.addEventListener(`click`, function() {
+raiseHappinessBtn.addEventListener(`click`, function () {
   Hud.prototype.showContainerHappiness();
   Hud.prototype.townBtnDisable();
 });
 
-confirmHappinessBtn.addEventListener(`click`, function() {
+confirmHappinessBtn.addEventListener(`click`, function () {
   Town.prototype.confirmHappiness();
   Hud.prototype.hideContainerHappiness();
   // Hud.prototype.townBtnEnable();
   confirmHappinessBtn.disabled = true;
 });
 
-cancelHappinessBtn.addEventListener(`click`, function() {
+cancelHappinessBtn.addEventListener(`click`, function () {
   Town.prototype.cancelHappiness();
   Hud.prototype.hideContainerHappiness();
-  hexAll.map(el => {
+  hexAll.map((el) => {
     if (el.town) el.disableActivation();
-  })
+  });
 });
 
 // Console deafult index of clicked Hex //
@@ -215,8 +243,6 @@ hexAll.forEach((el, index) =>
     console.log(index);
   })
 );
-
-
 
 // ----- show Hud Town hide Hud Town  ----- //
 hexAll.forEach((el) => {
@@ -260,8 +286,6 @@ hexAll.forEach((el) => {
   });
 });
 
-
-
 // ----- show TROOPS and MERCHANT HUD  ----- //
 hexAll.forEach((el) => {
   el.addEventListener(`click`, function () {
@@ -283,7 +307,11 @@ hexAll.forEach((el) => {
       // troopsPosition = undefined;
     }
 
-    if (el.troops && el.troops.soldiers.some((el) => el.type === `merchant`) && el.troops.player === player) {
+    if (
+      el.troops &&
+      el.troops.soldiers.some((el) => el.type === `merchant`) &&
+      el.troops.player === player
+    ) {
       Hud.prototype.showHudMerchant();
     } else {
       Hud.prototype.hideHudMerchant();
@@ -704,10 +732,13 @@ const paintHex = () => {
 const readTroops = () => {
   troopsOnMap = undefined;
   troopsOnMapArr = [];
-  console.log('%c this is troopsOnMapArr readed START', 'color: blue; font-size: 15px;', troopsOnMapArr);
+  console.log(
+    "%c this is troopsOnMapArr readed START",
+    "color: blue; font-size: 15px;",
+    troopsOnMapArr
+  );
 
   hexAll.forEach((el, index) => {
-
     if (el.troops && el.troops.player.nr === player.nr) {
       let troopOnMap = {
         type: el.troops.type,
@@ -721,19 +752,27 @@ const readTroops = () => {
 
       troopsOnMapArr.push(troopOnMap);
       // console.log('%c this is troopsOnMapArr readed END', 'color: blue; font-size: 15px;',troopsOnMapArr);
-
     }
     troopsOnMap = {
       type: `troops`,
       value: troopsOnMapArr,
     };
-
   });
-  console.log('%c this was troops readed', 'color: blue; font-size: 15px;',troopsOnMap, troopsOnMap.value.length);
+  console.log(
+    "%c this was troops readed",
+    "color: blue; font-size: 15px;",
+    troopsOnMap,
+    troopsOnMap.value.length
+  );
 };
 
 const paintTroops = () => {
-  console.log('%c this was troops painted', 'color: orange; font-size: 15px;',troopsOnMap, troopsOnMap.value.length);
+  console.log(
+    "%c this was troops painted",
+    "color: orange; font-size: 15px;",
+    troopsOnMap,
+    troopsOnMap.value.length
+  );
   hexAll.forEach((el, index) => {
     for (let i = 0; i < troopsOnMap.value.length; i++) {
       if (index === troopsOnMap.value[i].id) {
@@ -775,30 +814,39 @@ const readTown = () => {
       type: `town`,
       value: townsOnMapArr,
     };
-    
   });
-  console.log('%c this was town readed', 'color: blue; font-size: 15px;', townsOnMap);
+  console.log(
+    "%c this was town readed",
+    "color: blue; font-size: 15px;",
+    townsOnMap
+  );
 };
 
 const paintTown = () => {
-  console.log('%c this was towns painted', 'color: orange; font-size: 15px;', townsOnMap);
-  
+  console.log(
+    "%c this was towns painted",
+    "color: orange; font-size: 15px;",
+    townsOnMap
+  );
+
   hexAll.forEach((el, index) => {
     for (let i = 0; i < townsOnMap.value.length; i++) {
       if (index === townsOnMap.value[i].id) {
-
         if (!el.town) el.town = new Town(el, townsOnMap.value[i].color);
-        
+
         el.town.player = townsOnMap.value[i].player;
         el.town.happiness = townsOnMap.value[i].happiness;
         el.childNodes[4].classList.add(`town${el.town.color}`);
         el.town.showHappiness();
 
         if (townsOnMap.value[i].port) el.town.paintStructureForFree(`port`);
-        if (townsOnMap.value[i].academy) el.town.paintStructureForFree(`academy`);
-        if (townsOnMap.value[i].fortress) el.town.paintStructureForFree(`fortress`);
+        if (townsOnMap.value[i].academy)
+          el.town.paintStructureForFree(`academy`);
+        if (townsOnMap.value[i].fortress)
+          el.town.paintStructureForFree(`fortress`);
         if (townsOnMap.value[i].market) el.town.paintStructureForFree(`market`);
-        if (townsOnMap.value[i].obelisk) el.town.paintStructureForFree(`obelisk`);
+        if (townsOnMap.value[i].obelisk)
+          el.town.paintStructureForFree(`obelisk`);
         if (townsOnMap.value[i].temple) el.town.paintStructureForFree(`temple`);
         if (townsOnMap.value[i].observatory)
           el.town.paintStructureForFree(`observatory`);
@@ -814,7 +862,6 @@ startGame.addEventListener(`click`, () => {
 });
 
 endTurn.addEventListener(`click`, () => {
-
   readHex();
   readTown();
   readTroops();
@@ -845,9 +892,9 @@ endTurn.addEventListener(`click`, () => {
   publishMessage(player);
   console.log(`player sent`, player);
 
-  hexAll.forEach(el => {
+  hexAll.forEach((el) => {
     if (el.town) el.town.resetActivateTown();
-  })
+  });
 
   endTurn.style.display = `none`;
 });

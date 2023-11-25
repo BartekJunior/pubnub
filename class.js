@@ -967,7 +967,14 @@ class PossibleResource {
     };
 
     this.collectTempResource = () => {
-      if (this.id.possibleResource && clickedRes.length < town.size) {
+      let tempTownSize = town.size;
+      if (town.happiness === 2) {
+        tempTownSize++
+      } else if (town.happiness === 0) {
+        tempTownSize = 1;
+      } else tempTownSize = town.size;
+
+      if (this.id.possibleResource && clickedRes.length < tempTownSize) {
         if (this.id.hex.collectible && !this.collected) {
           clickedRes.push(this.id.possibleResource.resource);
           Hud.prototype.showConfirmCollectBtn();
