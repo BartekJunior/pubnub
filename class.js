@@ -351,16 +351,21 @@ class Town {
 
     //-------------- Recruit soldiers in Town --------------//
     this.recruitTempSoldier = (soldier) => {
-      const merchantLength = tempSoldiers.filter(
-        (item) => item.type === `merchant`
-      ).length;
-      if (soldier === `infantry` && tempSoldiers.length - merchantLength < 4)
+
+      let tempTownSize = town.size;
+      if (town.happiness === 2) {
+        tempTownSize++
+      } else if (town.happiness === 0) {
+        tempTownSize = 1;
+      } else tempTownSize = town.size;
+
+      if (soldier === `infantry` && tempSoldiers.length < tempTownSize)
         tempSoldiers.push(new Infantry(this.id, this.color));
-      if (soldier === `cavalry` && tempSoldiers.length - merchantLength < 4)
+      if (soldier === `cavalry` && tempSoldiers.length < tempTownSize)
         tempSoldiers.push(new Cavalry(this.id, this.color));
-      if (soldier === `elephant` && tempSoldiers.length - merchantLength < 4)
+      if (soldier === `elephant` && tempSoldiers.length < tempTownSize)
         tempSoldiers.push(new Elephant(this.id, this.color));
-      if (soldier === `merchant`)
+      if (soldier === `merchant` && tempSoldiers.length < tempTownSize)
         tempSoldiers.push(new Merchant(this.id, this.color));
       this.updateRecruitNr();
     };
@@ -514,7 +519,7 @@ class Town {
           player.resource[res[0]] + tempResource[res[0]] > 2
         ) {
           alert(
-            `Przekroczyłeś limit 2 jedzenia. Zbiór anulowano. Nie straciłeś Akcji.`
+            `Przekroczyłeś limit 2 jedzenia. Musisz rozwinąć Magazynowanie. Zbiór anulowano. Nie straciłeś Akcji.`
           );
           // console.log(`wieksze od 2 jest`, res[0]);
           Town.prototype.cancelCollect();

@@ -16,16 +16,6 @@ let player1;
 let player2;
 let player3;
 
-// Make start Hexes. It must be conected to set player functiion. Edit this
-hexAll[0].hex = new Hex(hexAll[0], `grass`, true, `food`, true);
-hexAll[1].hex = new Hex(hexAll[1], `forest`, true, `wood`, true);
-hexAll[6].hex = new Hex(hexAll[6], `mountain`, true, `stone`, true);
-hexAll[7].hex = new Hex(hexAll[7], `plain`, true, `food`, false);
-hexAll[0].classList.add(`class-${hexAll[0].hex.land}`);
-hexAll[1].classList.add(`class-${hexAll[1].hex.land}`);
-hexAll[6].classList.add(`class-${hexAll[6].hex.land}`);
-hexAll[7].classList.add(`class-${hexAll[7].hex.land}`);
-
 // hexAll[2].troops = new Troops(hexAll[2], `green`);
 // hexAll[2].troops.soldiers = [
 //   new Cavalry(hexAll[2], `green`),
@@ -87,33 +77,62 @@ setPlayer.addEventListener(`click`, function () {
   window.tree = new Tree();
   window.cost = new Cost();
 
+  // Make start Hexes for All Players
+  if (player.nr === 1) {
+    hexAll[0].hex = new Hex(hexAll[0], `grass`, true, `food`, true);
+    hexAll[1].hex = new Hex(hexAll[1], `forest`, true, `wood`, true);
+    hexAll[6].hex = new Hex(hexAll[6], `mountain`, true, `stone`, true);
+    hexAll[7].hex = new Hex(hexAll[7], `plain`, true, `food`, false);
+    hexAll[0].classList.add(`class-${hexAll[0].hex.land}`);
+    hexAll[1].classList.add(`class-${hexAll[1].hex.land}`);
+    hexAll[6].classList.add(`class-${hexAll[6].hex.land}`);
+    hexAll[7].classList.add(`class-${hexAll[7].hex.land}`);
+  }
+  if (player.nr === 2) {
+    hexAll[35].hex = new Hex(hexAll[35], `grass`, true, `food`, true);
+    hexAll[34].hex = new Hex(hexAll[34], `forest`, true, `wood`, true);
+    hexAll[29].hex = new Hex(hexAll[29], `mountain`, true, `stone`, true);
+    hexAll[28].hex = new Hex(hexAll[28], `plain`, true, `food`, false);
+    hexAll[35].classList.add(`class-${hexAll[35].hex.land}`);
+    hexAll[34].classList.add(`class-${hexAll[34].hex.land}`);
+    hexAll[29].classList.add(`class-${hexAll[29].hex.land}`);
+    hexAll[28].classList.add(`class-${hexAll[28].hex.land}`);
+  }
+  if (player.nr === 3) {
+    hexAll[5].hex = new Hex(hexAll[5], `grass`, true, `food`, true);
+    hexAll[11].hex = new Hex(hexAll[11], `forest`, true, `wood`, true);
+    hexAll[4].hex = new Hex(hexAll[4], `mountain`, true, `stone`, true);
+    hexAll[10].hex = new Hex(hexAll[10], `plain`, true, `food`, false);
+    hexAll[5].classList.add(`class-${hexAll[5].hex.land}`);
+    hexAll[11].classList.add(`class-${hexAll[11].hex.land}`);
+    hexAll[4].classList.add(`class-${hexAll[4].hex.land}`);
+    hexAll[10].classList.add(`class-${hexAll[10].hex.land}`);
+  }
 
   //set active turn to first player
   if (player.nr === 1) {
     player.action = 3;
-    startGame.style.display = `block`;
+    startGame.style.display = `inline-block`;
   }
   checkActionFirst();
 
   //add individual merchant for each user (seen only for current user)
   if (player.nr == 1) {
     player1 = player;
-    hexAll[0].troops = new Troops( hexAll[0], player.color);
-    hexAll[0].troops.soldiers.push(new Merchant( hexAll[0], player.color));
+    hexAll[0].troops = new Troops(hexAll[0], player.color);
+    hexAll[0].troops.soldiers.push(new Merchant(hexAll[0], player.color));
     hexAll[0].troops.calcSize();
     hexAll[0].troops.showSoldierHex();
   } else if (player.nr == 2) {
     player2 = player;
-    hexAll[35].troops = new Troops( hexAll[35], player.color);
-    hexAll[35].troops.soldiers.push(
-      new Merchant( hexAll[35], player.color)
-    );
+    hexAll[35].troops = new Troops(hexAll[35], player.color);
+    hexAll[35].troops.soldiers.push(new Merchant(hexAll[35], player.color));
     hexAll[35].troops.calcSize();
     hexAll[35].troops.showSoldierHex();
   } else if (player.nr == 3) {
     player3 = player;
-    hexAll[5].troops = new Troops( hexAll[5], player.color);
-    hexAll[5].troops.soldiers.push(new Merchant( hexAll[5], player.color));
+    hexAll[5].troops = new Troops(hexAll[5], player.color);
+    hexAll[5].troops.soldiers.push(new Merchant(hexAll[5], player.color));
     hexAll[5].troops.calcSize();
     hexAll[5].troops.showSoldierHex();
   }
@@ -132,22 +151,16 @@ setPlayer.addEventListener(`click`, function () {
   window[`p` + player.nr + `Global`].style.display = `block`;
 });
 
-
 // ------------------------------------------------------------------------ //
-
-
-
 
 // Testing soldiers //
 const hexes = document.querySelectorAll(`.hex`);
 console.log(hexes);
 
-
 // hexes[0].childNodes[0].classList.add(`soldierHex`, `elephantgreen`);
 // hexes[0].childNodes[2].classList.add(`soldierHex`, `elephantgreen`);
 // hexes[0].childNodes[6].classList.add(`soldierHex`, `elephantgreen`);
 // hexes[0].childNodes[8].classList.add(`soldierHex`, `elephantgreen`);
-
 
 const bb = () => {
   hexes[0].childNodes[4].classList.add(`towngreen`);
@@ -162,24 +175,17 @@ const bb = () => {
   hexes[1].childNodes[7].classList.add(`academy`);
   hexes[1].childNodes[5].classList.add(`obelisk`);
 
-
   hexes[2].childNodes[4].classList.add(`towngreen`);
   hexes[2].childNodes[3].classList.add(`observatory`);
   hexes[2].childNodes[1].classList.add(`port`);
   hexes[2].childNodes[7].classList.add(`temple`);
   hexes[2].childNodes[5].classList.add(`port`);
 
-
   hexes[3].childNodes[4].classList.add(`towngreen`);
   hexes[3].childNodes[1].classList.add(`observatory`);
   hexes[3].childNodes[5].classList.add(`port`);
   hexes[3].childNodes[3].classList.add(`temple`);
   hexes[3].childNodes[7].classList.add(`port`);
-}
+};
 
 // bb();
-
-
-
-
-

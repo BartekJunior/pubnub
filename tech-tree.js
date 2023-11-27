@@ -78,11 +78,11 @@ class Player {
       gold: 0,
       idea: 2,
       culture: 1,
-      morale: 2,
+      morale: 8,
     };
 
     Player.prototype.canAfford = function (cost) {
-      if (false) {
+      if (true) {
         // Check if deducting costs will result in negative resources
         if (
           this.resource.food - (cost.food || 0) < 0 ||
