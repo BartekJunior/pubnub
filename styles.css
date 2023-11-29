@@ -1193,3 +1193,10 @@ h2 {
 .divGrid > *:nth-child(5) {
   background-color: #04be3c;
 }
+
+.test-for-github {
+  display: block;
+}
+
+/* ------------ TEST  ----------------- */
+
