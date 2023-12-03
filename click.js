@@ -36,9 +36,9 @@ const p1TechTreeTitle = document.getElementById(`p1TechTreeTitle`);
 const p2TechTreeTitle = document.getElementById(`p2TechTreeTitle`);
 const p3TechTreeTitle = document.getElementById(`p3TechTreeTitle`);
 
-const p1ExitTech = document.getElementById(`p1ExitTech`);
-const p2ExitTech = document.getElementById(`p2ExitTech`);
-const p3ExitTech = document.getElementById(`p3ExitTech`);
+const exitBtns = document.querySelectorAll(`.exit-btn`);
+const playerCards = document.querySelectorAll(`.player-card-img`);
+const playerCard = document.getElementById(`playerCard`);
 
 // HUD Town
 const gameContainer = document.getElementById(`gameContainer`);
@@ -212,9 +212,6 @@ cancelBuild.addEventListener(`click`, function () {
   Hud.prototype.hideContainerStructure();
   Hud.prototype.townBtnEnable();
 });
-
-
-
 
 // Happiness //
 raiseHappinessBtn.addEventListener(`click`, function () {
@@ -898,6 +895,24 @@ endTurn.addEventListener(`click`, () => {
 
   endTurn.style.display = `none`;
 });
+
+
+// show Player Card //
+playerCards.forEach((el) =>
+  el.addEventListener(`click`, function () {
+    playerCard.style.display = `block`;
+  })
+);
+
+// Hide Tech Tree and Player Card, universal close function for every exitBtn //
+exitBtns.forEach((el) =>
+  el.addEventListener("click", function () {
+    const parentDiv = this.parentElement;
+    if (parentDiv) {
+      parentDiv.style.display = "none";
+    }
+  })
+);
 
 // -------------- Animations --------------------- //
 

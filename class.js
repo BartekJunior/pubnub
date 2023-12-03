@@ -1173,5 +1173,7 @@ class Hud {
       Hud.prototype.hideHudMerchant();
       Hud.prototype.hideRotateHud();
     };
+
+
   }
 }

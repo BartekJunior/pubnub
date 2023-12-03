@@ -81,6 +81,8 @@ class Player {
       morale: 8,
     };
 
+
+
     Player.prototype.canAfford = function (cost) {
       if (true) {
         // Check if deducting costs will result in negative resources
@@ -182,7 +184,7 @@ class Tree {
     this.player.setSkills();
 
     Tree.prototype.showTechTree = function (player) {
-      window[`p` + player.nr + `TechTree`].classList.toggle(`block-important`);
+      window[`p` + player.nr + `TechTree`].style.display = `block`;
       window[
         `p` + player.nr + `TechTreeTitle`
       ].textContent = `Technology Tree ${player.name}`;
@@ -216,6 +218,7 @@ class Tree {
     Tree.prototype.hideConfirmAdvance = () =>
       (skillConfirmContainer.style.display = `none`);
 
+
     // ----- show/hide TECH TREE  ----- //
     p1TreeBtn.addEventListener(`click`, () =>
       Tree.prototype.showTechTree(player1)
@@ -227,17 +230,6 @@ class Tree {
       Tree.prototype.showTechTree(player3)
     );
 
-    p1ExitTech.addEventListener(`click`, () =>
-      p1TechTree.classList.toggle(`block-important`)
-    );
-
-    p2ExitTech.addEventListener(`click`, () =>
-      p2TechTree.classList.toggle(`block-important`)
-    );
-
-    p3ExitTech.addEventListener(`click`, () =>
-      p3TechTree.classList.toggle(`block-important`)
-    );
 
     // Make an Advance //
     this.player.skills.forEach((el, index) => {

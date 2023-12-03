@@ -124,6 +124,7 @@ h2 {
 }
 
 .player-card-global {
+  display: none;
   width: 690px;
   height: 1020px;
   background-image: url(./img/UI/kartaGraczaSmall.png);
@@ -1147,9 +1148,6 @@ h2 {
   color: rgb(170, 31, 140);
 }
 
-.block-important {
-  display: block !important;
-}
 
 /* Food Wood Stone Icons */
 .tech-info > p > span,
