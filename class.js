@@ -1011,6 +1011,9 @@ class PossibleResource {
 ///// CLASS COST /////
 class Cost {
   constructor() {
+    Cost.prototype.advance = {
+      food: 2,
+    };
     Cost.prototype.merchant = {
       food: 2,
     };

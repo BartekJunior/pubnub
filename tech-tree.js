@@ -81,8 +81,6 @@ class Player {
       morale: 8,
     };
 
-
-
     Player.prototype.canAfford = function (cost) {
       if (true) {
         // Check if deducting costs will result in negative resources
@@ -94,19 +92,17 @@ class Player {
           this.resource.idea - (cost.idea || 0) < 0 ||
           this.resource.culture - (cost.culture || 0) < 0 ||
           this.resource.morale - (cost.morale || 0) < 0
-          ) {
-            // Insufficient resources, halt the method
-            alert(`Masz za mało surowców!`)
-            return false;
-          } else return true
-        }
-      
-      else return true
+        ) {
+          // Insufficient resources, halt the method
+          alert(`Masz za mało surowców!`);
+          return false;
+        } else return true;
+      } else return true;
     };
 
     Player.prototype.bearTheCost = function (cost, action) {
       console.log(`Wlasnie ponosisz koszt `, action);
-      if (!this.canAfford(cost)) return
+      if (!this.canAfford(cost)) return;
       else {
         this.resource.food -= cost.food || 0;
         this.resource.wood -= cost.wood || 0;
@@ -218,7 +214,6 @@ class Tree {
     Tree.prototype.hideConfirmAdvance = () =>
       (skillConfirmContainer.style.display = `none`);
 
-
     // ----- show/hide TECH TREE  ----- //
     p1TreeBtn.addEventListener(`click`, () =>
       Tree.prototype.showTechTree(player1)
@@ -230,7 +225,6 @@ class Tree {
       Tree.prototype.showTechTree(player3)
     );
 
-
     // Make an Advance //
     this.player.skills.forEach((el, index) => {
       el.id.addEventListener(`click`, () => {
@@ -238,45 +232,51 @@ class Tree {
           clickedSkill = el;
           clickedSkillIndex = index;
           Tree.prototype.showConfirmAdvance(clickedSkill);
-        } else alert(`LOCKED`);
+        } else
+          alert(
+            `Aby odblokować tę Kategorię musisz najpierw rozwinąć szczytowe Rozwinięcie`
+          );
       });
     });
 
     // Click OK and make Advance //
     confirmAdvance.addEventListener(`click`, () => {
-      clickedSkill.purchased = true;
-      clickedSkill.id.style.backgroundColor = player.color;
-      clickedSkill.id.disabled = true;
-      Tree.prototype.skillAffect(clickedSkillIndex);
+      if (player.bearTheCost(cost.advance, `Rozwiniecie`)) {
+        clickedSkill.purchased = true;
+        clickedSkill.id.style.backgroundColor = player.color;
+        clickedSkill.id.disabled = true;
+        Tree.prototype.skillAffect(clickedSkillIndex);
+        Tree.prototype.showResLine(player);
 
-      // Get morale or Culture instantly after Advance //
-      if (clickedSkill.id.classList.contains(`border-morale`))
-        this.player.resource.morale++;
-      if (clickedSkill.id.classList.contains(`border-culture`))
-        this.player.resource.culture++;
-      Hud.prototype.refreshCultureMorale();
+        // Get morale or Culture instantly after Advance //
+        if (clickedSkill.id.classList.contains(`border-morale`))
+          this.player.resource.morale++;
+        if (clickedSkill.id.classList.contains(`border-culture`))
+          this.player.resource.culture++;
+        Hud.prototype.refreshCultureMorale();
 
-      // Unlock 3 more skills above //
-      if (skillsTop.includes(clickedSkill)) {
-        // Make sure to check if there's a next skill in the array.
-        this.player.skills[clickedSkillIndex + 1].unlocked = true;
-        this.player.skills[clickedSkillIndex + 2].unlocked = true;
-        this.player.skills[clickedSkillIndex + 3].unlocked = true;
+        // Unlock 3 more skills above //
+        if (skillsTop.includes(clickedSkill)) {
+          // Make sure to check if there's a next skill in the array.
+          this.player.skills[clickedSkillIndex + 1].unlocked = true;
+          this.player.skills[clickedSkillIndex + 2].unlocked = true;
+          this.player.skills[clickedSkillIndex + 3].unlocked = true;
+        }
+
+        // Unlock each Democracy, Autocracy, Teocracy //
+        if (
+          clickedSkillIndex === 15 ||
+          clickedSkillIndex === 19 ||
+          clickedSkillIndex === 23
+        )
+          this.player.skills[clickedSkillIndex + 21].unlocked = true;
+
+        Tree.prototype.hideConfirmAdvance();
+        clickedSkill = undefined;
+        clickedSkillIndex = undefined;
+        player.action--;
+        window[`p` + player.nr + `ActionValue`].textContent = player.action;
       }
-
-      // Unlock each Democracy, Autocracy, Teocracy //
-      if (
-        clickedSkillIndex === 15 ||
-        clickedSkillIndex === 19 ||
-        clickedSkillIndex === 23
-      )
-        this.player.skills[clickedSkillIndex + 21].unlocked = true;
-
-      Tree.prototype.hideConfirmAdvance();
-      clickedSkill = undefined;
-      clickedSkillIndex = undefined;
-      player.action--;
-      window[`p` + player.nr + `ActionValue`].textContent = player.action;
     });
 
     cancelAdvance.addEventListener(`click`, () => {
