@@ -991,8 +991,8 @@ h2 {
 }
 
 .res-bg {
-  width: 28px;
-  height: 28px;
+  width: 45px;
+  height: 45px;
   background-color: #66ff66;
   border-radius: 50%;
 }
@@ -1160,35 +1160,35 @@ h2 {
 }
 
 .food-icon {
-  background-image: url(./img/resource/food.jpg);
+  background-image: url(./img/resource/food.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 }
 
 .wood-icon {
-  background-image: url(./img/resource/wood.jpg);
+  background-image: url(./img/resource/wood.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 }
 
 .stone-icon {
-  background-image: url(./img/resource/stone.jpg);
+  background-image: url(./img/resource/stone.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 }
 
 .gold-icon {
-  background-image: url(./img/resource/gold.jpg);
+  background-image: url(./img/resource/gold.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 }
 
 .idea-icon {
-  background-image: url(./img/resource/idea.jpg);
+  background-image: url(./img/resource/idea.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
