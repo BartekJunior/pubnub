@@ -185,6 +185,9 @@ h2 {
 }
 
 .hex-rotate {
+  width: 120px;
+  height: 138px;
+
   display: inline-grid;
   grid-template-columns: repeat(3, 40px);
   grid-template-rows: repeat(3, 40px);
@@ -192,7 +195,7 @@ h2 {
   align-content: center;
   justify-items: center;
   justify-content: center;
-  margin-left: -14px;
+  margin-left: 2px;
   background-color: rgb(190, 192, 192);
   /* z-index: -99; */
 
@@ -204,7 +207,7 @@ h2 {
     5% 75%,
     5% 25%
   );
-  clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
 }
 
 .hud-rotate-container {
@@ -215,13 +218,9 @@ h2 {
   margin-top: 70px;
 }
 
-.hud-rotate-container > .hex-row {
-  margin-top: -34px;
-}
 
 .hud-rotate-container > .hex-row > .hex-rotate {
   pointer-events: disable;
-  /* background-color: #2984b9; */
 }
 
 .rotate-btn-container {
@@ -234,12 +233,21 @@ h2 {
 .rotate-btn {
   width: 60px;
   height: 60px;
+  padding: 0;
+  border: 0;
   font-size: 30px;
+}
+
+.bi-arrow-repeat::before {
+  height: 60px;
+  line-height: 60px;
 }
 
 .explore-btn {
   width: 150px;
   height: 60px;
+  padding: 0;
+  border: 0;
   font-size: 20px;
 }
 
