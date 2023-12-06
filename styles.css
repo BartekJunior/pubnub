@@ -838,7 +838,7 @@ h2 {
 
 .resource-container {
   width: 75px !important;
-  height: 75px !important;
+  height: 90px !important;
   text-align: center;
 
   background-repeat: no-repeat;
@@ -876,26 +876,36 @@ h2 {
   background-size: 100% 100%;
 }
 
+.res-info-panel {
+  margin: 0;
+  height: 22px;
+}
+
+.res-icon-panel {
+  width: 25px;
+  height: 25px;
+}
+
 .resource-container > :nth-child(1),
 .action-container > :nth-child(1) {
-  height: 30%;
+  height: 50%;
 }
 
 .resource-container > :nth-child(2),
 .action-container > :nth-child(2) {
-  height: 70%;
+  height: 50%;
   font-size: 25px;
   font-weight: bold;
-  padding-top: 4px;
 }
 
-.action-img {
+.action-container {
   text-align: center;
 }
 
-.action-value {
+.action-container > .action-value {
+  margin-top: -18px;
   height: min-content;
-  text-align: center;
+  font-size: 35px;
 }
 
 /* ------------ MAP GAMEPLAY  ----------------- */
