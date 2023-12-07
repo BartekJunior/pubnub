@@ -110,8 +110,6 @@ const exploreBtn = document.getElementById(`exploreBtn`);
 
 rotateHud.style.display = `none`;
 
-// OOOOOOOOOOOOOOOMMMMMMMMMMMMMMMMMGGGGGGGGGGGGGGGGGGGGGG //
-
 //resource variables
 let tempResource = {
   food: 0,
@@ -237,7 +235,7 @@ cancelHappinessBtn.addEventListener(`click`, function () {
 // Console deafult index of clicked Hex //
 hexAll.forEach((el, index) =>
   el.addEventListener(`click`, function (e) {
-    console.log(index);
+    console.log(e.target, index);
   })
 );
 
@@ -380,8 +378,20 @@ let moveCounter = 0;
 let moveDestination;
 
 hexAll.forEach((el) => {
-  el.addEventListener(`click`, function () {
+  el.addEventListener(`click`, function (e) {
+
     if (el.possibleMove && !(el.hex.land === `water`)) {
+      
+      // Check if Roads were activated //
+      if (roadsHex.includes(e.target)) {
+        console.log(`poruszasz sie przez Drogi`);
+        if (!player.canAfford(cost.roads, `roads`)) {
+          // If you dont have resources, stop the Big Function
+          return;
+        }
+        player.bearTheCost(cost.roads, `roads`);
+      }
+
       moveDestination = el;
 
       if (!el.hex.vis) {
@@ -895,7 +905,6 @@ endTurn.addEventListener(`click`, () => {
 
   endTurn.style.display = `none`;
 });
-
 
 // show Player Card //
 playerCards.forEach((el) =>

@@ -760,8 +760,6 @@ class Troops {
       let rectHexArr = [];
       let distanceFromTown = [];
 
-      // console.log(`this`, this);
-
       for (let i = 0; i < hexAll.length; i++) {
         rectHexArr.push(hexAll[i].getBoundingClientRect());
         distanceFromTown[i] = Math.sqrt(
@@ -1039,6 +1037,10 @@ class Cost {
     };
     Cost.prototype.happiness = {
       morale: 1,
+    };
+    Cost.prototype.roads = {
+      food: 1,
+      stone: 1,
     };
   }
 }
