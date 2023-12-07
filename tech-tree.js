@@ -72,12 +72,12 @@ class Player {
     this.action = action;
 
     this.resource = {
-      food: 2,
-      wood: 1,
-      stone: 0,
-      gold: 0,
-      idea: 2,
-      culture: 1,
+      food: 4,
+      wood: 4,
+      stone: 4,
+      gold: 4,
+      idea: 4,
+      culture: 4,
       morale: 8,
     };
 

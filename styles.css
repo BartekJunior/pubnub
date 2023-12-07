@@ -1018,22 +1018,22 @@ h2 {
 .res > .food-icon {
   position: absolute;
   left: 20px;
-  top: 15px;
+  top: 6px;
 }
 .res > .wood-icon {
   position: absolute;
-  right: 20px;
-  top: 15px;
+  right: 23px;
+  top: 9px;
 }
 .res > .stone-icon {
   position: absolute;
-  left: 30px;
-  top: 50px;
+  left: 25px;
+  top: 55px;
 }
 .res > .gold-icon {
   position: absolute;
-  right: 31px;
-  top: 50px;
+  right: 27px;
+  top: 57px;
 }
 .res > .idea-icon {
   position: absolute;
